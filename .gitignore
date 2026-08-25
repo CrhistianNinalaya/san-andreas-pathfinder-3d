@@ -1,0 +1,20 @@
+# Dependencias y entornos
+node_modules/
+.env
+.env.local
+.vercel
+
+# Archivos pesados originales de desarrollo (ya procesados a WebP / JSON)
+Ultra HD Radar/
+data/paths_raw/
+
+# Archivos temporales e imágenes intermedias de prueba
+*.png
+mapa-gta-sa.webp
+
+# Sistema operativo e IDEs
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

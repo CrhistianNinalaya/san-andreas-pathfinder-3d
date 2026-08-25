@@ -217,17 +217,36 @@ function renderWaypointsList() {
   }
 }
 
+let currentAlternativeRoutes = [];
+let activeAltRouteIndex = 0;
+
 function calculateAndRenderMultiRoute() {
   if (waypoints.length < 2) return;
 
+  const startTime = performance.now();
+
+  // CASO 1: Exactamente 2 paradas (A y B) -> Generar Ruta Óptima + Rutas Alternativas
+  if (waypoints.length === 2) {
+    const fromNode = waypoints[0].snapNode;
+    const toNode = waypoints[1].snapNode;
+
+    currentAlternativeRoutes = graph.findRoutesWithAlternatives(fromNode.id, toNode.id, 3);
+    activeAltRouteIndex = 0;
+
+    const elapsed = (performance.now() - startTime).toFixed(1);
+    console.log(`Rutas alternativas calculadas en ${elapsed} ms.`);
+
+    renderAlternativeRoutesOnMap();
+    renderAlternativeRoutesInPanel();
+    return;
+  }
+
+  // CASO 2: 3 o más paradas (A -> B -> C -> D...) -> Ruta Multi-Parada Continua
   routeLegs = [];
   let totalDist = 0;
   let totalTime = 0;
   let allPathNodes = [];
 
-  const startTime = performance.now();
-
-  // Calcular cada tramo: W0 -> W1, W1 -> W2, W2 -> W3...
   for (let i = 0; i < waypoints.length - 1; i++) {
     const fromNode = waypoints[i].snapNode;
     const toNode = waypoints[i + 1].snapNode;
@@ -252,6 +271,100 @@ function calculateAndRenderMultiRoute() {
   renderMultiRouteInPanel(totalDist, totalTime);
 }
 
+function renderAlternativeRoutesOnMap() {
+  routePolylines.forEach(p => map.removeLayer(p));
+  routePolylines = [];
+
+  if (currentAlternativeRoutes.length === 0) return;
+
+  // Dibujar primero las rutas alternativas (en gris discontinuo, clickeables)
+  currentAlternativeRoutes.forEach((route, idx) => {
+    if (idx === activeAltRouteIndex) return;
+
+    const latlngs = route.path.map(n => GTA_MAP_CONFIG.gtaToLatLng(n.x, n.y));
+    const polyline = L.polyline(latlngs, {
+      color: '#64748b',
+      weight: 6,
+      opacity: 0.6,
+      dashArray: '6, 8',
+      lineCap: 'round'
+    }).addTo(map);
+
+    polyline.on('click', () => selectAlternativeRoute(idx));
+    routePolylines.push(polyline);
+  });
+
+  // Dibujar la ruta seleccionada (activa, brillante)
+  const activeRoute = currentAlternativeRoutes[activeAltRouteIndex];
+  if (activeRoute) {
+    const latlngs = activeRoute.path.map(n => GTA_MAP_CONFIG.gtaToLatLng(n.x, n.y));
+
+    const glow = L.polyline(latlngs, {
+      color: '#0284c7',
+      weight: 10,
+      opacity: 0.4,
+      lineCap: 'round'
+    }).addTo(map);
+    routePolylines.push(glow);
+
+    const mainLine = L.polyline(latlngs, {
+      color: '#38bdf8',
+      weight: 5.5,
+      opacity: 0.95,
+      lineCap: 'round'
+    }).addTo(map);
+    routePolylines.push(mainLine);
+  }
+}
+
+function renderAlternativeRoutesInPanel() {
+  const container = document.getElementById('routes-list');
+  container.innerHTML = '';
+
+  if (currentAlternativeRoutes.length === 0) {
+    container.innerHTML = `
+      <div class="instruction-hint">
+        ⚠️ No se encontró conexión vial entre estos puntos.
+      </div>`;
+    return;
+  }
+
+  currentAlternativeRoutes.forEach((route, idx) => {
+    const card = document.createElement('div');
+    card.className = `route-card ${idx === activeAltRouteIndex ? 'active' : ''}`;
+
+    const distKm = (route.totalDistance / 1000).toFixed(2);
+    const minutes = Math.floor(route.totalTimeSeconds / 60);
+    const seconds = route.totalTimeSeconds % 60;
+    const timeFormatted = minutes > 0 ? `${minutes} min ${seconds} s` : `${seconds} s`;
+    const gain = route.elevationProfile?.elevationGain || 0;
+    const loss = route.elevationProfile?.elevationLoss || 0;
+
+    card.innerHTML = `
+      <div class="route-title">
+        <span>${route.label}</span>
+        ${route.isOptimal ? '<span class="badge">Óptima</span>' : ''}
+      </div>
+      <div class="route-stats">
+        <span>📏 <strong>${distKm} km</strong> (3D)</span>
+        <span>⏱️ <strong>${timeFormatted}</strong></span>
+      </div>
+      <div class="route-stats" style="margin-top: 3px; font-size: 11px; color: #94a3b8;">
+        <span>⛰️ Desnivel: +${gain}m / -${loss}m</span>
+      </div>
+    `;
+
+    card.addEventListener('click', () => selectAlternativeRoute(idx));
+    container.appendChild(card);
+  });
+}
+
+function selectAlternativeRoute(index) {
+  activeAltRouteIndex = index;
+  renderAlternativeRoutesOnMap();
+  renderAlternativeRoutesInPanel();
+}
+
 function renderMultiRouteOnMap(allPathNodes) {
   routePolylines.forEach(p => map.removeLayer(p));
   routePolylines = [];
@@ -260,19 +373,17 @@ function renderMultiRouteOnMap(allPathNodes) {
 
   const latlngs = allPathNodes.map(n => GTA_MAP_CONFIG.gtaToLatLng(n.x, n.y));
 
-  // Brillo exterior
   const glow = L.polyline(latlngs, {
     color: '#0284c7',
-    weight: 9,
+    weight: 10,
     opacity: 0.4,
     lineCap: 'round'
   }).addTo(map);
   routePolylines.push(glow);
 
-  // Línea principal
   const mainLine = L.polyline(latlngs, {
     color: '#38bdf8',
-    weight: 5,
+    weight: 5.5,
     opacity: 0.95,
     lineCap: 'round'
   }).addTo(map);
@@ -296,7 +407,6 @@ function renderMultiRouteInPanel(totalDist, totalTime) {
   const seconds = totalTime % 60;
   const timeFormatted = minutes > 0 ? `${minutes} min ${seconds} s` : `${seconds} s`;
 
-  // Calcular desnivel total acumulado
   let totalGain = 0;
   let totalLoss = 0;
   let minZ = Infinity;
@@ -329,7 +439,6 @@ function renderMultiRouteInPanel(totalDist, totalTime) {
   `;
   container.appendChild(summaryCard);
 
-  // Detalle por tramo si hay 3 o más paradas (ej. A->B, B->C...)
   if (routeLegs.length > 1) {
     const detailsContainer = document.createElement('div');
     detailsContainer.style.display = 'flex';
