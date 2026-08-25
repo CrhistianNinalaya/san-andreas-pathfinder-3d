@@ -1,14 +1,14 @@
 /**
- * Módulo de Física de Elevación y Desnivel de Terreno (3D)
+ * 3D Elevation and Terrain Gradient Physics Module
  * 
- * Calcula distancias euclidianas tridimensionales (X, Y, Z),
- * pendientes porcentuales de subida/bajada y el impacto de la gravedad
- * y potencia del motor en el tiempo de viaje.
+ * Computes 3-dimensional Euclidean distances (X, Y, Z),
+ * slope percentages (uphill/downhill gradient), and vehicles'
+ * gravitational and powertrain speed impact.
  */
 
 class ElevationPhysics {
   /**
-   * Distancia euclidiana 3D real entre dos puntos
+   * 3D Euclidean distance between two nodes
    */
   static calculate3DDistance(nodeA, nodeB) {
     const dx = nodeA.x - nodeB.x;
@@ -18,15 +18,15 @@ class ElevationPhysics {
   }
 
   /**
-   * Distancia 2D horizontal en el plano del mapa
+   * 2D horizontal map distance
    */
   static calculate2DDistance(nodeA, nodeB) {
     return Math.hypot(nodeA.x - nodeB.x, nodeA.y - nodeB.y);
   }
 
   /**
-   * Pendiente / Desnivel porcentual entre dos nodos
-   * @returns {number} Pendiente decimal (ej. +0.12 es +12% de subida, -0.08 es -8% de bajada)
+   * Slope / Gradient between two nodes
+   * @returns {number} Decimal gradient (e.g. +0.12 is +12% climb, -0.08 is -8% descent)
    */
   static calculateSlope(nodeA, nodeB) {
     const dist2D = this.calculate2DDistance(nodeA, nodeB);
@@ -36,51 +36,42 @@ class ElevationPhysics {
   }
 
   /**
-   * Factor multiplicador de velocidad según la inclinación del terreno.
+   * Speed multiplier factor based on road grade / slope.
    * 
-   * Modelo físico vehicular:
-   * - Terreno plano (-3% a +3%): Factor 1.0 (Velocidad normal de crucero)
-   * - Subida moderada (+3% a +10%): Factor 0.85 (El motor empieza a esforzarse)
-   * - Subida empinada (+10% a +25%): Factor 0.50 a 0.35 (Pérdida severa de velocidad)
-   * - Subida extrema (> +25%): Factor 0.25 (Pistas de montaña en 1ª marcha)
-   * - Bajada moderada (-3% a -10%): Factor 1.10 (Asistencia gravitacional / inercia)
-   * - Bajada empinada (< -15%): Factor 0.80 (El conductor frena por control)
+   * Vehicle physics model:
+   * - Flat terrain (-4% to +4%): 1.0x (Cruise speed)
+   * - Moderate climb (+4% to +12%): 0.75x (Engine under load)
+   * - Steep climb (+12% to +25%): 0.50x (Severe power drop on hills)
+   * - Extreme mountain slope (> +25%): 0.30x (1st gear dirt tracks)
+   * - Gentle downhill (-4% to -15%): 1.10x (Inertia & gravitational assist)
+   * - Steep descent (< -15%): 0.85x (Braking required for safety)
    */
   static getSlopeSpeedMultiplier(slope) {
     if (slope > 0.25) {
-      // Cuesta extrema (> 25%)
       return 0.30;
     } else if (slope > 0.12) {
-      // Cuesta muy empinada (12% a 25%)
       return 0.50;
     } else if (slope > 0.04) {
-      // Cuesta moderada (4% a 12%)
       return 0.75;
     } else if (slope >= -0.04) {
-      // Plano (-4% a +4%)
       return 1.0;
     } else if (slope >= -0.15) {
-      // Bajada suave/favorable (-4% a -15%)
       return 1.10;
     } else {
-      // Bajada pronunciada (< -15%), requiere frenado
       return 0.85;
     }
   }
 
   /**
-   * Calcula el coste completo de un tramo vial considerando 3D y pendiente
+   * Evaluates complete segment metrics considering 3D distance and slope
    */
   static evaluateSegment(nodeA, nodeB, nominalSpeedKmH = 80) {
     const dist3D = this.calculate3DDistance(nodeA, nodeB);
     const slope = this.calculateSlope(nodeA, nodeB);
     const slopeMultiplier = this.getSlopeSpeedMultiplier(slope);
 
-    // Velocidad real efectiva en km/h
     const effectiveSpeedKmH = Math.max(15, nominalSpeedKmH * slopeMultiplier);
     const effectiveSpeedMps = (effectiveSpeedKmH * 1000) / 3600;
-
-    // Tiempo real en segundos para cruzar este tramo
     const timeSeconds = dist3D / effectiveSpeedMps;
 
     return {
@@ -93,7 +84,7 @@ class ElevationPhysics {
   }
 
   /**
-   * Calcula el perfil altimétrico completo de una ruta (desnivel positivo y negativo)
+   * Calculates overall elevation profile (elevation gain, loss, min/max altitude)
    */
   static calculateElevationProfile(pathNodes) {
     if (!pathNodes || pathNodes.length < 2) {

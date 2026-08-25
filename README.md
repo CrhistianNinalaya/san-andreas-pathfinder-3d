@@ -1,76 +1,76 @@
-# 🧭 San Andreas GPS Navigator 3D
+# 🧭 San Andreas GPS - 3D Route Planner & Navigator
 
-Sistema web de navegación y cálculo de rutas óptimas y alternativas para **Grand Theft Auto: San Andreas**, impulsado por el algoritmo **A\*** (A-Star), Teoría de Grafos, física de elevación 3D y **Leaflet.js**.
+Interactive web-based GPS navigation and route planner for **Grand Theft Auto: San Andreas**, powered by the **A\*** (A-Star) algorithm, Graph Theory, 3D terrain elevation physics, and **Leaflet.js**.
 
 ![GTA San Andreas GPS Preview](mapa-gta-sa-hd.webp)
 
 ---
 
-## 🚀 Características
+## 🚀 Features
 
-* **🗺️ Red Vial Oficial de Rockstar Games:**
-  * **28,991 nodos de vehículos** y **59,620 tramos viales** extraídos de los archivos `NODES.DAT` oficiales del juego.
-  * Cobertura de todo el estado: Los Santos, San Fierro, Las Venturas, Red County, Flint County, Bone County, Tierra Robada y Whetstone.
-* **⚡ Motor de Navegación A\* Ultrarrápido:**
-  * Implementación optimizada con `MinHeap` y tabla hash espacial $O(1)$.
-  * Trazado de rutas completas de una ciudad a otra en **~100 ms**.
-* **🛣️ Rutas Alternativas:**
-  * Calcula automáticamente la ruta más rápida y hasta 2 rutas secundarias viables mediante penalización dinámica de aristas.
-* **📍 Navegación Multi-Parada:**
-  * Soporte para marcar paradas intermedias ilimitadas ($A \to B \to C \to D \dots$).
-  * Desglose de distancia y tiempo por cada tramo individual.
-* **⛰️ Física Altimétrica 3D:**
-  * Distancia euclidiana 3D real $(\Delta X, \Delta Y, \Delta Z)$.
-  * Penalización por pendientes pronunciadas (reducción de potencia de motor en subidas y ganancia por inercia en bajadas).
-  * Perfil altimétrico con cálculo de subida/bajada acumulada y cota sobre el nivel del mar.
-* **🎨 Interfaz Web Interactiva:**
-  * Mapa Ultra HD ($6144 \times 6144\text{ px}$) generado a partir de los 144 archivos `.txd` del radar oficial.
-  * Marcadores arrastrables (*Drag & Drop*) con recálculo de ruta en tiempo real.
-  * Inspector de coordenadas en vivo $(X, Y)$ al mover el cursor.
+* **🗺️ Official Rockstar Games Road Network:**
+  * **28,991 vehicle nodes** and **59,620 directed road segments** extracted from official `NODES.DAT` game files.
+  * Complete state coverage: Los Santos, San Fierro, Las Venturas, Red County, Flint County, Bone County, Tierra Robada, and Whetstone.
+* **⚡ Ultra-Fast A\* Pathfinding Engine:**
+  * Optimized with `MinHeap` and $O(1)$ Spatial Hash Grid index.
+  * Cross-state path computation (e.g. San Fierro to Los Santos) in **~100 ms**.
+* **🛣️ Alternative Routes:**
+  * Automatically calculates the fastest primary route plus up to 2 secondary alternative routes via dynamic edge cost penalties.
+* **📍 Unlimited Multi-Stop Waypoints:**
+  * Add multiple stops seamlessly ($A \to B \to C \to D \dots$).
+  * Comprehensive total trip summary and leg-by-leg breakdowns.
+* **⛰️ 3D Elevation & Terrain Physics:**
+  * Real 3D Euclidean distances $(\Delta X, \Delta Y, \Delta Z)$.
+  * Slope/gradient penalties (engine powertrain drop on steep climbs and gravitational gain on gentle descents).
+  * Live altimeter metrics: total elevation gain/loss and altitude range (meters above sea level).
+* **🎨 Modern Interactive Web Interface:**
+  * Ultra HD ($6144 \times 6144\text{ px}$) map rendered from the 144 official in-game radar `.txd` tiles.
+  * Draggable markers with instant real-time route recalculation.
+  * Live coordinate inspector $(X, Y)$ on cursor hover.
 
 ---
 
-## 🛠️ Estructura del Proyecto
+## 🛠️ Project Structure
 
 ```text
-├── index.html              # Interfaz web principal
-├── package.json            # Metadatos del proyecto
-├── vercel.json             # Configuración para despliegue en Vercel
-├── .gitignore              # Archivos excluidos de git
+├── index.html              # Main web interface
+├── package.json            # Project metadata & scripts
+├── vercel.json             # Vercel deployment configuration
+├── .gitignore              # Git ignore rules
 │
 ├── css/
-│   └── style.css           # Estilos modernos con tema oscuro y glassmorphism
+│   └── style.css           # Dark theme with glassmorphism UI
 │
 ├── js/
-│   ├── map-config.js       # Coordenadas Leaflet L.CRS.Simple y calibración
-│   ├── elevation-cost.js   # Módulo independiente de física 3D y pendientes
-│   ├── pathfinder.js       # Motor A* con MinHeap y rutas alternativas
-│   └── app.js              # Controlador de UI, marcadores y eventos
+│   ├── map-config.js       # Leaflet coordinate calibration & bounds
+│   ├── elevation-cost.js   # 3D elevation physics & slope evaluation
+│   ├── pathfinder.js       # A* engine with MinHeap & alternative routes
+│   └── app.js              # UI controller, waypoints & event handlers
 │
 └── data/
-    ├── san_andreas_official_nodes.json  # Red completa de San Andreas (28,991 nodos)
-    └── san_fierro_official_nodes.json   # Subconjunto de San Fierro (6,217 nodos)
+    ├── san_andreas_official_nodes.json  # Full state road network (28,991 nodes)
+    └── san_fierro_official_nodes.json   # San Fierro subset (6,217 nodes)
 ```
 
 ---
 
-## 💻 Ejecución Local
+## 💻 Local Setup
 
-Para probar localmente con cualquier servidor estático:
+Run with any local HTTP server:
 
 ```bash
-# Con Python
+# Python
 python3 -m http.server 8080
 
-# O con Node.js
+# Or Node.js
 npx serve .
 ```
 
-Abre en tu navegador: `http://localhost:8080`
+Open in your browser: `http://localhost:8080`
 
 ---
 
-## 🌐 Despliegue en Vercel
+## 🌐 Deploy to Vercel
 
 ```bash
 npx vercel
@@ -78,6 +78,6 @@ npx vercel
 
 ---
 
-## 📜 Licencia
+## 📜 License
 
-MIT License. Datos del mapa y radar originales de Rockstar Games.
+MIT License. Map assets and road nodes belong to Rockstar Games.

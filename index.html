@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GTA San Andreas - GPS Navigator Multi-Parada</title>
+  <title>San Andreas GPS - 3D Route Planner & Navigator</title>
   
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   
   <!-- App CSS -->
-  <link rel="stylesheet" href="css/style.css?v=3.0">
+  <link rel="stylesheet" href="css/style.css?v=4.0">
 </head>
 <body>
 
-  <!-- Mapa Fullscreen -->
+  <!-- Fullscreen Map -->
   <div id="map"></div>
 
-  <!-- Panel Flotante de Navegación -->
+  <!-- Floating Navigation Panel -->
   <aside class="floating-panel">
     <div class="panel-header">
       <div class="brand">
@@ -25,51 +25,51 @@
           <h1>San Andreas GPS</h1>
         </div>
       </div>
-      <span class="badge">Multi-Paradas</span>
+      <span class="badge">A* 3D Engine</span>
     </div>
 
     <div class="panel-body">
-      <!-- Selector de Alcance -->
+      <!-- Network Scope Selector -->
       <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #94a3b8;">
-        <span>Red Vial:</span>
+        <span>Road Network:</span>
         <select id="select-scope" style="background: #1e293b; color: #f8fafc; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 4px 8px; font-size: 12px; outline: none; cursor: pointer;">
-          <option value="all" selected>Todo San Andreas (28,991 nodos)</option>
-          <option value="sf">San Fierro (6,217 nodos)</option>
+          <option value="all" selected>All San Andreas (28,991 nodes)</option>
+          <option value="sf">San Fierro (6,217 nodes)</option>
         </select>
       </div>
 
-      <!-- Lista Dinámica de Paradas (A, B, C...) -->
+      <!-- Dynamic Waypoints List (A, B, C...) -->
       <div id="waypoints-container" class="point-inputs">
         <div class="instruction-hint" style="margin: 0; width: 100%;">
-          Haz clic en el mapa para marcar el Punto <strong>A</strong>, <strong>B</strong>, <strong>C</strong>...
+          Click on the map to set Point <strong>A</strong>, <strong>B</strong>, <strong>C</strong>...
         </div>
       </div>
 
-      <!-- Botones de Acción -->
+      <!-- Action Buttons -->
       <div class="action-buttons">
-        <button id="btn-reverse" class="btn btn-secondary" title="Invertir orden de ruta">
-          🔄 Invertir
+        <button id="btn-reverse" class="btn btn-secondary" title="Reverse route direction">
+          🔄 Reverse
         </button>
-        <button id="btn-clear" class="btn btn-secondary" title="Limpiar todas las paradas">
-          🗑️ Limpiar
+        <button id="btn-clear" class="btn btn-secondary" title="Clear all waypoints">
+          🗑️ Clear
         </button>
-        <button id="btn-focus-all" class="btn btn-primary" title="Ver todo el mapa">
-          🗺️ Centrar
+        <button id="btn-focus-all" class="btn btn-primary" title="Fit whole state map">
+          🗺️ Center
         </button>
       </div>
 
-      <!-- Resultados y Desglose de la Ruta -->
+      <!-- Results and Route Breakdown -->
       <div id="routes-list" class="routes-container">
         <div class="instruction-hint">
-          💡 Puedes agregar todas las paradas que quieras (<strong>A ➔ B ➔ C ➔ D...</strong>).
+          💡 You can add multiple waypoints (<strong>A ➔ B ➔ C ➔ D...</strong>).
           <br><br>
-          <em>Arrastra cualquier marcador en el mapa para ajustar la ruta en tiempo real.</em>
+          <em>Drag markers on the map to dynamically recalculate the route.</em>
         </div>
       </div>
 
-      <!-- Controles de Depuración -->
+      <!-- Debug Controls -->
       <div class="debug-toggle">
-        <label for="toggle-debug" style="cursor: pointer;">Mostrar nodos viales en pantalla</label>
+        <label for="toggle-debug" style="cursor: pointer;">Show road network nodes</label>
         <input type="checkbox" id="toggle-debug" style="cursor: pointer;">
       </div>
     </div>
@@ -78,10 +78,10 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Módulos de la Aplicación -->
-  <script src="js/map-config.js?v=3.2"></script>
-  <script src="js/elevation-cost.js?v=3.2"></script>
-  <script src="js/pathfinder.js?v=3.2"></script>
-  <script src="js/app.js?v=3.2"></script>
+  <!-- Application Modules -->
+  <script src="js/map-config.js?v=4.0"></script>
+  <script src="js/elevation-cost.js?v=4.0"></script>
+  <script src="js/pathfinder.js?v=4.0"></script>
+  <script src="js/app.js?v=4.0"></script>
 </body>
 </html>

@@ -1,30 +1,36 @@
 /**
- * Configuración del Mapa de GTA San Andreas para Leaflet
- * Utilizando el Radar Oficial Ultra HD (6144x6144 px) extraído de los 144 TXD del juego.
+ * GTA San Andreas Map Configuration for Leaflet
+ * Powered by the Official Ultra HD Radar (6144x6144 px) stitched from 144 game TXD files.
  * 
- * En GTA San Andreas el sistema de coordenadas oficial es:
- * X: [-3000, 3000] (Oeste a Este)
- * Y: [-3000, 3000] (Sur a Norte)
+ * Official GTA San Andreas World Coordinate Space:
+ * X: [-3000, 3000] (West to East)
+ * Y: [-3000, 3000] (South to North)
  * 
- * Con Leaflet L.CRS.Simple:
- * lat -> Coordenada Y de GTA San Andreas
- * lng -> Coordenada X de GTA San Andreas
+ * In Leaflet L.CRS.Simple:
+ * lat -> GTA San Andreas Y coordinate
+ * lng -> GTA San Andreas X coordinate
  */
 
 const GTA_MAP_CONFIG = {
   bounds: [
-    [-3000, -3000], // Suroeste [min_y, min_x]
-    [3000, 3000]    // Noreste  [max_y, max_x]
+    [-3000, -3000], // South-West [min_y, min_x]
+    [3000, 3000]    // North-East [max_y, max_x]
   ],
   defaultView: {
-    center: [0, 0], // Centro de todo San Andreas [Y, X]
+    center: [0, 0], // Center of entire San Andreas [Y, X]
     zoom: -1,
+    minZoom: -2,
+    maxZoom: 4
+  },
+  sanFierroView: {
+    center: [200, -2000], // Center of San Fierro [Y, X]
+    zoom: 0,
     minZoom: -2,
     maxZoom: 4
   },
   imagePath: 'mapa-gta-sa-hd.webp',
 
-  // Convierte coordenadas de Leaflet (latlng) a objeto {x, y}
+  // Converts Leaflet latlng to GTA {x, y} coordinate object
   latLngToGta(latlng) {
     return {
       x: Math.round(latlng.lng),
@@ -32,7 +38,7 @@ const GTA_MAP_CONFIG = {
     };
   },
 
-  // Convierte coordenadas {x, y} a formato Leaflet [lat, lng]
+  // Converts GTA {x, y} coordinates to Leaflet [lat, lng] format
   gtaToLatLng(x, y) {
     return [y, x];
   }

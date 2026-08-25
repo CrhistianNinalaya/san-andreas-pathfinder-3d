@@ -1,7 +1,7 @@
 {
-  "name": "san-andreas-gps-navigator",
+  "name": "san-andreas-gps",
   "version": "1.0.0",
-  "description": "Sistema web interactivo de navegación GPS 3D para GTA San Andreas utilizando el algoritmo A* y la red vial oficial de Rockstar Games.",
+  "description": "Interactive 3D GPS navigation and route planner for GTA San Andreas powered by A* algorithm, terrain physics, and official Rockstar Games road network.",
   "main": "index.html",
   "scripts": {
     "start": "python3 -m http.server 8080",
@@ -10,11 +10,13 @@
   "keywords": [
     "gta-san-andreas",
     "gps",
+    "navigation",
     "pathfinding",
     "a-star",
     "leaflet",
     "graph-theory",
-    "3d-navigation"
+    "3d-terrain",
+    "route-planner"
   ],
   "author": "crhis",
   "license": "MIT"

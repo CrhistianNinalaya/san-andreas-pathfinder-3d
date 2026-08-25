@@ -1,16 +1,19 @@
 /**
- * Controlador de Navegación Multi-Parada (A, B, C...) para GTA San Andreas
+ * Multi-Stop 3D Navigation Controller for GTA San Andreas
  */
 
 let map = null;
 let graph = null;
 let rawData = null;
 
-let waypoints = []; // Array de { marker, snapNode, gtaCoords, label }
-let routeLegs = []; // Array de resultados A* por tramo [A->B, B->C, ...]
+let waypoints = []; // Array of { marker, snapNode, gtaCoords, label }
+let routeLegs = []; // Array of A* segment results [A->B, B->C, ...]
 let routePolylines = [];
 let debugLayerGroup = null;
 let showDebugGraph = false;
+
+let currentAlternativeRoutes = [];
+let activeAltRouteIndex = 0;
 
 document.addEventListener('DOMContentLoaded', async () => {
   initMap();
@@ -29,10 +32,10 @@ function initMap() {
 
   L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-  // Cargar imagen Ultra HD (6144x6144 px) de San Andreas
+  // Load Ultra HD (6144x6144 px) San Andreas Map Image
   L.imageOverlay(GTA_MAP_CONFIG.imagePath, GTA_MAP_CONFIG.bounds).addTo(map);
 
-  // Vista inicial en todo San Andreas
+  // Initial view centered on the entire state of San Andreas
   map.setView(
     GTA_MAP_CONFIG.defaultView.center,
     GTA_MAP_CONFIG.defaultView.zoom
@@ -40,7 +43,7 @@ function initMap() {
 
   debugLayerGroup = L.layerGroup().addTo(map);
 
-  // Indicador de coordenadas en vivo
+  // Live coordinate tracker control
   const coordDisplay = L.control({ position: 'bottomleft' });
   coordDisplay.onAdd = function() {
     const div = L.DomUtil.create('div', 'coord-display');
@@ -61,16 +64,16 @@ function initMap() {
 
 async function loadGraphData(datasetUrl) {
   const badge = document.querySelector('.badge');
-  if (badge) badge.textContent = 'Cargando red...';
+  if (badge) badge.textContent = 'Loading network...';
 
   try {
     const response = await fetch(`${datasetUrl}?v=${Date.now()}`);
     rawData = await response.json();
     graph = new RoadGraph(rawData);
-    console.log(`Grafo oficial cargado: ${graph.nodes.size} nodos.`);
-    if (badge) badge.textContent = `${graph.nodes.size.toLocaleString()} Nodos`;
+    console.log(`Official graph loaded: ${graph.nodes.size} nodes.`);
+    if (badge) badge.textContent = `${graph.nodes.size.toLocaleString()} Nodes`;
   } catch (error) {
-    console.error('Error cargando los nodos oficiales:', error);
+    console.error('Error loading official road nodes:', error);
     if (badge) badge.textContent = 'Error';
   }
 }
@@ -161,12 +164,11 @@ function removeWaypoint(index) {
   if (waypoints.length >= 2) {
     calculateAndRenderMultiRoute();
   } else {
-    // Limpiar líneas si queda solo 1 o 0 puntos
     routePolylines.forEach(p => map.removeLayer(p));
     routePolylines = [];
     document.getElementById('routes-list').innerHTML = `
       <div class="instruction-hint">
-        💡 Haz clic en el mapa para marcar el siguiente punto (A, B, C...).
+        💡 Click on the map to set the next waypoint (A, B, C...).
       </div>
     `;
   }
@@ -182,13 +184,13 @@ function renderWaypointsList() {
     card.className = 'point-card';
 
     let indClass = 'indicator-waypoint';
-    let roleText = `Parada ${wp.label}`;
+    let roleText = `Stop ${wp.label}`;
     if (idx === 0) {
       indClass = 'indicator-start';
-      roleText = 'Origen (Inicio)';
+      roleText = 'Origin (Start)';
     } else if (idx === total - 1 && total > 1) {
       indClass = 'indicator-end';
-      roleText = 'Destino Final';
+      roleText = 'Final Destination';
     }
 
     card.innerHTML = `
@@ -197,7 +199,7 @@ function renderWaypointsList() {
         <span class="point-label">${roleText}</span>
         <span class="point-val">X: ${wp.snapNode.x}, Y: ${wp.snapNode.y}</span>
       </div>
-      <button class="btn-remove-point" title="Eliminar parada ${wp.label}">✖</button>
+      <button class="btn-remove-point" title="Remove waypoint ${wp.label}">✖</button>
     `;
 
     card.querySelector('.btn-remove-point').addEventListener('click', (e) => {
@@ -211,21 +213,18 @@ function renderWaypointsList() {
   if (waypoints.length === 0) {
     container.innerHTML = `
       <div class="instruction-hint" style="margin: 0; width: 100%;">
-        Haz clic en el mapa para agregar puntos de ruta.
+        Click on the map to set route waypoints.
       </div>
     `;
   }
 }
-
-let currentAlternativeRoutes = [];
-let activeAltRouteIndex = 0;
 
 function calculateAndRenderMultiRoute() {
   if (waypoints.length < 2) return;
 
   const startTime = performance.now();
 
-  // CASO 1: Exactamente 2 paradas (A y B) -> Generar Ruta Óptima + Rutas Alternativas
+  // CASE 1: Exactly 2 waypoints (A and B) -> Generate Optimal + Alternative Routes
   if (waypoints.length === 2) {
     const fromNode = waypoints[0].snapNode;
     const toNode = waypoints[1].snapNode;
@@ -234,14 +233,14 @@ function calculateAndRenderMultiRoute() {
     activeAltRouteIndex = 0;
 
     const elapsed = (performance.now() - startTime).toFixed(1);
-    console.log(`Rutas alternativas calculadas en ${elapsed} ms.`);
+    console.log(`Alternative routes calculated in ${elapsed} ms.`);
 
     renderAlternativeRoutesOnMap();
     renderAlternativeRoutesInPanel();
     return;
   }
 
-  // CASO 2: 3 o más paradas (A -> B -> C -> D...) -> Ruta Multi-Parada Continua
+  // CASE 2: 3 or more waypoints (A -> B -> C -> D...) -> Multi-Stop Continuous Route
   routeLegs = [];
   let totalDist = 0;
   let totalTime = 0;
@@ -265,7 +264,7 @@ function calculateAndRenderMultiRoute() {
   }
 
   const elapsed = (performance.now() - startTime).toFixed(1);
-  console.log(`Ruta multi-parada calculada en ${elapsed} ms.`);
+  console.log(`Multi-stop route calculated in ${elapsed} ms.`);
 
   renderMultiRouteOnMap(allPathNodes);
   renderMultiRouteInPanel(totalDist, totalTime);
@@ -277,7 +276,7 @@ function renderAlternativeRoutesOnMap() {
 
   if (currentAlternativeRoutes.length === 0) return;
 
-  // Dibujar primero las rutas alternativas (en gris discontinuo, clickeables)
+  // Draw alternative routes first (dashed gray, clickable)
   currentAlternativeRoutes.forEach((route, idx) => {
     if (idx === activeAltRouteIndex) return;
 
@@ -294,7 +293,7 @@ function renderAlternativeRoutesOnMap() {
     routePolylines.push(polyline);
   });
 
-  // Dibujar la ruta seleccionada (activa, brillante)
+  // Draw selected active route (glowing bright cyan)
   const activeRoute = currentAlternativeRoutes[activeAltRouteIndex];
   if (activeRoute) {
     const latlngs = activeRoute.path.map(n => GTA_MAP_CONFIG.gtaToLatLng(n.x, n.y));
@@ -324,7 +323,7 @@ function renderAlternativeRoutesInPanel() {
   if (currentAlternativeRoutes.length === 0) {
     container.innerHTML = `
       <div class="instruction-hint">
-        ⚠️ No se encontró conexión vial entre estos puntos.
+        ⚠️ No road connection found between these points.
       </div>`;
     return;
   }
@@ -343,14 +342,14 @@ function renderAlternativeRoutesInPanel() {
     card.innerHTML = `
       <div class="route-title">
         <span>${route.label}</span>
-        ${route.isOptimal ? '<span class="badge">Óptima</span>' : ''}
+        ${route.isOptimal ? '<span class="badge">Optimal</span>' : ''}
       </div>
       <div class="route-stats">
         <span>📏 <strong>${distKm} km</strong> (3D)</span>
         <span>⏱️ <strong>${timeFormatted}</strong></span>
       </div>
       <div class="route-stats" style="margin-top: 3px; font-size: 11px; color: #94a3b8;">
-        <span>⛰️ Desnivel: +${gain}m / -${loss}m</span>
+        <span>⛰️ Elevation: +${gain}m / -${loss}m</span>
       </div>
     `;
 
@@ -397,7 +396,7 @@ function renderMultiRouteInPanel(totalDist, totalTime) {
   if (routeLegs.length === 0) {
     container.innerHTML = `
       <div class="instruction-hint">
-        ⚠️ No se encontró conexión vial entre algunas paradas.
+        ⚠️ No road connection found between some waypoints.
       </div>`;
     return;
   }
@@ -425,16 +424,16 @@ function renderMultiRouteInPanel(totalDist, totalTime) {
   summaryCard.className = 'route-card active';
   summaryCard.innerHTML = `
     <div class="route-title">
-      <span>🏁 Ruta Total (${waypoints[0].label} ➔ ${waypoints[waypoints.length - 1].label})</span>
-      <span class="badge">${waypoints.length} Paradas</span>
+      <span>🏁 Total Route (${waypoints[0].label} ➔ ${waypoints[waypoints.length - 1].label})</span>
+      <span class="badge">${waypoints.length} Stops</span>
     </div>
     <div class="route-stats">
       <span>📏 <strong>${distKm} km</strong> (3D)</span>
       <span>⏱️ <strong>${timeFormatted}</strong></span>
     </div>
     <div class="route-stats" style="margin-top: 4px; font-size: 11px; color: #cbd5e1;">
-      <span>⛰️ Desnivel: <strong>+${totalGain}m / -${totalLoss}m</strong></span>
-      <span>🏔️ Altitud: <strong>${minZ}m a ${maxZ}m</strong></span>
+      <span>⛰️ Elevation: <strong>+${totalGain}m / -${totalLoss}m</strong></span>
+      <span>🏔️ Altitude: <strong>${minZ}m to ${maxZ}m</strong></span>
     </div>
   `;
   container.appendChild(summaryCard);
@@ -458,11 +457,11 @@ function renderMultiRouteInPanel(totalDist, totalTime) {
       legCard.style.padding = '8px 10px';
       legCard.innerHTML = `
         <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 600;">
-          <span>Tramo ${i + 1}: ${leg.fromLabel} ➔ ${leg.toLabel}</span>
+          <span>Leg ${i + 1}: ${leg.fromLabel} ➔ ${leg.toLabel}</span>
           <span style="color: #38bdf8;">${legDistKm} km (${legTime})</span>
         </div>
         <div style="font-size: 10px; color: #94a3b8; margin-top: 3px;">
-          Subida acumulada: +${gain}m
+          Accumulated climb: +${gain}m
         </div>
       `;
       detailsContainer.appendChild(legCard);
@@ -484,7 +483,7 @@ function setupUIEvents() {
     renderWaypointsList();
     document.getElementById('routes-list').innerHTML = `
       <div class="instruction-hint">
-        💡 Haz clic en el mapa para marcar el <strong>Punto A</strong> (Inicio), luego <strong>B</strong>, <strong>C</strong>, etc.
+        💡 Click on the map to set <strong>Point A</strong> (Start), then <strong>B</strong>, <strong>C</strong>, etc.
       </div>
     `;
   });

@@ -1,5 +1,5 @@
 /**
- * Motor de Navegación A* Optimizado con MinHeap y Soporte de Elevación 3D
+ * High-Performance A* Navigation Engine with MinHeap and 3D Elevation Physics
  */
 
 class MinHeap {
@@ -69,11 +69,11 @@ class RoadGraph {
   }
 
   init(data) {
-    // 1. Guardar Nodos con sus 3 dimensiones (X, Y, Z)
+    // 1. Store nodes with (X, Y, Z) coordinates and build Spatial Hash Index
     for (const node of data.nodes) {
       const nodeObj = {
         id: String(node.id),
-        name: node.name || `Nodo ${node.id}`,
+        name: node.name || `Node ${node.id}`,
         x: node.x,
         y: node.y,
         z: node.z || 0
@@ -86,7 +86,7 @@ class RoadGraph {
       this.grid.get(ckey).push(nodeObj);
     }
 
-    // 2. Guardar Aristas con cálculo físico 3D
+    // 2. Store edges with 3D terrain physics calculation
     for (const edge of data.edges) {
       const fromId = String(edge.from);
       const toId = String(edge.to);
@@ -97,7 +97,6 @@ class RoadGraph {
 
       const nominalSpeed = edge.speed || 80;
 
-      // Evaluar tramo usando el módulo de física de elevación (ElevationPhysics)
       let segmentCost;
       if (typeof ElevationPhysics !== 'undefined') {
         segmentCost = ElevationPhysics.evaluateSegment(n1, n2, nominalSpeed);
@@ -121,6 +120,7 @@ class RoadGraph {
     }
   }
 
+  // O(1) Fast Spatial Hash Nearest-Neighbor lookup
   findNearestNode(x, y) {
     const cx = Math.floor(x / this.cellSize);
     const cy = Math.floor(y / this.cellSize);
@@ -250,7 +250,6 @@ class RoadGraph {
       curr = prev;
     }
 
-    // Calcular perfil de elevación tridimensional
     let elevationProfile = null;
     if (typeof ElevationPhysics !== 'undefined') {
       elevationProfile = ElevationPhysics.calculateElevationProfile(path);
@@ -280,7 +279,7 @@ class RoadGraph {
           ...result,
           index: i + 1,
           isOptimal: i === 0,
-          label: i === 0 ? 'Ruta más rápida' : `Ruta alternativa ${i}`
+          label: i === 0 ? 'Fastest Route' : `Alternative Route ${i}`
         });
       }
 
