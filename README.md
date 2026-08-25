@@ -1,4 +1,4 @@
-# 🧭 San Andreas GPS - 3D Route Planner & Navigator
+# 🧭 San Andreas Pathfinder 3D
 
 Interactive web-based GPS navigation and route planner for **Grand Theft Auto: San Andreas**, powered by the **A\*** (A-Star) algorithm, Graph Theory, 3D terrain elevation physics, and **Leaflet.js**.
 

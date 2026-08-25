@@ -1,5 +1,5 @@
 {
-  "name": "san-andreas-gps",
+  "name": "san-andreas-pathfinder-3d",
   "version": "1.0.0",
   "description": "Interactive 3D GPS navigation and route planner for GTA San Andreas powered by A* algorithm, terrain physics, and official Rockstar Games road network.",
   "main": "index.html",
