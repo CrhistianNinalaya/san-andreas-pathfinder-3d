@@ -1,6 +1,5 @@
 /**
- * Motor de Navegación A* Optimizado con MinHeap y Spatial Index
- * para grafos masivos (+30,000 nodos)
+ * Motor de Navegación A* Optimizado con MinHeap y Soporte de Elevación 3D
  */
 
 class MinHeap {
@@ -58,7 +57,7 @@ class RoadGraph {
   constructor(data) {
     this.nodes = new Map();
     this.adjacencyList = new Map();
-    this.grid = new Map(); // Spatial Hash Index (celdas de 200x200m)
+    this.grid = new Map(); // Spatial Hash Index
     this.cellSize = 200;
     this.init(data);
   }
@@ -70,7 +69,7 @@ class RoadGraph {
   }
 
   init(data) {
-    // 1. Guardar Nodos y construir Spatial Hash
+    // 1. Guardar Nodos con sus 3 dimensiones (X, Y, Z)
     for (const node of data.nodes) {
       const nodeObj = {
         id: String(node.id),
@@ -87,7 +86,7 @@ class RoadGraph {
       this.grid.get(ckey).push(nodeObj);
     }
 
-    // 2. Guardar Aristas
+    // 2. Guardar Aristas con cálculo físico 3D
     for (const edge of data.edges) {
       const fromId = String(edge.from);
       const toId = String(edge.to);
@@ -96,31 +95,32 @@ class RoadGraph {
       const n2 = this.nodes.get(toId);
       if (!n1 || !n2) continue;
 
-      const distance = Math.hypot(n1.x - n2.x, n1.y - n2.y);
-      const speed = edge.speed || 80;
-      const speedMps = (speed * 1000) / 3600;
-      const baseTimeSeconds = distance / speedMps;
+      const nominalSpeed = edge.speed || 80;
+
+      // Evaluar tramo usando el módulo de física de elevación (ElevationPhysics)
+      let segmentCost;
+      if (typeof ElevationPhysics !== 'undefined') {
+        segmentCost = ElevationPhysics.evaluateSegment(n1, n2, nominalSpeed);
+      } else {
+        const d2 = Math.hypot(n1.x - n2.x, n1.y - n2.y);
+        segmentCost = {
+          distance3D: d2,
+          timeSeconds: d2 / ((nominalSpeed * 1000) / 3600),
+          slopePercent: 0,
+          effectiveSpeedKmH: nominalSpeed
+        };
+      }
 
       this.adjacencyList.get(fromId).push({
         to: toId,
-        distance,
-        speed,
-        baseTimeSeconds
+        distance: segmentCost.distance3D,
+        baseTimeSeconds: segmentCost.timeSeconds,
+        slopePercent: segmentCost.slopePercent,
+        speed: segmentCost.effectiveSpeedKmH
       });
-
-      // Si no es dirigida, agregar vuelta
-      if (edge.bidirectional) {
-        this.adjacencyList.get(toId).push({
-          to: fromId,
-          distance,
-          speed,
-          baseTimeSeconds
-        });
-      }
     }
   }
 
-  // Búsqueda espacial ultrarrápida O(1) usando Spatial Hash
   findNearestNode(x, y) {
     const cx = Math.floor(x / this.cellSize);
     const cy = Math.floor(y / this.cellSize);
@@ -128,7 +128,6 @@ class RoadGraph {
     let nearest = null;
     let minDist = Infinity;
 
-    // Buscar en la celda y celdas vecinas (radio expandible)
     for (let r = 0; r <= 3; r++) {
       for (let dx = -r; dx <= r; dx++) {
         for (let dy = -r; dy <= r; dy++) {
@@ -148,7 +147,6 @@ class RoadGraph {
       if (nearest && minDist <= (r + 1) * this.cellSize) break;
     }
 
-    // Fallback lineal si el clic fue en mar abierto o fuera del mapa
     if (!nearest) {
       for (const node of this.nodes.values()) {
         const d = Math.hypot(node.x - x, node.y - y);
@@ -163,9 +161,14 @@ class RoadGraph {
   }
 
   heuristic(nodeA, nodeB) {
-    const maxSpeedMps = (120 * 1000) / 3600;
-    const distance = Math.hypot(nodeA.x - nodeB.x, nodeA.y - nodeB.y);
-    return distance / maxSpeedMps;
+    const maxSpeedMps = (130 * 1000) / 3600;
+    let dist;
+    if (typeof ElevationPhysics !== 'undefined') {
+      dist = ElevationPhysics.calculate3DDistance(nodeA, nodeB);
+    } else {
+      dist = Math.hypot(nodeA.x - nodeB.x, nodeA.y - nodeB.y);
+    }
+    return dist / maxSpeedMps;
   }
 
   findShortestPath(startId, goalId, edgePenalties = new Map()) {
@@ -174,11 +177,13 @@ class RoadGraph {
 
     if (!this.nodes.has(startId) || !this.nodes.has(goalId)) return null;
     if (startId === goalId) {
+      const node = this.nodes.get(startId);
       return {
-        path: [this.nodes.get(startId)],
+        path: [node],
         nodeIds: [startId],
         totalDistance: 0,
         totalTimeSeconds: 0,
+        elevationProfile: { elevationGain: 0, elevationLoss: 0, minElevation: node.z, maxElevation: node.z },
         usedEdges: []
       };
     }
@@ -245,11 +250,18 @@ class RoadGraph {
       curr = prev;
     }
 
+    // Calcular perfil de elevación tridimensional
+    let elevationProfile = null;
+    if (typeof ElevationPhysics !== 'undefined') {
+      elevationProfile = ElevationPhysics.calculateElevationProfile(path);
+    }
+
     return {
       path,
       nodeIds,
       totalDistance: Math.round(totalDistance),
       totalTimeSeconds: Math.round(totalTimeSeconds),
+      elevationProfile,
       usedEdges
     };
   }
@@ -272,7 +284,6 @@ class RoadGraph {
         });
       }
 
-      // Penalizar las aristas para forzar a A* a buscar rutas viales alternas
       for (let j = 0; j < result.nodeIds.length - 1; j++) {
         const u = result.nodeIds[j];
         const v = result.nodeIds[j + 1];

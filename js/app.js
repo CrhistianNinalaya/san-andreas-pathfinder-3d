@@ -296,6 +296,21 @@ function renderMultiRouteInPanel(totalDist, totalTime) {
   const seconds = totalTime % 60;
   const timeFormatted = minutes > 0 ? `${minutes} min ${seconds} s` : `${seconds} s`;
 
+  // Calcular desnivel total acumulado
+  let totalGain = 0;
+  let totalLoss = 0;
+  let minZ = Infinity;
+  let maxZ = -Infinity;
+
+  routeLegs.forEach(leg => {
+    if (leg.result.elevationProfile) {
+      totalGain += leg.result.elevationProfile.elevationGain;
+      totalLoss += leg.result.elevationProfile.elevationLoss;
+      minZ = Math.min(minZ, leg.result.elevationProfile.minElevation);
+      maxZ = Math.max(maxZ, leg.result.elevationProfile.maxElevation);
+    }
+  });
+
   const summaryCard = document.createElement('div');
   summaryCard.className = 'route-card active';
   summaryCard.innerHTML = `
@@ -304,8 +319,12 @@ function renderMultiRouteInPanel(totalDist, totalTime) {
       <span class="badge">${waypoints.length} Paradas</span>
     </div>
     <div class="route-stats">
-      <span>📏 <strong>${distKm} km</strong></span>
+      <span>📏 <strong>${distKm} km</strong> (3D)</span>
       <span>⏱️ <strong>${timeFormatted}</strong></span>
+    </div>
+    <div class="route-stats" style="margin-top: 4px; font-size: 11px; color: #cbd5e1;">
+      <span>⛰️ Desnivel: <strong>+${totalGain}m / -${totalLoss}m</strong></span>
+      <span>🏔️ Altitud: <strong>${minZ}m a ${maxZ}m</strong></span>
     </div>
   `;
   container.appendChild(summaryCard);
@@ -323,6 +342,7 @@ function renderMultiRouteInPanel(totalDist, totalTime) {
       const legMins = Math.floor(leg.result.totalTimeSeconds / 60);
       const legSecs = leg.result.totalTimeSeconds % 60;
       const legTime = legMins > 0 ? `${legMins}m ${legSecs}s` : `${legSecs}s`;
+      const gain = leg.result.elevationProfile?.elevationGain || 0;
 
       const legCard = document.createElement('div');
       legCard.className = 'route-card';
@@ -331,6 +351,9 @@ function renderMultiRouteInPanel(totalDist, totalTime) {
         <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 600;">
           <span>Tramo ${i + 1}: ${leg.fromLabel} ➔ ${leg.toLabel}</span>
           <span style="color: #38bdf8;">${legDistKm} km (${legTime})</span>
+        </div>
+        <div style="font-size: 10px; color: #94a3b8; margin-top: 3px;">
+          Subida acumulada: +${gain}m
         </div>
       `;
       detailsContainer.appendChild(legCard);
