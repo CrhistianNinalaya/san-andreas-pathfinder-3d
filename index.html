@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTA San Andreas - GPS Navigator Multi-Parada</title>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/style.css?v=3.0">
+</head>
+<body>
+
+  <!-- Mapa Fullscreen -->
+  <div id="map"></div>
+
+  <!-- Panel Flotante de Navegación -->
+  <aside class="floating-panel">
+    <div class="panel-header">
+      <div class="brand">
+        <span class="brand-icon">🧭</span>
+        <div>
+          <h1>San Andreas GPS</h1>
+        </div>
+      </div>
+      <span class="badge">Multi-Paradas</span>
+    </div>
+
+    <div class="panel-body">
+      <!-- Selector de Alcance -->
+      <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #94a3b8;">
+        <span>Red Vial:</span>
+        <select id="select-scope" style="background: #1e293b; color: #f8fafc; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 4px 8px; font-size: 12px; outline: none; cursor: pointer;">
+          <option value="all" selected>Todo San Andreas (28,991 nodos)</option>
+          <option value="sf">San Fierro (6,217 nodos)</option>
+        </select>
+      </div>
+
+      <!-- Lista Dinámica de Paradas (A, B, C...) -->
+      <div id="waypoints-container" class="point-inputs">
+        <div class="instruction-hint" style="margin: 0; width: 100%;">
+          Haz clic en el mapa para marcar el Punto <strong>A</strong>, <strong>B</strong>, <strong>C</strong>...
+        </div>
+      </div>
+
+      <!-- Botones de Acción -->
+      <div class="action-buttons">
+        <button id="btn-reverse" class="btn btn-secondary" title="Invertir orden de ruta">
+          🔄 Invertir
+        </button>
+        <button id="btn-clear" class="btn btn-secondary" title="Limpiar todas las paradas">
+          🗑️ Limpiar
+        </button>
+        <button id="btn-focus-all" class="btn btn-primary" title="Ver todo el mapa">
+          🗺️ Centrar
+        </button>
+      </div>
+
+      <!-- Resultados y Desglose de la Ruta -->
+      <div id="routes-list" class="routes-container">
+        <div class="instruction-hint">
+          💡 Puedes agregar todas las paradas que quieras (<strong>A ➔ B ➔ C ➔ D...</strong>).
+          <br><br>
+          <em>Arrastra cualquier marcador en el mapa para ajustar la ruta en tiempo real.</em>
+        </div>
+      </div>
+
+      <!-- Controles de Depuración -->
+      <div class="debug-toggle">
+        <label for="toggle-debug" style="cursor: pointer;">Mostrar nodos viales en pantalla</label>
+        <input type="checkbox" id="toggle-debug" style="cursor: pointer;">
+      </div>
+    </div>
+  </aside>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Módulos de la Aplicación -->
+  <script src="js/map-config.js?v=3.0"></script>
+  <script src="js/pathfinder.js?v=3.0"></script>
+  <script src="js/app.js?v=3.0"></script>
+</body>
+</html>
