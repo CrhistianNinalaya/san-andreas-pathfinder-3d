@@ -32,6 +32,6 @@
 }
 
 .selectInput option {
-  background: var(--color-bg-base);
-  color: var(--color-text-main);
+  background: var(--bg-dropdown);
+  color: var(--text-primary);
 }
