@@ -1,18 +1,24 @@
-# Dependencias y entornos
+# Build outputs
+dist/
+dist-ssr/
+coverage/
+
+# Dependencies & environments
 node_modules/
+.pnpm-store/
 .env
 .env.local
 .vercel
 
-# Archivos pesados originales de desarrollo (ya procesados a WebP / JSON)
+# Raw game assets (already processed to WebP / JSON)
 Ultra HD Radar/
 data/paths_raw/
 
-# Archivos temporales e imágenes intermedias de prueba
+# Temporary test files & intermediate images
 *.png
 mapa-gta-sa.webp
 
-# Sistema operativo e IDEs
+# OS & IDEs
 .DS_Store
 Thumbs.db
 .idea/

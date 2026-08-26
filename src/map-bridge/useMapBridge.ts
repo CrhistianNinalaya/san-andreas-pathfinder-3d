@@ -19,6 +19,8 @@ export function useMapBridge(
       crs: L.CRS.Simple,
       minZoom: -2,
       maxZoom: 4,
+      maxBounds: GTA_BOUNDS.leafletBounds,
+      maxBoundsViscosity: 0.8,
       zoomControl: false,
       attributionControl: false
     });
@@ -31,9 +33,12 @@ export function useMapBridge(
     // Initial View
     map.setView(GTA_CENTERS.all.center, GTA_CENTERS.all.zoom);
 
-    // Event Listeners
+    // Event Listeners with Bounds Validation
     map.on('click', (e: L.LeafletMouseEvent) => {
       const gta = latLngToGta(e.latlng);
+      if (gta.x < -3000 || gta.x > 3000 || gta.y < -3000 || gta.y > 3000) {
+        return; // Ignore clicks outside the GTA map bounds
+      }
       onMapClick(gta);
     });
 

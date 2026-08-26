@@ -39,6 +39,7 @@ export function App() {
 
   // Map callbacks
   const handleMapClick = useCallback((coords: GtaCoords) => {
+    if (coords.x < -3000 || coords.x > 3000 || coords.y < -3000 || coords.y > 3000) return;
     dispatch({ type: 'ADD_WAYPOINT', coords });
   }, []);
 
@@ -194,6 +195,7 @@ export function App() {
             activeRouteIndex={state.activeRouteIndex}
             onSelectRoute={handleSelectAlternative}
             waypointCount={state.waypoints.length}
+            vehicleType={state.vehicleType}
           />
         </div>
       </aside>

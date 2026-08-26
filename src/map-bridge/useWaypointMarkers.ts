@@ -47,8 +47,12 @@ export function useWaypointMarkers(
 
       marker.on('dragend', (e: L.LeafletEvent) => {
         const markerTarget = e.target as L.Marker;
-        const newCoords = latLngToGta(markerTarget.getLatLng());
-        onWaypointDrag(idx, newCoords);
+        const rawCoords = latLngToGta(markerTarget.getLatLng());
+        const clampedCoords: GtaCoords = {
+          x: Math.max(-3000, Math.min(3000, rawCoords.x)),
+          y: Math.max(-3000, Math.min(3000, rawCoords.y))
+        };
+        onWaypointDrag(idx, clampedCoords);
       });
 
       marker.addTo(group);

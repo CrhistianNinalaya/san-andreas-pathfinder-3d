@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from '../../i18n/useTranslation';
 import { formatDistance, formatDuration } from '../../geo/coordinates';
+import { VEHICLE_PROFILES, type VehicleProfileType } from '../../terrain/ElevationPhysics';
 import type { RouteResult } from '../../engine/types';
 
 interface RouteCardsProps {
@@ -8,15 +9,27 @@ interface RouteCardsProps {
   activeRouteIndex: number;
   onSelectRoute: (index: number) => void;
   waypointCount: number;
+  vehicleType: VehicleProfileType;
 }
+
+const VEHICLE_ICONS: Record<VehicleProfileType, string> = {
+  car: '🚗',
+  sports: '🏎️',
+  bike: '🏍️',
+  truck: '🚛',
+  offroad: '🚙'
+};
 
 export const RouteCards: React.FC<RouteCardsProps> = ({
   routes,
   activeRouteIndex,
   onSelectRoute,
-  waypointCount
+  waypointCount,
+  vehicleType
 }) => {
   const { t } = useTranslation();
+  const vehicle = VEHICLE_PROFILES[vehicleType] ?? VEHICLE_PROFILES.car;
+  const vehicleIcon = VEHICLE_ICONS[vehicleType] ?? '🚗';
 
   if (routes.length === 0) {
     if (waypointCount >= 2) {
@@ -58,6 +71,11 @@ export const RouteCards: React.FC<RouteCardsProps> = ({
         const gain = route.elevationProfile?.elevationGain ?? 0;
         const loss = route.elevationProfile?.elevationLoss ?? 0;
 
+        // Calculate average speed
+        const distKm = route.totalDistance / 1000;
+        const timeHours = route.totalTimeSeconds / 3600;
+        const avgSpeed = timeHours > 0 ? Math.round(distKm / timeHours) : 0;
+
         let title = route.label || t('alternativeRoute', { index: idx });
         if (route.isOptimal) title = t('fastestRoute');
 
@@ -79,27 +97,40 @@ export const RouteCards: React.FC<RouteCardsProps> = ({
               <span style={{ fontSize: '12px', fontWeight: 700, color: isActive ? '#38bdf8' : '#f8fafc' }}>
                 {title}
               </span>
-              {route.isOptimal && (
+              <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
                 <span style={{
                   fontSize: '10px',
-                  fontWeight: 700,
-                  background: '#0284c7',
-                  color: '#fff',
+                  fontWeight: 600,
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: '#cbd5e1',
                   padding: '2px 6px',
                   borderRadius: '4px'
                 }}>
-                  {t('optimal')}
+                  {vehicleIcon} {vehicle.name.split('/')[0]}
                 </span>
-              )}
+                {route.isOptimal && (
+                  <span style={{
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    background: '#0284c7',
+                    color: '#fff',
+                    padding: '2px 6px',
+                    borderRadius: '4px'
+                  }}>
+                    {t('optimal')}
+                  </span>
+                )}
+              </div>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#e2e8f0', margin: '4px 0' }}>
               <span>📏 <strong>{distStr} (3D)</strong></span>
-              <span>⏱️ <strong>{timeStr}</strong></span>
+              <span style={{ color: '#38bdf8' }}>⏱️ <strong>{timeStr}</strong></span>
             </div>
 
-            <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>
-              ⛰️ {t('elevation', { gain, loss })}
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>
+              <span>⛰️ {t('elevation', { gain, loss })}</span>
+              <span style={{ color: '#cbd5e1' }}>⚡ <strong>{avgSpeed} km/h</strong> avg</span>
             </div>
           </div>
         );
