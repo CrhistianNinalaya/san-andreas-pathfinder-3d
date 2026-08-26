@@ -15,6 +15,7 @@ Ultra HD Radar/
 data/paths_raw/
 
 # Temporary test files & intermediate images
+radar_tiles/
 *.png
 mapa-gta-sa.webp
 
