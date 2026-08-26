@@ -1,4 +1,5 @@
 import { useTranslation } from '../../i18n/useTranslation';
+import type { Language } from '../../i18n/translations';
 import type { RouteState } from '../../features/route/routeReducer';
 import type { VehicleProfileType } from '../../terrain/ElevationPhysics';
 import styles from './PanelControls.module.css';
@@ -40,10 +41,11 @@ export function PanelControls({
         <div style={{ width: '85px' }}>
           <select
             value={lang}
-            onChange={(e) => setLang(e.target.value as any)}
+            onChange={(e) => setLang(e.target.value as Language)}
             className={styles.selectInput}
+            aria-label="Language / Idioma"
           >
-            <option value="es">🇪🇸 ES</option>
+            <option value="es">🇵🇪 ES</option>
             <option value="en">🇺🇸 EN</option>
           </select>
         </div>
