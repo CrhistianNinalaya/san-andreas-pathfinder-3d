@@ -10,7 +10,10 @@ import type {
   RawDataset,
   RouteResult,
   NearestNodeResult,
-  GtaCoords
+  GtaCoords,
+  FindNearestOptions,
+  FindPathOptions,
+  FindAlternativesOptions
 } from './types';
 
 export class RoadGraph {
@@ -156,7 +159,8 @@ export class RoadGraph {
     return edge.distance / effectiveSpeedMps;
   }
 
-  public findNearestNode(x: number, y: number, onlyGiant = true): NearestNodeResult {
+  public findNearestNode(options: FindNearestOptions): NearestNodeResult {
+    const { x, y, onlyGiant = true } = options;
     const cx = Math.floor(x / this.cellSize);
     const cy = Math.floor(y / this.cellSize);
 
@@ -206,12 +210,8 @@ export class RoadGraph {
     return dist / maxSpeedMps;
   }
 
-  public findShortestPath(
-    startId: string | number,
-    goalId: string | number,
-    edgePenalties: Map<string, number> = new Map(),
-    vehicleType: VehicleProfileType = 'car'
-  ): RouteResult | null {
+  public findShortestPath(options: FindPathOptions): RouteResult | null {
+    const { startId, goalId, edgePenalties = new Map(), vehicleType = 'car' } = options;
     const sId = String(startId);
     const gId = String(goalId);
 
@@ -320,17 +320,18 @@ export class RoadGraph {
     };
   }
 
-  public findRoutesWithAlternatives(
-    startId: string | number,
-    goalId: string | number,
-    maxRoutes = 3,
-    vehicleType: VehicleProfileType = 'car'
-  ): RouteResult[] {
+  public findRoutesWithAlternatives(options: FindAlternativesOptions): RouteResult[] {
+    const { startId, goalId, maxRoutes = 3, vehicleType = 'car' } = options;
     const results: RouteResult[] = [];
     const edgePenalties = new Map<string, number>();
 
     for (let i = 0; i < maxRoutes; i++) {
-      const result = this.findShortestPath(startId, goalId, edgePenalties, vehicleType);
+      const result = this.findShortestPath({
+        startId,
+        goalId,
+        edgePenalties,
+        vehicleType
+      });
       if (!result) break;
 
       const pathSignature = result.nodeIds.join('>');

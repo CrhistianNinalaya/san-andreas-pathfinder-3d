@@ -11,6 +11,7 @@ A\* route planner over the official GTA:SA road network, with 3D terrain physics
 - **React 19 + TypeScript**, `strict` + `noUncheckedIndexedAccess`. No `any` in engine modules.
 - **Package Manager:** `pnpm` with **Node.js >= 24.11.0**.
 - **Pure domain separation:** `src/engine/`, `src/terrain/`, and `src/geo/` have zero imports of React, Leaflet, or the DOM.
+- **Max 2 positional parameters:** Any function or hook that takes more than 2 parameters must receive an options object `{ ... }` for clarity and maintainability.
 
 ## Layout
 

@@ -45,8 +45,8 @@ const buildMs = performance.now() - buildStart;
 const median = (xs: number[]) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)] ?? 0;
 
 const results: BenchResult[] = OD_PAIRS.map(({ label, from, to }) => {
-  const a = graph.findNearestNode(from.x, from.y).node;
-  const b = graph.findNearestNode(to.x, to.y).node;
+  const a = graph.findNearestNode({ x: from.x, y: from.y }).node;
+  const b = graph.findNearestNode({ x: to.x, y: to.y }).node;
   const samples: number[] = [];
   let route = null;
 
@@ -56,7 +56,7 @@ const results: BenchResult[] = OD_PAIRS.map(({ label, from, to }) => {
 
   for (let i = 0; i < runs; i++) {
     const t0 = performance.now();
-    route = graph.findShortestPath(a.id, b.id);
+    route = graph.findShortestPath({ startId: a.id, goalId: b.id });
     samples.push(performance.now() - t0);
   }
 

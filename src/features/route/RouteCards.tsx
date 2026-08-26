@@ -54,8 +54,8 @@ export const RouteCards: React.FC<RouteCardsProps> = ({
         const isActive = idx === activeRouteIndex;
         const distStr = formatDistance(route.totalDistance);
         const timeStr = formatDuration(route.totalTimeSeconds);
-        const gain = route.elevationProfile?.elevationGain ?? 0;
-        const loss = route.elevationProfile?.elevationLoss ?? 0;
+        const gain = Math.round(route.elevationProfile?.elevationGain ?? 0);
+        const loss = Math.round(route.elevationProfile?.elevationLoss ?? 0);
 
         // Calculate average speed
         const distKm = route.totalDistance / 1000;

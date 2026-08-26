@@ -61,4 +61,17 @@ describe('ElevationPhysics', () => {
     expect(profile.minElevation).toBe(10);
     expect(profile.maxElevation).toBe(50);
   });
+
+  it('should evaluate full segment metrics using options object', () => {
+    const seg = ElevationPhysics.evaluateSegment({
+      nodeA: { x: 0, y: 0, z: 0 },
+      nodeB: { x: 100, y: 0, z: 10 },
+      nominalSpeedKmH: 80,
+      vehicleType: 'sports'
+    });
+
+    expect(seg.distance3D).toBeCloseTo(100.5, 1);
+    expect(seg.slopePercent).toBe(10);
+    expect(seg.timeSeconds).toBeGreaterThan(0);
+  });
 });

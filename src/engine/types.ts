@@ -2,6 +2,8 @@
  * Core Types for San Andreas Pathfinder 3D
  */
 
+import type { VehicleProfileType } from '../terrain/ElevationPhysics';
+
 export interface GtaCoords {
   x: number;
   y: number;
@@ -31,6 +33,8 @@ export interface AdjacencyEdge {
   slope: number;
   slopePercent: number;
   nominalSpeed: number;
+  speed?: number;
+  baseTimeSeconds?: number;
 }
 
 export interface RawDataset {
@@ -68,4 +72,33 @@ export interface SegmentEvaluation {
   effectiveSpeedKmH: number;
   timeSeconds: number;
   elevationDelta: number;
+}
+
+/* Options interfaces for functions taking > 2 properties */
+
+export interface FindNearestOptions {
+  x: number;
+  y: number;
+  onlyGiant?: boolean;
+}
+
+export interface FindPathOptions {
+  startId: string | number;
+  goalId: string | number;
+  edgePenalties?: Map<string, number>;
+  vehicleType?: VehicleProfileType;
+}
+
+export interface FindAlternativesOptions {
+  startId: string | number;
+  goalId: string | number;
+  maxRoutes?: number;
+  vehicleType?: VehicleProfileType;
+}
+
+export interface EvaluateSegmentOptions {
+  nodeA: GtaCoords;
+  nodeB: GtaCoords;
+  nominalSpeedKmH?: number;
+  vehicleType?: VehicleProfileType;
 }

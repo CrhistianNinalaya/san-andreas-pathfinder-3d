@@ -105,12 +105,12 @@ export class ElevationPhysics {
   /**
    * Evaluates complete road segment metrics considering 3D distance and slope
    */
-  static evaluateSegment(
-    nodeA: GtaCoords,
-    nodeB: GtaCoords,
+  static evaluateSegment({
+    nodeA,
+    nodeB,
     nominalSpeedKmH = 80,
-    vehicleType: VehicleProfileType = 'car'
-  ): SegmentEvaluation {
+    vehicleType = 'car'
+  }: import('../engine/types').EvaluateSegmentOptions): SegmentEvaluation {
     const dist3D = this.calculate3DDistance(nodeA, nodeB);
     const slope = this.calculateSlope(nodeA, nodeB);
     const slopeMultiplier = this.getSlopeSpeedMultiplier(slope, vehicleType);

@@ -3,12 +3,15 @@ import L from 'leaflet';
 import { gtaToLatLng } from '../geo/coordinates';
 import type { RouteResult } from '../engine/types';
 
-export function useRouteLayer(
-  map: L.Map | null,
-  routes: RouteResult[],
-  activeRouteIndex: number,
-  onSelectAlternative?: (index: number) => void
-) {
+export interface UseRouteLayerOptions {
+  map: L.Map | null;
+  routes: RouteResult[];
+  activeRouteIndex: number;
+  onSelectAlternative?: (index: number) => void;
+}
+
+export function useRouteLayer(options: UseRouteLayerOptions) {
+  const { map, routes, activeRouteIndex, onSelectAlternative } = options;
   const layerGroupRef = useRef<L.LayerGroup | null>(null);
 
   useEffect(() => {
@@ -58,8 +61,8 @@ export function useRouteLayer(
 
       const mainLine = L.polyline(latlngs, {
         color: '#38bdf8',
-        weight: 5.5,
-        opacity: 0.95,
+        weight: 5,
+        opacity: 1.0,
         lineCap: 'round'
       });
       mainLine.addTo(group);

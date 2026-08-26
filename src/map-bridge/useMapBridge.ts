@@ -3,11 +3,14 @@ import L from 'leaflet';
 import { GTA_BOUNDS, GTA_CENTERS, latLngToGta } from '../geo/coordinates';
 import type { GtaCoords } from '../engine/types';
 
-export function useMapBridge(
-  containerRef: React.RefObject<HTMLDivElement | null>,
-  onMapClick: (coords: GtaCoords) => void,
-  onCursorMove?: (coords: GtaCoords) => void
-) {
+export interface UseMapBridgeOptions {
+  containerRef: React.RefObject<HTMLDivElement | null>;
+  onMapClick: (coords: GtaCoords) => void;
+  onCursorMove?: (coords: GtaCoords) => void;
+}
+
+export function useMapBridge(options: UseMapBridgeOptions) {
+  const { containerRef, onMapClick, onCursorMove } = options;
   const mapRef = useRef<L.Map | null>(null);
   const [isMapReady, setIsMapReady] = useState(false);
 

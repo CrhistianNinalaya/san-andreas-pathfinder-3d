@@ -56,11 +56,25 @@ export function App() {
   }, []);
 
   // Mount Leaflet
-  const { map } = useMapBridge(mapContainerRef, handleMapClick, handleCursorMove);
+  const { map } = useMapBridge({
+    containerRef: mapContainerRef,
+    onMapClick: handleMapClick,
+    onCursorMove: handleCursorMove
+  });
 
   // Sync Layers
-  useRouteLayer(map, state.routes, state.activeRouteIndex, handleSelectAlternative);
-  useWaypointMarkers(map, state.waypoints, handleWaypointDrag);
+  useRouteLayer({
+    map,
+    routes: state.routes,
+    activeRouteIndex: state.activeRouteIndex,
+    onSelectAlternative: handleSelectAlternative
+  });
+
+  useWaypointMarkers({
+    map,
+    waypoints: state.waypoints,
+    onWaypointDrag: handleWaypointDrag
+  });
 
   // Focus / Scope handler
   const handleScopeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

@@ -10,11 +10,14 @@ export interface Waypoint {
   snapNode: GraphNode;
 }
 
-export function useWaypointMarkers(
-  map: L.Map | null,
-  waypoints: Waypoint[],
-  onWaypointDrag: (index: number, newCoords: GtaCoords) => void
-) {
+export interface UseWaypointMarkersOptions {
+  map: L.Map | null;
+  waypoints: Waypoint[];
+  onWaypointDrag: (index: number, newCoords: GtaCoords) => void;
+}
+
+export function useWaypointMarkers(options: UseWaypointMarkersOptions) {
+  const { map, waypoints, onWaypointDrag } = options;
   const layerGroupRef = useRef<L.LayerGroup | null>(null);
 
   useEffect(() => {

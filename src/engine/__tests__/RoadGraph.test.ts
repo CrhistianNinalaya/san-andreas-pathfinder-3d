@@ -37,14 +37,14 @@ describe('RoadGraph and A* Pathfinding', () => {
     expect(node1?.isGiantComponent).toBe(true);
     expect(node99?.isGiantComponent).toBe(false);
 
-    const nearest = graph.findNearestNode(9900, 9900, true);
+    const nearest = graph.findNearestNode({ x: 9900, y: 9900, onlyGiant: true });
     expect(nearest.node?.id).not.toBe('99');
     expect(nearest.node?.isGiantComponent).toBe(true);
   });
 
   it('should find the shortest path between two connected nodes', () => {
     const graph = new RoadGraph(mockDataset);
-    const result = graph.findShortestPath('1', '3');
+    const result = graph.findShortestPath({ startId: '1', goalId: '3' });
 
     expect(result).not.toBeNull();
     expect(result?.nodeIds).toEqual(['1', '2', '3']);
@@ -53,7 +53,7 @@ describe('RoadGraph and A* Pathfinding', () => {
 
   it('should generate alternative routes when available', () => {
     const graph = new RoadGraph(mockDataset);
-    const routes = graph.findRoutesWithAlternatives('1', '3', 2);
+    const routes = graph.findRoutesWithAlternatives({ startId: '1', goalId: '3', maxRoutes: 2 });
 
     expect(routes.length).toBe(2);
     expect(routes[0]?.isOptimal).toBe(true);
@@ -64,9 +64,9 @@ describe('RoadGraph and A* Pathfinding', () => {
   it('should compute different travel times based on vehicle profile', () => {
     const graph = new RoadGraph(mockDataset);
 
-    const sportsRoute = graph.findShortestPath('5', '6', new Map(), 'sports');
-    const carRoute = graph.findShortestPath('5', '6', new Map(), 'car');
-    const truckRoute = graph.findShortestPath('5', '6', new Map(), 'truck');
+    const sportsRoute = graph.findShortestPath({ startId: '5', goalId: '6', vehicleType: 'sports' });
+    const carRoute = graph.findShortestPath({ startId: '5', goalId: '6', vehicleType: 'car' });
+    const truckRoute = graph.findShortestPath({ startId: '5', goalId: '6', vehicleType: 'truck' });
 
     expect(sportsRoute).not.toBeNull();
     expect(carRoute).not.toBeNull();
@@ -84,7 +84,7 @@ describe('RoadGraph and A* Pathfinding', () => {
     const node3 = graph.nodes.get('3')!;
 
     const h = graph.heuristic(node1, node3, 'car');
-    const result = graph.findShortestPath('1', '3', new Map(), 'car')!;
+    const result = graph.findShortestPath({ startId: '1', goalId: '3', vehicleType: 'car' })!;
 
     expect(h).toBeLessThanOrEqual(result.totalTimeSeconds);
   });

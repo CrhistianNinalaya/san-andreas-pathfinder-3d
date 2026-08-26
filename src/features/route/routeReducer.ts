@@ -4,7 +4,7 @@
 
 import type { RoadGraph } from '../../engine/RoadGraph';
 import type { GtaCoords, RouteResult } from '../../engine/types';
-import type { VehicleProfileType } from '../../terrain/ElevationPhysics';
+import { ElevationPhysics, type VehicleProfileType } from '../../terrain/ElevationPhysics';
 import type { Waypoint } from '../../map-bridge/useWaypointMarkers';
 
 export interface RouteState {
@@ -48,14 +48,26 @@ function getWaypointLabel(index: number): string {
   return `P${index + 1}`;
 }
 
-function computeRoutes(waypoints: Waypoint[], graph: RoadGraph | null, vehicleType: VehicleProfileType = 'car'): RouteResult[] {
+export interface ComputeRoutesOptions {
+  waypoints: Waypoint[];
+  graph: RoadGraph | null;
+  vehicleType?: VehicleProfileType;
+}
+
+function computeRoutes(options: ComputeRoutesOptions): RouteResult[] {
+  const { waypoints, graph, vehicleType = 'car' } = options;
   if (!graph || waypoints.length < 2) return [];
 
   // 2 Waypoints: Optimal + Alternatives with vehicle physics
   if (waypoints.length === 2) {
     const start = waypoints[0]!.snapNode;
     const goal = waypoints[1]!.snapNode;
-    return graph.findRoutesWithAlternatives(start.id, goal.id, 3, vehicleType);
+    return graph.findRoutesWithAlternatives({
+      startId: start.id,
+      goalId: goal.id,
+      maxRoutes: 3,
+      vehicleType
+    });
   }
 
   // 3+ Waypoints: Multi-Stop Continuous Journey
@@ -68,7 +80,11 @@ function computeRoutes(waypoints: Waypoint[], graph: RoadGraph | null, vehicleTy
   for (let i = 0; i < waypoints.length - 1; i++) {
     const start = waypoints[i]!.snapNode;
     const goal = waypoints[i + 1]!.snapNode;
-    const leg = graph.findShortestPath(start.id, goal.id, new Map(), vehicleType);
+    const leg = graph.findShortestPath({
+      startId: start.id,
+      goalId: goal.id,
+      vehicleType
+    });
 
     if (leg) {
       totalDistance += leg.totalDistance;
@@ -81,22 +97,7 @@ function computeRoutes(waypoints: Waypoint[], graph: RoadGraph | null, vehicleTy
 
   if (pathNodes.length === 0) return [];
 
-  const elevationProfile = {
-    elevationGain: 0,
-    elevationLoss: 0,
-    minElevation: Infinity,
-    maxElevation: -Infinity
-  };
-
-  pathNodes.forEach((node, idx) => {
-    if (node.z < elevationProfile.minElevation) elevationProfile.minElevation = node.z;
-    if (node.z > elevationProfile.maxElevation) elevationProfile.maxElevation = node.z;
-    if (idx > 0) {
-      const diff = node.z - (pathNodes[idx - 1]?.z ?? 0);
-      if (diff > 0) elevationProfile.elevationGain += diff;
-      else elevationProfile.elevationLoss += Math.abs(diff);
-    }
-  });
+  const elevationProfile = ElevationPhysics.calculateElevationProfile(pathNodes);
 
   return [
     {
@@ -117,14 +118,18 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
     case 'SET_GRAPH': {
       const graph = action.graph;
       const reSnappedWaypoints = state.waypoints.map(wp => {
-        const snap = graph.findNearestNode(wp.coords.x, wp.coords.y, true).node;
+        const snap = graph.findNearestNode({ x: wp.coords.x, y: wp.coords.y, onlyGiant: true }).node;
         return {
           ...wp,
           snapNode: snap || wp.snapNode
         };
       });
 
-      const routes = computeRoutes(reSnappedWaypoints, graph, state.vehicleType);
+      const routes = computeRoutes({
+        waypoints: reSnappedWaypoints,
+        graph,
+        vehicleType: state.vehicleType
+      });
       return {
         ...state,
         graph,
@@ -141,7 +146,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
 
     case 'ADD_WAYPOINT': {
       if (!state.graph) return state;
-      const nearest = state.graph.findNearestNode(action.coords.x, action.coords.y, true);
+      const nearest = state.graph.findNearestNode({ x: action.coords.x, y: action.coords.y, onlyGiant: true });
       if (!nearest.node) return state;
 
       const newIndex = state.waypoints.length;
@@ -157,7 +162,11 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
         wp.label = getWaypointLabel(i);
       });
 
-      const routes = computeRoutes(waypoints, state.graph, state.vehicleType);
+      const routes = computeRoutes({
+        waypoints,
+        graph: state.graph,
+        vehicleType: state.vehicleType
+      });
       return {
         ...state,
         waypoints,
@@ -171,7 +180,11 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
       waypoints.forEach((wp, i) => {
         wp.label = getWaypointLabel(i);
       });
-      const routes = computeRoutes(waypoints, state.graph, state.vehicleType);
+      const routes = computeRoutes({
+        waypoints,
+        graph: state.graph,
+        vehicleType: state.vehicleType
+      });
       return {
         ...state,
         waypoints,
@@ -182,7 +195,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
 
     case 'UPDATE_WAYPOINT': {
       if (!state.graph) return state;
-      const nearest = state.graph.findNearestNode(action.coords.x, action.coords.y, true);
+      const nearest = state.graph.findNearestNode({ x: action.coords.x, y: action.coords.y, onlyGiant: true });
       if (!nearest.node) return state;
 
       const waypoints = state.waypoints.map((wp, i) => {
@@ -194,7 +207,11 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
         };
       });
 
-      const routes = computeRoutes(waypoints, state.graph, state.vehicleType);
+      const routes = computeRoutes({
+        waypoints,
+        graph: state.graph,
+        vehicleType: state.vehicleType
+      });
       return {
         ...state,
         waypoints,
@@ -208,7 +225,11 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
       waypoints.forEach((wp, i) => {
         wp.label = getWaypointLabel(i);
       });
-      const routes = computeRoutes(waypoints, state.graph, state.vehicleType);
+      const routes = computeRoutes({
+        waypoints,
+        graph: state.graph,
+        vehicleType: state.vehicleType
+      });
       return {
         ...state,
         waypoints,
@@ -227,7 +248,11 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
 
     case 'SET_VEHICLE': {
       const vehicleType = action.vehicleType;
-      const routes = computeRoutes(state.waypoints, state.graph, vehicleType);
+      const routes = computeRoutes({
+        waypoints: state.waypoints,
+        graph: state.graph,
+        vehicleType
+      });
       return {
         ...state,
         vehicleType,
@@ -246,7 +271,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
 
       const vehicle = action.vehicle ?? state.vehicleType;
       const waypoints: Waypoint[] = action.waypointsCoords.map((c, i) => {
-        const snap = state.graph!.findNearestNode(c.x, c.y, true).node!;
+        const snap = state.graph!.findNearestNode({ x: c.x, y: c.y, onlyGiant: true }).node!;
         return {
           id: `wp_${i}`,
           label: getWaypointLabel(i),
@@ -255,7 +280,11 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
         };
       });
 
-      const routes = computeRoutes(waypoints, state.graph, vehicle);
+      const routes = computeRoutes({
+        waypoints,
+        graph: state.graph,
+        vehicleType: vehicle
+      });
       return {
         ...state,
         waypoints,
