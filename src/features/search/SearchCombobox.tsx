@@ -72,6 +72,11 @@ export function SearchCombobox({ onSelectPlace }: Readonly<SearchComboboxProps>)
     <div ref={containerRef} className={styles.searchContainer}>
       <input
         type="text"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded={isOpen && filteredPois.length > 0}
+        aria-controls="poi-listbox"
+        aria-activedescendant={isOpen && filteredPois.length > 0 ? `poi-option-${selectedIndex}` : undefined}
         value={query}
         onChange={e => {
           setQuery(e.target.value);
@@ -85,22 +90,30 @@ export function SearchCombobox({ onSelectPlace }: Readonly<SearchComboboxProps>)
       />
 
       {isOpen && filteredPois.length > 0 && (
-        <ul className={styles.dropdownMenu}>
-          {filteredPois.map((poi, idx) => (
-            <li
-              key={poi.id}
-              onClick={() => handleSelect(poi)}
-              className={`${styles.dropdownItem} ${idx === selectedIndex ? styles.dropdownItemSelected : ''}`}
-            >
-              <div className={styles.itemInfo}>
-                <span className={styles.itemName}>{poi.name[lang] || poi.name.en}</span>
-                <span className={styles.itemCity}>{poi.city}</span>
-              </div>
-              <span className={styles.itemKind}>{poi.kind}</span>
-            </li>
-          ))}
+        <ul id="poi-listbox" role="listbox" className={styles.dropdownMenu}>
+          {filteredPois.map((poi, idx) => {
+            const isSelected = idx === selectedIndex;
+            return (
+              <li key={poi.id} role="presentation">
+                <button
+                  type="button"
+                  id={`poi-option-${idx}`}
+                  role="option"
+                  aria-selected={isSelected}
+                  onClick={() => handleSelect(poi)}
+                  className={`${styles.dropdownItem} ${isSelected ? styles.dropdownItemSelected : ''}`}
+                >
+                  <div className={styles.itemInfo}>
+                    <span className={styles.itemName}>{poi.name[lang] || poi.name.en}</span>
+                    <span className={styles.itemCity}>{poi.city}</span>
+                  </div>
+                  <span className={styles.itemKind}>{poi.kind}</span>
+                </button>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
   );
-};
+}

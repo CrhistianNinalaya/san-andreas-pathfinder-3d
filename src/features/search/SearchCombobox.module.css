@@ -11,7 +11,7 @@
   border-radius: 8px;
   padding: 8px 12px;
   color: var(--text-primary);
-  font-size: 12.5px;
+  font-size: 13px;
   outline: none;
   backdrop-filter: blur(8px);
   transition: border-color 0.15s ease, background 0.15s ease;
@@ -44,14 +44,20 @@
 }
 
 .dropdownItem {
+  width: 100%;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
   padding: 8px 12px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
+  font-size: 12.5px;
   transition: background 0.1s ease;
   color: var(--text-primary);
+  outline: none;
 }
 
 .dropdownItem:hover,
@@ -74,7 +80,7 @@
 }
 
 .itemCity {
-  font-size: 10.5px;
+  font-size: 11px;
   color: var(--text-muted);
 }
 
@@ -84,4 +90,17 @@
   background: var(--bg-badge-neutral);
   color: var(--text-subtle);
   border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .searchInput {
+    padding: 10px 14px;
+    font-size: 14px;
+    min-height: 42px;
+  }
+
+  .dropdownItem {
+    padding: 11px 14px;
+    font-size: 13.5px;
+  }
 }

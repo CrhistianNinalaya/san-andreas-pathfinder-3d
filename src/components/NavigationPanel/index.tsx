@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { PanelHeader } from '../PanelHeader';
 import { PanelControls } from '../PanelControls';
 import { SearchCombobox } from '../../features/search/SearchCombobox';
@@ -20,15 +21,43 @@ export function NavigationPanel({
   onScopeChange,
   onCenterMap
 }: Readonly<NavigationPanelProps>) {
-  return (
-    <aside className={styles.floatingPanel}>
-      {/* Brand header with node count badge */}
-      <PanelHeader
-        isLoading={state.isLoadingGraph}
-        nodeCount={state.graphNodeCount}
-      />
+  const [isExpanded, setIsExpanded] = useState(true);
 
-      <div className={styles.panelBody}>
+  // Auto-expand panel on mobile when user adds waypoints
+  useEffect(() => {
+    if (state.waypoints.length > 0) {
+      setIsExpanded(true);
+    }
+  }, [state.waypoints.length]);
+
+  function toggleExpand() {
+    setIsExpanded((prev) => !prev);
+  }
+
+  return (
+    <aside className={`${styles.floatingPanel} ${isExpanded ? styles.expanded : ''}`}>
+      {/* Native button for accessible drawer toggling */}
+      <button
+        type="button"
+        className={styles.headerTriggerButton}
+        onClick={toggleExpand}
+        aria-expanded={isExpanded}
+        aria-controls="navigation-panel-body"
+        aria-label={isExpanded ? 'Collapse navigation panel' : 'Expand navigation panel'}
+      >
+        {/* Mobile Drawer Pull Indicator */}
+        <div className={styles.mobilePillWrapper}>
+          <div className={styles.mobilePill} />
+        </div>
+
+        {/* Brand header with node count badge */}
+        <PanelHeader
+          isLoading={state.isLoadingGraph}
+          nodeCount={state.graphNodeCount}
+        />
+      </button>
+
+      <div id="navigation-panel-body" className={styles.panelBody}>
         {/* Scope, language and vehicle controls */}
         <PanelControls
           scope={state.scope}
