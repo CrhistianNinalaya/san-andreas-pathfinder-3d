@@ -433,9 +433,8 @@ Fixing what P2-6 identified, once the foundation is in place:
 - Reject an alternative whose edge overlap with an already-accepted route exceeds 70%.
 - Return `{ routes, requested, found }` so the UI can say "only 2 distinct routes exist" instead of
   silently showing fewer.
-- Turn-by-turn directions: derive bearing changes along the path, cluster into manoeuvres
-  ("continue 1.2 km", "turn right"). Pure function over the node list, fully unit-testable.
 - Elevation profile chart: one inline `<svg><path>` from the `z` array. No chart library.
+- Turn-by-turn directions: **[DEFERRED / SKIPPED for v1]** derive bearing changes along the path, cluster into manoeuvres ("continue 1.2 km", "turn right"). May be revisited in a future phase if community demand justifies it.
 
 ---
 
@@ -531,7 +530,7 @@ Zero inline styles (P2-4). Lighthouse ≥ 95 on performance and accessibility.
 - Search combobox (§7.2).
 - Vehicle profiles (§7.3), including the continuous slope curve that retires P2-5.
 - Mobile bottom sheet (§7.4).
-- Turn-by-turn + elevation chart (§7.6).
+- Elevation profile chart (§7.6). *(Turn-by-turn deferred to future).*
 
 **Exit:** usable one-handed on a 375 px phone. Search finds any of the 300 POIs in ES or EN.
 
@@ -540,7 +539,7 @@ Zero inline styles (P2-4). Lighthouse ≥ 95 on performance and accessibility.
 ### Phase 5 — Optional · unscoped
 
 Short links (§3.3, **⚠ decision needed**) · bidirectional A\* or ALT landmarks if profiling justifies
-it · live frontier visualisation for the algorithm-curious · PWA / offline · public train and flight
+it · live frontier visualisation for the algorithm-curious · turn-by-turn navigation manoeuvres · PWA / offline · public train and flight
 network layers.
 
 ---
