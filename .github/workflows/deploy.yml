@@ -1,6 +1,7 @@
 name: CI & Deploy to Vercel
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -41,8 +42,8 @@ jobs:
       - name: 🏗️ Production Build
         run: pnpm run build
 
-      - name: 🚀 Deploy to Vercel (Production)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: 🚀 Deploy to Vercel (Manual Trigger Only)
+        if: github.event_name == 'workflow_dispatch'
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
