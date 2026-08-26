@@ -436,6 +436,92 @@ Fixing what P2-6 identified, once the foundation is in place:
 - Elevation profile chart: one inline `<svg><path>` from the `z` array. No chart library.
 - Turn-by-turn directions: **[DEFERRED / SKIPPED for v1]** derive bearing changes along the path, cluster into manoeuvres ("continue 1.2 km", "turn right"). May be revisited in a future phase if community demand justifies it.
 
+### 7.7 Custom Markers & SA-MP Roleplay Circuits (FenixZone / Job Presets)
+
+Target use-case: SA-MP / GTA:SA multiplayer roleplay circuits that require purchasing or delivering goods across multiple map points (e.g., FenixZone *Armero* job requiring 250 materials in San Fierro, 50 at Los Santos Ammu-Nation, and 50 at the Los Santos storm drain/canal).
+
+#### 7.7.1 Persistent Custom Markers (Local POIs)
+- **Creation:** Right-click on map canvas, long-press on mobile, or "Save Pin" action from current coordinate tracker.
+- **Attributes:**
+  ```typescript
+  interface CustomMarker {
+    id: string; // crypto.randomUUID() or timestamp
+    name: string; // e.g. "Fábrica Materiales SF", "Desagüe 50 Mats"
+    x: number;
+    y: number;
+    z: number;
+    category?: 'materials' | 'ammunition' | 'job' | 'safehouse' | 'custom';
+    color?: string; // hex accent or token
+    createdAt: number;
+  }
+  ```
+- **Storage:** Persisted locally in `localStorage` under `sap_custom_markers`.
+- **Search Integration:** Injected into `SearchCombobox` queries alongside official POIs with an indicator badge (`[Favorito]` / `[Custom]`).
+- **Map Layer:** Rendered with distinct customizable Leaflet marker icons with quick "Añadir a ruta" popup action.
+
+#### 7.7.2 Saved Route Presets (Circuit Templates)
+- Save active multi-stop waypoint sequences as reusable named presets (e.g. `"Ruta Armero 350 Mats"`, `"Circuito Basurero / Repartidor"`).
+- **Schema:**
+  ```typescript
+  interface RoutePreset {
+    id: string;
+    title: string;
+    description?: string;
+    vehicleType: VehicleProfileType;
+    waypoints: Array<{ name: string; x: number; y: number; z: number }>;
+    updatedAt: number;
+  }
+  ```
+- **UI Management:** Quick preset dropdown / modal in the navigation panel to load, rename, reorder, or delete saved circuits in 1 click.
+
+#### 7.7.3 TSP Circuit Optimizer (*Travelling Salesperson Problem*)
+- Multi-stop optimization button: **"⚡ Optimizar orden de paradas"**.
+- For $\le 8$ waypoints, computes optimal permutation of intermediate stops (preserving Origin and/or Final Destination) using brute-force / Held-Karp over A* cost matrix to minimize total travel time.
+
+#### 7.7.4 Import / Export & Shareable Links
+- Export custom markers and presets to portable `.json` files to share with gang members or friends.
+- URL Hash serialization (e.g. `#circuit=SF_Mats,LS_Ammu,LS_Drain`) for one-click sharing in Discord / forums.
+
+### 7.8 Shortcut & Offroad Network (SA-MP Wildcard Edges & Cliff Jumps)
+
+Official GTA:SA node datasets only contain paths coded by Rockstar for ambient NPC traffic on paved roads. Real multiplayer/SA-MP roleplay drivers (e.g. FenixZone) use off-road hill cuts, cliff jumps, railroad bridges, and stormwater drains to bypass long highway curves.
+
+#### 7.8.1 Shortcut Edge Data Model
+```typescript
+interface ShortcutEdge {
+  id: string;
+  name: string; // e.g. "Salto Risco Flint County", "Atajo Césped Vinewood"
+  fromCoords: GtaCoords;
+  toCoords: GtaCoords;
+  type: 'offroad' | 'cliff_jump' | 'railroad' | 'drainage' | 'urban_cut';
+  isUnidirectional: boolean; // Cliff jumps are strictly one-way (downhill only)
+  nominalSpeed: number; // e.g. 40 km/h for rough dirt, 110 km/h for cliff drop
+  dangerLevel: 1 | 2 | 3; // 1 = easy grass cut, 3 = high rollover/damage risk
+  vehicleSuitability?: VehicleProfileType[]; // e.g. ['offroad', 'bike', 'sports']
+}
+```
+
+#### 7.8.2 Routing Behavior & Visual Representation
+- **Toggle Control:** `[⚡ Permitir atajos y saltos arriesgados (Rutas SA-MP)]`.
+- **Hybrid Graph Insertion:** When enabled, shortcut edges are dynamically injected into `adjacencyList` linking nearest road nodes.
+- **Visual Distinction:** Standard road segments render in cyan (`#38bdf8`), while shortcut/cliff segments render in vivid orange/red neon (`#f97316` / `#ef4444`) with hazard badges (⚠️ *Salto de Risco*).
+
+#### 7.8.3 Data Acquisition Strategies (How to Capture Shortcut Coordinates)
+
+Since off-road shortcuts and stunt jumps are emergent player knowledge not present in official traffic files, the data can be harvested through four complementary channels:
+
+1. **In-Game CLEO / SA-MP GPS Logger Script (`tools/cleo/shortcut_recorder.cs`):**
+   - A lightweight CLEO script running in GTA:SA / SA-MP with keyboard hotkeys:
+     - `Ctrl + 1` at the edge of the cliff (captures `start: { x, y, z }`).
+     - `Ctrl + 2` at the landing road (captures `end: { x, y, z }` and saves to `shortcuts_dump.json`).
+     - **Breadcrumb recorder mode:** Records coordinates every 15 metres while driving off-road to capture curved paths.
+2. **Visual Web Editor Mode (*In-App Shortcut Builder*):**
+   - An interactive editor mode in the web app: click node A on the high-res satellite Leaflet canvas, click node B, configure jump type/one-way flag, and save directly to `localStorage` or download as `shortcuts.json`.
+3. **Automated Extraction of `tracks.dat` (Railroad Network):**
+   - Extract train tracks from GTA `data/paths/tracks.dat` via a Python script (`tools/pipeline/extract_tracks.py`) to automatically generate railroad bridge and tunnel shortcut corridors.
+4. **Community Datasets & Crowdsourcing:**
+   - Shipped as a curated `data/shortcuts.json` in the repository, open to community PRs for roleplay servers.
+
 ---
 
 ## 8. Implementation plan
@@ -538,9 +624,7 @@ Zero inline styles (P2-4). Lighthouse ≥ 95 on performance and accessibility.
 
 ### Phase 5 — Optional · unscoped
 
-Short links (§3.3, **⚠ decision needed**) · bidirectional A\* or ALT landmarks if profiling justifies
-it · live frontier visualisation for the algorithm-curious · turn-by-turn navigation manoeuvres · PWA / offline · public train and flight
-network layers.
+Custom Markers & SA-MP Job Presets (§7.7) · Shortcut & Offroad Network (§7.8) · TSP multi-stop route optimizer · Short links / shareable circuits (§3.3) · live frontier visualisation for the algorithm-curious · turn-by-turn navigation manoeuvres · PWA / offline · public train and flight network layers.
 
 ---
 
