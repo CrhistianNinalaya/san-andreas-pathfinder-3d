@@ -2,63 +2,54 @@
 
 A\* route planner over the official GTA:SA road network, with 3D terrain physics, on a Leaflet map.
 
-**Current state:** vanilla JS prototype (4 `<script>` tags, no build). Being migrated to React +
-TypeScript in an Nx monorepo. Read [SPEC.md](SPEC.md) before proposing architecture, and
-[docs/CODE-REVIEW.md](docs/CODE-REVIEW.md) before claiming something is broken — it probably is, and
-it's probably already documented with a finding id.
+**Current state:** React 19 + TypeScript + Vite application.
 
 ## Constraints
 
-- **No libraries for the UI layer.** Components, panels, inputs, sheets, comboboxes are hand-written.
-  Libraries are fine everywhere else (Leaflet, Vite, Vitest, React).
-- **Leaflet stays.** The map engine is not being rewritten.
-- **React + TypeScript**, `strict` + `noUncheckedIndexedAccess`. No `any` in `libs/`.
-- **Python for data work.** The extraction/packing pipeline is a build-time backend, never a runtime
-  service. Routing runs entirely in the browser — see SPEC.md §3 for why.
-- **Nx monorepo** with enforced module boundaries.
+- **No libraries for the UI layer.** Components, panels, inputs, sheets, comboboxes are hand-written with CSS Modules.
+- **Leaflet stays.** The map engine is wrapped via the imperative bridge pattern (`src/map-bridge/`).
+- **React 19 + TypeScript**, `strict` + `noUncheckedIndexedAccess`. No `any` in engine modules.
+- **Package Manager:** `pnpm` with **Node.js >= 24.11.0**.
+- **Pure domain separation:** `src/engine/`, `src/terrain/`, and `src/geo/` have zero imports of React, Leaflet, or the DOM.
 
 ## Layout
 
 ```
-js/        vanilla engine + UI (being replaced; the engine is good, app.js is not)
-data/      road-network datasets
-tools/     verify-graph.mjs, bench-route.mjs — dev tooling, not shipped
-docs/      CODE-REVIEW.md, SPEC.md lives at the root
-.agent/    skills/ and workflows/
+src/
+  engine/       MinHeap, RoadGraph (A*), types (pure TS)
+  terrain/      ElevationPhysics, vehicle profiles (pure TS)
+  geo/          Coordinate math and Leaflet conversions (pure TS)
+  map-bridge/   Leaflet ↔ React Bridge hooks and MapView
+  features/     Search combobox, Waypoints list, Route cards, URL state
+  i18n/         Typed bilingual dictionaries (ES/EN)
+  ui/           Handcrafted UI styles
+  app/          Main App container
+data/           san_andreas_official_nodes.json, pois.json
+tools/          verify-graph.mjs, bench-route.mjs
+.agent/         skills/ and workflows/
 ```
 
 ## Before you change something
 
 ```bash
-node tools/verify-graph.mjs     # dataset invariants + connectivity
-node tools/bench-route.mjs      # A* timings against the recorded baseline
+pnpm run verify-graph     # dataset invariants + connectivity
+pnpm run bench            # A* timings against the recorded baseline
+pnpm test                 # Vitest pure domain test suite
+pnpm run build            # Production TypeScript + Vite build
 ```
-
-Any engine change needs a benchmark. Any dataset change needs the verifier.
-
-Serving locally: `npx serve .` — the `npm start` script uses `python3 -m http.server`, which does not
-run on Windows.
 
 ## Things that will mislead you
 
-- **6.6% of road nodes cannot reach the rest of the map.** 31 connected components. "No route found"
-  is usually this, not an A\* bug.
+- **6.6% of road nodes cannot reach the rest of the map in raw data.** The engine uses Union-Find to snap strictly into the giant component (27,083 nodes).
 - **`lat` is GTA `y` and `lng` is GTA `x`.** Every mirrored-marker bug is this swap.
-- **The A\* heuristic's admissibility margin is 7%** and its violation is completely silent.
+- **The A\* heuristic's admissibility margin is guaranteed dynamically** (`maxSpeed * 1.10 + 1`).
 - **Node ids change on every dataset rebuild.** Never persist one — persist world coordinates.
-- **No node has a `name`.** Place search needs a POI dataset that does not exist yet.
-- **Hardcoded counts in the README and `index.html` are wrong** (6,217 vs the actual 6,385). Verify
-  numbers from the data.
 
 ## Conventions
 
-Code, comments, commits, and docs in **English** (since commit `2d7cbd4`). User-facing strings are
-translated ES/EN and live in `libs/i18n` — Spanish is the reference translation.
+Code, comments, commits, and docs in **English**. User-facing strings are
+translated ES/EN and live in `src/i18n` — Spanish is the reference translation.
 
 ## Skills
 
 `gta-graph-data` · `pathfinding-engine` · `sa-coordinates` · `ui-conventions`
-
-## Commands
-
-`/verify-graph` · `/bench-route` · `/port-module` · `/spec-status` · `/dev`

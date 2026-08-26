@@ -21,16 +21,15 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
 
-    /* Path Aliases */
-    "baseUrl": ".",
+    /* Path Aliases (Modern TS without deprecated baseUrl) */
     "paths": {
-      "@engine/*": ["src/engine/*"],
-      "@terrain/*": ["src/terrain/*"],
-      "@geo/*": ["src/geo/*"],
-      "@ui/*": ["src/ui/*"],
-      "@i18n/*": ["src/i18n/*"],
-      "@map-bridge/*": ["src/map-bridge/*"],
-      "@features/*": ["src/features/*"]
+      "@engine/*": ["./src/engine/*"],
+      "@terrain/*": ["./src/terrain/*"],
+      "@geo/*": ["./src/geo/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@map-bridge/*": ["./src/map-bridge/*"],
+      "@features/*": ["./src/features/*"]
     }
   },
   "include": ["src", "tools"]
