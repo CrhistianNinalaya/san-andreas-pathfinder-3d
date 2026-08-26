@@ -1,6 +1,7 @@
 import { useTranslation } from '../../i18n/useTranslation';
 import { formatDistance, formatDuration } from '../../geo/coordinates';
 import { VEHICLE_PROFILES, type VehicleProfileType } from '../../terrain/ElevationPhysics';
+import { ElevationChart } from '../../components/ElevationChart';
 import type { RouteResult } from '../../engine/types';
 import styles from './RouteCards.module.css';
 
@@ -65,9 +66,11 @@ export function RouteCards({
         if (route.isOptimal) title = t('fastestRoute');
 
         return (
-          <div
+          <button
+            type="button"
             key={idx}
             onClick={() => onSelectRoute(idx)}
+            aria-pressed={isActive}
             className={`${styles.card} ${isActive ? styles.cardActive : ''}`}
           >
             <div className={styles.cardHeader}>
@@ -95,9 +98,18 @@ export function RouteCards({
               <span>⛰️ {t('elevation', { gain, loss })}</span>
               <span className={styles.speedText}>⚡ <strong>{avgSpeed} km/h</strong> avg</span>
             </div>
-          </div>
+
+            {/* 3D Elevation Profile Chart rendered for active route */}
+            {isActive && route.path.length > 1 && (
+              <ElevationChart
+                path={route.path}
+                gain={gain}
+                loss={loss}
+              />
+            )}
+          </button>
         );
       })}
     </div>
   );
-};
+}

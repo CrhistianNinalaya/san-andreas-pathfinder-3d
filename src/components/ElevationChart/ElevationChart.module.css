@@ -1,0 +1,74 @@
+.chartContainer {
+  margin-top: 0.65rem;
+  padding: 0.65rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.chartTitle {
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rangeBadges {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-family: monospace;
+}
+
+.badgeMin {
+  color: var(--color-success);
+}
+
+.badgeMax {
+  color: var(--color-accent);
+}
+
+.svgWrapper {
+  width: 100%;
+  height: 70px;
+  position: relative;
+}
+
+.elevationSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.areaFill {
+  fill: url(#elevationGradient);
+  opacity: 0.35;
+}
+
+.lineStroke {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chartFooter {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-family: monospace;
+}

@@ -45,7 +45,8 @@ export const translations = {
     searchPlaceholder: '🔍 Buscar lugar (ej. Grove Street, Aeropuerto)...',
     searchNoResults: 'No se encontraron lugares con ese nombre',
     dragHint: 'Arrastra los marcadores para recalcular la ruta en tiempo real.',
-    coordinates: 'X: {x} | Y: {y}'
+    coordinates: 'X: {x} | Y: {y}',
+    elevationProfile: 'Perfil de Elevación 3D'
   },
   en: {
     appTitle: 'San Andreas Pathfinder 3D',
@@ -88,7 +89,8 @@ export const translations = {
     searchPlaceholder: '🔍 Search place (e.g. Grove Street, Airport)...',
     searchNoResults: 'No places found matching that query',
     dragHint: 'Drag markers to recalculate route in real time.',
-    coordinates: 'X: {x} | Y: {y}'
+    coordinates: 'X: {x} | Y: {y}',
+    elevationProfile: '3D Elevation Profile'
   }
 } as const;
 

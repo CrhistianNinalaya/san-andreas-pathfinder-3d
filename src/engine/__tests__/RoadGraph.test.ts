@@ -88,4 +88,12 @@ describe('RoadGraph and A* Pathfinding', () => {
 
     expect(h).toBeLessThanOrEqual(result.totalTimeSeconds);
   });
+
+  it('should filter out alternative candidates with >70% edge overlap', () => {
+    const graph = new RoadGraph(mockDataset);
+    const routes = graph.findRoutesWithAlternatives({ startId: '1', goalId: '3', maxRoutes: 3 });
+
+    // In mockDataset, only 2 distinct routes exist (1->2->3 and 1->4->3)
+    expect(routes.length).toBe(2);
+  });
 });

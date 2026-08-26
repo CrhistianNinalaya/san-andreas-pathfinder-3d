@@ -24,11 +24,18 @@
 }
 
 .card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
   padding: 10px 12px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: 8px;
   cursor: pointer;
+  outline: none;
   transition: all 0.15s ease;
 }
 

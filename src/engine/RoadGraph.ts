@@ -439,14 +439,41 @@ export class RoadGraph {
   }
 
   /**
+   * Calculates the percentage of edge overlap between a candidate route and an existing route
+   */
+  private _calculateEdgeOverlap(candidateEdges: Set<string>, existingEdges: Set<string>): number {
+    if (candidateEdges.size === 0) return 0;
+    let shared = 0;
+    for (const edge of candidateEdges) {
+      if (existingEdges.has(edge)) {
+        shared++;
+      }
+    }
+    return shared / candidateEdges.size;
+  }
+
+  /**
+   * Extracts edge keys from an array of node ids
+   */
+  private _extractEdgeKeys(nodeIds: string[]): Set<string> {
+    const keys = new Set<string>();
+    for (let j = 0; j < nodeIds.length - 1; j++) {
+      keys.add(`${nodeIds[j]}->${nodeIds[j + 1]}`);
+    }
+    return keys;
+  }
+
+  /**
    * Finds optimal route plus alternative secondary routes with penalty factors
    */
   public findRoutesWithAlternatives(options: FindAlternativesOptions): RouteResult[] {
     const { startId, goalId, maxRoutes = 3, vehicleType = 'car' } = options;
     const results: RouteResult[] = [];
     const edgePenalties = new Map<string, number>();
+    const acceptedEdgeSets: Set<string>[] = [];
 
-    for (let i = 0; i < maxRoutes; i++) {
+    // Attempt up to maxRoutes * 2 searches to discover distinct alternatives
+    for (let i = 0; i < maxRoutes * 2 && results.length < maxRoutes; i++) {
       const result = this.findShortestPath({
         startId,
         goalId,
@@ -455,20 +482,25 @@ export class RoadGraph {
       });
       if (!result) break;
 
-      const pathSignature = result.nodeIds.join('>');
-      if (!results.some(r => r.nodeIds.join('>') === pathSignature)) {
+      const candidateEdgeKeys = this._extractEdgeKeys(result.nodeIds);
+
+      // Check if candidate route is distinct from all accepted routes (<= 70% overlap)
+      const isTooSimilar = acceptedEdgeSets.some(existingSet => {
+        return this._calculateEdgeOverlap(candidateEdgeKeys, existingSet) > 0.70;
+      });
+
+      if (!isTooSimilar) {
+        acceptedEdgeSets.push(candidateEdgeKeys);
         results.push({
           ...result,
-          index: i + 1,
-          isOptimal: i === 0,
-          label: i === 0 ? 'Fastest Route' : `Alternative Route ${i}`
+          index: results.length + 1,
+          isOptimal: results.length === 0,
+          label: results.length === 0 ? 'Fastest Route' : `Alternative Route ${results.length}`
         });
       }
 
-      for (let j = 0; j < result.nodeIds.length - 1; j++) {
-        const u = result.nodeIds[j]!;
-        const v = result.nodeIds[j + 1]!;
-        const edgeKey = `${u}->${v}`;
+      // Penalize used edges for the next iteration to find alternative paths
+      for (const edgeKey of candidateEdgeKeys) {
         const currentPenalty = edgePenalties.get(edgeKey) ?? 1.0;
         edgePenalties.set(edgeKey, currentPenalty * 3.5);
       }
