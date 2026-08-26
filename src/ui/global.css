@@ -1,3 +1,55 @@
+:root {
+  /* Surface & Backgrounds */
+  --bg-canvas: rgb(26, 30, 40);
+  --bg-panel: rgba(15, 23, 42, 0.88);
+  --bg-panel-header: rgba(30, 41, 59, 0.7);
+  --bg-card: rgba(15, 23, 42, 0.65);
+  --bg-card-hover: rgba(30, 41, 59, 0.75);
+  --bg-card-active: rgba(56, 189, 248, 0.12);
+  --bg-input: #1e293b;
+  --bg-input-focus: #0f172a;
+  --bg-button-secondary: rgba(30, 41, 59, 0.8);
+  --bg-button-secondary-hover: rgba(51, 65, 85, 0.9);
+  --bg-badge: rgba(56, 189, 248, 0.15);
+  --bg-badge-neutral: rgba(255, 255, 255, 0.1);
+  --bg-dropdown: #0f172a;
+  --bg-dropdown-hover: #1e293b;
+
+  /* Typography & Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-subtle: #cbd5e1;
+  --text-accent: #38bdf8;
+  --text-inverse: #ffffff;
+
+  /* Brand, Status & Markers */
+  --color-primary: #0284c7;
+  --color-primary-hover: #0369a1;
+  --color-accent: #38bdf8;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-danger-bg: rgba(239, 68, 68, 0.1);
+  --color-danger-border: rgba(239, 68, 68, 0.3);
+  --color-danger-text: #fca5a5;
+  --color-waypoint: #0284c7;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.15);
+  --border-strong: rgba(255, 255, 255, 0.25);
+  --border-accent: #38bdf8;
+  --border-focus: #0284c7;
+
+  /* Shadows & Glows */
+  --shadow-panel: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --shadow-card-glow: 0 0 15px rgba(56, 189, 248, 0.2);
+  --shadow-pin: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-pin-start: 0 0 14px rgba(16, 185, 129, 0.7);
+  --shadow-pin-waypoint: 0 0 14px rgba(2, 132, 199, 0.7);
+  --shadow-pin-end: 0 0 14px rgba(239, 68, 68, 0.7);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,11 +60,13 @@ body, html, #root {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: rgb(26, 30, 40);
+  background: var(--bg-canvas);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-primary);
 }
 
 .leaflet-container {
-  background: rgb(26, 30, 40) !important;
+  background: var(--bg-canvas) !important;
 }
 
 /* Custom Leaflet Map Pins */
@@ -24,8 +78,8 @@ body, html, #root {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  border: 2px solid var(--text-inverse);
+  box-shadow: var(--shadow-pin);
   cursor: grab;
   transition: transform 0.15s ease;
 }
@@ -39,22 +93,22 @@ body, html, #root {
   transform: rotate(45deg);
   font-size: 11px;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--text-inverse);
 }
 
 .pin-start {
-  background: #10b981;
-  box-shadow: 0 0 14px rgba(16, 185, 129, 0.7);
+  background: var(--color-success);
+  box-shadow: var(--shadow-pin-start);
 }
 
 .pin-waypoint {
-  background: #0284c7;
-  box-shadow: 0 0 14px rgba(2, 132, 199, 0.7);
+  background: var(--color-waypoint);
+  box-shadow: var(--shadow-pin-waypoint);
 }
 
 .pin-end {
-  background: #ef4444;
-  box-shadow: 0 0 14px rgba(239, 68, 68, 0.7);
+  background: var(--color-danger);
+  box-shadow: var(--shadow-pin-end);
 }
 
 /* Custom scrollbars */

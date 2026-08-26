@@ -1,0 +1,87 @@
+.searchContainer {
+  position: relative;
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--bg-input);
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--text-primary);
+  font-size: 12.5px;
+  outline: none;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.searchInput:focus {
+  border-color: var(--border-focus);
+  background: var(--bg-input-focus);
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: var(--bg-dropdown);
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  list-style: none;
+  padding: 4px 0;
+  z-index: 2000;
+  box-shadow: var(--shadow-panel);
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.dropdownItem {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  transition: background 0.1s ease;
+  color: var(--text-primary);
+}
+
+.dropdownItem:hover,
+.dropdownItemSelected {
+  background: var(--bg-dropdown-hover);
+}
+
+.dropdownItemSelected {
+  border-left: 3px solid var(--border-accent);
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemName {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.itemCity {
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+
+.itemKind {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--bg-badge-neutral);
+  color: var(--text-subtle);
+  border-radius: 4px;
+}

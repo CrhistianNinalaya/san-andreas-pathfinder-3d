@@ -1,0 +1,109 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.errorBox {
+  padding: 12px;
+  background: var(--color-danger-bg);
+  border: 1px solid var(--color-danger-border);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--color-danger-text);
+  text-align: center;
+}
+
+.hintBox {
+  padding: 12px;
+  background: var(--bg-card);
+  border-radius: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.card {
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+}
+
+.cardActive {
+  background: var(--bg-card-active);
+  border: 1.5px solid var(--border-accent);
+  box-shadow: var(--shadow-card-glow);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.cardTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.cardTitleActive {
+  color: var(--text-accent);
+}
+
+.badgesRow {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.vehicleBadge {
+  font-size: 10px;
+  font-weight: 600;
+  background: var(--bg-badge-neutral);
+  color: var(--text-subtle);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.optimalBadge {
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--color-primary);
+  color: var(--text-inverse);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.metricsRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 4px 0;
+}
+
+.timeText {
+  color: var(--text-accent);
+  font-weight: 700;
+}
+
+.statsRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.speedText {
+  color: var(--text-subtle);
+}
