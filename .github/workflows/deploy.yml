@@ -1,0 +1,52 @@
+name: CI & Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-and-deploy:
+    name: Test, Validate & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: 📂 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🗺️ Verify Graph Invariants
+        run: pnpm run verify-graph
+
+      - name: 🧪 Run Vitest Test Suite
+        run: pnpm test
+
+      - name: 🔍 TypeScript Typecheck
+        run: pnpm run typecheck
+
+      - name: 🏗️ Production Build
+        run: pnpm run build
+
+      - name: 🚀 Deploy to Vercel (Production)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+          working-directory: ./
