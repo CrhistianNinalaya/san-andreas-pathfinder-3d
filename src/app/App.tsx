@@ -28,7 +28,7 @@ export function App() {
     fetch('data/san_andreas_official_nodes.json')
       .then(res => res.json())
       .then((data: RawDataset) => {
-        const graph = new RoadGraph(data, state.vehicleType);
+        const graph = new RoadGraph(data);
         dispatch({ type: 'SET_GRAPH', graph });
       })
       .catch(err => {

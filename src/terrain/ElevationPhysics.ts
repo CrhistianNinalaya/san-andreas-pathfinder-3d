@@ -115,7 +115,7 @@ export class ElevationPhysics {
     const slope = this.calculateSlope(nodeA, nodeB);
     const slopeMultiplier = this.getSlopeSpeedMultiplier(slope, vehicleType);
 
-    const effectiveSpeedKmH = Math.max(15, nominalSpeedKmH * slopeMultiplier);
+    const effectiveSpeedKmH = Math.max(5, nominalSpeedKmH * slopeMultiplier);
     const effectiveSpeedMps = (effectiveSpeedKmH * 1000) / 3600;
     const timeSeconds = dist3D / effectiveSpeedMps;
 

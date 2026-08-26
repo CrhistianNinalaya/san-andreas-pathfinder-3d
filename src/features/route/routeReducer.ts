@@ -48,14 +48,14 @@ function getWaypointLabel(index: number): string {
   return `P${index + 1}`;
 }
 
-function computeRoutes(waypoints: Waypoint[], graph: RoadGraph | null): RouteResult[] {
+function computeRoutes(waypoints: Waypoint[], graph: RoadGraph | null, vehicleType: VehicleProfileType = 'car'): RouteResult[] {
   if (!graph || waypoints.length < 2) return [];
 
-  // 2 Waypoints: Optimal + Alternatives
+  // 2 Waypoints: Optimal + Alternatives with vehicle physics
   if (waypoints.length === 2) {
     const start = waypoints[0]!.snapNode;
     const goal = waypoints[1]!.snapNode;
-    return graph.findRoutesWithAlternatives(start.id, goal.id, 3);
+    return graph.findRoutesWithAlternatives(start.id, goal.id, 3, vehicleType);
   }
 
   // 3+ Waypoints: Multi-Stop Continuous Journey
@@ -68,7 +68,7 @@ function computeRoutes(waypoints: Waypoint[], graph: RoadGraph | null): RouteRes
   for (let i = 0; i < waypoints.length - 1; i++) {
     const start = waypoints[i]!.snapNode;
     const goal = waypoints[i + 1]!.snapNode;
-    const leg = graph.findShortestPath(start.id, goal.id);
+    const leg = graph.findShortestPath(start.id, goal.id, new Map(), vehicleType);
 
     if (leg) {
       totalDistance += leg.totalDistance;
@@ -124,7 +124,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
         };
       });
 
-      const routes = computeRoutes(reSnappedWaypoints, graph);
+      const routes = computeRoutes(reSnappedWaypoints, graph, state.vehicleType);
       return {
         ...state,
         graph,
@@ -153,12 +153,11 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
       };
 
       const waypoints = [...state.waypoints, newWp];
-      // Renumber labels
       waypoints.forEach((wp, i) => {
         wp.label = getWaypointLabel(i);
       });
 
-      const routes = computeRoutes(waypoints, state.graph);
+      const routes = computeRoutes(waypoints, state.graph, state.vehicleType);
       return {
         ...state,
         waypoints,
@@ -172,7 +171,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
       waypoints.forEach((wp, i) => {
         wp.label = getWaypointLabel(i);
       });
-      const routes = computeRoutes(waypoints, state.graph);
+      const routes = computeRoutes(waypoints, state.graph, state.vehicleType);
       return {
         ...state,
         waypoints,
@@ -195,7 +194,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
         };
       });
 
-      const routes = computeRoutes(waypoints, state.graph);
+      const routes = computeRoutes(waypoints, state.graph, state.vehicleType);
       return {
         ...state,
         waypoints,
@@ -209,7 +208,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
       waypoints.forEach((wp, i) => {
         wp.label = getWaypointLabel(i);
       });
-      const routes = computeRoutes(waypoints, state.graph);
+      const routes = computeRoutes(waypoints, state.graph, state.vehicleType);
       return {
         ...state,
         waypoints,
@@ -226,8 +225,15 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
         activeRouteIndex: 0
       };
 
-    case 'SET_VEHICLE':
-      return { ...state, vehicleType: action.vehicleType };
+    case 'SET_VEHICLE': {
+      const vehicleType = action.vehicleType;
+      const routes = computeRoutes(state.waypoints, state.graph, vehicleType);
+      return {
+        ...state,
+        vehicleType,
+        routes
+      };
+    }
 
     case 'SET_SCOPE':
       return { ...state, scope: action.scope };
@@ -238,6 +244,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
     case 'RESTORE_URL_WAYPOINTS': {
       if (!state.graph || action.waypointsCoords.length === 0) return state;
 
+      const vehicle = action.vehicle ?? state.vehicleType;
       const waypoints: Waypoint[] = action.waypointsCoords.map((c, i) => {
         const snap = state.graph!.findNearestNode(c.x, c.y, true).node!;
         return {
@@ -248,12 +255,12 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
         };
       });
 
-      const routes = computeRoutes(waypoints, state.graph);
+      const routes = computeRoutes(waypoints, state.graph, vehicle);
       return {
         ...state,
         waypoints,
         routes,
-        vehicleType: action.vehicle ?? state.vehicleType,
+        vehicleType: vehicle,
         activeRouteIndex: action.altIndex ?? 0
       };
     }

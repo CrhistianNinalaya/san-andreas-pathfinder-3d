@@ -3,7 +3,7 @@
  */
 
 import { MinHeap } from './MinHeap';
-import { ElevationPhysics, type VehicleProfileType } from '../terrain/ElevationPhysics';
+import { ElevationPhysics, VEHICLE_PROFILES, type VehicleProfileType } from '../terrain/ElevationPhysics';
 import type {
   GraphNode,
   AdjacencyEdge,
@@ -19,13 +19,12 @@ export class RoadGraph {
   public grid = new Map<string, GraphNode[]>();
   public cellSize = 200;
   public maxSpeedKmh = 110;
-  public heuristicSpeedMps = (122 * 1000) / 3600;
   public giantComponentRoot = 0;
   public totalGiantNodes = 0;
 
-  constructor(data?: RawDataset, vehicleType: VehicleProfileType = 'car') {
+  constructor(data?: RawDataset) {
     if (data) {
-      this.init(data, vehicleType);
+      this.init(data);
     }
   }
 
@@ -35,7 +34,7 @@ export class RoadGraph {
     return `${cx},${cy}`;
   }
 
-  public init(data: RawDataset, vehicleType: VehicleProfileType = 'car'): void {
+  public init(data: RawDataset): void {
     this.nodes.clear();
     this.adjacencyList.clear();
     this.grid.clear();
@@ -84,7 +83,7 @@ export class RoadGraph {
       return a;
     };
 
-    // 3. Build edges with 3D terrain physics
+    // 3. Build edges storing 3D distance and slope
     for (let i = 0; i < data.edges.length; i++) {
       const edge = data.edges[i]!;
       const fromId = String(edge.from);
@@ -105,14 +104,15 @@ export class RoadGraph {
       const nominalSpeed = edge.speed ?? 80;
       if (nominalSpeed > maxEdgeSpeed) maxEdgeSpeed = nominalSpeed;
 
-      const segment = ElevationPhysics.evaluateSegment(n1, n2, nominalSpeed, vehicleType);
+      const dist3D = ElevationPhysics.calculate3DDistance(n1, n2);
+      const slope = ElevationPhysics.calculateSlope(n1, n2);
 
       this.adjacencyList.get(fromId)!.push({
         to: toId,
-        distance: segment.distance3D,
-        baseTimeSeconds: segment.timeSeconds,
-        slopePercent: segment.slopePercent,
-        speed: segment.effectiveSpeedKmH
+        distance: dist3D,
+        slope,
+        slopePercent: Math.round(slope * 100),
+        nominalSpeed
       });
     }
 
@@ -146,9 +146,14 @@ export class RoadGraph {
       }
     }
 
-    // Derive admissible heuristic speed ceiling
     this.maxSpeedKmh = Math.max(110, maxEdgeSpeed);
-    this.heuristicSpeedMps = ((this.maxSpeedKmh * 1.10 + 1) * 1000) / 3600;
+  }
+
+  public getEdgeTravelTime(edge: AdjacencyEdge, vehicleType: VehicleProfileType = 'car'): number {
+    const slopeMultiplier = ElevationPhysics.getSlopeSpeedMultiplier(edge.slope, vehicleType);
+    const effectiveSpeedKmH = Math.max(5, edge.nominalSpeed * slopeMultiplier);
+    const effectiveSpeedMps = (effectiveSpeedKmH * 1000) / 3600;
+    return edge.distance / effectiveSpeedMps;
   }
 
   public findNearestNode(x: number, y: number, onlyGiant = true): NearestNodeResult {
@@ -193,15 +198,19 @@ export class RoadGraph {
     return { node: nearest, distance: minDist };
   }
 
-  public heuristic(nodeA: GtaCoords, nodeB: GtaCoords): number {
+  public heuristic(nodeA: GtaCoords, nodeB: GtaCoords, vehicleType: VehicleProfileType = 'car'): number {
     const dist = ElevationPhysics.calculate3DDistance(nodeA, nodeB);
-    return dist / this.heuristicSpeedMps;
+    const profile = VEHICLE_PROFILES[vehicleType] ?? VEHICLE_PROFILES.car;
+    const maxVehicleSpeedKmh = this.maxSpeedKmh * profile.nominalMultiplier * 1.10 + 1;
+    const maxSpeedMps = (maxVehicleSpeedKmh * 1000) / 3600;
+    return dist / maxSpeedMps;
   }
 
   public findShortestPath(
     startId: string | number,
     goalId: string | number,
-    edgePenalties: Map<string, number> = new Map()
+    edgePenalties: Map<string, number> = new Map(),
+    vehicleType: VehicleProfileType = 'car'
   ): RouteResult | null {
     const sId = String(startId);
     const gId = String(goalId);
@@ -258,13 +267,14 @@ export class RoadGraph {
 
         const edgeKey = `${currentId}->${nextId}`;
         const penalty = edgePenalties.get(edgeKey) ?? 1.0;
-        const edgeCost = edge.baseTimeSeconds * penalty;
+        const edgeTime = this.getEdgeTravelTime(edge, vehicleType);
+        const edgeCost = edgeTime * penalty;
         const newCost = (costSoFar.get(currentId) ?? 0) + edgeCost;
 
         const existingCost = costSoFar.get(nextId);
         if (existingCost === undefined || newCost < existingCost) {
           costSoFar.set(nextId, newCost);
-          const priority = newCost + this.heuristic(nextNode, goalNode);
+          const priority = newCost + this.heuristic(nextNode, goalNode, vehicleType);
           frontier.push(nextId, priority, newCost);
           cameFrom.set(nextId, currentId);
           edgeUsed.set(nextId, edge);
@@ -290,7 +300,7 @@ export class RoadGraph {
         if (edge) {
           usedEdges.unshift(edge);
           totalDistance += edge.distance;
-          totalTimeSeconds += edge.baseTimeSeconds;
+          totalTimeSeconds += this.getEdgeTravelTime(edge, vehicleType);
         }
         curr = prev;
       } else {
@@ -313,13 +323,14 @@ export class RoadGraph {
   public findRoutesWithAlternatives(
     startId: string | number,
     goalId: string | number,
-    maxRoutes = 3
+    maxRoutes = 3,
+    vehicleType: VehicleProfileType = 'car'
   ): RouteResult[] {
     const results: RouteResult[] = [];
     const edgePenalties = new Map<string, number>();
 
     for (let i = 0; i < maxRoutes; i++) {
-      const result = this.findShortestPath(startId, goalId, edgePenalties);
+      const result = this.findShortestPath(startId, goalId, edgePenalties, vehicleType);
       if (!result) break;
 
       const pathSignature = result.nodeIds.join('>');

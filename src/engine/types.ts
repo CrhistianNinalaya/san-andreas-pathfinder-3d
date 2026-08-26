@@ -28,9 +28,9 @@ export interface GraphEdge {
 export interface AdjacencyEdge {
   to: string;
   distance: number;
-  baseTimeSeconds: number;
+  slope: number;
   slopePercent: number;
-  speed: number;
+  nominalSpeed: number;
 }
 
 export interface RawDataset {
