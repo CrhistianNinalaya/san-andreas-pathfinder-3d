@@ -1,0 +1,109 @@
+import React from 'react';
+import { useTranslation } from '../../i18n/useTranslation';
+import { formatDistance, formatDuration } from '../../geo/coordinates';
+import type { RouteResult } from '../../engine/types';
+
+interface RouteCardsProps {
+  routes: RouteResult[];
+  activeRouteIndex: number;
+  onSelectRoute: (index: number) => void;
+  waypointCount: number;
+}
+
+export const RouteCards: React.FC<RouteCardsProps> = ({
+  routes,
+  activeRouteIndex,
+  onSelectRoute,
+  waypointCount
+}) => {
+  const { t } = useTranslation();
+
+  if (routes.length === 0) {
+    if (waypointCount >= 2) {
+      return (
+        <div style={{
+          padding: '12px',
+          background: 'rgba(239, 68, 68, 0.1)',
+          border: '1px solid rgba(239, 68, 68, 0.3)',
+          borderRadius: '8px',
+          fontSize: '12px',
+          color: '#fca5a5',
+          textAlign: 'center'
+        }}>
+          ⚠️ {t('noRouteFound')}
+        </div>
+      );
+    }
+
+    return (
+      <div style={{
+        padding: '12px',
+        background: 'rgba(15, 23, 42, 0.5)',
+        borderRadius: '8px',
+        fontSize: '11.5px',
+        color: '#94a3b8',
+        lineHeight: '1.5'
+      }}>
+        💡 {t('dragHint')}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      {routes.map((route, idx) => {
+        const isActive = idx === activeRouteIndex;
+        const distStr = formatDistance(route.totalDistance);
+        const timeStr = formatDuration(route.totalTimeSeconds);
+        const gain = route.elevationProfile?.elevationGain ?? 0;
+        const loss = route.elevationProfile?.elevationLoss ?? 0;
+
+        let title = route.label || t('alternativeRoute', { index: idx });
+        if (route.isOptimal) title = t('fastestRoute');
+
+        return (
+          <div
+            key={idx}
+            onClick={() => onSelectRoute(idx)}
+            style={{
+              padding: '10px 12px',
+              background: isActive ? 'rgba(56, 189, 248, 0.12)' : 'rgba(15, 23, 42, 0.65)',
+              border: isActive ? '1.5px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease',
+              boxShadow: isActive ? '0 0 15px rgba(56, 189, 248, 0.2)' : 'none'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+              <span style={{ fontSize: '12px', fontWeight: 700, color: isActive ? '#38bdf8' : '#f8fafc' }}>
+                {title}
+              </span>
+              {route.isOptimal && (
+                <span style={{
+                  fontSize: '10px',
+                  fontWeight: 700,
+                  background: '#0284c7',
+                  color: '#fff',
+                  padding: '2px 6px',
+                  borderRadius: '4px'
+                }}>
+                  {t('optimal')}
+                </span>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#e2e8f0', margin: '4px 0' }}>
+              <span>📏 <strong>{distStr} (3D)</strong></span>
+              <span>⏱️ <strong>{timeStr}</strong></span>
+            </div>
+
+            <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>
+              ⛰️ {t('elevation', { gain, loss })}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};

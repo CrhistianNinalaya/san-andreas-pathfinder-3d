@@ -1,0 +1,57 @@
+import { useEffect, useRef, useState } from 'react';
+import L from 'leaflet';
+import { GTA_BOUNDS, GTA_CENTERS, latLngToGta } from '../geo/coordinates';
+import type { GtaCoords } from '../engine/types';
+
+export function useMapBridge(
+  containerRef: React.RefObject<HTMLDivElement | null>,
+  onMapClick: (coords: GtaCoords) => void,
+  onCursorMove?: (coords: GtaCoords) => void
+) {
+  const mapRef = useRef<L.Map | null>(null);
+  const [isMapReady, setIsMapReady] = useState(false);
+
+  useEffect(() => {
+    if (!containerRef.current || mapRef.current) return;
+
+    // Create Leaflet instance ONCE
+    const map = L.map(containerRef.current, {
+      crs: L.CRS.Simple,
+      minZoom: -2,
+      maxZoom: 4,
+      zoomControl: false,
+      attributionControl: false
+    });
+
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    // Overlay Ultra HD GTA San Andreas Map
+    L.imageOverlay('mapa-gta-sa-hd.webp', GTA_BOUNDS.leafletBounds).addTo(map);
+
+    // Initial View
+    map.setView(GTA_CENTERS.all.center, GTA_CENTERS.all.zoom);
+
+    // Event Listeners
+    map.on('click', (e: L.LeafletMouseEvent) => {
+      const gta = latLngToGta(e.latlng);
+      onMapClick(gta);
+    });
+
+    if (onCursorMove) {
+      map.on('mousemove', (e: L.LeafletMouseEvent) => {
+        const gta = latLngToGta(e.latlng);
+        onCursorMove(gta);
+      });
+    }
+
+    mapRef.current = map;
+    setIsMapReady(true);
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, []);
+
+  return { map: mapRef.current, isMapReady };
+}
