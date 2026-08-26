@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from '../../i18n/useTranslation';
 import type { GtaCoords } from '../../engine/types';
 import styles from './SearchCombobox.module.css';
@@ -18,7 +18,7 @@ interface SearchComboboxProps {
   onSelectPlace: (coords: GtaCoords, name: string) => void;
 }
 
-export const SearchCombobox: React.FC<SearchComboboxProps> = ({ onSelectPlace }) => {
+export function SearchCombobox({ onSelectPlace }: Readonly<SearchComboboxProps>) {
   const { t, lang } = useTranslation();
   const [query, setQuery] = useState('');
   const [pois, setPois] = useState<POI[]>([]);
@@ -43,14 +43,14 @@ export const SearchCombobox: React.FC<SearchComboboxProps> = ({ onSelectPlace })
     return nameEs.includes(q) || nameEn.includes(q) || city.includes(q) || aliases.includes(q);
   }).slice(0, 5);
 
-  const handleSelect = (poi: POI) => {
+  function handleSelect(poi: POI) {
     const placeName = poi.name[lang] || poi.name.en;
     onSelectPlace({ x: poi.x, y: poi.y, z: poi.z }, placeName);
     setQuery('');
     setIsOpen(false);
-  };
+  }
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  function handleKeyDown(e: React.KeyboardEvent) {
     if (!isOpen || filteredPois.length === 0) return;
 
     if (e.key === 'ArrowDown') {
@@ -66,7 +66,7 @@ export const SearchCombobox: React.FC<SearchComboboxProps> = ({ onSelectPlace })
     } else if (e.key === 'Escape') {
       setIsOpen(false);
     }
-  };
+  }
 
   return (
     <div ref={containerRef} className={styles.searchContainer}>

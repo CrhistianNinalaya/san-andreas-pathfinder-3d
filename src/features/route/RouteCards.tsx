@@ -1,11 +1,10 @@
-import React from 'react';
 import { useTranslation } from '../../i18n/useTranslation';
 import { formatDistance, formatDuration } from '../../geo/coordinates';
 import { VEHICLE_PROFILES, type VehicleProfileType } from '../../terrain/ElevationPhysics';
 import type { RouteResult } from '../../engine/types';
 import styles from './RouteCards.module.css';
 
-interface RouteCardsProps {
+export interface RouteCardsProps {
   routes: RouteResult[];
   activeRouteIndex: number;
   onSelectRoute: (index: number) => void;
@@ -21,13 +20,13 @@ const VEHICLE_ICONS: Record<VehicleProfileType, string> = {
   offroad: '🚙'
 };
 
-export const RouteCards: React.FC<RouteCardsProps> = ({
+export function RouteCards({
   routes,
   activeRouteIndex,
   onSelectRoute,
   waypointCount,
   vehicleType
-}) => {
+}: Readonly<RouteCardsProps>) {
   const { t } = useTranslation();
   const vehicle = VEHICLE_PROFILES[vehicleType] ?? VEHICLE_PROFILES.car;
   const vehicleIcon = VEHICLE_ICONS[vehicleType] ?? '🚗';

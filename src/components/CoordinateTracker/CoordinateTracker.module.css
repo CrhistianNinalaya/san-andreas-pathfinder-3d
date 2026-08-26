@@ -1,0 +1,17 @@
+.coordDisplay {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: var(--z-hud);
+  background: var(--color-surface-translucent);
+  border: 1px solid var(--color-border-dim);
+  backdrop-filter: blur(12px);
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  box-shadow: var(--shadow-panel);
+  pointer-events: none;
+  user-select: none;
+}

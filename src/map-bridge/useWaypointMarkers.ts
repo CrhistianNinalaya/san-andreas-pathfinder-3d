@@ -16,7 +16,7 @@ export interface UseWaypointMarkersOptions {
   onWaypointDrag: (index: number, newCoords: GtaCoords) => void;
 }
 
-export function useWaypointMarkers(options: UseWaypointMarkersOptions) {
+export function useWaypointMarkers(options: Readonly<UseWaypointMarkersOptions>) {
   const { map, waypoints, onWaypointDrag } = options;
   const layerGroupRef = useRef<L.LayerGroup | null>(null);
 

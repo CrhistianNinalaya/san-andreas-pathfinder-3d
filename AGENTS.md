@@ -12,6 +12,13 @@ A\* route planner over the official GTA:SA road network, with 3D terrain physics
 - **Package Manager:** `pnpm` with **Node.js >= 24.11.0**.
 - **Pure domain separation:** `src/engine/`, `src/terrain/`, and `src/geo/` have zero imports of React, Leaflet, or the DOM.
 - **Max 2 positional parameters:** Any function or hook that takes more than 2 parameters must receive an options object `{ ... }` for clarity and maintainability.
+- **Readonly React Props:** All component and hook prop interfaces must be wrapped with TypeScript's `Readonly<Props>` utility type: `export function MyComponent({ ... }: Readonly<MyComponentProps>)`.
+- **Function Declarations:** Always declare components, custom hooks, and helper functions using standard `function` keyword declarations (`export function MyComponent(...) { ... }`) rather than arrow function variable assignments (`const MyComponent = ...`).
+- **Component Folder Architecture:**
+  - `index.tsx` (view render) and `[Name].module.css` (scoped styles).
+  - `types.ts` is created only when props $> 4$ (if $\le 4$, define the interface inline in `index.tsx`).
+  - Component-specific hooks live in `hooks/` with single responsibility.
+  - Component pure helper functions live in `utils/`.
 
 ## Layout
 

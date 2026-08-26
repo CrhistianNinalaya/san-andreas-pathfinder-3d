@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from '../../i18n/useTranslation';
 import type { Waypoint } from '../../map-bridge/useWaypointMarkers';
 import styles from './WaypointsList.module.css';
@@ -8,7 +7,7 @@ interface WaypointsListProps {
   onRemove: (index: number) => void;
 }
 
-export const WaypointsList: React.FC<WaypointsListProps> = ({ waypoints, onRemove }) => {
+export function WaypointsList({ waypoints, onRemove }: Readonly<WaypointsListProps>) {
   const { t } = useTranslation();
   const total = waypoints.length;
 
@@ -49,6 +48,7 @@ export const WaypointsList: React.FC<WaypointsListProps> = ({ waypoints, onRemov
             </div>
 
             <button
+              type="button"
               onClick={() => onRemove(idx)}
               title="Remove"
               className={styles.removeBtn}

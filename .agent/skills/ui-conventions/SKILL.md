@@ -21,8 +21,21 @@ hundred lines of our own code, not 200 KB of someone else's.
 
 ## Stack
 
-React 19 · TypeScript `strict` + `noUncheckedIndexedAccess` · Vite · CSS Modules · Vitest ·
-Biome (lint + format).
+React 19 · TypeScript `strict` + `noUncheckedIndexedAccess` · Vite · CSS Modules · Vitest.
+
+## Component and Props Architecture
+
+- **Readonly React Props:** All component and hook prop interfaces must be wrapped with TypeScript's `Readonly<Props>` utility type:
+  ```tsx
+  export function MyComponent({ ... }: Readonly<MyComponentProps>) { ... }
+  ```
+- **Function Declarations:** Always declare components, custom hooks, and helper functions using standard `function` keyword declarations (`export function MyComponent(...) { ... }`) rather than arrow function variable assignments (`const MyComponent = ...`).
+- **Component Folder Architecture:**
+  - `index.tsx` (view render) and `[Name].module.css` (scoped styles).
+  - `types.ts` is created only when props $> 4$ (if $\le 4$, define the interface inline in `index.tsx`).
+  - Component-specific hooks live in `hooks/` with single responsibility.
+  - Component pure helper functions live in `utils/`.
+- **Max 2 Positional Parameters:** Any function or hook receiving $> 2$ parameters must use an options object `{ ... }`.
 
 `any` is banned in `libs/`. The engine indexes typed arrays constantly — `noUncheckedIndexedAccess`
 is on precisely because it catches the resulting off-by-ones.

@@ -10,7 +10,7 @@ export interface UseRouteLayerOptions {
   onSelectAlternative?: (index: number) => void;
 }
 
-export function useRouteLayer(options: UseRouteLayerOptions) {
+export function useRouteLayer(options: Readonly<UseRouteLayerOptions>) {
   const { map, routes, activeRouteIndex, onSelectAlternative } = options;
   const layerGroupRef = useRef<L.LayerGroup | null>(null);
 

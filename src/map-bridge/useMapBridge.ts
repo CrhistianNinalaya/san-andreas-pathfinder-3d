@@ -9,7 +9,7 @@ export interface UseMapBridgeOptions {
   onCursorMove?: (coords: GtaCoords) => void;
 }
 
-export function useMapBridge(options: UseMapBridgeOptions) {
+export function useMapBridge(options: Readonly<UseMapBridgeOptions>) {
   const { containerRef, onMapClick, onCursorMove } = options;
   const mapRef = useRef<L.Map | null>(null);
   const [isMapReady, setIsMapReady] = useState(false);
