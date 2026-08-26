@@ -16,6 +16,18 @@ import type {
   FindAlternativesOptions
 } from './types';
 
+interface RelaxNeighborsOptions {
+  currentId: string;
+  neighbors: AdjacencyEdge[];
+  goalNode: GraphNode;
+  edgePenalties: Map<string, number>;
+  vehicleType: VehicleProfileType;
+  costSoFar: Map<string, number>;
+  cameFrom: Map<string, string | null>;
+  edgeUsed: Map<string, AdjacencyEdge>;
+  frontier: MinHeap<string>;
+}
+
 export class RoadGraph {
   public nodes = new Map<string, GraphNode>();
   public adjacencyList = new Map<string, AdjacencyEdge[]>();
@@ -37,18 +49,31 @@ export class RoadGraph {
     return `${cx},${cy}`;
   }
 
+  /**
+   * Initializes the road graph from raw nodes and edges dataset
+   */
   public init(data: RawDataset): void {
     this.nodes.clear();
     this.adjacencyList.clear();
     this.grid.clear();
 
-    let maxEdgeSpeed = 0;
-    const nodeCount = data.nodes.length;
+    const nodeIndexMap = this._populateNodesAndGrid(data.nodes);
+    const parent = this._initUnionFind(data.nodes.length);
+    const maxEdgeSpeed = this._populateAdjacencyAndUnionFind(data.edges, nodeIndexMap, parent);
+    const giantRoot = this._calculateGiantComponent(data.nodes.length, parent);
+    this._classifyNodesByComponent(data.nodes, parent, giantRoot);
+
+    this.maxSpeedKmh = Math.max(110, maxEdgeSpeed);
+  }
+
+  /**
+   * Builds nodes Map and spatial hash grid
+   */
+  private _populateNodesAndGrid(rawNodes: RawDataset['nodes']): Map<string, number> {
     const nodeIndexMap = new Map<string, number>();
 
-    // 1. Build nodes and spatial hash
-    for (let i = 0; i < nodeCount; i++) {
-      const node = data.nodes[i]!;
+    for (let i = 0; i < rawNodes.length; i++) {
+      const node = rawNodes[i]!;
       const idStr = String(node.id);
       nodeIndexMap.set(idStr, i);
 
@@ -74,21 +99,43 @@ export class RoadGraph {
       cell.push(nodeObj);
     }
 
-    // 2. Precompute Connected Components (Union-Find)
+    return nodeIndexMap;
+  }
+
+  /**
+   * Initializes Union-Find parent array
+   */
+  private _initUnionFind(nodeCount: number): Int32Array {
     const parent = new Int32Array(nodeCount);
-    for (let i = 0; i < nodeCount; i++) parent[i] = i;
+    for (let i = 0; i < nodeCount; i++) {
+      parent[i] = i;
+    }
+    return parent;
+  }
 
-    const find = (a: number): number => {
-      while (parent[a] !== a) {
-        parent[a] = parent[parent[a]!]!;
-        a = parent[a]!;
-      }
-      return a;
-    };
+  /**
+   * Finds the root of a set in Union-Find with path compression
+   */
+  private _findRoot(parent: Int32Array, nodeIdx: number): number {
+    let curr = nodeIdx;
+    while (parent[curr] !== curr) {
+      parent[curr] = parent[parent[curr]!]!;
+      curr = parent[curr]!;
+    }
+    return curr;
+  }
 
-    // 3. Build edges storing 3D distance and slope
-    for (let i = 0; i < data.edges.length; i++) {
-      const edge = data.edges[i]!;
+  /**
+   * Builds adjacency lists and links connected components
+   */
+  private _populateAdjacencyAndUnionFind(
+    edges: RawDataset['edges'],
+    nodeIndexMap: Map<string, number>,
+    parent: Int32Array
+  ): number {
+    let maxEdgeSpeed = 0;
+
+    for (const edge of edges) {
       const fromId = String(edge.from);
       const toId = String(edge.to);
 
@@ -99,13 +146,17 @@ export class RoadGraph {
       const idx1 = nodeIndexMap.get(fromId);
       const idx2 = nodeIndexMap.get(toId);
       if (idx1 !== undefined && idx2 !== undefined) {
-        const root1 = find(idx1);
-        const root2 = find(idx2);
-        if (root1 !== root2) parent[root1] = root2;
+        const root1 = this._findRoot(parent, idx1);
+        const root2 = this._findRoot(parent, idx2);
+        if (root1 !== root2) {
+          parent[root1] = root2;
+        }
       }
 
       const nominalSpeed = edge.speed ?? 80;
-      if (nominalSpeed > maxEdgeSpeed) maxEdgeSpeed = nominalSpeed;
+      if (nominalSpeed > maxEdgeSpeed) {
+        maxEdgeSpeed = nominalSpeed;
+      }
 
       const dist3D = ElevationPhysics.calculate3DDistance(n1, n2);
       const slope = ElevationPhysics.calculateSlope(n1, n2);
@@ -119,10 +170,16 @@ export class RoadGraph {
       });
     }
 
-    // 4. Determine Giant Component
+    return maxEdgeSpeed;
+  }
+
+  /**
+   * Calculates the giant connected component root and size
+   */
+  private _calculateGiantComponent(nodeCount: number, parent: Int32Array): number {
     const componentCounts = new Map<number, number>();
     for (let i = 0; i < nodeCount; i++) {
-      const root = find(i);
+      const root = this._findRoot(parent, i);
       componentCounts.set(root, (componentCounts.get(root) ?? 0) + 1);
     }
 
@@ -137,19 +194,26 @@ export class RoadGraph {
 
     this.giantComponentRoot = giantRoot;
     this.totalGiantNodes = maxComponentSize;
+    return giantRoot;
+  }
 
-    // Label nodes
-    for (let i = 0; i < nodeCount; i++) {
-      const node = data.nodes[i]!;
+  /**
+   * Labels each graph node with its component id and giant flag
+   */
+  private _classifyNodesByComponent(
+    rawNodes: RawDataset['nodes'],
+    parent: Int32Array,
+    giantRoot: number
+  ): void {
+    for (let i = 0; i < rawNodes.length; i++) {
+      const node = rawNodes[i]!;
       const nodeObj = this.nodes.get(String(node.id));
       if (nodeObj) {
-        const root = find(i);
+        const root = this._findRoot(parent, i);
         nodeObj.componentId = root;
         nodeObj.isGiantComponent = root === giantRoot;
       }
     }
-
-    this.maxSpeedKmh = Math.max(110, maxEdgeSpeed);
   }
 
   public getEdgeTravelTime(edge: AdjacencyEdge, vehicleType: VehicleProfileType = 'car'): number {
@@ -159,47 +223,58 @@ export class RoadGraph {
     return edge.distance / effectiveSpeedMps;
   }
 
+  /**
+   * Scans a specific cell for the closest node
+   */
+  private _scanCellForNearest(
+    cellNodes: GraphNode[],
+    x: number,
+    y: number,
+    onlyGiant: boolean,
+    best: { nearest: GraphNode | null; minDist: number }
+  ): void {
+    for (const node of cellNodes) {
+      if (onlyGiant && !node.isGiantComponent) continue;
+      const d = Math.hypot(node.x - x, node.y - y);
+      if (d < best.minDist) {
+        best.minDist = d;
+        best.nearest = node;
+      }
+    }
+  }
+
+  /**
+   * Finds the nearest road node to given world coordinates
+   */
   public findNearestNode(options: FindNearestOptions): NearestNodeResult {
     const { x, y, onlyGiant = true } = options;
     const cx = Math.floor(x / this.cellSize);
     const cy = Math.floor(y / this.cellSize);
 
-    let nearest: GraphNode | null = null;
-    let minDist = Infinity;
+    const best = { nearest: null as GraphNode | null, minDist: Infinity };
 
+    // 1. Check concentric radial rings in the spatial hash grid
     for (let r = 0; r <= 3; r++) {
       for (let dx = -r; dx <= r; dx++) {
         for (let dy = -r; dy <= r; dy++) {
           const key = `${cx + dx},${cy + dy}`;
           const cellNodes = this.grid.get(key);
           if (cellNodes) {
-            for (let i = 0; i < cellNodes.length; i++) {
-              const node = cellNodes[i]!;
-              if (onlyGiant && !node.isGiantComponent) continue;
-              const d = Math.hypot(node.x - x, node.y - y);
-              if (d < minDist) {
-                minDist = d;
-                nearest = node;
-              }
-            }
+            this._scanCellForNearest(cellNodes, x, y, onlyGiant, best);
           }
         }
       }
-      if (nearest && minDist <= (r + 1) * this.cellSize) break;
-    }
-
-    if (!nearest) {
-      for (const node of this.nodes.values()) {
-        if (onlyGiant && !node.isGiantComponent) continue;
-        const d = Math.hypot(node.x - x, node.y - y);
-        if (d < minDist) {
-          minDist = d;
-          nearest = node;
-        }
+      if (best.nearest && best.minDist <= (r + 1) * this.cellSize) {
+        break;
       }
     }
 
-    return { node: nearest, distance: minDist };
+    // 2. Fallback exhaustive scan if point is far outside regular grid cells
+    if (!best.nearest) {
+      this._scanCellForNearest(Array.from(this.nodes.values()), x, y, onlyGiant, best);
+    }
+
+    return { node: best.nearest, distance: best.minDist };
   }
 
   public heuristic(nodeA: GtaCoords, nodeB: GtaCoords, vehicleType: VehicleProfileType = 'car'): number {
@@ -210,6 +285,67 @@ export class RoadGraph {
     return dist / maxSpeedMps;
   }
 
+  /**
+   * Creates a zero distance route when origin equals destination
+   */
+  private _createZeroDistanceRoute(node: GraphNode, id: string): RouteResult {
+    return {
+      path: [node],
+      nodeIds: [id],
+      totalDistance: 0,
+      totalTimeSeconds: 0,
+      elevationProfile: {
+        elevationGain: 0,
+        elevationLoss: 0,
+        minElevation: node.z,
+        maxElevation: node.z
+      },
+      usedEdges: []
+    };
+  }
+
+  /**
+   * Evaluates and relaxes neighboring edges of the current node
+   */
+  private _relaxNeighbors(options: RelaxNeighborsOptions): void {
+    const {
+      currentId,
+      neighbors,
+      goalNode,
+      edgePenalties,
+      vehicleType,
+      costSoFar,
+      cameFrom,
+      edgeUsed,
+      frontier
+    } = options;
+
+    const currentCost = costSoFar.get(currentId) ?? 0;
+
+    for (const edge of neighbors) {
+      const nextId = edge.to;
+      const nextNode = this.nodes.get(nextId);
+      if (!nextNode) continue;
+
+      const edgeKey = `${currentId}->${nextId}`;
+      const penalty = edgePenalties.get(edgeKey) ?? 1.0;
+      const edgeCost = this.getEdgeTravelTime(edge, vehicleType) * penalty;
+      const newCost = currentCost + edgeCost;
+
+      const existingCost = costSoFar.get(nextId);
+      if (existingCost === undefined || newCost < existingCost) {
+        costSoFar.set(nextId, newCost);
+        const priority = newCost + this.heuristic(nextNode, goalNode, vehicleType);
+        frontier.push(nextId, priority, newCost);
+        cameFrom.set(nextId, currentId);
+        edgeUsed.set(nextId, edge);
+      }
+    }
+  }
+
+  /**
+   * A* shortest path search over the 3D road graph
+   */
   public findShortestPath(options: FindPathOptions): RouteResult | null {
     const { startId, goalId, edgePenalties = new Map(), vehicleType = 'car' } = options;
     const sId = String(startId);
@@ -218,76 +354,58 @@ export class RoadGraph {
     const startNode = this.nodes.get(sId);
     const goalNode = this.nodes.get(gId);
     if (!startNode || !goalNode) return null;
-
-    if (sId === gId) {
-      return {
-        path: [startNode],
-        nodeIds: [sId],
-        totalDistance: 0,
-        totalTimeSeconds: 0,
-        elevationProfile: {
-          elevationGain: 0,
-          elevationLoss: 0,
-          minElevation: startNode.z,
-          maxElevation: startNode.z
-        },
-        usedEdges: []
-      };
-    }
+    if (sId === gId) return this._createZeroDistanceRoute(startNode, sId);
 
     const frontier = new MinHeap<string>();
     frontier.push(sId, 0, 0);
 
-    const cameFrom = new Map<string, string | null>();
-    const costSoFar = new Map<string, number>();
+    const cameFrom = new Map<string, string | null>([[sId, null]]);
+    const costSoFar = new Map<string, number>([[sId, 0]]);
     const edgeUsed = new Map<string, AdjacencyEdge>();
-
-    cameFrom.set(sId, null);
-    costSoFar.set(sId, 0);
 
     while (!frontier.isEmpty()) {
       const popped = frontier.pop();
       if (!popped) break;
 
-      const currentId = popped.node;
-      const currentCost = popped.cost;
-
+      const { node: currentId, cost: currentCost } = popped;
       if (currentId === gId) break;
+
       // Stale-pop guard (P1-6)
       const bestCost = costSoFar.get(currentId);
       if (bestCost !== undefined && currentCost > bestCost) continue;
 
       const neighbors = this.adjacencyList.get(currentId) ?? [];
-
-      for (let i = 0; i < neighbors.length; i++) {
-        const edge = neighbors[i]!;
-        const nextId = edge.to;
-        const nextNode = this.nodes.get(nextId);
-        if (!nextNode) continue;
-
-        const edgeKey = `${currentId}->${nextId}`;
-        const penalty = edgePenalties.get(edgeKey) ?? 1.0;
-        const edgeTime = this.getEdgeTravelTime(edge, vehicleType);
-        const edgeCost = edgeTime * penalty;
-        const newCost = (costSoFar.get(currentId) ?? 0) + edgeCost;
-
-        const existingCost = costSoFar.get(nextId);
-        if (existingCost === undefined || newCost < existingCost) {
-          costSoFar.set(nextId, newCost);
-          const priority = newCost + this.heuristic(nextNode, goalNode, vehicleType);
-          frontier.push(nextId, priority, newCost);
-          cameFrom.set(nextId, currentId);
-          edgeUsed.set(nextId, edge);
-        }
-      }
+      this._relaxNeighbors({
+        currentId,
+        neighbors,
+        goalNode,
+        edgePenalties,
+        vehicleType,
+        costSoFar,
+        cameFrom,
+        edgeUsed,
+        frontier
+      });
     }
 
     if (!cameFrom.has(gId)) return null;
 
+    return this._reconstructPath(gId, cameFrom, edgeUsed, vehicleType);
+  }
+
+  /**
+   * Reconstructs the path from goal back to start using cameFrom pointers
+   */
+  private _reconstructPath(
+    goalId: string,
+    cameFrom: Map<string, string | null>,
+    edgeUsed: Map<string, AdjacencyEdge>,
+    vehicleType: VehicleProfileType
+  ): RouteResult {
     const path: GraphNode[] = [];
     const nodeIds: string[] = [];
     const usedEdges: AdjacencyEdge[] = [];
-    let curr: string | null = gId;
+    let curr: string | null = goalId;
     let totalDistance = 0;
     let totalTimeSeconds = 0;
 
@@ -320,6 +438,9 @@ export class RoadGraph {
     };
   }
 
+  /**
+   * Finds optimal route plus alternative secondary routes with penalty factors
+   */
   public findRoutesWithAlternatives(options: FindAlternativesOptions): RouteResult[] {
     const { startId, goalId, maxRoutes = 3, vehicleType = 'car' } = options;
     const results: RouteResult[] = [];
