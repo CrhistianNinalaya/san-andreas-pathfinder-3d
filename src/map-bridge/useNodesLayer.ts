@@ -4,6 +4,8 @@ import { gtaToLatLng } from '../geo/coordinates';
 import type { RoadGraph } from '../engine/RoadGraph';
 import type { GraphNode } from '../engine/types';
 import { NODE_LAYER_THEME } from './theme';
+import { useTranslation } from '../i18n/useTranslation';
+import type { TranslationKey } from '../i18n/translations';
 
 export interface UseNodesLayerOptions {
   map: L.Map | null;
@@ -12,6 +14,7 @@ export interface UseNodesLayerOptions {
 }
 
 type NodeCategory = 'patch' | 'shortcut' | null;
+type Translator = (key: TranslationKey, params?: Record<string, string | number>) => string;
 
 function getNodeCategory(node: GraphNode, graph: RoadGraph): NodeCategory {
   if (node.customType === 'patch') return 'patch';
@@ -34,30 +37,35 @@ function getNodeThemeStyle(node: GraphNode, category: NodeCategory) {
   return node.isGiantComponent ? NODE_LAYER_THEME.giant : NODE_LAYER_THEME.isolated;
 }
 
-function buildPopupHtml(node: GraphNode, category: NodeCategory): string {
+function buildPopupHtml(node: GraphNode, category: NodeCategory, t: Translator): string {
   const isGiant = node.isGiantComponent;
 
   let statusColor: string = isGiant ? NODE_LAYER_THEME.giant.color : NODE_LAYER_THEME.isolated.color;
-  let statusLabel = isGiant ? '✅ Conectado (Gigante)' : '⚠️ Aislado / Desconectado';
+  let statusLabel = isGiant ? t('nodeStatusGiant') : t('nodeStatusIsolated');
 
   if (category === 'patch') {
     statusColor = NODE_LAYER_THEME.patch.color;
-    statusLabel = '🔧 Parche Vial Oficial';
+    statusLabel = t('nodeStatusPatch');
   } else if (category === 'shortcut') {
     statusColor = NODE_LAYER_THEME.shortcut.color;
-    statusLabel = '⚡ Atajo / Ruta Personalizada';
+    statusLabel = t('nodeStatusShortcut');
   }
 
   return `<div style="font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.4;">
     <strong style="color: ${statusColor}; font-size: 13px;">${node.name}</strong><br/>
-    <strong>ID:</strong> ${node.id}<br/>
-    <strong>Coords:</strong> (${node.x}, ${node.y})<br/>
-    <strong>Altitud:</strong> ${node.z} m<br/>
-    <strong>Estado:</strong> ${statusLabel}
+    <strong>${t('nodeId')}</strong> ${node.id}<br/>
+    <strong>${t('nodeCoords')}</strong> (${node.x}, ${node.y})<br/>
+    <strong>${t('nodeAltitude')}</strong> ${node.z} m<br/>
+    <strong>${t('nodeStatus')}</strong> ${statusLabel}
   </div>`;
 }
 
-function createNodeMarker(node: GraphNode, renderer: L.Canvas, category: NodeCategory): L.CircleMarker {
+function createNodeMarker(
+  node: GraphNode,
+  renderer: L.Canvas,
+  category: NodeCategory,
+  t: Translator
+): L.CircleMarker {
   const latlng = gtaToLatLng(node.x, node.y);
   const style = getNodeThemeStyle(node, category);
 
@@ -70,11 +78,11 @@ function createNodeMarker(node: GraphNode, renderer: L.Canvas, category: NodeCat
     fillOpacity: style.fillOpacity
   });
 
-  circle.bindPopup(buildPopupHtml(node, category));
+  circle.bindPopup(buildPopupHtml(node, category, t));
   return circle;
 }
 
-function renderCustomEdges(group: L.LayerGroup, graph: RoadGraph): void {
+function renderCustomEdges(group: L.LayerGroup, graph: RoadGraph, t: Translator): void {
   const seen = new Set<string>();
   for (const [fromId, edges] of graph.adjacencyList.entries()) {
     const fromNode = graph.nodes.get(fromId);
@@ -92,6 +100,7 @@ function renderCustomEdges(group: L.LayerGroup, graph: RoadGraph): void {
 
       const isPatch = edge.type === 'patch';
       const color = isPatch ? NODE_LAYER_THEME.patch.fillColor : NODE_LAYER_THEME.shortcut.fillColor;
+      const title = isPatch ? t('edgePatch') : t('edgeShortcut');
 
       const polyline = L.polyline([gtaToLatLng(fromNode.x, fromNode.y), gtaToLatLng(toNode.x, toNode.y)], {
         color,
@@ -104,9 +113,9 @@ function renderCustomEdges(group: L.LayerGroup, graph: RoadGraph): void {
 
       polyline.bindPopup(
         `<div style="font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.4;">
-          <strong style="color: ${color}; font-size: 13px;">${isPatch ? '🔧 Parche Vial Oficial' : '⚡ Atajo Personalizado'}</strong><br/>
-          <strong>Conexión:</strong> ${fromNode.name} ↔ ${toNode.name}<br/>
-          <strong>Distancia:</strong> ${Math.round(edge.distance)} m
+          <strong style="color: ${color}; font-size: 13px;">${title}</strong><br/>
+          <strong>${t('edgeConnection', { from: fromNode.name, to: toNode.name })}</strong><br/>
+          <strong>${t('edgeDistance', { dist: Math.round(edge.distance) })}</strong>
         </div>`
       );
 
@@ -115,7 +124,7 @@ function renderCustomEdges(group: L.LayerGroup, graph: RoadGraph): void {
   }
 }
 
-function renderNodesToLayer(group: L.LayerGroup, graph: RoadGraph): void {
+function renderNodesToLayer(group: L.LayerGroup, graph: RoadGraph, t: Translator): void {
   const renderer = L.canvas({ padding: 0.5 });
   const customNodes: Array<{ node: GraphNode; category: NodeCategory }> = [];
 
@@ -124,19 +133,20 @@ function renderNodesToLayer(group: L.LayerGroup, graph: RoadGraph): void {
     if (category) {
       customNodes.push({ node, category });
     } else {
-      createNodeMarker(node, renderer, null).addTo(group);
+      createNodeMarker(node, renderer, null, t).addTo(group);
     }
   }
 
   // Draw custom connectors and overlay custom nodes on top
-  renderCustomEdges(group, graph);
+  renderCustomEdges(group, graph, t);
   for (const item of customNodes) {
-    createNodeMarker(item.node, renderer, item.category).addTo(group);
+    createNodeMarker(item.node, renderer, item.category, t).addTo(group);
   }
 }
 
 export function useNodesLayer(options: Readonly<UseNodesLayerOptions>) {
   const { map, graph, showNodes } = options;
+  const { t } = useTranslation();
   const layerGroupRef = useRef<L.LayerGroup | null>(null);
 
   useEffect(() => {
@@ -147,7 +157,7 @@ export function useNodesLayer(options: Readonly<UseNodesLayerOptions>) {
     group.clearLayers();
 
     if (showNodes && graph) {
-      renderNodesToLayer(group, graph);
+      renderNodesToLayer(group, graph, t);
     }
-  }, [map, graph, showNodes]);
+  }, [map, graph, showNodes, t]);
 }

@@ -47,7 +47,19 @@ export const translations = {
     searchNoResults: 'No se encontraron lugares con ese nombre',
     dragHint: 'Arrastra los marcadores para recalcular la ruta en tiempo real.',
     coordinates: 'X: {x} | Y: {y}',
-    elevationProfile: 'Perfil de Elevación 3D'
+    elevationProfile: 'Perfil de Elevación 3D',
+    nodeId: 'ID:',
+    nodeCoords: 'Coords:',
+    nodeAltitude: 'Altitud:',
+    nodeStatus: 'Estado:',
+    nodeStatusGiant: '✅ Conectado (Gigante)',
+    nodeStatusIsolated: '⚠️ Aislado / Desconectado',
+    nodeStatusPatch: '🔧 Parche Vial Oficial',
+    nodeStatusShortcut: '⚡ Atajo / Ruta Personalizada',
+    edgePatch: '🔧 Parche Vial Oficial',
+    edgeShortcut: '⚡ Atajo Personalizado',
+    edgeConnection: 'Conexión: {from} ↔ {to}',
+    edgeDistance: 'Distancia: {dist} m'
   },
   en: {
     appTitle: 'San Andreas Pathfinder 3D',
@@ -92,7 +104,19 @@ export const translations = {
     searchNoResults: 'No places found matching that query',
     dragHint: 'Drag markers to recalculate route in real time.',
     coordinates: 'X: {x} | Y: {y}',
-    elevationProfile: '3D Elevation Profile'
+    elevationProfile: '3D Elevation Profile',
+    nodeId: 'ID:',
+    nodeCoords: 'Coords:',
+    nodeAltitude: 'Altitude:',
+    nodeStatus: 'Status:',
+    nodeStatusGiant: '✅ Connected (Giant Component)',
+    nodeStatusIsolated: '⚠️ Isolated / Disconnected',
+    nodeStatusPatch: '🔧 Official Road Patch',
+    nodeStatusShortcut: '⚡ Custom Shortcut / Route',
+    edgePatch: '🔧 Official Road Patch',
+    edgeShortcut: '⚡ Custom Shortcut',
+    edgeConnection: 'Connection: {from} ↔ {to}',
+    edgeDistance: 'Distance: {dist} m'
   }
 } as const;
 
