@@ -36,6 +36,19 @@ export function App() {
     }
   }, [mapInstance]);
 
+  // Stable map interaction callbacks
+  const handleMapClick = useCallback((coords: GtaCoords) => {
+    dispatch({ type: 'ADD_WAYPOINT', coords });
+  }, []);
+
+  const handleWaypointDrag = useCallback((index: number, coords: GtaCoords) => {
+    dispatch({ type: 'UPDATE_WAYPOINT', index, coords });
+  }, []);
+
+  const handleSelectAlternative = useCallback((index: number) => {
+    dispatch({ type: 'SET_ACTIVE_ROUTE', index });
+  }, []);
+
   return (
     <div className={styles.appContainer}>
       {/* Interactive Leaflet Map Canvas */}
@@ -43,10 +56,10 @@ export function App() {
         routes={state.routes}
         activeRouteIndex={state.activeRouteIndex}
         waypoints={state.waypoints}
-        onMapClick={(coords) => dispatch({ type: 'ADD_WAYPOINT', coords })}
+        onMapClick={handleMapClick}
         onCursorMove={setCursorCoords}
-        onWaypointDrag={(index, coords) => dispatch({ type: 'UPDATE_WAYPOINT', index, coords })}
-        onSelectAlternative={(index) => dispatch({ type: 'SET_ACTIVE_ROUTE', index })}
+        onWaypointDrag={handleWaypointDrag}
+        onSelectAlternative={handleSelectAlternative}
         onMapReady={setMapInstance}
       />
 

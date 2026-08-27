@@ -9,6 +9,7 @@ A\* route planner over the official GTA:SA road network, with 3D terrain physics
 - **No libraries for the UI layer.** Components, panels, inputs, sheets, comboboxes are hand-written with CSS Modules.
 - **Leaflet stays.** The map engine is wrapped via the imperative bridge pattern (`src/map-bridge/`).
 - **React 19 + TypeScript**, `strict` + `noUncheckedIndexedAccess`. No `any` in engine modules.
+- **No Non-Null Assertions (!):** The non-null assertion operator `!` (e.g. `array[i]!`, `map.get(...)!`) is strictly forbidden. Do not bypass TypeScript's type checker with "trust me". Use explicit defensive guards (`if (!item) return/continue`), safe narrowing, or fallback defaults (`??`) to guarantee true runtime safety.
 - **Package Manager:** `pnpm` with **Node.js >= 24.11.0**.
 - **Pure domain separation:** `src/engine/`, `src/terrain/`, and `src/geo/` have zero imports of React, Leaflet, or the DOM.
 - **Max 2 positional parameters:** Any function or hook that takes more than 2 parameters must receive an options object `{ ... }` for clarity and maintainability.

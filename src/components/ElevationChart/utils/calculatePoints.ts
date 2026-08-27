@@ -25,19 +25,23 @@ export function calculateChartPoints(
   paddingTop = 8,
   paddingBottom = 8
 ): ElevationChartData | null {
-  if (!path || path.length < 2) {
+  const firstNode = path[0];
+  const lastNode = path.at(-1);
+  if (!firstNode || !lastNode || path.length < 2) {
     return null;
   }
 
   // 1. Compute cumulative 2D distances and track Z range
   const cumulativeDistances: number[] = [0];
   let currentDist = 0;
-  let minZ = path[0]!.z;
-  let maxZ = path[0]!.z;
+  let minZ = firstNode.z;
+  let maxZ = firstNode.z;
 
   for (let i = 1; i < path.length; i++) {
-    const prev = path[i - 1]!;
-    const curr = path[i]!;
+    const prev = path[i - 1];
+    const curr = path[i];
+    if (!prev || !curr) continue;
+
     const stepDist = ElevationPhysics.calculate2DDistance(prev, curr);
     currentDist += stepDist;
     cumulativeDistances.push(currentDist);
@@ -59,8 +63,9 @@ export function calculateChartPoints(
   const points: { x: number; y: number }[] = [];
 
   for (let i = 0; i < path.length; i++) {
-    const node = path[i]!;
-    const dist = cumulativeDistances[i]!;
+    const node = path[i];
+    const dist = cumulativeDistances[i];
+    if (!node || dist === undefined) continue;
 
     const normX = (dist / totalDistance) * width;
     // Invert Y for SVG coordinates (0 is top, height is bottom)
@@ -73,19 +78,22 @@ export function calculateChartPoints(
   }
 
   // 3. Build SVG Path strings
-  const first = points[0]!;
-  const last = points[points.length - 1]!;
+  const firstPoint = points[0];
+  const lastPoint = points.at(-1);
+  if (!firstPoint || !lastPoint) {
+    return null;
+  }
 
   const linePathCommands = points.map((p, idx) => `${idx === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
-  const areaPathCommands = `${linePathCommands} L ${last.x} ${height} L ${first.x} ${height} Z`;
+  const areaPathCommands = `${linePathCommands} L ${lastPoint.x} ${height} L ${firstPoint.x} ${height} Z`;
 
   return {
     linePath: linePathCommands,
     areaPath: areaPathCommands,
     minZ: Math.round(minZ),
     maxZ: Math.round(maxZ),
-    startZ: Math.round(path[0]!.z),
-    endZ: Math.round(path[path.length - 1]!.z),
+    startZ: Math.round(firstNode.z),
+    endZ: Math.round(lastNode.z),
     totalDistanceMeters: Math.round(totalDistance)
   };
 }

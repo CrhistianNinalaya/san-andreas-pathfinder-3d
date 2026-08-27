@@ -73,7 +73,9 @@ export class RoadGraph {
     const nodeIndexMap = new Map<string, number>();
 
     for (let i = 0; i < rawNodes.length; i++) {
-      const node = rawNodes[i]!;
+      const node = rawNodes[i];
+      if (!node) continue;
+
       const idStr = String(node.id);
       nodeIndexMap.set(idStr, i);
 
@@ -118,9 +120,16 @@ export class RoadGraph {
    */
   private _findRoot(parent: Int32Array, nodeIdx: number): number {
     let curr = nodeIdx;
-    while (parent[curr] !== curr) {
-      parent[curr] = parent[parent[curr]!]!;
-      curr = parent[curr]!;
+    while (true) {
+      const parentCurr = parent[curr];
+      if (parentCurr === undefined || parentCurr === curr) {
+        break;
+      }
+      const grandParent = parent[parentCurr];
+      if (grandParent !== undefined) {
+        parent[curr] = grandParent;
+      }
+      curr = parentCurr;
     }
     return curr;
   }
@@ -161,13 +170,16 @@ export class RoadGraph {
       const dist3D = ElevationPhysics.calculate3DDistance(n1, n2);
       const slope = ElevationPhysics.calculateSlope(n1, n2);
 
-      this.adjacencyList.get(fromId)!.push({
-        to: toId,
-        distance: dist3D,
-        slope,
-        slopePercent: Math.round(slope * 100),
-        nominalSpeed
-      });
+      const fromList = this.adjacencyList.get(fromId);
+      if (fromList) {
+        fromList.push({
+          to: toId,
+          distance: dist3D,
+          slope,
+          slopePercent: Math.round(slope * 100),
+          nominalSpeed
+        });
+      }
     }
 
     return maxEdgeSpeed;
@@ -206,7 +218,8 @@ export class RoadGraph {
     giantRoot: number
   ): void {
     for (let i = 0; i < rawNodes.length; i++) {
-      const node = rawNodes[i]!;
+      const node = rawNodes[i];
+      if (!node) continue;
       const nodeObj = this.nodes.get(String(node.id));
       if (nodeObj) {
         const root = this._findRoot(parent, i);
@@ -411,7 +424,10 @@ export class RoadGraph {
 
     while (curr !== null) {
       nodeIds.unshift(curr);
-      path.unshift(this.nodes.get(curr)!);
+      const currNode = this.nodes.get(curr);
+      if (currNode) {
+        path.unshift(currNode);
+      }
       const prev: string | null | undefined = cameFrom.get(curr);
       if (prev) {
         const edge = edgeUsed.get(curr);
@@ -458,7 +474,11 @@ export class RoadGraph {
   private _extractEdgeKeys(nodeIds: string[]): Set<string> {
     const keys = new Set<string>();
     for (let j = 0; j < nodeIds.length - 1; j++) {
-      keys.add(`${nodeIds[j]}->${nodeIds[j + 1]}`);
+      const from = nodeIds[j];
+      const to = nodeIds[j + 1];
+      if (from && to) {
+        keys.add(`${from}->${to}`);
+      }
     }
     return keys;
   }

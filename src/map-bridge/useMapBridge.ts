@@ -22,8 +22,11 @@ export function useMapBridge(options: Readonly<UseMapBridgeOptions>) {
       crs: L.CRS.Simple,
       minZoom: -2,
       maxZoom: 4,
-      maxBounds: GTA_BOUNDS.leafletBounds,
-      maxBoundsViscosity: 0.8,
+      maxBounds: [
+        [-3800, -3800],
+        [3800, 3800]
+      ],
+      maxBoundsViscosity: 0.7,
       zoomControl: false,
       attributionControl: false
     });

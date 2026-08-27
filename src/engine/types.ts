@@ -49,6 +49,16 @@ export interface ElevationProfile {
   maxElevation: number;
 }
 
+export interface RouteLeg {
+  fromIndex: number;
+  toIndex: number;
+  fromLabel: string;
+  toLabel: string;
+  path: GraphNode[];
+  totalDistance: number;
+  totalTimeSeconds: number;
+}
+
 export interface RouteResult {
   path: GraphNode[];
   nodeIds: string[];
@@ -56,6 +66,7 @@ export interface RouteResult {
   totalTimeSeconds: number;
   elevationProfile: ElevationProfile;
   usedEdges: AdjacencyEdge[];
+  legs?: RouteLeg[];
   index?: number;
   isOptimal?: boolean;
   label?: string;

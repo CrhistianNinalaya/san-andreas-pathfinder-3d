@@ -3,7 +3,7 @@
  */
 
 import type { RoadGraph } from '../../engine/RoadGraph';
-import type { GtaCoords, RouteResult } from '../../engine/types';
+import type { GtaCoords, RouteResult, RouteLeg } from '../../engine/types';
 import { ElevationPhysics, type VehicleProfileType } from '../../terrain/ElevationPhysics';
 import type { Waypoint } from '../../map-bridge/useWaypointMarkers';
 
@@ -44,8 +44,7 @@ export const initialRouteState: RouteState = {
 
 function getWaypointLabel(index: number): string {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  if (index < letters.length) return letters[index]!;
-  return `P${index + 1}`;
+  return letters[index] ?? `P${index + 1}`;
 }
 
 export interface ComputeRoutesOptions {
@@ -60,8 +59,12 @@ function computeRoutes(options: ComputeRoutesOptions): RouteResult[] {
 
   // 2 Waypoints: Optimal + Alternatives with vehicle physics
   if (waypoints.length === 2) {
-    const start = waypoints[0]!.snapNode;
-    const goal = waypoints[1]!.snapNode;
+    const firstWp = waypoints[0];
+    const secondWp = waypoints[1];
+    if (!firstWp || !secondWp) return [];
+
+    const start = firstWp.snapNode;
+    const goal = secondWp.snapNode;
     return graph.findRoutesWithAlternatives({
       startId: start.id,
       goalId: goal.id,
@@ -76,10 +79,15 @@ function computeRoutes(options: ComputeRoutesOptions): RouteResult[] {
   let totalTimeSeconds = 0;
   const usedEdges = [];
   const nodeIds = [];
+  const legs: RouteLeg[] = [];
 
   for (let i = 0; i < waypoints.length - 1; i++) {
-    const start = waypoints[i]!.snapNode;
-    const goal = waypoints[i + 1]!.snapNode;
+    const startWp = waypoints[i];
+    const goalWp = waypoints[i + 1];
+    if (!startWp || !goalWp) continue;
+
+    const start = startWp.snapNode;
+    const goal = goalWp.snapNode;
     const leg = graph.findShortestPath({
       startId: start.id,
       goalId: goal.id,
@@ -92,12 +100,23 @@ function computeRoutes(options: ComputeRoutesOptions): RouteResult[] {
       usedEdges.push(...leg.usedEdges);
       nodeIds.push(...leg.nodeIds);
       pathNodes.push(...leg.path);
+      legs.push({
+        fromIndex: i,
+        toIndex: i + 1,
+        fromLabel: startWp.label,
+        toLabel: goalWp.label,
+        path: leg.path,
+        totalDistance: leg.totalDistance,
+        totalTimeSeconds: leg.totalTimeSeconds
+      });
     }
   }
 
   if (pathNodes.length === 0) return [];
 
   const elevationProfile = ElevationPhysics.calculateElevationProfile(pathNodes);
+  const firstLabel = waypoints[0]?.label ?? 'A';
+  const lastLabel = waypoints.at(-1)?.label ?? 'B';
 
   return [
     {
@@ -107,8 +126,9 @@ function computeRoutes(options: ComputeRoutesOptions): RouteResult[] {
       totalTimeSeconds: Math.round(totalTimeSeconds),
       elevationProfile,
       usedEdges,
+      legs,
       isOptimal: true,
-      label: `Total Route (${waypoints[0]!.label} ➔ ${waypoints[waypoints.length - 1]!.label})`
+      label: `Total Route (${firstLabel} ➔ ${lastLabel})`
     }
   ];
 }
@@ -124,7 +144,6 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
           snapNode: snap || wp.snapNode
         };
       });
-
       const routes = computeRoutes({
         waypoints: reSnappedWaypoints,
         graph,
@@ -203,7 +222,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
         return {
           ...wp,
           coords: action.coords,
-          snapNode: nearest.node!
+          snapNode: nearest.node ?? wp.snapNode
         };
       });
 
@@ -269,20 +288,25 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
     case 'RESTORE_URL_WAYPOINTS': {
       if (!state.graph || action.waypointsCoords.length === 0) return state;
 
+      const graph = state.graph;
       const vehicle = action.vehicle ?? state.vehicleType;
-      const waypoints: Waypoint[] = action.waypointsCoords.map((c, i) => {
-        const snap = state.graph!.findNearestNode({ x: c.x, y: c.y, onlyGiant: true }).node!;
-        return {
-          id: `wp_${i}`,
-          label: getWaypointLabel(i),
-          coords: c,
-          snapNode: snap
-        };
+      const waypoints: Waypoint[] = [];
+
+      action.waypointsCoords.forEach((c, i) => {
+        const snap = graph.findNearestNode({ x: c.x, y: c.y, onlyGiant: true }).node;
+        if (snap) {
+          waypoints.push({
+            id: `wp_${i}`,
+            label: getWaypointLabel(i),
+            coords: c,
+            snapNode: snap
+          });
+        }
       });
 
       const routes = computeRoutes({
         waypoints,
-        graph: state.graph,
+        graph,
         vehicleType: vehicle
       });
       return {

@@ -18,13 +18,19 @@ export class MinHeap<T> {
 
   pop(): HeapItem<T> | null {
     if (this.heap.length === 0) return null;
-    const top = this.heap[0]!;
+    const top = this.heap[0];
+    if (!top) return null;
+
     const bottom = this.heap.pop();
     if (this.heap.length > 0 && bottom !== undefined) {
       this.heap[0] = bottom;
       this._bubbleDown(0);
     }
     return top;
+  }
+
+  peek(): HeapItem<T> | null {
+    return this.heap[0] ?? null;
   }
 
   isEmpty(): boolean {
@@ -62,21 +68,26 @@ export class MinHeap<T> {
       const right = left + 1;
       let smallest = index;
 
-      const currentItem = this.heap[index];
       const leftItem = this.heap[left];
       const rightItem = this.heap[right];
+      const smallestItem = this.heap[smallest];
 
-      if (left < length && leftItem && currentItem && leftItem.priority < this.heap[smallest]!.priority) {
+      if (left < length && leftItem && smallestItem && leftItem.priority < smallestItem.priority) {
         smallest = left;
       }
-      if (right < length && rightItem && rightItem.priority < this.heap[smallest]!.priority) {
+
+      const updatedSmallestItem = this.heap[smallest];
+      if (right < length && rightItem && updatedSmallestItem && rightItem.priority < updatedSmallestItem.priority) {
         smallest = right;
       }
+
       if (smallest !== index) {
-        const itemAtSmallest = this.heap[smallest]!;
-        const itemAtIndex = this.heap[index]!;
-        this.heap[index] = itemAtSmallest;
-        this.heap[smallest] = itemAtIndex;
+        const itemAtSmallest = this.heap[smallest];
+        const itemAtIndex = this.heap[index];
+        if (itemAtSmallest && itemAtIndex) {
+          this.heap[index] = itemAtSmallest;
+          this.heap[smallest] = itemAtIndex;
+        }
         index = smallest;
       } else {
         break;

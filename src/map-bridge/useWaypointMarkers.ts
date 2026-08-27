@@ -19,6 +19,8 @@ export interface UseWaypointMarkersOptions {
 export function useWaypointMarkers(options: Readonly<UseWaypointMarkersOptions>) {
   const { map, waypoints, onWaypointDrag } = options;
   const layerGroupRef = useRef<L.LayerGroup | null>(null);
+  const onWaypointDragRef = useRef(onWaypointDrag);
+  onWaypointDragRef.current = onWaypointDrag;
 
   useEffect(() => {
     if (!map) return;
@@ -48,6 +50,11 @@ export function useWaypointMarkers(options: Readonly<UseWaypointMarkersOptions>)
         icon
       });
 
+      // Prevent clicks on markers from propagating to map (which triggers ADD_WAYPOINT)
+      marker.on('click', (e: L.LeafletMouseEvent) => {
+        L.DomEvent.stopPropagation(e);
+      });
+
       marker.on('dragend', (e: L.LeafletEvent) => {
         const markerTarget = e.target as L.Marker;
         const rawCoords = latLngToGta(markerTarget.getLatLng());
@@ -55,10 +62,10 @@ export function useWaypointMarkers(options: Readonly<UseWaypointMarkersOptions>)
           x: Math.max(-3000, Math.min(3000, rawCoords.x)),
           y: Math.max(-3000, Math.min(3000, rawCoords.y))
         };
-        onWaypointDrag(idx, clampedCoords);
+        onWaypointDragRef.current(idx, clampedCoords);
       });
 
       marker.addTo(group);
     });
-  }, [map, waypoints, onWaypointDrag]);
+  }, [map, waypoints]);
 }

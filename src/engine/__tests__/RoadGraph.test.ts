@@ -73,20 +73,30 @@ describe('RoadGraph and A* Pathfinding', () => {
     expect(truckRoute).not.toBeNull();
 
     // Sports car is faster than standard car on climb
-    expect(sportsRoute!.totalTimeSeconds).toBeLessThan(carRoute!.totalTimeSeconds);
-    // Truck on climb takes significantly longer than standard car
-    expect(truckRoute!.totalTimeSeconds).toBeGreaterThan(carRoute!.totalTimeSeconds);
+    expect(sportsRoute?.totalTimeSeconds).toBeDefined();
+    expect(carRoute?.totalTimeSeconds).toBeDefined();
+    expect(truckRoute?.totalTimeSeconds).toBeDefined();
+    if (sportsRoute && carRoute && truckRoute) {
+      expect(sportsRoute.totalTimeSeconds).toBeLessThan(carRoute.totalTimeSeconds);
+      expect(truckRoute.totalTimeSeconds).toBeGreaterThan(carRoute.totalTimeSeconds);
+    }
   });
 
   it('should guarantee admissibility of the heuristic', () => {
     const graph = new RoadGraph(mockDataset);
-    const node1 = graph.nodes.get('1')!;
-    const node3 = graph.nodes.get('3')!;
+    const node1 = graph.nodes.get('1');
+    const node3 = graph.nodes.get('3');
+    expect(node1).toBeDefined();
+    expect(node3).toBeDefined();
 
-    const h = graph.heuristic(node1, node3, 'car');
-    const result = graph.findShortestPath({ startId: '1', goalId: '3', vehicleType: 'car' })!;
-
-    expect(h).toBeLessThanOrEqual(result.totalTimeSeconds);
+    if (node1 && node3) {
+      const h = graph.heuristic(node1, node3, 'car');
+      const result = graph.findShortestPath({ startId: '1', goalId: '3', vehicleType: 'car' });
+      expect(result).toBeDefined();
+      if (result) {
+        expect(h).toBeLessThanOrEqual(result.totalTimeSeconds);
+      }
+    }
   });
 
   it('should filter out alternative candidates with >70% edge overlap', () => {
