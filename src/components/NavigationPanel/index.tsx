@@ -50,10 +50,11 @@ export function NavigationPanel({
           <div className={styles.mobilePill} />
         </div>
 
-        {/* Brand header with node count badge */}
+        {/* Brand header with node count badge and toggle chevron */}
         <PanelHeader
           isLoading={state.isLoadingGraph}
           nodeCount={state.graphNodeCount}
+          isExpanded={isExpanded}
         />
       </button>
 

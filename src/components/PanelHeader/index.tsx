@@ -5,9 +5,10 @@ import styles from './PanelHeader.module.css';
 export interface PanelHeaderProps {
   isLoading: boolean;
   nodeCount: number;
+  isExpanded?: boolean;
 }
 
-export function PanelHeader({ isLoading, nodeCount }: Readonly<PanelHeaderProps>) {
+export function PanelHeader({ isLoading, nodeCount, isExpanded }: Readonly<PanelHeaderProps>) {
   const { t } = useTranslation();
 
   return (
@@ -18,11 +19,18 @@ export function PanelHeader({ isLoading, nodeCount }: Readonly<PanelHeaderProps>
           <h1>{t('appTitle')}</h1>
         </div>
       </div>
-      <span className={styles.badge}>
-        {isLoading
-          ? t('loading')
-          : t('nodesLoaded', { count: formatNodeCount(nodeCount) })}
-      </span>
+      <div className={styles.headerMeta}>
+        <span className={styles.badge}>
+          {isLoading
+            ? t('loading')
+            : t('nodesLoaded', { count: formatNodeCount(nodeCount) })}
+        </span>
+        {isExpanded !== undefined && (
+          <span className={styles.toggleChevron} aria-hidden="true">
+            {isExpanded ? '▼' : '▲'}
+          </span>
+        )}
+      </div>
     </div>
   );
 }

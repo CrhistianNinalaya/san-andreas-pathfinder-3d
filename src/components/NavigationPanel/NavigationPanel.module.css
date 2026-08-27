@@ -4,6 +4,7 @@
   left: 1.25rem;
   width: 380px;
   max-height: calc(100vh - 2.5rem);
+  max-height: calc(100dvh - 2.5rem);
   background: var(--bg-panel);
   border: 1px solid var(--border-medium);
   backdrop-filter: blur(16px);
@@ -36,6 +37,7 @@
   display: none;
   width: 100%;
   padding-top: 8px;
+  padding-bottom: 2px;
   justify-content: center;
   align-items: center;
 }
@@ -59,25 +61,32 @@
 /* Mobile & Tablet Bottom Sheet Layout */
 @media (max-width: 768px) {
   .floatingPanel {
+    position: fixed;
     top: auto;
     bottom: 0;
     left: 0;
-    width: 100vw;
-    max-height: 70px; /* Collapsed peek mode */
+    right: 0;
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+    max-height: calc(78px + env(safe-area-inset-bottom, 0px)); /* Fully visible header peek banner */
     border-radius: 20px 20px 0 0;
     border-left: none;
     border-right: none;
     border-bottom: none;
     box-shadow: var(--shadow-bottom-sheet);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    z-index: var(--z-panel, 1000);
   }
 
   .floatingPanel.expanded {
-    max-height: 75vh; /* Expanded mode */
+    max-height: calc(85dvh - env(safe-area-inset-top, 0px)); /* Dynamic viewport height expanded */
   }
 
   .headerTriggerButton {
     cursor: pointer;
     user-select: none;
+    touch-action: manipulation;
   }
 
   .mobilePillWrapper {
@@ -87,5 +96,9 @@
   .panelBody {
     padding: 0.85rem 1rem 1.5rem 1rem;
     gap: 0.85rem;
+  }
+
+  .floatingPanel:not(.expanded) .panelBody {
+    display: none;
   }
 }
