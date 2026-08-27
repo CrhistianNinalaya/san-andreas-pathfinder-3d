@@ -14,7 +14,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "verify-graph": "node tools/verify-graph.mjs",
+    "verify-graph": "tsx tools/verify-graph.ts",
     "bench": "tsx tools/bench-route.ts"
   },
   "dependencies": {
