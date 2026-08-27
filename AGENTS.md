@@ -20,6 +20,7 @@ A\* route planner over the official GTA:SA road network, with 3D terrain physics
   - `types.ts` is created only when props $> 4$ (if $\le 4$, define the interface inline in `index.tsx`).
   - Component-specific hooks live in `hooks/` with single responsibility.
   - Component pure helper functions live in `utils/`.
+- **CSS Custom Properties (Design Tokens):** All UI styling (colors, backgrounds, borders, shadows, radii, font sizes, transitions, z-indices) must strictly use CSS variables (`var(--...)`) defined in `src/ui/global.css`. Never use raw hardcoded hex/rgb/rgba values in CSS Modules or components.
 - **Responsive Breakpoints:**
   - Mobile bottom sheet / touch layout: `@media (max-width: 768px)` (canonical standard defined in `src/ui/breakpoints.ts` and `src/ui/global.css`).
 

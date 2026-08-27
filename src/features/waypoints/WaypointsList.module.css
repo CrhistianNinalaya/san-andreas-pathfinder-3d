@@ -51,17 +51,17 @@
 
 .badgeStart {
   background: var(--color-success);
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  box-shadow: var(--shadow-pin-start);
 }
 
 .badgeWaypoint {
   background: var(--color-accent);
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+  box-shadow: var(--shadow-pin-waypoint);
 }
 
 .badgeEnd {
   background: var(--color-danger);
-  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+  box-shadow: var(--shadow-pin-end);
 }
 
 .infoCol {

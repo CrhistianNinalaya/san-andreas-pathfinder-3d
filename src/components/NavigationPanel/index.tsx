@@ -58,12 +58,14 @@ export function NavigationPanel({
       </button>
 
       <div id="navigation-panel-body" className={styles.panelBody}>
-        {/* Scope, language and vehicle controls */}
+        {/* Scope, language, vehicle, and nodes layer controls */}
         <PanelControls
           scope={state.scope}
           vehicleType={state.vehicleType}
+          showNodes={state.showNodes}
           onScopeChange={onScopeChange}
           onVehicleChange={(vehicleType) => dispatch({ type: 'SET_VEHICLE', vehicleType })}
+          onToggleNodes={() => dispatch({ type: 'TOGGLE_NODES' })}
         />
 
         {/* POI Landmark Search Combobox */}

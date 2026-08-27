@@ -25,10 +25,7 @@ export function useWaypointMarkers(options: Readonly<UseWaypointMarkersOptions>)
   useEffect(() => {
     if (!map) return;
 
-    if (!layerGroupRef.current) {
-      layerGroupRef.current = L.layerGroup().addTo(map);
-    }
-
+    layerGroupRef.current ??= L.layerGroup().addTo(map);
     const group = layerGroupRef.current;
     group.clearLayers();
 

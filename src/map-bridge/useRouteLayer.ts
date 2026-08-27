@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import { gtaToLatLng } from '../geo/coordinates';
 import { partitionLegSegments } from './utils/routeOverlap';
+import { ROUTE_PALETTE } from './theme';
 import type { RouteResult } from '../engine/types';
 
 export interface UseRouteLayerOptions {
@@ -11,14 +12,6 @@ export interface UseRouteLayerOptions {
   onSelectAlternative?: (index: number) => void;
 }
 
-const LEG_PALETTE = [
-  { main: '#38bdf8', casing: '#082f49' }, // Cyan (Leg 1: A -> B)
-  { main: '#34d399', casing: '#022c22' }, // Emerald (Leg 2: B -> C)
-  { main: '#fbbf24', casing: '#451a03' }, // Amber (Leg 3: C -> D)
-  { main: '#c084fc', casing: '#3b0764' }, // Violet (Leg 4: D -> E)
-  { main: '#fb7185', casing: '#4c0519' }  // Rose (Leg 5: E -> F)
-];
-
 export function useRouteLayer(options: Readonly<UseRouteLayerOptions>) {
   const { map, routes, activeRouteIndex, onSelectAlternative } = options;
   const layerGroupRef = useRef<L.LayerGroup | null>(null);
@@ -26,10 +19,7 @@ export function useRouteLayer(options: Readonly<UseRouteLayerOptions>) {
   useEffect(() => {
     if (!map) return;
 
-    if (!layerGroupRef.current) {
-      layerGroupRef.current = L.layerGroup().addTo(map);
-    }
-
+    layerGroupRef.current ??= L.layerGroup().addTo(map);
     const group = layerGroupRef.current;
     group.clearLayers();
 
@@ -41,7 +31,7 @@ export function useRouteLayer(options: Readonly<UseRouteLayerOptions>) {
 
       const latlngs = route.path.map(n => gtaToLatLng(n.x, n.y));
       const line = L.polyline(latlngs, {
-        color: '#64748b',
+        color: ROUTE_PALETTE.alternative.color,
         weight: 3,
         opacity: 0.6,
         dashArray: '5, 7',
@@ -61,11 +51,10 @@ export function useRouteLayer(options: Readonly<UseRouteLayerOptions>) {
     if (active) {
       if (active.legs && active.legs.length > 1) {
         // Multi-Stop Route: Render with intelligent overlap detection
-        // Unique road spans are 100% SOLID. Overlapping road spans are DASHED to reveal previous leg color.
         const segments = partitionLegSegments(active.legs);
 
         segments.forEach((seg) => {
-          const colorPair = LEG_PALETTE[seg.legIndex % LEG_PALETTE.length] ?? { main: '#38bdf8', casing: '#082f49' };
+          const colorPair = ROUTE_PALETTE.legs[seg.legIndex % ROUTE_PALETTE.legs.length] ?? ROUTE_PALETTE.primary;
           const dashPattern = seg.isOverlapping ? '10, 10' : undefined;
 
           // Contrast casing outline
@@ -95,7 +84,7 @@ export function useRouteLayer(options: Readonly<UseRouteLayerOptions>) {
         const latlngs = active.path.map(n => gtaToLatLng(n.x, n.y));
 
         const glow = L.polyline(latlngs, {
-          color: '#0284c7',
+          color: ROUTE_PALETTE.primary.glow,
           weight: 6,
           opacity: 0.4,
           lineCap: 'round',
@@ -104,7 +93,7 @@ export function useRouteLayer(options: Readonly<UseRouteLayerOptions>) {
         glow.addTo(group);
 
         const mainLine = L.polyline(latlngs, {
-          color: '#38bdf8',
+          color: ROUTE_PALETTE.primary.main,
           weight: 3.5,
           opacity: 1.0,
           lineCap: 'round',

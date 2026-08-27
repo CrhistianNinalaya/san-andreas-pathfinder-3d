@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { useMapBridge } from '../../../map-bridge/useMapBridge';
 import { useRouteLayer } from '../../../map-bridge/useRouteLayer';
 import { useWaypointMarkers } from '../../../map-bridge/useWaypointMarkers';
+import { useNodesLayer } from '../../../map-bridge/useNodesLayer';
 import type { UseMapIntegrationOptions } from '../types';
 
 /**
- * Hook responsible for orchestrating the Leaflet bridge, route layers, and waypoint markers
+ * Hook responsible for orchestrating the Leaflet bridge, route layers, waypoint markers, and debug node layer
  */
 export function useMapIntegration(options: Readonly<UseMapIntegrationOptions>) {
   const {
@@ -13,6 +14,8 @@ export function useMapIntegration(options: Readonly<UseMapIntegrationOptions>) {
     routes,
     activeRouteIndex,
     waypoints,
+    graph,
+    showNodes = false,
     onMapClick,
     onCursorMove,
     onWaypointDrag,
@@ -47,6 +50,13 @@ export function useMapIntegration(options: Readonly<UseMapIntegrationOptions>) {
     map,
     waypoints,
     onWaypointDrag
+  });
+
+  // Sync road network nodes layer
+  useNodesLayer({
+    map,
+    graph: graph ?? null,
+    showNodes
   });
 
   return { map, isMapReady };

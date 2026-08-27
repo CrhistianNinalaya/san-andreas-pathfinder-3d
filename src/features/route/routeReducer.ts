@@ -16,6 +16,7 @@ export interface RouteState {
   graph: RoadGraph | null;
   isLoadingGraph: boolean;
   graphNodeCount: number;
+  showNodes: boolean;
 }
 
 export type RouteAction =
@@ -29,6 +30,7 @@ export type RouteAction =
   | { type: 'SET_VEHICLE'; vehicleType: VehicleProfileType }
   | { type: 'SET_SCOPE'; scope: RouteState['scope'] }
   | { type: 'SET_ACTIVE_ROUTE'; index: number }
+  | { type: 'TOGGLE_NODES' }
   | { type: 'RESTORE_URL_WAYPOINTS'; waypointsCoords: GtaCoords[]; vehicle?: VehicleProfileType; altIndex?: number };
 
 export const initialRouteState: RouteState = {
@@ -39,7 +41,8 @@ export const initialRouteState: RouteState = {
   scope: 'all',
   graph: null,
   isLoadingGraph: true,
-  graphNodeCount: 0
+  graphNodeCount: 0,
+  showNodes: false
 };
 
 function getWaypointLabel(index: number): string {
@@ -284,6 +287,9 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
 
     case 'SET_ACTIVE_ROUTE':
       return { ...state, activeRouteIndex: action.index };
+
+    case 'TOGGLE_NODES':
+      return { ...state, showNodes: !state.showNodes };
 
     case 'RESTORE_URL_WAYPOINTS': {
       if (!state.graph || action.waypointsCoords.length === 0) return state;

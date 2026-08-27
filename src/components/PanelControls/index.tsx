@@ -2,20 +2,16 @@ import { useTranslation } from '../../i18n/useTranslation';
 import type { Language } from '../../i18n/translations';
 import type { RouteState } from '../../features/route/routeReducer';
 import type { VehicleProfileType } from '../../terrain/ElevationPhysics';
+import type { PanelControlsProps } from './types';
 import styles from './PanelControls.module.css';
-
-export interface PanelControlsProps {
-  scope: RouteState['scope'];
-  vehicleType: VehicleProfileType;
-  onScopeChange: (scope: RouteState['scope']) => void;
-  onVehicleChange: (vehicle: VehicleProfileType) => void;
-}
 
 export function PanelControls({
   scope,
   vehicleType,
+  showNodes = false,
   onScopeChange,
-  onVehicleChange
+  onVehicleChange,
+  onToggleNodes
 }: Readonly<PanelControlsProps>) {
   const { t, lang, setLang } = useTranslation();
 
@@ -66,6 +62,20 @@ export function PanelControls({
           <option value="offroad">{t('vehOffroad')}</option>
         </select>
       </div>
+
+      {/* Road Network Node Layer Toggle Button */}
+      {onToggleNodes && (
+        <button
+          type="button"
+          className={`${styles.toggleNodesButton} ${showNodes ? styles.active : ''}`}
+          onClick={onToggleNodes}
+          aria-pressed={showNodes}
+          title={showNodes ? t('hideNodes') : t('showNodes')}
+        >
+          <span>{showNodes ? '🌐' : '🔘'}</span>
+          <span>{showNodes ? t('hideNodes') : t('showNodes')}</span>
+        </button>
+      )}
     </div>
   );
 }

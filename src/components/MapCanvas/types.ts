@@ -1,11 +1,14 @@
 import type L from 'leaflet';
 import type { GtaCoords, RouteResult } from '../../engine/types';
+import type { RoadGraph } from '../../engine/RoadGraph';
 import type { Waypoint } from '../../map-bridge/useWaypointMarkers';
 
 export interface MapCanvasProps {
   routes: RouteResult[];
   activeRouteIndex: number;
   waypoints: Waypoint[];
+  graph?: RoadGraph | null;
+  showNodes?: boolean;
   onMapClick: (coords: GtaCoords) => void;
   onCursorMove?: (coords: GtaCoords) => void;
   onWaypointDrag: (index: number, newCoords: GtaCoords) => void;
@@ -18,6 +21,8 @@ export interface UseMapIntegrationOptions {
   routes: RouteResult[];
   activeRouteIndex: number;
   waypoints: Waypoint[];
+  graph?: RoadGraph | null;
+  showNodes?: boolean;
   onMapClick: (coords: GtaCoords) => void;
   onCursorMove?: (coords: GtaCoords) => void;
   onWaypointDrag: (index: number, newCoords: GtaCoords) => void;

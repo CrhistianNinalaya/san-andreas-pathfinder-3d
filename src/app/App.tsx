@@ -56,6 +56,8 @@ export function App() {
         routes={state.routes}
         activeRouteIndex={state.activeRouteIndex}
         waypoints={state.waypoints}
+        graph={state.graph}
+        showNodes={state.showNodes}
         onMapClick={handleMapClick}
         onCursorMove={setCursorCoords}
         onWaypointDrag={handleWaypointDrag}

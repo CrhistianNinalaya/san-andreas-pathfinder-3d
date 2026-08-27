@@ -48,6 +48,8 @@
   --shadow-pin-start: 0 0 14px rgba(16, 185, 129, 0.7);
   --shadow-pin-waypoint: 0 0 14px rgba(2, 132, 199, 0.7);
   --shadow-pin-end: 0 0 14px rgba(239, 68, 68, 0.7);
+  --shadow-bottom-sheet: 0 -10px 25px rgba(0, 0, 0, 0.5);
+  --bg-active-glow: rgba(2, 132, 199, 0.15);
 
   /* Z-Index Hierarchy (Leaflet uses up to 650 internally) */
   --z-map: 1;
