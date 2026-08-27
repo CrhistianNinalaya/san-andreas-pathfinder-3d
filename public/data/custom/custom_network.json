@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "description": "Custom player shortcuts, off-road circuits, stunt jumps, and road network patches for San Andreas",
+  "nodes": [],
+  "edges": [
+    {
+      "from": "18_171",
+      "to": "18_173",
+      "speed": 70,
+      "type": "patch",
+      "description": "Flint County tunnel bridge junction"
+    },
+    {
+      "from": "18_173",
+      "to": "18_171",
+      "speed": 70,
+      "type": "patch",
+      "description": "Flint County tunnel bridge junction"
+    }
+  ]
+}

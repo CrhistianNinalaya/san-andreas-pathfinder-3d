@@ -32,14 +32,22 @@ const args = process.argv.slice(2);
 const asJson = args.includes('--json');
 const runs = Number(args.find((a) => a.startsWith('--runs='))?.slice(7) ?? 5);
 const dataPath =
-  args.find((a) => a.startsWith('--data='))?.slice(7) ?? 'data/san_andreas_official_nodes.json';
+  args.find((a) => a.startsWith('--data='))?.slice(7) ?? 'public/data/official/san_andreas_official_nodes.json';
+const customPath =
+  args.find((a) => a.startsWith('--custom='))?.slice(9) ?? 'public/data/custom/custom_network.json';
 
 const parseStart = performance.now();
 const data: RawDataset = JSON.parse(readFileSync(dataPath, 'utf8'));
+let customData: import('../src/engine/types').CustomNetworkDataset | undefined;
+try {
+  customData = JSON.parse(readFileSync(customPath, 'utf8'));
+} catch {
+  // custom network is optional
+}
 const parseMs = performance.now() - parseStart;
 
 const buildStart = performance.now();
-const graph = new RoadGraph(data);
+const graph = new RoadGraph(data, customData);
 const buildMs = performance.now() - buildStart;
 
 const median = (xs: number[]) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)] ?? 0;

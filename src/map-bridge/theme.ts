@@ -9,6 +9,10 @@ export const MAP_TOKENS = {
   danger: '#ef4444',
   dangerLight: '#f87171',
   success: '#10b981',
+  successDark: '#047857',
+  successLight: '#34d399',
+  gold: '#fbbf24',
+  goldDark: '#b45309',
   muted: '#64748b'
 } as const;
 
@@ -26,6 +30,20 @@ export const NODE_LAYER_THEME = {
     color: MAP_TOKENS.danger,
     fillColor: MAP_TOKENS.dangerLight,
     fillOpacity: 0.9
+  },
+  patch: {
+    radius: 3.5,
+    weight: 2,
+    color: MAP_TOKENS.successDark,
+    fillColor: MAP_TOKENS.success,
+    fillOpacity: 1.0
+  },
+  shortcut: {
+    radius: 3.5,
+    weight: 2,
+    color: MAP_TOKENS.goldDark,
+    fillColor: MAP_TOKENS.gold,
+    fillOpacity: 1.0
   }
 } as const;
 

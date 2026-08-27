@@ -10,6 +10,16 @@ export interface GtaCoords {
   z?: number;
 }
 
+/**
+ * Categorization for community-defined nodes and custom road network overlays:
+ * 
+ * - `'shortcut'`: Urban or city shortcuts through parking lots, alleys, or plazas to bypass traffic lights/turns.
+ * - `'offroad'`: Dirt paths, mountain trails, countryside dirt tracks, and canal drainages unmapped in NPC data.
+ * - `'jump'`: Unique stunt jumps, ramp takeoffs, and cliff drops allowing rapid one-way elevation transitions.
+ * - `'patch'`: Official network topology repairs bridging missing junctions or dead-ends in raw extracted data (e.g. Flint County tunnel).
+ */
+export type CustomNetworkType = 'shortcut' | 'offroad' | 'jump' | 'patch';
+
 export interface GraphNode {
   id: string;
   name: string;
@@ -18,6 +28,8 @@ export interface GraphNode {
   z: number;
   componentId: number;
   isGiantComponent: boolean;
+  isCustom?: boolean;
+  customType?: CustomNetworkType;
 }
 
 export interface GraphEdge {
@@ -25,6 +37,8 @@ export interface GraphEdge {
   to: string | number;
   speed?: number;
   flags?: number;
+  isCustom?: boolean;
+  type?: CustomNetworkType;
 }
 
 export interface AdjacencyEdge {
@@ -35,11 +49,28 @@ export interface AdjacencyEdge {
   nominalSpeed: number;
   speed?: number;
   baseTimeSeconds?: number;
+  isCustom?: boolean;
+  type?: CustomNetworkType;
 }
 
 export interface RawDataset {
   nodes: Array<{ id: number | string; x: number; y: number; z?: number; name?: string }>;
   edges: Array<{ from: number | string; to: number | string; speed?: number; flags?: number }>;
+}
+
+export interface CustomEdge {
+  from: number | string;
+  to: number | string;
+  speed?: number;
+  type?: CustomNetworkType;
+  description?: string;
+}
+
+export interface CustomNetworkDataset {
+  version?: string;
+  description?: string;
+  nodes?: Array<{ id: number | string; x: number; y: number; z?: number; name?: string }>;
+  edges?: CustomEdge[];
 }
 
 export interface ElevationProfile {

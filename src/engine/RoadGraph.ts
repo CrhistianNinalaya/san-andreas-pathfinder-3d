@@ -8,6 +8,7 @@ import type {
   GraphNode,
   AdjacencyEdge,
   RawDataset,
+  CustomNetworkDataset,
   RouteResult,
   NearestNodeResult,
   GtaCoords,
@@ -37,9 +38,9 @@ export class RoadGraph {
   public giantComponentRoot = 0;
   public totalGiantNodes = 0;
 
-  constructor(data?: RawDataset) {
+  constructor(data?: RawDataset, customData?: CustomNetworkDataset) {
     if (data) {
-      this.init(data);
+      this.init(data, customData);
     }
   }
 
@@ -50,18 +51,26 @@ export class RoadGraph {
   }
 
   /**
-   * Initializes the road graph from raw nodes and edges dataset
+   * Initializes the road graph from raw nodes and edges dataset, with optional custom network overlay
    */
-  public init(data: RawDataset): void {
+  public init(data: RawDataset, customData?: CustomNetworkDataset): void {
     this.nodes.clear();
     this.adjacencyList.clear();
     this.grid.clear();
 
-    const nodeIndexMap = this._populateNodesAndGrid(data.nodes);
-    const parent = this._initUnionFind(data.nodes.length);
-    const maxEdgeSpeed = this._populateAdjacencyAndUnionFind(data.edges, nodeIndexMap, parent);
-    const giantRoot = this._calculateGiantComponent(data.nodes.length, parent);
-    this._classifyNodesByComponent(data.nodes, parent, giantRoot);
+    const mergedNodes = customData?.nodes && customData.nodes.length > 0
+      ? [...data.nodes, ...customData.nodes]
+      : data.nodes;
+
+    const mergedEdges = customData?.edges && customData.edges.length > 0
+      ? [...data.edges, ...customData.edges]
+      : data.edges;
+
+    const nodeIndexMap = this._populateNodesAndGrid(mergedNodes);
+    const parent = this._initUnionFind(mergedNodes.length);
+    const maxEdgeSpeed = this._populateAdjacencyAndUnionFind(mergedEdges, nodeIndexMap, parent);
+    const giantRoot = this._calculateGiantComponent(mergedNodes.length, parent);
+    this._classifyNodesByComponent(mergedNodes, parent, giantRoot);
 
     this.maxSpeedKmh = Math.max(110, maxEdgeSpeed);
   }
@@ -86,7 +95,9 @@ export class RoadGraph {
         y: node.y,
         z: node.z ?? 0,
         componentId: 0,
-        isGiantComponent: false
+        isGiantComponent: false,
+        isCustom: (node as GraphNode).isCustom,
+        customType: (node as GraphNode).customType
       };
 
       this.nodes.set(nodeObj.id, nodeObj);
@@ -172,12 +183,16 @@ export class RoadGraph {
 
       const fromList = this.adjacencyList.get(fromId);
       if (fromList) {
+        const customEdge = edge as import('./types').CustomEdge;
+        const isCustom = customEdge.type !== undefined;
         fromList.push({
           to: toId,
           distance: dist3D,
           slope,
           slopePercent: Math.round(slope * 100),
-          nominalSpeed
+          nominalSpeed,
+          isCustom,
+          type: customEdge.type
         });
       }
     }

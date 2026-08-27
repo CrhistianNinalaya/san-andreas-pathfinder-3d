@@ -36,8 +36,8 @@ src/
   i18n/         Typed bilingual dictionaries (ES/EN)
   ui/           Handcrafted UI styles
   app/          Main App container
-data/           san_andreas_official_nodes.json, pois.json
-tools/          verify-graph.mjs, bench-route.mjs
+public/data/    san_andreas_official_nodes.json, pois.json
+tools/          verify-graph.mjs, bench-route.ts
 .agent/         skills/ and workflows/
 ```
 
