@@ -46,6 +46,26 @@ export const VEHICLE_PROFILES: Record<VehicleProfileType, VehicleProfile> = {
   }
 };
 
+/** Exponential decay rate of the uphill climb penalty */
+const UPHILL_DECAY = 3.5;
+/** Slope at which the downhill inertia boost peaks and braking starts to dominate */
+const DOWNHILL_INERTIA_LIMIT = 0.15;
+/** Speed gained per unit of downhill slope while coasting */
+const DOWNHILL_INERTIA_GAIN = 0.7;
+/** Speed lost per unit of downhill slope once braking is required */
+const DOWNHILL_BRAKING_LOSS = 1.5;
+/** Floors on the terrain response, as a fraction of the road's nominal speed */
+const MIN_UPHILL_RESPONSE = 0.2;
+const MIN_DOWNHILL_RESPONSE = 0.6;
+
+/**
+ * Largest value the terrain response can take, reached at exactly
+ * DOWNHILL_INERTIA_LIMIT. Derived from the constants above rather than written
+ * out, so the A* heuristic's speed ceiling in RoadGraph cannot drift away from
+ * the physics it is supposed to bound.
+ */
+export const MAX_SLOPE_SPEED_MULTIPLIER = 1 + DOWNHILL_INERTIA_LIMIT * DOWNHILL_INERTIA_GAIN;
+
 export class ElevationPhysics {
   /**
    * 3D Euclidean distance between two points (X, Y, Z)
@@ -76,30 +96,45 @@ export class ElevationPhysics {
   }
 
   /**
+   * Terrain-only speed response, as a fraction of the road's nominal speed.
+   *
+   * Kept independent of the vehicle's nominalMultiplier so that both floors
+   * mean the same thing: MIN_UPHILL_RESPONSE and MIN_DOWNHILL_RESPONSE are
+   * each a share of the road speed, for every vehicle.
+   *
+   * Uphill, with a sensitivity of 1:
+   * - At +5% grade: ~0.84x
+   * - At +15% grade: ~0.59x
+   * - At +30% grade: ~0.35x
+   */
+  private static getSlopeResponse(slope: number, slopeSensitivity: number): number {
+    if (slope > 0) {
+      // Uphill climb: speed decreases exponentially with slope and sensitivity
+      const penalty = Math.exp(-UPHILL_DECAY * slope * slopeSensitivity);
+      return Math.max(MIN_UPHILL_RESPONSE, penalty);
+    }
+
+    if (slope < 0) {
+      // Downhill descent: slight inertia boost up to the limit, then braking
+      const absSlope = Math.abs(slope);
+      if (absSlope <= DOWNHILL_INERTIA_LIMIT) {
+        return 1 + absSlope * DOWNHILL_INERTIA_GAIN;
+      }
+      // Steep downhill requires braking for safety, continuous with the branch
+      // above because it starts from the same peak value
+      const braked = MAX_SLOPE_SPEED_MULTIPLIER - (absSlope - DOWNHILL_INERTIA_LIMIT) * DOWNHILL_BRAKING_LOSS;
+      return Math.max(MIN_DOWNHILL_RESPONSE, braked);
+    }
+
+    return 1;
+  }
+
+  /**
    * Smooth continuous speed multiplier based on road slope and vehicle profile
    */
   static getSlopeSpeedMultiplier(slope: number, vehicleType: VehicleProfileType = 'car'): number {
     const profile = VEHICLE_PROFILES[vehicleType] ?? VEHICLE_PROFILES.car;
-
-    if (slope > 0) {
-      // Uphill climb: speed decreases exponentially with slope and sensitivity
-      // - At +5% grade: ~0.80x
-      // - At +15% grade: ~0.50x
-      // - At +30% grade: ~0.30x
-      const penalty = Math.exp(-3.5 * slope * profile.slopeSensitivity);
-      return Math.max(0.20, penalty * profile.nominalMultiplier);
-    } else if (slope < 0) {
-      // Downhill descent: slight inertia boost up to -15%, then braking required
-      const absSlope = Math.abs(slope);
-      if (absSlope <= 0.15) {
-        return (1.0 + absSlope * 0.7) * profile.nominalMultiplier; // Up to ~1.10x
-      } else {
-        // Steep downhill requires braking for safety
-        return Math.max(0.60, (1.10 - (absSlope - 0.15) * 1.5)) * profile.nominalMultiplier;
-      }
-    }
-
-    return 1.0 * profile.nominalMultiplier;
+    return this.getSlopeResponse(slope, profile.slopeSensitivity) * profile.nominalMultiplier;
   }
 
   /**

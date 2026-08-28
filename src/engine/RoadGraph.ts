@@ -3,7 +3,18 @@
  */
 
 import { MinHeap } from './MinHeap';
-import { ElevationPhysics, VEHICLE_PROFILES, type VehicleProfileType } from '../terrain/ElevationPhysics';
+import {
+  ElevationPhysics,
+  VEHICLE_PROFILES,
+  MAX_SLOPE_SPEED_MULTIPLIER,
+  type VehicleProfileType
+} from '../terrain/ElevationPhysics';
+
+/**
+ * Widens the heuristic's speed ceiling by a hair so floating-point rounding can
+ * never push the estimate above a real edge cost that sits exactly at the peak.
+ */
+const HEURISTIC_SAFETY_MARGIN = 1.0001;
 import type {
   GraphNode,
   AdjacencyEdge,
@@ -280,6 +291,7 @@ export class RoadGraph {
     const cy = Math.floor(y / this.cellSize);
 
     const best = { nearest: null as GraphNode | null, minDist: Infinity };
+    let isProven = false;
 
     // 1. Check concentric radial rings in the spatial hash grid
     for (let r = 0; r <= 3; r++) {
@@ -292,23 +304,35 @@ export class RoadGraph {
           }
         }
       }
-      if (best.nearest && best.minDist <= (r + 1) * this.cellSize) {
+      // The query point sits anywhere inside its own cell, so scanning the
+      // (2r+1)² block only guarantees coverage out to r * cellSize. Using
+      // (r + 1) * cellSize here accepts hits that a neighbouring cell could beat.
+      if (best.nearest && best.minDist <= r * this.cellSize) {
+        isProven = true;
         break;
       }
     }
 
-    // 2. Fallback exhaustive scan if point is far outside regular grid cells
-    if (!best.nearest) {
+    // 2. Fallback exhaustive scan when the grid search found nothing, or ran out
+    //    of rings before it could prove the candidate is the closest node.
+    if (!isProven) {
       this._scanCellForNearest(Array.from(this.nodes.values()), x, y, onlyGiant, best);
     }
 
     return { node: best.nearest, distance: best.minDist };
   }
 
+  /**
+   * Admissible A* estimate: the fastest any edge could possibly be travelled is
+   * the fastest road speed in the dataset, scaled by the vehicle's multiplier
+   * and the peak downhill boost. Both factors come from ElevationPhysics rather
+   * than being restated here, so the bound holds for any speed the data carries.
+   */
   public heuristic(nodeA: GtaCoords, nodeB: GtaCoords, vehicleType: VehicleProfileType = 'car'): number {
     const dist = ElevationPhysics.calculate3DDistance(nodeA, nodeB);
     const profile = VEHICLE_PROFILES[vehicleType] ?? VEHICLE_PROFILES.car;
-    const maxVehicleSpeedKmh = this.maxSpeedKmh * profile.nominalMultiplier * 1.10 + 1;
+    const maxVehicleSpeedKmh =
+      this.maxSpeedKmh * profile.nominalMultiplier * MAX_SLOPE_SPEED_MULTIPLIER * HEURISTIC_SAFETY_MARGIN;
     const maxSpeedMps = (maxVehicleSpeedKmh * 1000) / 3600;
     return dist / maxSpeedMps;
   }
