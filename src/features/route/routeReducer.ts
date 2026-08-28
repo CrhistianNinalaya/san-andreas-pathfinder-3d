@@ -97,22 +97,24 @@ function computeRoutes(options: ComputeRoutesOptions): RouteResult[] {
       vehicleType
     });
 
-    if (leg) {
-      totalDistance += leg.totalDistance;
-      totalTimeSeconds += leg.totalTimeSeconds;
-      usedEdges.push(...leg.usedEdges);
-      nodeIds.push(...leg.nodeIds);
-      pathNodes.push(...leg.path);
-      legs.push({
-        fromIndex: i,
-        toIndex: i + 1,
-        fromLabel: startWp.label,
-        toLabel: goalWp.label,
-        path: leg.path,
-        totalDistance: leg.totalDistance,
-        totalTimeSeconds: leg.totalTimeSeconds
-      });
-    }
+    // A stitched-over gap would draw a straight line across the map and report
+    // a total that omits the missing leg, so an unroutable stop fails the trip
+    if (!leg) return [];
+
+    totalDistance += leg.totalDistance;
+    totalTimeSeconds += leg.totalTimeSeconds;
+    usedEdges.push(...leg.usedEdges);
+    nodeIds.push(...leg.nodeIds);
+    pathNodes.push(...leg.path);
+    legs.push({
+      fromIndex: i,
+      toIndex: i + 1,
+      fromLabel: startWp.label,
+      toLabel: goalWp.label,
+      path: leg.path,
+      totalDistance: leg.totalDistance,
+      totalTimeSeconds: leg.totalTimeSeconds
+    });
   }
 
   if (pathNodes.length === 0) return [];
@@ -315,12 +317,17 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
         graph,
         vehicleType: vehicle
       });
+
+      // A shared ?r= index can outlive the route set it was captured from
+      const requestedIndex = action.altIndex ?? 0;
+      const activeRouteIndex = requestedIndex < routes.length ? requestedIndex : 0;
+
       return {
         ...state,
         waypoints,
         routes,
         vehicleType: vehicle,
-        activeRouteIndex: action.altIndex ?? 0
+        activeRouteIndex
       };
     }
 
