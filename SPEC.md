@@ -514,7 +514,7 @@ Since off-road shortcuts and stunt jumps are emergent player knowledge not prese
    - A lightweight CLEO script running in GTA:SA / SA-MP with keyboard hotkeys:
      - `Ctrl + 1` at the edge of the cliff (captures `start: { x, y, z }`).
      - `Ctrl + 2` at the landing road (captures `end: { x, y, z }` and saves to `shortcuts_dump.json`).
-     - **Breadcrumb recorder mode:** Records coordinates every 15 metres while driving off-road to capture curved paths.
+     - **Breadcrumb recorder mode:** Records coordinates every 10 metres while driving off-road to capture curved paths.
 2. **Visual Web Editor Mode (*In-App Shortcut Builder*):**
    - An interactive editor mode in the web app: click node A on the high-res satellite Leaflet canvas, click node B, configure jump type/one-way flag, and save directly to `localStorage` or download as `shortcuts.json`.
 3. **Automated Extraction of `tracks.dat` (Railroad Network):**

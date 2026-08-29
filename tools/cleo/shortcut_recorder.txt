@@ -1,0 +1,246 @@
+// ==============================================================================
+// San Andreas Pathfinder 3D - GPS Shortcut & Coordinates Recorder
+// Specification: SPEC.md §7.8.3 (Line 513)
+// ------------------------------------------------------------------------------
+// In-Game CLEO Script for GTA San Andreas & SA-MP
+//
+// CONTROLES Y HOTKEYS:
+//   F4       : Activar / Desactivar HUD en tiempo real (X, Y, Z, Vel, Rumbo)
+//   Ctrl + 1 : Marcar punto de INICIO { x, y, z } (borde de risco / entrada atajo)
+//   Ctrl + 2 : Marcar punto de FIN { x, y, z }, clasificar y GUARDAR en 'shortcuts_dump.json'
+//   Ctrl + 3 : Activar / Desactivar Modo TRAZOS/CURVAS (Auto-log cada 10m en 'breadcrumbs_dump.json')
+// ==============================================================================
+
+{$CLEO .cs}
+{$USE CLEO, file}
+
+script_name "GPSREC"
+
+// -----------------------------------------------------------------------------
+// Declaración de Variables Locales (Máx 32 variables en motor GTA:SA)
+// -----------------------------------------------------------------------------
+var
+    0@ : Float  // Coordenada actual X
+    1@ : Float  // Coordenada actual Y
+    2@ : Float  // Coordenada actual Z
+    3@ : Int    // Handle del vehículo (si conduce)
+    4@ : Float  // Inicio X
+    5@ : Float  // Inicio Y
+    6@ : Float  // Inicio Z
+    7@ : Float  // Fin X
+    8@ : Float  // Fin Y
+    9@ : Float  // Fin Z
+    10@ : Float // Distancia 3D euclidiana
+    11@ : Int   // Bandera: ¿Inicio capturado? (0 = No, 1 = Sí)
+    12@ : Int   // Bandera: ¿Modo Breadcrumbs activo? (0 = No, 1 = Sí)
+    13@ : Float // Último Breadcrumb X
+    14@ : Float // Último Breadcrumb Y
+    15@ : Float // Último Breadcrumb Z
+    16@ : Float // Distancia recorrida desde el último breadcrumb
+    17@ : Int   // Puntero de buffer dinámico en memoria (0AC8)
+    18@ : Int   // Handle de archivo (0A9A)
+    19@ : Int   // Bandera: ¿HUD en vivo activo? (0 = No, 1 = Sí)
+    20@ : Float // Ángulo / Rumbo de orientación (0.0 a 360.0 grados)
+    21@ : Float // Velocidad del vehículo en km/h
+    22@ : Int   // Contador de atajos en la sesión actual
+    23@ : Int   // Contador de trazos de curvas (strokes)
+    24@ : Int   // Contador de puntos dentro del trazo actual
+    25@ : Float // Desnivel vertical (Z_start - Z_end)
+end
+
+// Inicialización de estados
+11@ = 0 // has_start = 0
+12@ = 0 // breadcrumbs = 0
+19@ = 0 // live_hud = 0
+22@ = 1 // shortcut_id = 1
+23@ = 0 // stroke_id = 0
+24@ = 0 // points_in_stroke = 0
+
+// Notificación de inicio del mod
+wait 1000
+print_formatted_now "~y~Pathfinder GPS Logger ~g~ACTIVO~w~ | F4:HUD Ctrl+1/2:Atajo Ctrl+3:Curva" time 3500
+018C: play_sound 1057 at 0.0 0.0 0.0
+
+:MAIN_LOOP
+wait 0  // Invariante de seguridad: nunca remover para no congelar el juego
+
+// -----------------------------------------------------------------------------
+// 1. Lectura de Posición, Rumbo y Velocidad (A pie o en Vehículo)
+// -----------------------------------------------------------------------------
+if 00DF: actor $PLAYER_ACTOR driving
+then
+    03C0: 3@ = store_current_car_char_is_in $PLAYER_ACTOR
+    00AA: store_car 3@ position_to 0@ 1@ 2@
+    0174: 20@ = car 3@ z_angle
+    02E3: 21@ = car 3@ speed
+    21@ *= 175.0 // Conversión aproximada a km/h
+else
+    00A0: store_actor $PLAYER_ACTOR position_to 0@ 1@ 2@
+    0172: 20@ = actor $PLAYER_ACTOR z_angle
+    21@ = 0.0
+end
+
+// -----------------------------------------------------------------------------
+// 2. HUD en Tiempo Real (Toggle con Tecla F4 = 0x73)
+// -----------------------------------------------------------------------------
+if 0AB0: is_key_pressed 0x73  // Tecla F4
+then
+    19@ ^= 1  // Toggle HUD
+    if 19@ == 1
+    then
+        018C: play_sound 1057 at 0.0 0.0 0.0
+        print_formatted_now "HUD Coordenadas: ~g~ON" time 1500
+    else
+        018C: play_sound 1058 at 0.0 0.0 0.0
+        print_formatted_now "HUD Coordenadas: ~r~OFF" time 1500
+    end
+    wait 250  // Anti-rebote
+end
+
+// Renderizado continuo del HUD si está activo
+if 19@ == 1
+then
+    print_formatted_now "X:~y~%.1f ~w~Y:~y~%.1f ~w~Z:~y~%.1f ~w~| ~g~%.0f ~w~km/h | Ang:~b~%.0f~w~" time 120 0@ 1@ 2@ 21@ 20@
+end
+
+// -----------------------------------------------------------------------------
+// 3. Hotkey Ctrl + 1: Capturar Punto de INICIO
+// -----------------------------------------------------------------------------
+if and
+    0AB0: is_key_pressed 0x11  // VK_CONTROL
+    0AB0: is_key_pressed 0x31  // Tecla '1'
+then
+    4@ = 0@
+    5@ = 1@
+    6@ = 2@
+    11@ = 1  // Marcar que tenemos un punto de inicio capturado
+
+    018C: play_sound 1057 at 0.0 0.0 0.0  // Beep agudo de confirmación
+    print_formatted_now "Inicio Atajo #%d ~g~CAPTURADO~w~: X:%.1f Y:%.1f Z:%.1f" time 2500 22@ 4@ 5@ 6@
+    wait 300  // Anti-rebote
+end
+
+// -----------------------------------------------------------------------------
+// 4. Hotkey Ctrl + 2: Capturar Punto de FIN, Clasificar y Guardar en JSON
+// -----------------------------------------------------------------------------
+if and
+    0AB0: is_key_pressed 0x11  // VK_CONTROL
+    0AB0: is_key_pressed 0x32  // Tecla '2'
+then
+    if 11@ == 1
+    then
+        7@ = 0@
+        8@ = 1@
+        9@ = 2@
+
+        // Cálculo de distancia 3D euclidiana
+        050A: 10@ = distance_between_XYZ 4@ 5@ 6@ and_XYZ 7@ 8@ 9@
+
+        // Cálculo de desnivel vertical (Z_start - Z_end)
+        25@ = 6@
+        25@ -= 9@
+
+        // Abrir archivo en modo adición ("at" = append text)
+        0A9A: 18@ = openfile "shortcuts_dump.json" mode "at"
+        if 18@ <> 0
+        then
+            // Reservar buffer dinámico de 256 bytes para evitar desbordamientos
+            0AC8: 17@ = allocate_memory_size 256
+            if 17@ <> 0
+            then
+                // Detección automática de Salto de Risco vs Atajo normal:
+                // Si la caída vertical es >= 8.0 metros se clasifica como cliff_jump
+                if 25@ >= 8.0
+                then
+                    0AD3: string 17@ format "{\"id\": %d, \"type\": \"cliff_jump\", \"start\": {\"x\": %.2f, \"y\": %.2f, \"z\": %.2f}, \"end\": {\"x\": %.2f, \"y\": %.2f, \"z\": %.2f}, \"dist\": %.2f, \"drop\": %.2f},%c%n" 22@ 4@ 5@ 6@ 7@ 8@ 9@ 10@ 25@ 13 10
+                else
+                    0AD3: string 17@ format "{\"id\": %d, \"type\": \"offroad\", \"start\": {\"x\": %.2f, \"y\": %.2f, \"z\": %.2f}, \"end\": {\"x\": %.2f, \"y\": %.2f, \"z\": %.2f}, \"dist\": %.2f, \"drop\": %.2f},%c%n" 22@ 4@ 5@ 6@ 7@ 8@ 9@ 10@ 25@ 13 10
+                end
+
+                0AD8: write_string_to_file 18@ from 17@
+                0AC9: free_allocated_memory 17@
+            end
+            0A9B: closefile 18@
+
+            018C: play_sound 1057 at 0.0 0.0 0.0  // Sonido de éxito
+
+            if 25@ >= 8.0
+            then
+                print_formatted_now "Salto de Risco #%d ~g~GUARDADO~w~ (Dist:~y~%.0fm ~w~Caida:~r~-%.0fm~w~)" time 3000 22@ 10@ 25@
+            else
+                print_formatted_now "Atajo #%d ~g~GUARDADO~w~ (Distancia: ~y~%.0fm~w~)" time 3000 22@ 10@
+            end
+
+            11@ = 0   // Reiniciar bandera de inicio
+            22@ += 1  // Incrementar contador de atajos
+        else
+            018C: play_sound 1058 at 0.0 0.0 0.0  // Sonido de error
+            print_formatted_now "~r~ERROR:~w~ No se pudo escribir shortcuts_dump.json" time 2500
+        end
+    else
+        // Error: Se intentó marcar fin sin haber capturado un inicio
+        018C: play_sound 1058 at 0.0 0.0 0.0
+        print_formatted_now "~r~¡SIN INICIO!~w~ Presiona primero Ctrl+1" time 2500
+    end
+    wait 300  // Anti-rebote
+end
+
+// -----------------------------------------------------------------------------
+// 5. Hotkey Ctrl + 3: Toggle MODO BREADCRUMBS (Grabación de Curvas)
+// -----------------------------------------------------------------------------
+if and
+    0AB0: is_key_pressed 0x11  // VK_CONTROL
+    0AB0: is_key_pressed 0x33  // Tecla '3'
+then
+    12@ ^= 1  // Alternar modo
+    if 12@ == 1
+    then
+        23@ += 1  // Nuevo número de trazo
+        24@ = 0   // Reiniciar contador de puntos para este trazo
+        13@ = 0@  // Inicializar último punto con posición actual
+        14@ = 1@
+        15@ = 2@
+        018C: play_sound 1057 at 0.0 0.0 0.0
+        print_formatted_now "Trazo #%d: ~g~GRABANDO CURVA~w~ (Puntos cada 10m)" time 2500 23@
+    else
+        018C: play_sound 1058 at 0.0 0.0 0.0
+        print_formatted_now "Trazo #%d: ~r~FINALIZADO~w~ (Total: ~y~%d pts~w~)" time 2500 23@ 24@
+    end
+    wait 300  // Anti-rebote
+end
+
+// -----------------------------------------------------------------------------
+// 6. Muestreo Automático de Breadcrumbs (Cada 10 Metros)
+// -----------------------------------------------------------------------------
+if 12@ == 1
+then
+    // Calcular distancia 3D desde el último punto registrado
+    050A: 16@ = distance_between_XYZ 0@ 1@ 2@ and_XYZ 13@ 14@ 15@
+
+    if 16@ >= 10.0
+    then
+        0A9A: 18@ = openfile "breadcrumbs_dump.json" mode "at"
+        if 18@ <> 0
+        then
+            0AC8: 17@ = allocate_memory_size 128
+            if 17@ <> 0
+            then
+                24@ += 1  // Incrementar contador de puntos del trazo
+                0AD3: string 17@ format "{\"stroke\": %d, \"pt\": %d, \"x\": %.2f, \"y\": %.2f, \"z\": %.2f},%c%n" 23@ 24@ 0@ 1@ 2@ 13 10
+                0AD8: write_string_to_file 18@ from 17@
+                0AC9: free_allocated_memory 17@
+            end
+            0A9B: closefile 18@
+
+            // Actualizar último punto registrado
+            13@ = 0@
+            14@ = 1@
+            15@ = 2@
+
+            // Click sonoro suave (cámara/obturador) para confirmar registro sin invadir la pantalla
+            018C: play_sound 1137 at 0.0 0.0 0.0
+        end
+    end
+end
+
+goto @MAIN_LOOP

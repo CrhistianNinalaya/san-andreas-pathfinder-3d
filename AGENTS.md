@@ -64,4 +64,4 @@ translated ES/EN and live in `src/i18n` — Spanish is the reference translation
 
 ## Skills
 
-`gta-graph-data` · `pathfinding-engine` · `sa-coordinates` · `ui-conventions`
+`gta-graph-data` · `pathfinding-engine` · `sa-coordinates` · `ui-conventions` · `cleo-sanny-builder`
