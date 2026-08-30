@@ -1,7 +1,7 @@
 {
   "id": 4,
   "name": "Atajo #4 (Verde Lima)",
-  "description": "San Fierro Doherty / Battery Pt",
+  "description": "San Fierro Doherty -> Battery Pt (Unidireccional)",
   "color": "#84cc16",
   "nodes": [
     {
@@ -115,181 +115,85 @@
       "from": "sc_4_1",
       "to": "sc_4_2",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_2",
-      "to": "sc_4_1",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_2",
       "to": "sc_4_3",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_3",
-      "to": "sc_4_2",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_3",
       "to": "sc_4_4",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_4",
-      "to": "sc_4_3",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_4",
       "to": "sc_4_5",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_5",
-      "to": "sc_4_4",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_5",
       "to": "sc_4_6",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_6",
-      "to": "sc_4_5",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_6",
       "to": "sc_4_7",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_7",
-      "to": "sc_4_6",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_7",
       "to": "sc_4_8",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_8",
-      "to": "sc_4_7",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_8",
       "to": "sc_4_9",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_9",
-      "to": "sc_4_8",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_9",
       "to": "sc_4_10",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_10",
-      "to": "sc_4_9",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_10",
       "to": "sc_4_11",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_11",
-      "to": "sc_4_10",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_11",
       "to": "sc_4_12",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_12",
-      "to": "sc_4_11",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_12",
       "to": "sc_4_13",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_13",
-      "to": "sc_4_12",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_13",
       "to": "sc_4_14",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_14",
-      "to": "sc_4_13",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_14",
       "to": "sc_4_15",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_15",
-      "to": "sc_4_14",
-      "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
-    },
-    {
-      "from": "sc_4_15",
-      "to": "33_23",
-      "speed": 60,
-      "description": "Salida de Atajo #4 (Verde Lima) hacia Node 33_23 (Sin retroceso)"
-    },
-    {
-      "from": "33_23",
-      "to": "sc_4_15",
-      "speed": 60,
-      "description": "Salida de Atajo #4 (Verde Lima) hacia Node 33_23 (Sin retroceso)"
+      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "33_639",
@@ -298,10 +202,11 @@
       "description": "Entrada a Atajo #4 (Verde Lima) desde Node 33_639"
     },
     {
-      "from": "sc_4_1",
-      "to": "33_639",
+      "from": "sc_4_15",
+      "to": "33_23",
       "speed": 60,
-      "description": "Entrada a Atajo #4 (Verde Lima) desde Node 33_639"
+      "description": "Salida de Atajo #4 (Verde Lima) hacia Node 33_23"
     }
-  ]
+  ],
+  "oneWay": true
 }

@@ -1,7 +1,7 @@
 {
   "id": 1,
   "name": "Atajo #1 (Dorado)",
-  "description": "Glen Park -> Temple",
+  "description": "Glen Park -> Temple (Unidireccional)",
   "color": "#f59e0b",
   "nodes": [
     {
@@ -175,259 +175,127 @@
     },
     {
       "from": "sc_1_2",
-      "to": "sc_1_1",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_2",
       "to": "sc_1_3",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_3",
-      "to": "sc_1_2",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_3",
       "to": "sc_1_4",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_4",
-      "to": "sc_1_3",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_4",
       "to": "sc_1_5",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_5",
-      "to": "sc_1_4",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_5",
       "to": "sc_1_6",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_6",
-      "to": "sc_1_5",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_6",
       "to": "sc_1_7",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_7",
-      "to": "sc_1_6",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_7",
       "to": "sc_1_8",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_8",
-      "to": "sc_1_7",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_8",
       "to": "sc_1_9",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_9",
-      "to": "sc_1_8",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_9",
       "to": "sc_1_10",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_10",
-      "to": "sc_1_9",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_10",
       "to": "sc_1_11",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_11",
-      "to": "sc_1_10",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_11",
       "to": "sc_1_12",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_12",
-      "to": "sc_1_11",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_12",
       "to": "sc_1_13",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_13",
-      "to": "sc_1_12",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_13",
       "to": "sc_1_14",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_14",
-      "to": "sc_1_13",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_14",
       "to": "sc_1_15",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_15",
-      "to": "sc_1_14",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_15",
       "to": "sc_1_16",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_16",
-      "to": "sc_1_15",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_16",
       "to": "sc_1_17",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_17",
-      "to": "sc_1_16",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_17",
       "to": "sc_1_18",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_18",
-      "to": "sc_1_17",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_18",
       "to": "sc_1_19",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_19",
-      "to": "sc_1_18",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_19",
       "to": "sc_1_20",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_20",
-      "to": "sc_1_19",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_20",
       "to": "sc_1_21",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_21",
-      "to": "sc_1_20",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_21",
       "to": "sc_1_22",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_22",
-      "to": "sc_1_21",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
     {
       "from": "sc_1_22",
       "to": "sc_1_23",
-      "speed": 70,
-      "description": "Atajo #1: Glen Park -> Temple"
-    },
-    {
-      "from": "sc_1_23",
-      "to": "sc_1_22",
       "speed": 70,
       "description": "Atajo #1: Glen Park -> Temple"
     },
@@ -435,25 +303,14 @@
       "from": "21_109",
       "to": "sc_1_1",
       "speed": 60,
-      "description": "Entrada a Atajo #1 (Dorado)"
-    },
-    {
-      "from": "sc_1_1",
-      "to": "21_109",
-      "speed": 60,
-      "description": "Entrada a Atajo #1 (Dorado)"
+      "description": "Entrada a Atajo #1 (Dorado) desde Node 21_109"
     },
     {
       "from": "sc_1_23",
       "to": "20_319",
       "speed": 60,
-      "description": "Salida de Atajo #1 (Dorado) hacia 20_319 (Sin retroceso)"
-    },
-    {
-      "from": "20_319",
-      "to": "sc_1_23",
-      "speed": 60,
-      "description": "Salida de Atajo #1 (Dorado) hacia 20_319 (Sin retroceso)"
+      "description": "Salida de Atajo #1 (Dorado) hacia Node 20_319"
     }
-  ]
+  ],
+  "oneWay": true
 }

@@ -83,10 +83,10 @@ const officialNodesPath = 'public/data/official/san_andreas_official_nodes.json'
 // Paleta de colores asignados por ID de atajo consecutivo (1..6)
 // oneWay: true = salto/caida de acantilado fisicamente imposible en sentido inverso
 const SHORTCUT_CONFIG: Record<number, ShortcutConfig> = {
-  1: { name: 'Dorado', hex: '#f59e0b', desc: 'Glen Park -> Temple', slug: '1_glen_park_temple', oneWay: false },
+  1: { name: 'Dorado', hex: '#f59e0b', desc: 'Glen Park -> Temple (Unidireccional)', slug: '1_glen_park_temple', oneWay: true },
   2: { name: 'Cyan Neón', hex: '#06b6d4', desc: 'Marina -> Rodeo', slug: '2_marina_rodeo', oneWay: false },
   3: { name: 'Rosa Fucsia', hex: '#ec4899', desc: 'Mount Chiliad / Whetstone (Salto de acantilado - Unidireccional)', slug: '3_mount_chiliad_whetstone', oneWay: true },
-  4: { name: 'Verde Lima', hex: '#84cc16', desc: 'San Fierro Doherty / Battery Pt', slug: '4_san_fierro_doherty', oneWay: false },
+  4: { name: 'Verde Lima', hex: '#84cc16', desc: 'San Fierro Doherty -> Battery Pt (Unidireccional)', slug: '4_san_fierro_doherty', oneWay: true },
   5: { name: 'Naranja Fuego', hex: '#f97316', desc: 'Flint County -> Red County', slug: '5_flint_to_red_county', oneWay: false },
   6: { name: 'Púrpura Eléctrico', hex: '#a855f7', desc: 'Flint County -> Foster Valley (Caida de acantilado - Unidireccional)', slug: '6_flint_to_foster_valley', oneWay: true }
 };
