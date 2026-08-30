@@ -37,7 +37,7 @@ export const initialRouteState: RouteState = {
   waypoints: [],
   routes: [],
   activeRouteIndex: 0,
-  vehicleType: 'car',
+  vehicleType: 'bike',
   scope: 'all',
   graph: null,
   isLoadingGraph: true,
@@ -57,7 +57,7 @@ export interface ComputeRoutesOptions {
 }
 
 function computeRoutes(options: ComputeRoutesOptions): RouteResult[] {
-  const { waypoints, graph, vehicleType = 'car' } = options;
+  const { waypoints, graph, vehicleType = 'bike' } = options;
   if (!graph || waypoints.length < 2) return [];
 
   // 2 Waypoints: Optimal + Alternatives with vehicle physics

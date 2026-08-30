@@ -403,7 +403,7 @@ export class RoadGraph {
    * A* shortest path search over the 3D road graph
    */
   public findShortestPath(options: FindPathOptions): RouteResult | null {
-    const { startId, goalId, edgePenalties = new Map(), vehicleType = 'car' } = options;
+    const { startId, goalId, edgePenalties = new Map(), vehicleType = 'bike' } = options;
     const sId = String(startId);
     const gId = String(goalId);
 
@@ -527,16 +527,19 @@ export class RoadGraph {
   }
 
   /**
-   * Finds optimal route plus alternative secondary routes with penalty factors
+   * Finds optimal route plus alternative secondary routes with penalty factors.
+   * Candidates are collected first, then sorted by totalTimeSeconds so the
+   * fastest alternative always appears as Alternative 1, regardless of the
+   * iteration order in which the penalty-based search discovered them.
    */
   public findRoutesWithAlternatives(options: FindAlternativesOptions): RouteResult[] {
-    const { startId, goalId, maxRoutes = 3, vehicleType = 'car' } = options;
-    const results: RouteResult[] = [];
+    const { startId, goalId, maxRoutes = 3, vehicleType = 'bike' } = options;
+    const candidates: RouteResult[] = [];
     const edgePenalties = new Map<string, number>();
     const acceptedEdgeSets: Set<string>[] = [];
 
     // Attempt up to maxRoutes * 2 searches to discover distinct alternatives
-    for (let i = 0; i < maxRoutes * 2 && results.length < maxRoutes; i++) {
+    for (let i = 0; i < maxRoutes * 2 && candidates.length < maxRoutes; i++) {
       const result = this.findShortestPath({
         startId,
         goalId,
@@ -554,12 +557,7 @@ export class RoadGraph {
 
       if (!isTooSimilar) {
         acceptedEdgeSets.push(candidateEdgeKeys);
-        results.push({
-          ...result,
-          index: results.length + 1,
-          isOptimal: results.length === 0,
-          label: results.length === 0 ? 'Fastest Route' : `Alternative Route ${results.length}`
-        });
+        candidates.push({ ...result });
       }
 
       // Penalize used edges for the next iteration to find alternative paths
@@ -569,6 +567,14 @@ export class RoadGraph {
       }
     }
 
-    return results;
+    // Sort by travel time so the genuinely fastest candidate is always first
+    candidates.sort((a, b) => a.totalTimeSeconds - b.totalTimeSeconds);
+
+    return candidates.map((candidate, idx) => ({
+      ...candidate,
+      index: idx + 1,
+      isOptimal: idx === 0,
+      label: idx === 0 ? 'Fastest Route' : `Alternative Route ${idx}`
+    }));
   }
 }

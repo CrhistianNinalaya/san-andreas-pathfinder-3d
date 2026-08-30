@@ -55,9 +55,9 @@ export function PanelControls({
           className={styles.selectInput}
           title={t('vehicleProfile')}
         >
+          <option value="bike">{t('vehBike')}</option>
           <option value="car">{t('vehCar')}</option>
           <option value="sports">{t('vehSports')}</option>
-          <option value="bike">{t('vehBike')}</option>
           <option value="truck">{t('vehTruck')}</option>
           <option value="offroad">{t('vehOffroad')}</option>
         </select>
