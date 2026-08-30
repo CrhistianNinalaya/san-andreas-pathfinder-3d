@@ -1,6 +1,8 @@
 # 🧭 San Andreas Pathfinder 3D
 
-Interactive web-based GPS navigation and route planner for **Grand Theft Auto: San Andreas**, powered by **React 19**, **TypeScript**, the **A\*** algorithm, 3D terrain elevation physics, and **Leaflet.js**.
+> 🇪🇸 [Leer en Español](./README.es.md)
+
+Interactive web-based GPS navigator and route planner for **Grand Theft Auto: San Andreas**, powered by **React 19**, **TypeScript**, the **A\*** algorithm, 3D terrain elevation physics, and **Leaflet.js**.
 
 ![GTA San Andreas GPS Preview](mapa-gta-sa-hd.webp)
 
@@ -8,85 +10,134 @@ Interactive web-based GPS navigation and route planner for **Grand Theft Auto: S
 
 ## 🚀 Features
 
-* **🗺️ Official Rockstar Games Road Network:**
-  * **28,991 vehicle nodes** and **59,620 directed road segments** extracted from official `NODES.DAT` game files.
-  * Union-Find giant component guarantee (27,083 connected nodes, 0 orphaned node dead-ends).
-* **⚡ Ultra-Fast A\* Pathfinding Engine:**
-  * Pure TypeScript domain engine with `MinHeap` and $O(1)$ Spatial Hash Grid index.
-  * Cross-state path computation (e.g. San Fierro to Los Santos) in **~29 ms**.
-* **🛣️ Alternative Routes:**
-  * Automatically calculates the fastest primary route plus up to 2 secondary alternative routes via dynamic edge cost penalties.
-* **📍 Unlimited Multi-Stop Waypoints:**
-  * Add multiple stops seamlessly ($A \to B \to C \to D \dots$).
-  * Real-time drag-and-drop marker relocation with instant path recomputation.
-* **⛰️ 3D Elevation & Terrain Physics:**
-  * Real 3D Euclidean distances $(\Delta X, \Delta Y, \Delta Z)$ and continuous slope curves.
-  * 5 Vehicle profiles: Standard Car, Sports Car, Motorcycle, Truck, and 4x4 Off-Road.
-  * Live altimeter metrics: total elevation gain/loss and altitude range (meters above sea level).
-* **🔍 Landmark Place Search (POIs):**
-  * Intelligent search with autocomplete and aliases (Grove Street, Airports, Mount Chiliad, Four Dragons Casino, etc.).
-* **🌐 Bilingual Support & Shareable URLs:**
-  * Full Spanish (reference) and English translations.
-  * Bi-directional URL synchronization (`?w=2494,-1668;1707,-2438&r=0&v=sports&l=es`).
+### 🗺️ Official Rockstar Games Road Network
+- **28,991 vehicle nodes** and **59,620 directed road segments** extracted from the official `NODES.DAT` game files.
+- Union-Find giant component guarantee: **27,083 connected nodes**, 0 dead-end orphans.
+
+### ⚡ Ultra-Fast A\* Pathfinding Engine
+- Pure TypeScript domain engine with a `MinHeap` priority queue and O(1) Spatial Hash Grid index.
+- Cross-state path computation (e.g. San Fierro → Los Santos) in **~23 ms median**.
+- Alternative routes sorted **by actual travel time** — the fastest option is always shown first.
+
+### 🛣️ Smart Alternative Routes
+- Up to 2 secondary routes discovered via dynamic edge-cost penalties and >70% edge-overlap filter.
+- Each candidate is sorted by `totalTimeSeconds` so shorter alternatives are never buried below longer ones.
+
+### 📍 Unlimited Multi-Stop Waypoints
+- Add any number of stops: A → B → C → D …
+- Real-time drag-and-drop marker relocation with instant path recomputation.
+
+### ⛰️ 3D Elevation & Terrain Physics
+- Real 3D Euclidean distances (ΔX, ΔY, ΔZ) with continuous slope curves.
+- **5 vehicle profiles:** Standard Car, Sports Car, **Motorcycle (Recommended)**, Truck, 4×4 Off-Road.
+- Live altimeter: total elevation gain/loss and altitude range above sea level.
+
+### 🏍️ Curated Custom Shortcuts (6 routes)
+- Player-recorded off-road trails and stunt circuits integrated into the road graph.
+- **Unidirectional edge support:** cliff descents and stunt jumps flagged `oneWay: true` — the GPS will never route uphill through a physically impossible jump.
+- 3-layer network architecture:
+  - **Layer 1** — Official Rockstar nodes (`san_andreas_official_nodes.json`)
+  - **Layer 2** — Official patch edges (`network_patches.json`) fixing 2 mapping errors in the original game data
+  - **Layer 3** — Curated shortcuts (`shortcuts/` folder, one JSON per shortcut)
+
+### 🔍 Landmark Place Search (POIs)
+- Autocomplete with aliases (Grove Street, Airports, Mount Chiliad, Four Dragons Casino, etc.).
+
+### 🌐 Bilingual Support & Shareable URLs
+- Full Spanish (reference) and English translations.
+- Bi-directional URL sync: `?w=2494,-1668;1707,-2438&r=0&v=bike&l=es`
 
 ---
 
-## 🛠️ Project Structure
+## 🗂️ Project Structure
 
-```text
+```
 san-andreas-pathfinder-3d/
 ├── src/
 │   ├── engine/          ★ Pure domain: MinHeap, RoadGraph (A*), types
 │   ├── terrain/         ★ Pure domain: ElevationPhysics & vehicle profiles
-│   ├── geo/             ★ Pure domain: Coordinates & bounds conversions
-│   ├── map-bridge/      ★ Imperative Leaflet ↔ React Bridge
-│   ├── features/        ★ Search, Route cards, Waypoint list, URL state
-│   ├── i18n/            ★ Typed ES / EN dictionaries & useTranslation
-│   ├── ui/              ★ Global CSS and handcrafted UI components
-│   └── app/             ★ Shell & App.tsx
+│   ├── geo/             ★ Pure domain: Coordinate conversions & bounds
+│   ├── map-bridge/      ★ Imperative Leaflet ↔ React bridge
+│   ├── features/        ★ Search combobox, Route cards, Waypoints, URL state
+│   ├── i18n/            ★ Typed ES/EN dictionaries & useTranslation hook
+│   ├── ui/              ★ Global CSS tokens & handcrafted components
+│   └── app/             ★ App shell & hooks
 │
-├── data/
-│   ├── san_andreas_official_nodes.json  # Full state road network (28,991 nodes)
-│   └── pois.json                        # Landmark locations and search aliases
+├── public/data/
+│   ├── official/
+│   │   └── san_andreas_official_nodes.json  # 28,991 nodes, 59,620 edges
+│   ├── custom/
+│   │   ├── network_patches.json             # 2 official mapping fix edges
+│   │   └── shortcuts/
+│   │       ├── manifest.json
+│   │       ├── 1_glen_park_temple.json
+│   │       ├── 2_marina_rodeo.json
+│   │       ├── 3_mount_chiliad_whetstone.json  # oneWay: true (cliff descent)
+│   │       ├── 4_san_fierro_doherty.json
+│   │       ├── 5_flint_to_red_county.json
+│   │       └── 6_flint_to_foster_valley.json  # oneWay: true (cliff descent)
+│   └── pois.json
+│
 ├── tools/
-│   ├── verify-graph.mjs # Invariants & giant component verifier
-│   └── bench-route.mjs  # A* benchmark against recorded baseline
+│   ├── verify-graph.ts      # Dataset invariants & giant component verifier
+│   ├── bench-route.ts       # A* benchmark against recorded baseline
+│   └── import-shortcuts.ts  # CLEO trajectory → shortcut JSON pipeline
 │
+├── .agent/skills/           # Agent skill documentation (curation, pathfinding…)
 ├── vite.config.ts
 ├── tsconfig.json
-├── package.json
-└── vercel.json
+└── package.json
 ```
 
 ---
 
-## 💻 Development with pnpm
+## 💻 Development
 
-Requirements: **Node.js >= 24.11.0** and **pnpm >= 9.0.0**.
+Requirements: **Node.js ≥ 24.11.0** and **pnpm**.
 
 ```bash
 # Install dependencies
 pnpm install
 
-# Start development server with instant HMR
+# Start development server (HMR)
 pnpm dev
 
 # Run Vitest unit tests
 pnpm test
 
-# Run graph invariant verifier
+# Verify graph dataset invariants
 pnpm run verify-graph
 
-# Run A* routing benchmark
+# A* routing benchmark
 pnpm run bench
 
-# Build for production
+# Production build
 pnpm run build
 ```
 
 ---
 
-## 🌐 Deploy to Vercel
+## 🗺️ Coordinate System
+
+| System | Description |
+|--------|-------------|
+| **GTA World Units** | Native coordinates from `NODES.DAT`. `X` = East/West, `Y` = North/South, `Z` = Altitude. |
+| **Leaflet CRS.Simple** | `lat` maps to GTA `Y`, `lng` maps to GTA `X`. **Axes are swapped.** |
+
+> ⚠️ `lat` is GTA `Y` and `lng` is GTA `X`. Every mirrored-marker bug is caused by this swap.
+
+---
+
+## 🏍️ Recommended Vehicle Profile
+
+The **Motorcycle** profile (`bike`) is the default and recommended for all use cases.  
+Its `slopeSensitivity: 0.5` makes it the most balanced profile across San Andreas's
+varied terrain — it avoids over-penalizing steep hills while still respecting elevation
+changes in travel-time estimates. Other profiles remain available in the UI selector.
+
+---
+
+## 🌐 Deploy
 
 ```bash
 npx vercel
@@ -96,4 +147,4 @@ npx vercel
 
 ## 📜 License
 
-MIT License. Map assets and road nodes belong to Rockstar Games.
+MIT License. Map assets and road network data belong to **Rockstar Games**.
