@@ -4,7 +4,7 @@
 
 Interactive web-based GPS navigator and route planner for **Grand Theft Auto: San Andreas**, powered by **React 19**, **TypeScript**, the **A\*** algorithm, 3D terrain elevation physics, and **Leaflet.js**.
 
-![GTA San Andreas GPS Preview](mapa-gta-sa-hd.webp)
+![GTA San Andreas GPS Preview](src/assets/mapa-gta-sa-hd.webp)
 
 ---
 
@@ -148,3 +148,61 @@ npx vercel
 ## 📜 License
 
 MIT License. Map assets and road network data belong to **Rockstar Games**.
+
+---
+
+## 🎮 Custom Shortcut Recording Pipeline
+
+Custom shortcuts are recorded directly in-game using two CLEO scripts compiled with [Sanny Builder](https://sannybuilder.com/) for **GTA:SA / SA-MP**.
+
+### `tools/cleo/samp_coords_hud.txt` — Live Coordinates HUD
+
+A lightweight CLEO script that renders the player's real-time GTA world coordinates (`X`, `Y`, `Z`) on screen while in-game.
+
+| Key | Action |
+|-----|--------|
+| `K` or `H` | Toggle HUD on/off |
+
+- Reads position via `store_actor` (safe for SA-MP, zero vehicle opcode usage).
+- Display: Row 1 = X (white), Row 2 = Y (yellow), Row 3 = Z (cyan).
+- Used to visually identify the **entry and exit snap nodes** for each shortcut.
+
+---
+
+### `tools/cleo/samp_shortcut_recorder.txt` — Trajectory Recorder
+
+A CLEO script that records a continuous 3D trajectory (jumps, curves, off-road paths) and saves it to `cleo/shortcuts.ini` using the native `IniFiles.cleo` plugin. Zero open/close file handles, zero null pointers, zero crashes.
+
+| Key | Action |
+|-----|--------|
+| `I` or `Ctrl+1` | Start recording (REC) |
+| `O` or `Ctrl+2` | Stop and save trajectory (STOP) |
+
+Output format (`shortcuts.ini`):
+```ini
+[1_pt]        ; total point count for shortcut #1
+total = 40
+
+[1_1]         ; point index within the shortcut
+x = -1389.0
+y = -1412.9
+z = 106.4
+```
+
+Auto-samples every **3.5 meters** of movement or freefall, capturing the complete 3D shape of the trajectory.
+
+---
+
+### Full Pipeline
+
+```
+In-Game Recording          Import Tool                  Router
+──────────────────         ─────────────────────        ──────────────
+samp_shortcut_recorder  →  tools/import-shortcuts.ts →  public/data/custom/
+  (CLEO .cs)                 - snap to official nodes    shortcuts/<n>_name.json
+  → cleo/shortcuts.ini       - resample at ~10.5m
+                             - generate forward edges
+                             - set oneWay flag if needed
+```
+
+> **Note:** `.txt` source files must be compiled to `.cs` using Sanny Builder before installation in the `CLEO/` game folder. See [`.agent/skills/cleo-sanny-builder/SKILL.md`](.agent/skills/cleo-sanny-builder/SKILL.md) for compilation instructions.

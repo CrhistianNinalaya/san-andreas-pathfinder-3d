@@ -4,7 +4,7 @@
 
 Navegador GPS interactivo y planificador de rutas para **Grand Theft Auto: San Andreas**, construido con **React 19**, **TypeScript**, el algoritmo **A\***, física de elevación 3D y **Leaflet.js**.
 
-![Vista previa del GPS de GTA San Andreas](mapa-gta-sa-hd.webp)
+![Vista previa del GPS de GTA San Andreas](src/assets/mapa-gta-sa-hd.webp)
 
 ---
 
@@ -149,3 +149,61 @@ npx vercel
 ## 📜 Licencia
 
 Licencia MIT. Los assets del mapa y la red vial pertenecen a **Rockstar Games**.
+
+---
+
+## 🎮 Pipeline de Grabación de Atajos Personalizados
+
+Los atajos personalizados se graban directamente en el juego usando dos scripts CLEO compilados con [Sanny Builder](https://sannybuilder.com/) para **GTA:SA / SA-MP**.
+
+### `tools/cleo/samp_coords_hud.txt` — HUD de Coordenadas en Vivo
+
+Script CLEO ligero que muestra las coordenadas del mundo GTA (`X`, `Y`, `Z`) del jugador en pantalla en tiempo real.
+
+| Tecla | Acción |
+|-------|--------|
+| `K` o `H` | Activar / Desactivar HUD |
+
+- Lee la posición vía `store_actor` (seguro para SA-MP, sin opcodes de vehículo).
+- Visualización: Fila 1 = X (blanco), Fila 2 = Y (amarillo), Fila 3 = Z (celeste).
+- Se usa para identificar visualmente los **nodos de entrada y salida** de cada atajo.
+
+---
+
+### `tools/cleo/samp_shortcut_recorder.txt` — Grabador de Trayectorias
+
+Script CLEO que graba una trayectoria 3D continua (saltos, curvas, caminos off-road) y la guarda en `cleo/shortcuts.ini` usando el plugin nativo `IniFiles.cleo`. Sin handles de archivo abiertos/cerrados, sin punteros nulos, sin crasheos.
+
+| Tecla | Acción |
+|-------|--------|
+| `I` o `Ctrl+1` | Iniciar grabación (REC) |
+| `O` o `Ctrl+2` | Detener y guardar trayectoria (STOP) |
+
+Formato de salida (`shortcuts.ini`):
+```ini
+[1_pt]        ; total de puntos para el atajo #1
+total = 40
+
+[1_1]         ; índice de punto dentro del atajo
+x = -1389.0
+y = -1412.9
+z = 106.4
+```
+
+Muestreo automático cada **3.5 metros** de movimiento o caída libre, capturando la forma 3D completa de la trayectoria.
+
+---
+
+### Pipeline Completo
+
+```
+Grabación en Juego          Herramienta de Importación      Router
+──────────────────          ──────────────────────────      ──────────────
+samp_shortcut_recorder  →   tools/import-shortcuts.ts   →  public/data/custom/
+  (CLEO .cs)                  - snap a nodos oficiales      shortcuts/<n>_nombre.json
+  → cleo/shortcuts.ini         - remuestreo a ~10.5m
+                               - genera aristas forward
+                               - oneWay si aplica
+```
+
+> **Nota:** Los archivos fuente `.txt` deben compilarse a `.cs` con Sanny Builder antes de instalarlos en la carpeta `CLEO/` del juego. Ver [`.agent/skills/cleo-sanny-builder/SKILL.md`](.agent/skills/cleo-sanny-builder/SKILL.md) para instrucciones de compilación.
