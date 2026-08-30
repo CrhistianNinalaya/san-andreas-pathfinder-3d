@@ -59,7 +59,8 @@ export const translations = {
     edgePatch: '🔧 Parche Vial Oficial',
     edgeShortcut: '⚡ Atajo Personalizado',
     edgeConnection: 'Conexión: {from} ↔ {to}',
-    edgeDistance: 'Distancia: {dist} m'
+    edgeDistance: 'Distancia: {dist} m',
+    edgeOneWay: '➡️ Sentido: Unidireccional (Solo ida / Salto)'
   },
   en: {
     appTitle: 'San Andreas Pathfinder 3D',
@@ -116,7 +117,8 @@ export const translations = {
     edgePatch: '🔧 Official Road Patch',
     edgeShortcut: '⚡ Custom Shortcut',
     edgeConnection: 'Connection: {from} ↔ {to}',
-    edgeDistance: 'Distance: {dist} m'
+    edgeDistance: 'Distance: {dist} m',
+    edgeOneWay: '➡️ Direction: One-Way (Single direction / Jump)'
   }
 } as const;
 

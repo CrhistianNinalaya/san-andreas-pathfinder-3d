@@ -13,6 +13,7 @@ interface ShortcutDoc {
   readonly name?: string;
   readonly description?: string;
   readonly color?: string;
+  readonly oneWay?: boolean;
   readonly nodes?: CustomNode[];
   readonly edges?: CustomEdge[];
 }
@@ -67,7 +68,8 @@ async function loadShortcuts(): Promise<{ nodes: CustomNode[]; edges: CustomEdge
             speed: e.speed ?? 70,
             type: e.type ?? 'shortcut',
             color: e.color ?? parentColor,
-            description: e.description ?? parentDescription
+            description: e.description ?? parentDescription,
+            oneWay: e.oneWay ?? doc.oneWay
           });
         }
       }

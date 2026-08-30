@@ -1,7 +1,7 @@
 {
   "id": 6,
   "name": "Atajo #6 (P\u00farpura El\u00e9ctrico)",
-  "description": "Flint County -> Foster Valley",
+  "description": "Flint County -> Foster Valley (Caida de acantilado - Unidireccional)",
   "color": "#a855f7",
   "nodes": [
     {
@@ -821,1406 +821,590 @@
     {
       "from": "sc_6_1",
       "to": "sc_6_2",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_2",
-      "to": "sc_6_1",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_2",
       "to": "sc_6_3",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_3",
-      "to": "sc_6_2",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_3",
       "to": "sc_6_4",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_4",
-      "to": "sc_6_3",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_4",
       "to": "sc_6_5",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_5",
-      "to": "sc_6_4",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_5",
       "to": "sc_6_6",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_6",
-      "to": "sc_6_5",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_6",
       "to": "sc_6_7",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_7",
-      "to": "sc_6_6",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_7",
       "to": "sc_6_8",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_8",
-      "to": "sc_6_7",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_8",
       "to": "sc_6_9",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_9",
-      "to": "sc_6_8",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_9",
       "to": "sc_6_10",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_10",
-      "to": "sc_6_9",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_10",
       "to": "sc_6_11",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_11",
-      "to": "sc_6_10",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_11",
       "to": "sc_6_12",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_12",
-      "to": "sc_6_11",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_12",
       "to": "sc_6_13",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_13",
-      "to": "sc_6_12",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_13",
       "to": "sc_6_14",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_14",
-      "to": "sc_6_13",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_14",
       "to": "sc_6_15",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_15",
-      "to": "sc_6_14",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_15",
       "to": "sc_6_16",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_16",
-      "to": "sc_6_15",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_16",
       "to": "sc_6_17",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_17",
-      "to": "sc_6_16",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_17",
       "to": "sc_6_18",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_18",
-      "to": "sc_6_17",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_18",
       "to": "sc_6_19",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_19",
-      "to": "sc_6_18",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_19",
       "to": "sc_6_20",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_20",
-      "to": "sc_6_19",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_20",
       "to": "sc_6_21",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_21",
-      "to": "sc_6_20",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_21",
       "to": "sc_6_22",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_22",
-      "to": "sc_6_21",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_22",
       "to": "sc_6_23",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_23",
-      "to": "sc_6_22",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_23",
       "to": "sc_6_24",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_24",
-      "to": "sc_6_23",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_24",
       "to": "sc_6_25",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_25",
-      "to": "sc_6_24",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_25",
       "to": "sc_6_26",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_26",
-      "to": "sc_6_25",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_26",
       "to": "sc_6_27",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_27",
-      "to": "sc_6_26",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_27",
       "to": "sc_6_28",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_28",
-      "to": "sc_6_27",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_28",
       "to": "sc_6_29",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_29",
-      "to": "sc_6_28",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_29",
       "to": "sc_6_30",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_30",
-      "to": "sc_6_29",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_30",
       "to": "sc_6_31",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_31",
-      "to": "sc_6_30",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_31",
       "to": "sc_6_32",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_32",
-      "to": "sc_6_31",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_32",
       "to": "sc_6_33",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_33",
-      "to": "sc_6_32",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_33",
       "to": "sc_6_34",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_34",
-      "to": "sc_6_33",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_34",
       "to": "sc_6_35",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_35",
-      "to": "sc_6_34",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_35",
       "to": "sc_6_36",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_36",
-      "to": "sc_6_35",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_36",
       "to": "sc_6_37",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_37",
-      "to": "sc_6_36",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_37",
       "to": "sc_6_38",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_38",
-      "to": "sc_6_37",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_38",
       "to": "sc_6_39",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_39",
-      "to": "sc_6_38",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_39",
       "to": "sc_6_40",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_40",
-      "to": "sc_6_39",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_40",
       "to": "sc_6_41",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_41",
-      "to": "sc_6_40",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_41",
       "to": "sc_6_42",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_42",
-      "to": "sc_6_41",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_42",
       "to": "sc_6_43",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_43",
-      "to": "sc_6_42",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_43",
       "to": "sc_6_44",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_44",
-      "to": "sc_6_43",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_44",
       "to": "sc_6_45",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_45",
-      "to": "sc_6_44",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_45",
       "to": "sc_6_46",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_46",
-      "to": "sc_6_45",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_46",
       "to": "sc_6_47",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_47",
-      "to": "sc_6_46",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_47",
       "to": "sc_6_48",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_48",
-      "to": "sc_6_47",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_48",
       "to": "sc_6_49",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_49",
-      "to": "sc_6_48",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_49",
       "to": "sc_6_50",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_50",
-      "to": "sc_6_49",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_50",
       "to": "sc_6_51",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_51",
-      "to": "sc_6_50",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_51",
       "to": "sc_6_52",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_52",
-      "to": "sc_6_51",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_52",
       "to": "sc_6_53",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_53",
-      "to": "sc_6_52",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_53",
       "to": "sc_6_54",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_54",
-      "to": "sc_6_53",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_54",
       "to": "sc_6_55",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_55",
-      "to": "sc_6_54",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_55",
       "to": "sc_6_56",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_56",
-      "to": "sc_6_55",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_56",
       "to": "sc_6_57",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_57",
-      "to": "sc_6_56",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_57",
       "to": "sc_6_58",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_58",
-      "to": "sc_6_57",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_58",
       "to": "sc_6_59",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_59",
-      "to": "sc_6_58",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_59",
       "to": "sc_6_60",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_60",
-      "to": "sc_6_59",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_60",
       "to": "sc_6_61",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_61",
-      "to": "sc_6_60",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_61",
       "to": "sc_6_62",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_62",
-      "to": "sc_6_61",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_62",
       "to": "sc_6_63",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_63",
-      "to": "sc_6_62",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_63",
       "to": "sc_6_64",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_64",
-      "to": "sc_6_63",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_64",
       "to": "sc_6_65",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_65",
-      "to": "sc_6_64",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_65",
       "to": "sc_6_66",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_66",
-      "to": "sc_6_65",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_66",
       "to": "sc_6_67",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_67",
-      "to": "sc_6_66",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_67",
       "to": "sc_6_68",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_68",
-      "to": "sc_6_67",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_68",
       "to": "sc_6_69",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_69",
-      "to": "sc_6_68",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_69",
       "to": "sc_6_70",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_70",
-      "to": "sc_6_69",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_70",
       "to": "sc_6_71",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_71",
-      "to": "sc_6_70",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_71",
       "to": "sc_6_72",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_72",
-      "to": "sc_6_71",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_72",
       "to": "sc_6_73",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_73",
-      "to": "sc_6_72",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_73",
       "to": "sc_6_74",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_74",
-      "to": "sc_6_73",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_74",
       "to": "sc_6_75",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_75",
-      "to": "sc_6_74",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_75",
       "to": "sc_6_76",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_76",
-      "to": "sc_6_75",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_76",
       "to": "sc_6_77",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_77",
-      "to": "sc_6_76",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_77",
       "to": "sc_6_78",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_78",
-      "to": "sc_6_77",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_78",
       "to": "sc_6_79",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_79",
-      "to": "sc_6_78",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_79",
       "to": "sc_6_80",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_80",
-      "to": "sc_6_79",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_80",
       "to": "sc_6_81",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_81",
-      "to": "sc_6_80",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_81",
       "to": "sc_6_82",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_82",
-      "to": "sc_6_81",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_82",
       "to": "sc_6_83",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_83",
-      "to": "sc_6_82",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_83",
       "to": "sc_6_84",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_84",
-      "to": "sc_6_83",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_84",
       "to": "sc_6_85",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_85",
-      "to": "sc_6_84",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_85",
       "to": "sc_6_86",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_86",
-      "to": "sc_6_85",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_86",
       "to": "sc_6_87",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_87",
-      "to": "sc_6_86",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_87",
       "to": "sc_6_88",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_88",
-      "to": "sc_6_87",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_88",
       "to": "sc_6_89",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_89",
-      "to": "sc_6_88",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_89",
       "to": "sc_6_90",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_90",
-      "to": "sc_6_89",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_90",
       "to": "sc_6_91",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_91",
-      "to": "sc_6_90",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_91",
       "to": "sc_6_92",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_92",
-      "to": "sc_6_91",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_92",
       "to": "sc_6_93",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_93",
-      "to": "sc_6_92",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_93",
       "to": "sc_6_94",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_94",
-      "to": "sc_6_93",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_94",
       "to": "sc_6_95",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_95",
-      "to": "sc_6_94",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_95",
       "to": "sc_6_96",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_96",
-      "to": "sc_6_95",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_96",
       "to": "sc_6_97",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_97",
-      "to": "sc_6_96",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_97",
       "to": "sc_6_98",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_98",
-      "to": "sc_6_97",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_98",
       "to": "sc_6_99",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_99",
-      "to": "sc_6_98",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_99",
       "to": "sc_6_100",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_100",
-      "to": "sc_6_99",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_100",
       "to": "sc_6_101",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_101",
-      "to": "sc_6_100",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_101",
       "to": "sc_6_102",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_102",
-      "to": "sc_6_101",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_102",
       "to": "sc_6_103",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_103",
-      "to": "sc_6_102",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_103",
       "to": "sc_6_104",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_104",
-      "to": "sc_6_103",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_104",
       "to": "sc_6_105",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_105",
-      "to": "sc_6_104",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_105",
       "to": "sc_6_106",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_106",
-      "to": "sc_6_105",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_106",
       "to": "sc_6_107",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_107",
-      "to": "sc_6_106",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_107",
       "to": "sc_6_108",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_108",
-      "to": "sc_6_107",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_108",
       "to": "sc_6_109",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_109",
-      "to": "sc_6_108",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_109",
       "to": "sc_6_110",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_110",
-      "to": "sc_6_109",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_110",
       "to": "sc_6_111",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_111",
-      "to": "sc_6_110",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_111",
       "to": "sc_6_112",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_112",
-      "to": "sc_6_111",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_112",
       "to": "sc_6_113",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_113",
-      "to": "sc_6_112",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_113",
       "to": "sc_6_114",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_114",
-      "to": "sc_6_113",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_114",
       "to": "sc_6_115",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_115",
-      "to": "sc_6_114",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "sc_6_115",
       "to": "sc_6_116",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
-    },
-    {
-      "from": "sc_6_116",
-      "to": "sc_6_115",
-      "speed": 70,
-      "description": "Atajo #6: Flint County -> Foster Valley"
+      "speed": 70
     },
     {
       "from": "26_172",
       "to": "sc_6_1",
       "speed": 60,
-      "description": "Entrada a Atajo #6 (P\u00farpura El\u00e9ctrico) desde Node 26_172"
-    },
-    {
-      "from": "sc_6_1",
-      "to": "26_172",
-      "speed": 60,
-      "description": "Entrada a Atajo #6 (P\u00farpura El\u00e9ctrico) desde Node 26_172"
+      "description": "Entrada a Atajo #6 (Purpura Electrico) desde Node 26_172"
     },
     {
       "from": "sc_6_116",
       "to": "25_492",
       "speed": 60,
-      "description": "Salida de Atajo #6 (P\u00farpura El\u00e9ctrico) hacia Node 25_492"
-    },
-    {
-      "from": "25_492",
-      "to": "sc_6_116",
-      "speed": 60,
-      "description": "Salida de Atajo #6 (P\u00farpura El\u00e9ctrico) hacia Node 25_492"
+      "description": "Salida de Atajo #6 (Purpura Electrico) hacia Node 25_492"
     }
-  ]
+  ],
+  "oneWay": true
 }

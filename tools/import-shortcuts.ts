@@ -13,6 +13,7 @@ interface ShortcutConfig {
   readonly hex: string;
   readonly desc: string;
   readonly slug: string;
+  readonly oneWay?: boolean;
 }
 
 interface OfficialNode {
@@ -47,6 +48,7 @@ interface ShortcutFileDoc {
   readonly name: string;
   readonly description: string;
   readonly color: string;
+  readonly oneWay?: boolean;
   readonly nodes: CustomNetworkNode[];
   readonly edges: CustomNetworkEdge[];
 }
@@ -79,13 +81,14 @@ const manifestPath = path.join(shortcutsDir, 'manifest.json');
 const officialNodesPath = 'public/data/official/san_andreas_official_nodes.json';
 
 // Paleta de colores asignados por ID de atajo consecutivo (1..6)
+// oneWay: true = salto/caida de acantilado fisicamente imposible en sentido inverso
 const SHORTCUT_CONFIG: Record<number, ShortcutConfig> = {
-  1: { name: 'Dorado', hex: '#f59e0b', desc: 'Glen Park -> Temple', slug: '1_glen_park_temple' },
-  2: { name: 'Cyan Neón', hex: '#06b6d4', desc: 'Marina -> Rodeo', slug: '2_marina_rodeo' },
-  3: { name: 'Rosa Fucsia', hex: '#ec4899', desc: 'Mount Chiliad / Whetstone', slug: '3_mount_chiliad_whetstone' },
-  4: { name: 'Verde Lima', hex: '#84cc16', desc: 'San Fierro Doherty / Battery Pt', slug: '4_san_fierro_doherty' },
-  5: { name: 'Naranja Fuego', hex: '#f97316', desc: 'Flint County -> Red County', slug: '5_flint_to_red_county' },
-  6: { name: 'Púrpura Eléctrico', hex: '#a855f7', desc: 'Flint County -> Foster Valley', slug: '6_flint_to_foster_valley' }
+  1: { name: 'Dorado', hex: '#f59e0b', desc: 'Glen Park -> Temple', slug: '1_glen_park_temple', oneWay: false },
+  2: { name: 'Cyan Neón', hex: '#06b6d4', desc: 'Marina -> Rodeo', slug: '2_marina_rodeo', oneWay: false },
+  3: { name: 'Rosa Fucsia', hex: '#ec4899', desc: 'Mount Chiliad / Whetstone (Salto de acantilado - Unidireccional)', slug: '3_mount_chiliad_whetstone', oneWay: true },
+  4: { name: 'Verde Lima', hex: '#84cc16', desc: 'San Fierro Doherty / Battery Pt', slug: '4_san_fierro_doherty', oneWay: false },
+  5: { name: 'Naranja Fuego', hex: '#f97316', desc: 'Flint County -> Red County', slug: '5_flint_to_red_county', oneWay: false },
+  6: { name: 'Púrpura Eléctrico', hex: '#a855f7', desc: 'Flint County -> Foster Valley (Caida de acantilado - Unidireccional)', slug: '6_flint_to_foster_valley', oneWay: true }
 };
 
 const DEFAULT_COLORS: ReadonlyArray<Readonly<{ name: string; hex: string }>> = [
@@ -249,23 +252,31 @@ for (const sc of shortcuts) {
       z: p.z
     });
 
-    // Conectar puntos consecutivos bidireccionalmente
+    // Conectar puntos consecutivos bidireccionalmente o unidireccionalmente
     if (i > 0) {
       const prevP = pts[i - 1];
       if (!prevP) continue;
       const prevNodeId = `sc_${sc.id}_${prevP.pt}`;
-      scEdges.push(
-        {
+      if (conf.oneWay) {
+        scEdges.push({
           from: prevNodeId,
           to: nodeId,
           speed: 70
-        },
-        {
-          from: nodeId,
-          to: prevNodeId,
-          speed: 70
-        }
-      );
+        });
+      } else {
+        scEdges.push(
+          {
+            from: prevNodeId,
+            to: nodeId,
+            speed: 70
+          },
+          {
+            from: nodeId,
+            to: prevNodeId,
+            speed: 70
+          }
+        );
+      }
     }
   }
 
@@ -276,39 +287,57 @@ for (const sc of shortcuts) {
     const snapStart = findClosestOfficialNode(firstPt.x, firstPt.y);
     if (snapStart.node && snapStart.dist < 60) {
       const startCustomId = `sc_${sc.id}_${firstPt.pt}`;
-      scEdges.push(
-        {
+      if (conf.oneWay) {
+        scEdges.push({
           from: snapStart.node.id,
           to: startCustomId,
           speed: 60,
           description: `Entrada a Atajo #${sc.id} (${colorName})`
-        },
-        {
-          from: startCustomId,
-          to: snapStart.node.id,
-          speed: 60,
-          description: `Entrada a Atajo #${sc.id} (${colorName})`
-        }
-      );
+        });
+      } else {
+        scEdges.push(
+          {
+            from: snapStart.node.id,
+            to: startCustomId,
+            speed: 60,
+            description: `Entrada a Atajo #${sc.id} (${colorName})`
+          },
+          {
+            from: startCustomId,
+            to: snapStart.node.id,
+            speed: 60,
+            description: `Entrada a Atajo #${sc.id} (${colorName})`
+          }
+        );
+      }
     }
 
     const snapEnd = findClosestOfficialNode(lastPt.x, lastPt.y);
     if (snapEnd.node && snapEnd.dist < 60) {
       const endCustomId = `sc_${sc.id}_${lastPt.pt}`;
-      scEdges.push(
-        {
+      if (conf.oneWay) {
+        scEdges.push({
           from: endCustomId,
           to: snapEnd.node.id,
           speed: 60,
           description: `Salida de Atajo #${sc.id} (${colorName})`
-        },
-        {
-          from: snapEnd.node.id,
-          to: endCustomId,
-          speed: 60,
-          description: `Salida de Atajo #${sc.id} (${colorName})`
-        }
-      );
+        });
+      } else {
+        scEdges.push(
+          {
+            from: endCustomId,
+            to: snapEnd.node.id,
+            speed: 60,
+            description: `Salida de Atajo #${sc.id} (${colorName})`
+          },
+          {
+            from: snapEnd.node.id,
+            to: endCustomId,
+            speed: 60,
+            description: `Salida de Atajo #${sc.id} (${colorName})`
+          }
+        );
+      }
     }
   }
 
@@ -317,6 +346,7 @@ for (const sc of shortcuts) {
     name: `Atajo #${sc.id} (${colorName})`,
     description: descPrefix,
     color,
+    oneWay: conf.oneWay ?? false,
     nodes: scNodes,
     edges: scEdges
   };

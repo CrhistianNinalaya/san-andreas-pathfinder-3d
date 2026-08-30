@@ -56,11 +56,12 @@ export interface AdjacencyEdge {
   type?: CustomNetworkType;
   color?: string;
   description?: string;
+  oneWay?: boolean;
 }
 
 export interface RawDataset {
   nodes: Array<{ id: number | string; x: number; y: number; z?: number; name?: string; color?: string }>;
-  edges: Array<{ from: number | string; to: number | string; speed?: number; flags?: number; color?: string; description?: string }>;
+  edges: Array<{ from: number | string; to: number | string; speed?: number; flags?: number; color?: string; description?: string; oneWay?: boolean }>;
 }
 
 export interface CustomEdge {
@@ -70,6 +71,7 @@ export interface CustomEdge {
   type?: CustomNetworkType;
   color?: string;
   description?: string;
+  oneWay?: boolean;
 }
 
 export interface CustomNode {

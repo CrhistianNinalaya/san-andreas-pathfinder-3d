@@ -1,7 +1,7 @@
 {
   "id": 3,
   "name": "Atajo #3 (Rosa Fucsia)",
-  "description": "Mount Chiliad / Whetstone",
+  "description": "Mount Chiliad / Whetstone (Salto de acantilado - Unidireccional)",
   "color": "#ec4899",
   "nodes": [
     {
@@ -289,470 +289,197 @@
     {
       "from": "sc_3_1",
       "to": "sc_3_2",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_2",
-      "to": "sc_3_1",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_2",
       "to": "sc_3_3",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_3",
-      "to": "sc_3_2",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_3",
       "to": "sc_3_4",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_4",
-      "to": "sc_3_3",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_4",
       "to": "sc_3_5",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_5",
-      "to": "sc_3_4",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_5",
       "to": "sc_3_6",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_6",
-      "to": "sc_3_5",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_6",
       "to": "sc_3_7",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_7",
-      "to": "sc_3_6",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_7",
       "to": "sc_3_8",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_8",
-      "to": "sc_3_7",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_8",
       "to": "sc_3_9",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_9",
-      "to": "sc_3_8",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_9",
       "to": "sc_3_10",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_10",
-      "to": "sc_3_9",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_10",
       "to": "sc_3_11",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_11",
-      "to": "sc_3_10",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_11",
       "to": "sc_3_12",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_12",
-      "to": "sc_3_11",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_12",
       "to": "sc_3_13",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_13",
-      "to": "sc_3_12",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_13",
       "to": "sc_3_14",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_14",
-      "to": "sc_3_13",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_14",
       "to": "sc_3_15",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_15",
-      "to": "sc_3_14",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_15",
       "to": "sc_3_16",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_16",
-      "to": "sc_3_15",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_16",
       "to": "sc_3_17",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_17",
-      "to": "sc_3_16",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_17",
       "to": "sc_3_18",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_18",
-      "to": "sc_3_17",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_18",
       "to": "sc_3_19",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_19",
-      "to": "sc_3_18",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_19",
       "to": "sc_3_20",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_20",
-      "to": "sc_3_19",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_20",
       "to": "sc_3_21",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_21",
-      "to": "sc_3_20",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_21",
       "to": "sc_3_22",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_22",
-      "to": "sc_3_21",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_22",
       "to": "sc_3_23",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_23",
-      "to": "sc_3_22",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_23",
       "to": "sc_3_24",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_24",
-      "to": "sc_3_23",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_24",
       "to": "sc_3_25",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_25",
-      "to": "sc_3_24",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_25",
       "to": "sc_3_26",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_26",
-      "to": "sc_3_25",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_26",
       "to": "sc_3_27",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_27",
-      "to": "sc_3_26",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_27",
       "to": "sc_3_28",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_28",
-      "to": "sc_3_27",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_28",
       "to": "sc_3_29",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_29",
-      "to": "sc_3_28",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_29",
       "to": "sc_3_30",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_30",
-      "to": "sc_3_29",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_30",
       "to": "sc_3_31",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_31",
-      "to": "sc_3_30",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_31",
       "to": "sc_3_32",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_32",
-      "to": "sc_3_31",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_32",
       "to": "sc_3_33",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_33",
-      "to": "sc_3_32",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_33",
       "to": "sc_3_34",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_34",
-      "to": "sc_3_33",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_34",
       "to": "sc_3_35",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_35",
-      "to": "sc_3_34",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_35",
       "to": "sc_3_36",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_36",
-      "to": "sc_3_35",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_36",
       "to": "sc_3_37",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_37",
-      "to": "sc_3_36",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_37",
       "to": "sc_3_38",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_38",
-      "to": "sc_3_37",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_38",
       "to": "sc_3_39",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_39",
-      "to": "sc_3_38",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "sc_3_39",
       "to": "sc_3_40",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
-    },
-    {
-      "from": "sc_3_40",
-      "to": "sc_3_39",
-      "speed": 70,
-      "description": "Atajo #3: Mount Chiliad / Whetstone"
+      "speed": 70
     },
     {
       "from": "18_39",
@@ -761,22 +488,11 @@
       "description": "Entrada a Atajo #3 (Rosa Fucsia) desde Node 18_39"
     },
     {
-      "from": "sc_3_1",
-      "to": "18_39",
-      "speed": 60,
-      "description": "Entrada a Atajo #3 (Rosa Fucsia) desde Node 18_39"
-    },
-    {
       "from": "sc_3_40",
       "to": "17_142",
       "speed": 60,
       "description": "Salida de Atajo #3 (Rosa Fucsia) hacia Node 17_142"
-    },
-    {
-      "from": "17_142",
-      "to": "sc_3_40",
-      "speed": 60,
-      "description": "Salida de Atajo #3 (Rosa Fucsia) hacia Node 17_142"
     }
-  ]
+  ],
+  "oneWay": true
 }

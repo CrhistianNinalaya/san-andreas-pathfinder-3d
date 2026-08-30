@@ -120,11 +120,13 @@ function renderCustomEdges(group: L.LayerGroup, graph: RoadGraph, t: Translator)
         lineJoin: 'round'
       });
 
+      const oneWayBadge = edge.oneWay ? `<br/><span style="color: #f59e0b; font-weight: 600;">${t('edgeOneWay')}</span>` : '';
+
       polyline.bindPopup(
         `<div style="font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.4;">
           <strong style="color: ${color}; font-size: 13px;">${title}</strong><br/>
           <strong>${t('edgeConnection', { from: fromNode.name, to: toNode.name })}</strong><br/>
-          <strong>${t('edgeDistance', { dist: Math.round(edge.distance) })}</strong>
+          <strong>${t('edgeDistance', { dist: Math.round(edge.distance) })}</strong>${oneWayBadge}
         </div>`
       );
 

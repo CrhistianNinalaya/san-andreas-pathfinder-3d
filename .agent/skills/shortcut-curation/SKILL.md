@@ -69,10 +69,15 @@ Given raw recording points $P_1, P_2, \dots, P_m$:
    * Select the candidate $N_{merge}$ that aligns with the vehicle's exit trajectory.
    * If trailing points $P_{n}, P_{n+1}$ have overshot past $N_{merge}$ onto the asphalt, prune them and snap the terminal point directly to $N_{merge}$.
 
-4. **Connect Graph Edges:**
-   * Create bidirectional custom edges between all consecutive points: $P_i' \leftrightarrow P_{i+1}'$.
-   * Connect $N_{fork} \leftrightarrow P_1'$ with speed $60\,\text{km/h}$.
-   * Connect $P_{last}' \leftrightarrow N_{merge}$ with speed $60\,\text{km/h}$.
+4. **Connect Graph Edges & Unidirectional Invariant:**
+   * **Unidirectional Jump & Cliff Drops (`oneWay: true`):**
+     If the trajectory contains a stunt ramp jump, cliff descent, or sheer vertical drop (e.g. Mount Chiliad cliff descent), mark the shortcut as `"oneWay": true`.
+     * Generate **forward directed edges only**:
+       $N_{fork} \to P_1'$, $P_i' \to P_{i+1}'$, and $P_{last}' \to N_{merge}$.
+     * **Strictly omit reverse edges**. This prevents the A* routing engine / GPS from ever proposing an impossible reverse ascent up a vertical cliff or reverse jump.
+   * **Bidirectional Trails (`oneWay: false`):**
+     For drivable two-way dirt roads and trails, generate reciprocal edges:
+     $N_{fork} \leftrightarrow P_1'$, $P_i' \leftrightarrow P_{i+1}'$, and $P_{last}' \leftrightarrow N_{merge}$.
    * Set descriptive labels, unique color tokens, and verify graph invariants.
 
 ---

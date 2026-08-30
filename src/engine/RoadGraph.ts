@@ -206,7 +206,8 @@ export class RoadGraph {
           isCustom,
           type: customEdge.type,
           color: customEdge.color,
-          description: customEdge.description
+          description: customEdge.description,
+          oneWay: customEdge.oneWay
         });
       }
     }

@@ -70,6 +70,7 @@ try {
             id?: number | string;
             color?: string;
             description?: string;
+            oneWay?: boolean;
             nodes?: import('../src/engine/types').CustomNode[];
             edges?: import('../src/engine/types').CustomEdge[];
           };
@@ -92,7 +93,8 @@ try {
                 speed: e.speed ?? 70,
                 type: 'shortcut',
                 color: e.color ?? parentColor,
-                description: e.description ?? parentDesc
+                description: e.description ?? parentDesc,
+                oneWay: e.oneWay ?? item.oneWay
               });
             }
           }
