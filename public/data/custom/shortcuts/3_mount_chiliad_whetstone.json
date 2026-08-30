@@ -1,0 +1,782 @@
+{
+  "id": 3,
+  "name": "Atajo #3 (Rosa Fucsia)",
+  "description": "Mount Chiliad / Whetstone",
+  "color": "#ec4899",
+  "nodes": [
+    {
+      "id": "sc_3_1",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 1/40",
+      "x": -1389.0,
+      "y": -1412.9,
+      "z": 106.4
+    },
+    {
+      "id": "sc_3_2",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 2/40",
+      "x": -1401.03,
+      "y": -1410.98,
+      "z": 105.661
+    },
+    {
+      "id": "sc_3_3",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 3/40",
+      "x": -1411.13,
+      "y": -1410.68,
+      "z": 104.302
+    },
+    {
+      "id": "sc_3_4",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 4/40",
+      "x": -1421.1,
+      "y": -1409.76,
+      "z": 102.97
+    },
+    {
+      "id": "sc_3_5",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 5/40",
+      "x": -1430.74,
+      "y": -1406.79,
+      "z": 101.98
+    },
+    {
+      "id": "sc_3_6",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 6/40",
+      "x": -1440.11,
+      "y": -1402.31,
+      "z": 101.53
+    },
+    {
+      "id": "sc_3_7",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 7/40",
+      "x": -1449.13,
+      "y": -1397.72,
+      "z": 101.525
+    },
+    {
+      "id": "sc_3_8",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 8/40",
+      "x": -1458.28,
+      "y": -1392.63,
+      "z": 100.645
+    },
+    {
+      "id": "sc_3_9",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 9/40",
+      "x": -1466.92,
+      "y": -1387.57,
+      "z": 100.078
+    },
+    {
+      "id": "sc_3_10",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 10/40",
+      "x": -1475.61,
+      "y": -1382.61,
+      "z": 99.4295
+    },
+    {
+      "id": "sc_3_11",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 11/40",
+      "x": -1484.83,
+      "y": -1378.06,
+      "z": 97.2333
+    },
+    {
+      "id": "sc_3_12",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 12/40",
+      "x": -1493.22,
+      "y": -1373.92,
+      "z": 93.1082
+    },
+    {
+      "id": "sc_3_13",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 13/40",
+      "x": -1501.02,
+      "y": -1370.07,
+      "z": 87.3754
+    },
+    {
+      "id": "sc_3_14",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 14/40",
+      "x": -1508.21,
+      "y": -1366.53,
+      "z": 80.4102
+    },
+    {
+      "id": "sc_3_15",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 15/40",
+      "x": -1514.7,
+      "y": -1363.33,
+      "z": 72.6787
+    },
+    {
+      "id": "sc_3_16",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 16/40",
+      "x": -1520.53,
+      "y": -1360.45,
+      "z": 64.5053
+    },
+    {
+      "id": "sc_3_17",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 17/40",
+      "x": -1526.03,
+      "y": -1357.74,
+      "z": 55.6931
+    },
+    {
+      "id": "sc_3_18",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 18/40",
+      "x": -1532.43,
+      "y": -1355.24,
+      "z": 48.2418
+    },
+    {
+      "id": "sc_3_19",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 19/40",
+      "x": -1541.99,
+      "y": -1358.07,
+      "z": 49.0497
+    },
+    {
+      "id": "sc_3_20",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 20/40",
+      "x": -1547.44,
+      "y": -1366.38,
+      "z": 50.5252
+    },
+    {
+      "id": "sc_3_21",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 21/40",
+      "x": -1555.24,
+      "y": -1372.92,
+      "z": 49.6782
+    },
+    {
+      "id": "sc_3_22",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 22/40",
+      "x": -1564.92,
+      "y": -1374.96,
+      "z": 48.1336
+    },
+    {
+      "id": "sc_3_23",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 23/40",
+      "x": -1575.0,
+      "y": -1375.61,
+      "z": 46.5077
+    },
+    {
+      "id": "sc_3_24",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 24/40",
+      "x": -1585.09,
+      "y": -1374.86,
+      "z": 46.9637
+    },
+    {
+      "id": "sc_3_25",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 25/40",
+      "x": -1595.12,
+      "y": -1372.16,
+      "z": 47.6019
+    },
+    {
+      "id": "sc_3_26",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 26/40",
+      "x": -1604.62,
+      "y": -1368.0,
+      "z": 47.9083
+    },
+    {
+      "id": "sc_3_27",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 27/40",
+      "x": -1613.89,
+      "y": -1363.46,
+      "z": 46.5341
+    },
+    {
+      "id": "sc_3_28",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 28/40",
+      "x": -1622.83,
+      "y": -1357.86,
+      "z": 46.1357
+    },
+    {
+      "id": "sc_3_29",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 29/40",
+      "x": -1631.11,
+      "y": -1351.32,
+      "z": 46.5596
+    },
+    {
+      "id": "sc_3_30",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 30/40",
+      "x": -1638.41,
+      "y": -1344.24,
+      "z": 47.0512
+    },
+    {
+      "id": "sc_3_31",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 31/40",
+      "x": -1645.44,
+      "y": -1336.44,
+      "z": 47.1564
+    },
+    {
+      "id": "sc_3_32",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 32/40",
+      "x": -1651.13,
+      "y": -1328.22,
+      "z": 47.7144
+    },
+    {
+      "id": "sc_3_33",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 33/40",
+      "x": -1656.43,
+      "y": -1319.44,
+      "z": 48.2028
+    },
+    {
+      "id": "sc_3_34",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 34/40",
+      "x": -1661.75,
+      "y": -1310.58,
+      "z": 48.6898
+    },
+    {
+      "id": "sc_3_35",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 35/40",
+      "x": -1667.24,
+      "y": -1301.45,
+      "z": 49.1788
+    },
+    {
+      "id": "sc_3_36",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 36/40",
+      "x": -1672.47,
+      "y": -1292.75,
+      "z": 49.6315
+    },
+    {
+      "id": "sc_3_37",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 37/40",
+      "x": -1677.76,
+      "y": -1283.95,
+      "z": 50.0898
+    },
+    {
+      "id": "sc_3_38",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 38/40",
+      "x": -1683.09,
+      "y": -1274.99,
+      "z": 50.5335
+    },
+    {
+      "id": "sc_3_39",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 39/40",
+      "x": -1688.37,
+      "y": -1265.89,
+      "z": 50.9817
+    },
+    {
+      "id": "sc_3_40",
+      "name": "Atajo #3 (Rosa Fucsia) - Punto 40/40",
+      "x": -1701.9,
+      "y": -1248.5,
+      "z": 51.2
+    }
+  ],
+  "edges": [
+    {
+      "from": "sc_3_1",
+      "to": "sc_3_2",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_2",
+      "to": "sc_3_1",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_2",
+      "to": "sc_3_3",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_3",
+      "to": "sc_3_2",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_3",
+      "to": "sc_3_4",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_4",
+      "to": "sc_3_3",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_4",
+      "to": "sc_3_5",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_5",
+      "to": "sc_3_4",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_5",
+      "to": "sc_3_6",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_6",
+      "to": "sc_3_5",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_6",
+      "to": "sc_3_7",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_7",
+      "to": "sc_3_6",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_7",
+      "to": "sc_3_8",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_8",
+      "to": "sc_3_7",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_8",
+      "to": "sc_3_9",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_9",
+      "to": "sc_3_8",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_9",
+      "to": "sc_3_10",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_10",
+      "to": "sc_3_9",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_10",
+      "to": "sc_3_11",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_11",
+      "to": "sc_3_10",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_11",
+      "to": "sc_3_12",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_12",
+      "to": "sc_3_11",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_12",
+      "to": "sc_3_13",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_13",
+      "to": "sc_3_12",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_13",
+      "to": "sc_3_14",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_14",
+      "to": "sc_3_13",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_14",
+      "to": "sc_3_15",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_15",
+      "to": "sc_3_14",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_15",
+      "to": "sc_3_16",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_16",
+      "to": "sc_3_15",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_16",
+      "to": "sc_3_17",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_17",
+      "to": "sc_3_16",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_17",
+      "to": "sc_3_18",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_18",
+      "to": "sc_3_17",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_18",
+      "to": "sc_3_19",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_19",
+      "to": "sc_3_18",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_19",
+      "to": "sc_3_20",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_20",
+      "to": "sc_3_19",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_20",
+      "to": "sc_3_21",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_21",
+      "to": "sc_3_20",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_21",
+      "to": "sc_3_22",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_22",
+      "to": "sc_3_21",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_22",
+      "to": "sc_3_23",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_23",
+      "to": "sc_3_22",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_23",
+      "to": "sc_3_24",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_24",
+      "to": "sc_3_23",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_24",
+      "to": "sc_3_25",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_25",
+      "to": "sc_3_24",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_25",
+      "to": "sc_3_26",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_26",
+      "to": "sc_3_25",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_26",
+      "to": "sc_3_27",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_27",
+      "to": "sc_3_26",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_27",
+      "to": "sc_3_28",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_28",
+      "to": "sc_3_27",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_28",
+      "to": "sc_3_29",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_29",
+      "to": "sc_3_28",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_29",
+      "to": "sc_3_30",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_30",
+      "to": "sc_3_29",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_30",
+      "to": "sc_3_31",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_31",
+      "to": "sc_3_30",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_31",
+      "to": "sc_3_32",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_32",
+      "to": "sc_3_31",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_32",
+      "to": "sc_3_33",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_33",
+      "to": "sc_3_32",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_33",
+      "to": "sc_3_34",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_34",
+      "to": "sc_3_33",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_34",
+      "to": "sc_3_35",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_35",
+      "to": "sc_3_34",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_35",
+      "to": "sc_3_36",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_36",
+      "to": "sc_3_35",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_36",
+      "to": "sc_3_37",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_37",
+      "to": "sc_3_36",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_37",
+      "to": "sc_3_38",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_38",
+      "to": "sc_3_37",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_38",
+      "to": "sc_3_39",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_39",
+      "to": "sc_3_38",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_39",
+      "to": "sc_3_40",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "sc_3_40",
+      "to": "sc_3_39",
+      "speed": 70,
+      "description": "Atajo #3: Mount Chiliad / Whetstone"
+    },
+    {
+      "from": "18_39",
+      "to": "sc_3_1",
+      "speed": 60,
+      "description": "Entrada a Atajo #3 (Rosa Fucsia) desde Node 18_39"
+    },
+    {
+      "from": "sc_3_1",
+      "to": "18_39",
+      "speed": 60,
+      "description": "Entrada a Atajo #3 (Rosa Fucsia) desde Node 18_39"
+    },
+    {
+      "from": "sc_3_40",
+      "to": "17_142",
+      "speed": 60,
+      "description": "Salida de Atajo #3 (Rosa Fucsia) hacia Node 17_142"
+    },
+    {
+      "from": "17_142",
+      "to": "sc_3_40",
+      "speed": 60,
+      "description": "Salida de Atajo #3 (Rosa Fucsia) hacia Node 17_142"
+    }
+  ]
+}

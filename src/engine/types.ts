@@ -30,6 +30,7 @@ export interface GraphNode {
   isGiantComponent: boolean;
   isCustom?: boolean;
   customType?: CustomNetworkType;
+  color?: string;
 }
 
 export interface GraphEdge {
@@ -39,6 +40,8 @@ export interface GraphEdge {
   flags?: number;
   isCustom?: boolean;
   type?: CustomNetworkType;
+  color?: string;
+  description?: string;
 }
 
 export interface AdjacencyEdge {
@@ -51,11 +54,13 @@ export interface AdjacencyEdge {
   baseTimeSeconds?: number;
   isCustom?: boolean;
   type?: CustomNetworkType;
+  color?: string;
+  description?: string;
 }
 
 export interface RawDataset {
-  nodes: Array<{ id: number | string; x: number; y: number; z?: number; name?: string }>;
-  edges: Array<{ from: number | string; to: number | string; speed?: number; flags?: number }>;
+  nodes: Array<{ id: number | string; x: number; y: number; z?: number; name?: string; color?: string }>;
+  edges: Array<{ from: number | string; to: number | string; speed?: number; flags?: number; color?: string; description?: string }>;
 }
 
 export interface CustomEdge {
@@ -63,13 +68,25 @@ export interface CustomEdge {
   to: number | string;
   speed?: number;
   type?: CustomNetworkType;
+  color?: string;
   description?: string;
+}
+
+export interface CustomNode {
+  id: number | string;
+  x: number;
+  y: number;
+  z?: number;
+  name?: string;
+  isCustom?: boolean;
+  customType?: CustomNetworkType;
+  color?: string;
 }
 
 export interface CustomNetworkDataset {
   version?: string;
   description?: string;
-  nodes?: Array<{ id: number | string; x: number; y: number; z?: number; name?: string }>;
+  nodes?: CustomNode[];
   edges?: CustomEdge[];
 }
 

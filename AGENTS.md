@@ -21,6 +21,13 @@ A\* route planner over the official GTA:SA road network, with 3D terrain physics
   - Component-specific hooks live in `hooks/` with single responsibility.
   - Component pure helper functions live in `utils/`.
 - **CSS Custom Properties (Design Tokens):** All UI styling (colors, backgrounds, borders, shadows, radii, font sizes, transitions, z-indices) must strictly use CSS variables (`var(--...)`) defined in `src/ui/global.css`. Never use raw hardcoded hex/rgb/rgba values in CSS Modules or components.
+- **Clean Code & Linter Invariants:**
+  - **No Nested Ternaries:** Never nest ternary expressions (`a ? b : c ? d : e`). Extract them into independent statements or early-return functions.
+  - **Standard Global Built-ins:** Prefer `Number.parseInt` over `parseInt` and `Number.parseFloat` over `parseFloat`.
+  - **Regex Method:** Use `RegExp.exec()` rather than `String.prototype.match()`.
+  - **Optional Chaining:** Prefer optional chaining expressions (`obj?.prop`, `arr?.[i]`) over verbose logical AND chains (`obj && obj.prop`).
+  - **Single Array Push:** Do not call `Array#push()` multiple times consecutively; combine them into a single call: `arr.push(itemA, itemB)`.
+  - **Relative Indexing:** Prefer `arr.at(-1)` / `arr.at(0)` over `arr[arr.length - 1]` or index math.
 - **Responsive Breakpoints:**
   - Mobile bottom sheet / touch layout: `@media (max-width: 768px)` (canonical standard defined in `src/ui/breakpoints.ts` and `src/ui/global.css`).
 
@@ -64,4 +71,4 @@ translated ES/EN and live in `src/i18n` — Spanish is the reference translation
 
 ## Skills
 
-`gta-graph-data` · `pathfinding-engine` · `sa-coordinates` · `ui-conventions` · `cleo-sanny-builder`
+`gta-graph-data` · `pathfinding-engine` · `sa-coordinates` · `ui-conventions` · `cleo-sanny-builder` · `shortcut-curation`

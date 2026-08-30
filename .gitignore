@@ -18,6 +18,9 @@ data/paths_raw/
 radar_tiles/
 *.png
 mapa-gta-sa.webp
+public/data/shortcuts_dump.json
+*.ini
+*.cs
 
 # OS & IDEs
 .DS_Store
@@ -25,3 +28,4 @@ Thumbs.db
 .idea/
 .vscode/
 *.log
+

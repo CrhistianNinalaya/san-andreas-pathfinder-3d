@@ -15,7 +15,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "verify-graph": "tsx tools/verify-graph.ts",
-    "bench": "tsx tools/bench-route.ts"
+    "bench": "tsx tools/bench-route.ts",
+    "import-shortcuts": "tsx tools/import-shortcuts.ts"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

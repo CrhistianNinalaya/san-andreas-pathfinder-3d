@@ -1,0 +1,459 @@
+{
+  "id": 1,
+  "name": "Atajo #1 (Dorado)",
+  "description": "Glen Park -> Temple",
+  "color": "#f59e0b",
+  "nodes": [
+    {
+      "id": "sc_1_1",
+      "name": "Atajo #1 (Dorado) - Punto 1/23",
+      "x": 872.5,
+      "y": -1144.9,
+      "z": 22.6
+    },
+    {
+      "id": "sc_1_2",
+      "name": "Atajo #1 (Dorado) - Punto 2/23",
+      "x": 864.67,
+      "y": -1144.9,
+      "z": 22.6
+    },
+    {
+      "id": "sc_1_3",
+      "name": "Atajo #1 (Dorado) - Punto 3/23",
+      "x": 854.38,
+      "y": -1144.9,
+      "z": 22.6
+    },
+    {
+      "id": "sc_1_4",
+      "name": "Atajo #1 (Dorado) - Punto 4/23",
+      "x": 844.33,
+      "y": -1144.9,
+      "z": 22.6
+    },
+    {
+      "id": "sc_1_5",
+      "name": "Atajo #1 (Dorado) - Punto 5/23",
+      "x": 833.83,
+      "y": -1144.9,
+      "z": 22.6
+    },
+    {
+      "id": "sc_1_6",
+      "name": "Atajo #1 (Dorado) - Punto 6/23",
+      "x": 823.81,
+      "y": -1141.5,
+      "z": 23.0
+    },
+    {
+      "id": "sc_1_7",
+      "name": "Atajo #1 (Dorado) - Punto 7/23",
+      "x": 813.489,
+      "y": -1137.25,
+      "z": 23.3026
+    },
+    {
+      "id": "sc_1_8",
+      "name": "Atajo #1 (Dorado) - Punto 8/23",
+      "x": 803.168,
+      "y": -1136.33,
+      "z": 23.3892
+    },
+    {
+      "id": "sc_1_9",
+      "name": "Atajo #1 (Dorado) - Punto 9/23",
+      "x": 792.66,
+      "y": -1135.39,
+      "z": 23.7269
+    },
+    {
+      "id": "sc_1_10",
+      "name": "Atajo #1 (Dorado) - Punto 10/23",
+      "x": 782.124,
+      "y": -1134.43,
+      "z": 23.3387
+    },
+    {
+      "id": "sc_1_11",
+      "name": "Atajo #1 (Dorado) - Punto 11/23",
+      "x": 772.159,
+      "y": -1133.43,
+      "z": 23.4091
+    },
+    {
+      "id": "sc_1_12",
+      "name": "Atajo #1 (Dorado) - Punto 12/23",
+      "x": 761.805,
+      "y": -1132.23,
+      "z": 23.7821
+    },
+    {
+      "id": "sc_1_13",
+      "name": "Atajo #1 (Dorado) - Punto 13/23",
+      "x": 751.544,
+      "y": -1131.54,
+      "z": 23.8808
+    },
+    {
+      "id": "sc_1_14",
+      "name": "Atajo #1 (Dorado) - Punto 14/23",
+      "x": 741.551,
+      "y": -1131.24,
+      "z": 25.0151
+    },
+    {
+      "id": "sc_1_15",
+      "name": "Atajo #1 (Dorado) - Punto 15/23",
+      "x": 731.274,
+      "y": -1131.24,
+      "z": 26.0884
+    },
+    {
+      "id": "sc_1_16",
+      "name": "Atajo #1 (Dorado) - Punto 16/23",
+      "x": 721.276,
+      "y": -1131.25,
+      "z": 24.7705
+    },
+    {
+      "id": "sc_1_17",
+      "name": "Atajo #1 (Dorado) - Punto 17/23",
+      "x": 711.632,
+      "y": -1131.26,
+      "z": 21.2046
+    },
+    {
+      "id": "sc_1_18",
+      "name": "Atajo #1 (Dorado) - Punto 18/23",
+      "x": 702.631,
+      "y": -1131.32,
+      "z": 16.2163
+    },
+    {
+      "id": "sc_1_19",
+      "name": "Atajo #1 (Dorado) - Punto 19/23",
+      "x": 692.804,
+      "y": -1134.26,
+      "z": 15.9741
+    },
+    {
+      "id": "sc_1_20",
+      "name": "Atajo #1 (Dorado) - Punto 20/23",
+      "x": 686.081,
+      "y": -1142.09,
+      "z": 15.3547
+    },
+    {
+      "id": "sc_1_21",
+      "name": "Atajo #1 (Dorado) - Punto 21/23",
+      "x": 680.274,
+      "y": -1150.8,
+      "z": 14.8943
+    },
+    {
+      "id": "sc_1_22",
+      "name": "Atajo #1 (Dorado) - Punto 22/23",
+      "x": 675.369,
+      "y": -1159.61,
+      "z": 14.775
+    },
+    {
+      "id": "sc_1_23",
+      "name": "Atajo #1 (Dorado) - Punto 23/23",
+      "x": 672.67,
+      "y": -1163.86,
+      "z": 14.694
+    }
+  ],
+  "edges": [
+    {
+      "from": "sc_1_1",
+      "to": "sc_1_2",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_2",
+      "to": "sc_1_1",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_2",
+      "to": "sc_1_3",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_3",
+      "to": "sc_1_2",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_3",
+      "to": "sc_1_4",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_4",
+      "to": "sc_1_3",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_4",
+      "to": "sc_1_5",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_5",
+      "to": "sc_1_4",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_5",
+      "to": "sc_1_6",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_6",
+      "to": "sc_1_5",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_6",
+      "to": "sc_1_7",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_7",
+      "to": "sc_1_6",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_7",
+      "to": "sc_1_8",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_8",
+      "to": "sc_1_7",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_8",
+      "to": "sc_1_9",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_9",
+      "to": "sc_1_8",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_9",
+      "to": "sc_1_10",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_10",
+      "to": "sc_1_9",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_10",
+      "to": "sc_1_11",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_11",
+      "to": "sc_1_10",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_11",
+      "to": "sc_1_12",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_12",
+      "to": "sc_1_11",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_12",
+      "to": "sc_1_13",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_13",
+      "to": "sc_1_12",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_13",
+      "to": "sc_1_14",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_14",
+      "to": "sc_1_13",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_14",
+      "to": "sc_1_15",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_15",
+      "to": "sc_1_14",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_15",
+      "to": "sc_1_16",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_16",
+      "to": "sc_1_15",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_16",
+      "to": "sc_1_17",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_17",
+      "to": "sc_1_16",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_17",
+      "to": "sc_1_18",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_18",
+      "to": "sc_1_17",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_18",
+      "to": "sc_1_19",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_19",
+      "to": "sc_1_18",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_19",
+      "to": "sc_1_20",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_20",
+      "to": "sc_1_19",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_20",
+      "to": "sc_1_21",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_21",
+      "to": "sc_1_20",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_21",
+      "to": "sc_1_22",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_22",
+      "to": "sc_1_21",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_22",
+      "to": "sc_1_23",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "sc_1_23",
+      "to": "sc_1_22",
+      "speed": 70,
+      "description": "Atajo #1: Glen Park -> Temple"
+    },
+    {
+      "from": "21_109",
+      "to": "sc_1_1",
+      "speed": 60,
+      "description": "Entrada a Atajo #1 (Dorado)"
+    },
+    {
+      "from": "sc_1_1",
+      "to": "21_109",
+      "speed": 60,
+      "description": "Entrada a Atajo #1 (Dorado)"
+    },
+    {
+      "from": "sc_1_23",
+      "to": "20_319",
+      "speed": 60,
+      "description": "Salida de Atajo #1 (Dorado) hacia 20_319 (Sin retroceso)"
+    },
+    {
+      "from": "20_319",
+      "to": "sc_1_23",
+      "speed": 60,
+      "description": "Salida de Atajo #1 (Dorado) hacia 20_319 (Sin retroceso)"
+    }
+  ]
+}

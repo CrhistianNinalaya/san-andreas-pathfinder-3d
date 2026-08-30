@@ -32,6 +32,15 @@ function getNodeThemeStyle(node: GraphNode, category: NodeCategory) {
     return NODE_LAYER_THEME.patch;
   }
   if (category === 'shortcut') {
+    if (node.color) {
+      return {
+        radius: NODE_LAYER_THEME.shortcut.radius,
+        weight: NODE_LAYER_THEME.shortcut.weight,
+        color: node.color,
+        fillColor: node.color,
+        fillOpacity: 1.0
+      };
+    }
     return NODE_LAYER_THEME.shortcut;
   }
   return node.isGiantComponent ? NODE_LAYER_THEME.giant : NODE_LAYER_THEME.isolated;
@@ -47,7 +56,7 @@ function buildPopupHtml(node: GraphNode, category: NodeCategory, t: Translator):
     statusColor = NODE_LAYER_THEME.patch.color;
     statusLabel = t('nodeStatusPatch');
   } else if (category === 'shortcut') {
-    statusColor = NODE_LAYER_THEME.shortcut.color;
+    statusColor = node.color ?? NODE_LAYER_THEME.shortcut.color;
     statusLabel = t('nodeStatusShortcut');
   }
 
@@ -99,8 +108,8 @@ function renderCustomEdges(group: L.LayerGroup, graph: RoadGraph, t: Translator)
       seen.add(edgeKey);
 
       const isPatch = edge.type === 'patch';
-      const color = isPatch ? NODE_LAYER_THEME.patch.fillColor : NODE_LAYER_THEME.shortcut.fillColor;
-      const title = isPatch ? t('edgePatch') : t('edgeShortcut');
+      const color = edge.color ?? (isPatch ? NODE_LAYER_THEME.patch.fillColor : NODE_LAYER_THEME.shortcut.fillColor);
+      const title = edge.description ?? (isPatch ? t('edgePatch') : t('edgeShortcut'));
 
       const polyline = L.polyline([gtaToLatLng(fromNode.x, fromNode.y), gtaToLatLng(toNode.x, toNode.y)], {
         color,

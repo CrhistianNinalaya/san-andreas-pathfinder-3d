@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "description": "Manifest of player-recorded shortcuts for San Andreas",
+  "files": [
+    "1_glen_park_temple.json",
+    "2_marina_rodeo.json",
+    "3_mount_chiliad_whetstone.json",
+    "4_san_fierro_doherty.json",
+    "5_flint_to_red_county.json",
+    "6_flint_to_foster_valley.json"
+  ]
+}

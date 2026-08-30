@@ -108,7 +108,8 @@ export class RoadGraph {
         componentId: 0,
         isGiantComponent: false,
         isCustom: (node as GraphNode).isCustom,
-        customType: (node as GraphNode).customType
+        customType: (node as GraphNode).customType,
+        color: (node as GraphNode).color
       };
 
       this.nodes.set(nodeObj.id, nodeObj);
@@ -203,7 +204,9 @@ export class RoadGraph {
           slopePercent: Math.round(slope * 100),
           nominalSpeed,
           isCustom,
-          type: customEdge.type
+          type: customEdge.type,
+          color: customEdge.color,
+          description: customEdge.description
         });
       }
     }

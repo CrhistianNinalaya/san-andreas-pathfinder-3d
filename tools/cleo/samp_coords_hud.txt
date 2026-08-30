@@ -1,0 +1,106 @@
+// ==============================================================================
+// San Andreas Pathfinder 3D - SA-MP Coordinates HUD (HUD Exclusivo SA-MP)
+// ==============================================================================
+// Script CLEO ligero y blindado al 100% para SA-MP (samp_debug y online)
+// Lectura de posición universal vía store_actor y renderizado 2D nativo (045A)
+// Cero opcodes de vehículos o velocidad para eliminar cualquier corrupción de memoria
+//
+// CONTROLES:
+//   Tecla 'K' o 'H' : Activar / Desactivar HUD en pantalla
+//
+// DISPOSICIÓN EN PANTALLA (Margen izquierdo):
+//   Fila 1 (Blanco)   : Coordenada X
+//   Fila 2 (Amarillo) : Coordenada Y
+//   Fila 3 (Celeste)  : Coordenada Z
+// ==============================================================================
+
+{$CLEO .cs}
+Alloc($PLAYER_ACTOR, 3)
+
+script_name "SAMPHUD"
+
+// Variables locales:
+// 0@ : Coordenada actual X (Float)
+// 1@ : Coordenada actual Y (Float)
+// 2@ : Coordenada actual Z (Float)
+// 19@ : Estado del HUD: 0 = Apagado, 1 = Encendido (Int)
+// 28@ : X entero para dibujar en pantalla (Int)
+// 29@ : Y entero para dibujar en pantalla (Int)
+// 30@ : Z entero para dibujar en pantalla (Int)
+
+// Iniciar encendido automáticamente
+19@ = 1
+wait 1000
+
+// =============================================================================
+// BUCLE PRINCIPAL (Wait 0 para renderizado 2D continuo sin parpadeo)
+// =============================================================================
+:MAIN_LOOP
+wait 0
+
+// 1. Detección de teclas de activación (K = 75, H = 72)
+if or
+    0AB0: key_pressed 75  // Tecla 'K'
+    0AB0: key_pressed 72  // Tecla 'H'
+goto_if_false @CHECK_HUD_STATE
+
+// Invertir estado (Toggle)
+19@ ^= 1
+if
+    19@ == 1
+goto_if_false @TOGGLE_OFF
+
+018C: play_sound 1057 at 0.0 0.0 0.0  // Sonido ON (Beep positivo)
+goto @DEBOUNCE
+
+:TOGGLE_OFF
+018C: play_sound 1058 at 0.0 0.0 0.0  // Sonido OFF (Beep negativo)
+
+:DEBOUNCE
+wait 250 // Anti-rebote de teclado
+
+// 2. Verificar si el HUD debe dibujarse
+:CHECK_HUD_STATE
+if
+    19@ == 1
+goto_if_false @MAIN_LOOP
+
+// 3. Verificar que el jugador esté activo en SA-MP
+if
+    0256: player 0 defined
+goto_if_false @MAIN_LOOP
+
+// 4. Lectura UNIVERSAL de posición (Inmune a bugs: funciona a pie, en moto, auto, avión)
+00A0: store_actor $PLAYER_ACTOR position_to 0@ 1@ 2@
+
+// 5. Conversión a números enteros para el renderizado nativo
+008C: 28@ = float 0@ to_integer
+008C: 29@ = float 1@ to_integer
+008C: 30@ = float 2@ to_integer
+
+// 6. RENDERIZADO NATIVO 2D (GTA San Andreas Engine - 045A)
+// Fila 1: X (Blanco)
+03F0: use_text_commands 1
+0349: set_text_font 1
+033F: set_text_scale 0.35 1.2
+0340: set_text_colour 255 255 255 255
+081C: set_text_edge 1 0 0 0 255
+045A: draw_text_1number 25.0 160.0 GXT 'NUMBER' number 28@
+
+// Fila 2: Y (Amarillo)
+03F0: use_text_commands 1
+0349: set_text_font 1
+033F: set_text_scale 0.35 1.2
+0340: set_text_colour 255 255 50 255
+081C: set_text_edge 1 0 0 0 255
+045A: draw_text_1number 25.0 180.0 GXT 'NUMBER' number 29@
+
+// Fila 3: Z (Celeste)
+03F0: use_text_commands 1
+0349: set_text_font 1
+033F: set_text_scale 0.35 1.2
+0340: set_text_colour 50 220 255 255
+081C: set_text_edge 1 0 0 0 255
+045A: draw_text_1number 25.0 200.0 GXT 'NUMBER' number 30@
+
+goto @MAIN_LOOP

@@ -1,0 +1,256 @@
+// ==============================================================================
+// San Andreas Pathfinder 3D - SA-MP Shortcut & Trajectory Recorder
+// ==============================================================================
+// Script CLEO 100% blindado para SA-MP usando el plugin nativo IniFiles.cleo
+// Graba trayectorias 3D continuas (saltos, curvas, atajos) en cleo/shortcuts.ini
+// Cero opcodes de archivos abiertos/cerrados, cero punteros nulos, cero crasheos
+//
+// CONTROLES:
+//   Tecla 'I' o Ctrl + 1 : INICIAR GRABACIÓN de trayectoria (Botón REC)
+//   Tecla 'O' o Ctrl + 2 : DETENER Y GUARDAR trayectoria (Botón STOP)
+//
+// FORMATO DE SALIDA (cleo/shortcuts.ini):
+//   Sección [id_pt] con claves x, y, z y sección [id] con total de puntos
+//   Muestreo automático continuo cada 3.5 metros mientras te mueves o caes
+// ==============================================================================
+
+{$CLEO .cs}
+Alloc($PLAYER_ACTOR, 3)
+
+script_name "SRECOR"
+
+// Declaración formal de tipos de variables locales para Sanny Builder
+var
+    0@ : Float  // Coordenada actual X
+    1@ : Float  // Coordenada actual Y
+    2@ : Float  // Coordenada actual Z
+    10@ : Int   // Estado de grabación: 0 = Inactivo, 1 = Grabando
+    11@ : Int   // Contador / ID de la trayectoria actual (Atajo #1, #2, ...)
+    12@ : Int   // Contador de puntos dentro de la trayectoria actual
+    13@ : Float // Último punto X guardado
+    14@ : Float // Último punto Y guardado
+    15@ : Float // Último punto Z guardado
+    16@ : Float // Distancia recorrida al cuadrado (dist_sq)
+    17@ : Float // Variable temporal matemática
+end
+
+// Inicialización limpia
+10@ = 0 // grabacion_activa = 0
+11@ = 0 // shortcut_id = 0
+12@ = 0 // point_index = 0
+
+// Espera pasiva inicial para carga limpia en SA-MP
+wait 1500
+
+// =============================================================================
+// BUCLE PRINCIPAL
+// =============================================================================
+:MAIN_LOOP
+wait 10
+
+// 1. Detectar Tecla de INICIO: Tecla 'I' (73) o Ctrl + 1
+:CHECK_KEY_START
+if
+    0AB0: key_pressed 73  // Tecla 'I'
+then
+    goto @START_RECORDING
+end
+
+if and
+    0AB0: key_pressed 17  // Ctrl
+    0AB0: key_pressed 49  // 1
+then
+    goto @START_RECORDING
+end
+
+if and
+    0AB0: key_pressed 17  // Ctrl
+    0AB0: key_pressed 97  // Numpad 1
+then
+    goto @START_RECORDING
+end
+
+goto @CHECK_KEY_STOP
+
+// Iniciar grabación de trayectoria
+:START_RECORDING
+if
+    10@ == 1
+then
+    // Ya está grabando, ignorar repetición
+    goto @CHECK_KEY_STOP
+end
+
+if
+    0256: player 0 defined
+jf @CHECK_KEY_STOP
+
+// Activar grabación y preparar contadores
+10@ = 1
+11@ += 1  // Nuevo número de atajo (#1, #2, #3...)
+12@ = 1   // Primer punto (#1)
+
+// Capturar posición inicial universal (a pie o en vehículo)
+00A0: store_actor $PLAYER_ACTOR position_to 0@ 1@ 2@
+0087: 13@ = 0@
+0087: 14@ = 1@
+0087: 15@ = 2@
+
+// Escribir Punto #1 en cleo/shortcuts.ini usando IniFiles.cleo
+0AD3: 20@v = string_format "%d_%d" 11@ 12@
+0AF3: write_float 0@ to_ini_file "cleo/shortcuts.ini" section 20@v key "x"
+0AF3: write_float 1@ to_ini_file "cleo/shortcuts.ini" section 20@v key "y"
+0AF3: write_float 2@ to_ini_file "cleo/shortcuts.ini" section 20@v key "z"
+
+// Guardar metadatos del atajo
+0AD3: 20@v = string_format "%d" 11@
+0AF1: write_int 12@ to_ini_file "cleo/shortcuts.ini" section 20@v key "points"
+0AF1: write_int 11@ to_ini_file "cleo/shortcuts.ini" section "meta" key "total_shortcuts"
+
+// Feedback audiovisual
+018C: play_sound 1057 at 0.0 0.0 0.0  // Beep positivo
+0ACD: show_text_highpriority "REC: ~g~GRABANDO TRAYECTORIA...~w~" time 2000
+wait 300 // Anti-rebote
+
+// -----------------------------------------------------------------------------
+// 2. Detectar Tecla de DETENER Y GUARDAR: Tecla 'O' (79) o Ctrl + 2
+// -----------------------------------------------------------------------------
+:CHECK_KEY_STOP
+if
+    0AB0: key_pressed 79  // Tecla 'O'
+then
+    goto @STOP_RECORDING
+end
+
+if and
+    0AB0: key_pressed 17  // Ctrl
+    0AB0: key_pressed 50  // 2
+then
+    goto @STOP_RECORDING
+end
+
+if and
+    0AB0: key_pressed 17  // Ctrl
+    0AB0: key_pressed 98  // Numpad 2
+then
+    goto @STOP_RECORDING
+end
+
+goto @SAMPLE_TRAJECTORY
+
+// Detener grabación de trayectoria
+:STOP_RECORDING
+if
+    10@ == 0
+then
+    // Si no estaba grabando, avisar al usuario
+    018C: play_sound 1058 at 0.0 0.0 0.0
+    0ACD: show_text_highpriority "~r~SIN GRABACION ACTIVA~w~: Presiona Tecla I para iniciar" time 2500
+    wait 300
+    goto @SAMPLE_TRAJECTORY
+end
+
+if
+    0256: player 0 defined
+jf @FINALIZE_STOP
+
+// Capturar posición final
+00A0: store_actor $PLAYER_ACTOR position_to 0@ 1@ 2@
+
+// Calcular distancia al cuadrado: dist_sq = dx^2 + dy^2 + dz^2
+0087: 16@ = 0@
+0063: 16@ -= 13@
+006B: 16@ *= 16@ // dx^2
+
+0087: 17@ = 1@
+0063: 17@ -= 14@
+006B: 17@ *= 17@ // dy^2
+
+005B: 16@ += 17@ // dx^2 + dy^2
+
+0087: 17@ = 2@
+0063: 17@ -= 15@
+006B: 17@ *= 17@ // dz^2
+
+005B: 16@ += 17@ // dist_sq
+
+// Si nos movimos más de 0.5m (0.5^2 = 0.25) desde el último punto, registrar el punto final exacto
+if
+    16@ >= 0.25
+then
+    12@ += 1
+    0AD3: 20@v = string_format "%d_%d" 11@ 12@
+    0AF3: write_float 0@ to_ini_file "cleo/shortcuts.ini" section 20@v key "x"
+    0AF3: write_float 1@ to_ini_file "cleo/shortcuts.ini" section 20@v key "y"
+    0AF3: write_float 2@ to_ini_file "cleo/shortcuts.ini" section 20@v key "z"
+end
+
+// Actualizar cantidad final de puntos del atajo
+0AD3: 20@v = string_format "%d" 11@
+0AF1: write_int 12@ to_ini_file "cleo/shortcuts.ini" section 20@v key "points"
+
+:FINALIZE_STOP
+10@ = 0 // Detener grabación
+
+// Feedback audiovisual
+018C: play_sound 1058 at 0.0 0.0 0.0  // Beep de parada
+0ACD: show_text_highpriority "Atajo ~g~GUARDADO~w~ en cleo/shortcuts.ini" time 3000
+wait 300 // Anti-rebote
+
+// -----------------------------------------------------------------------------
+// 3. Muestreo Automático en segundo plano (cada 3.5 metros recorridos o caídos)
+// -----------------------------------------------------------------------------
+:SAMPLE_TRAJECTORY
+if
+    10@ == 1
+jf @MAIN_LOOP
+
+if
+    0256: player 0 defined
+jf @MAIN_LOOP
+
+// Leer posición actual
+00A0: store_actor $PLAYER_ACTOR position_to 0@ 1@ 2@
+
+// Calcular distancia al cuadrado: dist_sq = dx^2 + dy^2 + dz^2
+0087: 16@ = 0@
+0063: 16@ -= 13@
+006B: 16@ *= 16@ // dx^2
+
+0087: 17@ = 1@
+0063: 17@ -= 14@
+006B: 17@ *= 17@ // dy^2
+
+005B: 16@ += 17@ // dx^2 + dy^2
+
+0087: 17@ = 2@
+0063: 17@ -= 15@
+006B: 17@ *= 17@ // dz^2
+
+005B: 16@ += 17@ // dist_sq
+
+// Si hemos avanzado o caído al menos 10.0 metros (10.0^2 = 100.0) para igualar el estándar de GTA:SA:
+if
+    16@ >= 100.0
+jf @MAIN_LOOP
+
+// Registrar nuevo punto en shortcuts.ini
+12@ += 1
+0AD3: 20@v = string_format "%d_%d" 11@ 12@
+0AF3: write_float 0@ to_ini_file "cleo/shortcuts.ini" section 20@v key "x"
+0AF3: write_float 1@ to_ini_file "cleo/shortcuts.ini" section 20@v key "y"
+0AF3: write_float 2@ to_ini_file "cleo/shortcuts.ini" section 20@v key "z"
+
+// Actualizar contador acumulado de puntos de este atajo
+0AD3: 20@v = string_format "%d" 11@
+0AF1: write_int 12@ to_ini_file "cleo/shortcuts.ini" section 20@v key "points"
+
+// Actualizar coordenadas del último punto
+0087: 13@ = 0@
+0087: 14@ = 1@
+0087: 15@ = 2@
+
+// Clic de obturador para saber que grabó un punto mientras conduces
+018C: play_sound 1137 at 0.0 0.0 0.0
+
+goto @MAIN_LOOP

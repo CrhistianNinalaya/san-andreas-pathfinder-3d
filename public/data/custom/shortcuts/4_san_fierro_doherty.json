@@ -1,0 +1,364 @@
+{
+  "id": 4,
+  "name": "Atajo #4 (Verde Lima)",
+  "description": "San Fierro Doherty / Battery Pt",
+  "color": "#84cc16",
+  "nodes": [
+    {
+      "id": "sc_4_1",
+      "name": "Atajo #4 (Verde Lima) - Punto 1/18",
+      "x": -1845.6,
+      "y": 431.9,
+      "z": 16.0
+    },
+    {
+      "id": "sc_4_2",
+      "name": "Atajo #4 (Verde Lima) - Punto 2/18",
+      "x": -1846.4,
+      "y": 438.212,
+      "z": 16.5832
+    },
+    {
+      "id": "sc_4_3",
+      "name": "Atajo #4 (Verde Lima) - Punto 3/18",
+      "x": -1838.6,
+      "y": 445.072,
+      "z": 17.1419
+    },
+    {
+      "id": "sc_4_4",
+      "name": "Atajo #4 (Verde Lima) - Punto 4/18",
+      "x": -1830.39,
+      "y": 451.547,
+      "z": 18.0007
+    },
+    {
+      "id": "sc_4_5",
+      "name": "Atajo #4 (Verde Lima) - Punto 5/18",
+      "x": -1822.53,
+      "y": 457.734,
+      "z": 18.9643
+    },
+    {
+      "id": "sc_4_6",
+      "name": "Atajo #4 (Verde Lima) - Punto 6/18",
+      "x": -1814.31,
+      "y": 464.103,
+      "z": 20.5769
+    },
+    {
+      "id": "sc_4_7",
+      "name": "Atajo #4 (Verde Lima) - Punto 7/18",
+      "x": -1805.95,
+      "y": 470.358,
+      "z": 22.4689
+    },
+    {
+      "id": "sc_4_8",
+      "name": "Atajo #4 (Verde Lima) - Punto 8/18",
+      "x": -1797.85,
+      "y": 476.35,
+      "z": 24.6364
+    },
+    {
+      "id": "sc_4_9",
+      "name": "Atajo #4 (Verde Lima) - Punto 9/18",
+      "x": -1789.82,
+      "y": 482.268,
+      "z": 25.528
+    },
+    {
+      "id": "sc_4_10",
+      "name": "Atajo #4 (Verde Lima) - Punto 10/18",
+      "x": -1782.2,
+      "y": 487.115,
+      "z": 30.8099
+    },
+    {
+      "id": "sc_4_11",
+      "name": "Atajo #4 (Verde Lima) - Punto 11/18",
+      "x": -1773.79,
+      "y": 490.852,
+      "z": 35.7745
+    },
+    {
+      "id": "sc_4_12",
+      "name": "Atajo #4 (Verde Lima) - Punto 12/18",
+      "x": -1765.72,
+      "y": 494.715,
+      "z": 40.6867
+    },
+    {
+      "id": "sc_4_13",
+      "name": "Atajo #4 (Verde Lima) - Punto 13/18",
+      "x": -1757.16,
+      "y": 498.416,
+      "z": 44.4223
+    },
+    {
+      "id": "sc_4_14",
+      "name": "Atajo #4 (Verde Lima) - Punto 14/18",
+      "x": -1747.92,
+      "y": 502.383,
+      "z": 45.7187
+    },
+    {
+      "id": "sc_4_15",
+      "name": "Atajo #4 (Verde Lima) - Punto 15/18",
+      "x": -1738.59,
+      "y": 506.362,
+      "z": 44.1558
+    },
+    {
+      "id": "sc_4_16",
+      "name": "Atajo #4 (Verde Lima) - Punto 16/18",
+      "x": -1729.93,
+      "y": 510.054,
+      "z": 40.0386
+    },
+    {
+      "id": "sc_4_17",
+      "name": "Atajo #4 (Verde Lima) - Punto 17/18",
+      "x": -1720.66,
+      "y": 513.74,
+      "z": 37.9534
+    },
+    {
+      "id": "sc_4_18",
+      "name": "Atajo #4 (Verde Lima) - Punto 18/18",
+      "x": -1711.24,
+      "y": 517.53,
+      "z": 37.8948
+    }
+  ],
+  "edges": [
+    {
+      "from": "sc_4_1",
+      "to": "sc_4_2",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_2",
+      "to": "sc_4_1",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_2",
+      "to": "sc_4_3",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_3",
+      "to": "sc_4_2",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_3",
+      "to": "sc_4_4",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_4",
+      "to": "sc_4_3",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_4",
+      "to": "sc_4_5",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_5",
+      "to": "sc_4_4",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_5",
+      "to": "sc_4_6",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_6",
+      "to": "sc_4_5",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_6",
+      "to": "sc_4_7",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_7",
+      "to": "sc_4_6",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_7",
+      "to": "sc_4_8",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_8",
+      "to": "sc_4_7",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_8",
+      "to": "sc_4_9",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_9",
+      "to": "sc_4_8",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_9",
+      "to": "sc_4_10",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_10",
+      "to": "sc_4_9",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_10",
+      "to": "sc_4_11",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_11",
+      "to": "sc_4_10",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_11",
+      "to": "sc_4_12",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_12",
+      "to": "sc_4_11",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_12",
+      "to": "sc_4_13",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_13",
+      "to": "sc_4_12",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_13",
+      "to": "sc_4_14",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_14",
+      "to": "sc_4_13",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_14",
+      "to": "sc_4_15",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_15",
+      "to": "sc_4_14",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_15",
+      "to": "sc_4_16",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_16",
+      "to": "sc_4_15",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_16",
+      "to": "sc_4_17",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_17",
+      "to": "sc_4_16",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_17",
+      "to": "sc_4_18",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "sc_4_18",
+      "to": "sc_4_17",
+      "speed": 70,
+      "description": "Atajo #4: San Fierro Doherty / Battery Pt"
+    },
+    {
+      "from": "33_637",
+      "to": "sc_4_1",
+      "speed": 60,
+      "description": "Entrada a Atajo #4 (Verde Lima) desde Node 33_637"
+    },
+    {
+      "from": "sc_4_1",
+      "to": "33_637",
+      "speed": 60,
+      "description": "Entrada a Atajo #4 (Verde Lima) desde Node 33_637"
+    },
+    {
+      "from": "sc_4_18",
+      "to": "33_23",
+      "speed": 60,
+      "description": "Salida de Atajo #4 (Verde Lima) hacia Node 33_23 (Sin retroceso)"
+    },
+    {
+      "from": "33_23",
+      "to": "sc_4_18",
+      "speed": 60,
+      "description": "Salida de Atajo #4 (Verde Lima) hacia Node 33_23 (Sin retroceso)"
+    }
+  ]
+}
