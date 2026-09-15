@@ -189,7 +189,10 @@ y = -1412.9
 z = 106.4
 ```
 
-Auto-samples every **3.5 meters** of movement or freefall, capturing the complete 3D shape of the trajectory.
+Auto-samples every **10.0 meters** of movement or freefall, capturing the complete 3D shape of the trajectory.
+The threshold lives in the `.cs` as `dist_sq >= 100.0`. Measured spacing across the imported shortcuts is
+10.33 m mean / 10.30 m median — the overshoot is the ground covered inside one 10 ms script tick.
+That matches the official network, whose median edge is 11.26 m (10.56 m over degree-2 corridors).
 
 ---
 
@@ -200,7 +203,7 @@ In-Game Recording          Import Tool                  Router
 ──────────────────         ─────────────────────        ──────────────
 samp_shortcut_recorder  →  tools/import-shortcuts.ts →  public/data/custom/
   (CLEO .cs)                 - snap to official nodes    shortcuts/<n>_name.json
-  → cleo/shortcuts.ini       - resample at ~10.5m
+  → cleo/shortcuts.ini       - copy points 1:1 (no resample)
                              - generate forward edges
                              - set oneWay flag if needed
 ```

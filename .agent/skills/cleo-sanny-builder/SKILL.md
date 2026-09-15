@@ -99,7 +99,7 @@ end
 > When the user toggles recording ON, **point #1 `{ pt: 1, x, y, z }` must be saved IMMEDIATELY** to the JSON file.
 > If the script only writes when `distance >= 10.0`, any short movement before toggling OFF will record **0 points**.
 > 
-> **Sampling rate:** Sample every **5.0 meters** with an audio click cue (`018C: play_sound 1137 at 0.0 0.0 0.0`) so the player hears confirmation while driving.
+> **Sampling rate:** Sample every **10.0 meters** (`dist_sq >= 100.0`) to match the official network's median node spacing of 11.26 m. Pair it with an audio click cue (`018C: play_sound 1137 at 0.0 0.0 0.0`) so the player hears confirmation while driving.
 
 ---
 

@@ -11,7 +11,7 @@
 //
 // FORMATO DE SALIDA (cleo/shortcuts.ini):
 //   Sección [id_pt] con claves x, y, z y sección [id] con total de puntos
-//   Muestreo automático continuo cada 3.5 metros mientras te mueves o caes
+//   Muestreo automático continuo cada 10.0 metros mientras te mueves o caes
 // ==============================================================================
 
 {$CLEO .cs}
@@ -198,7 +198,7 @@ end
 wait 300 // Anti-rebote
 
 // -----------------------------------------------------------------------------
-// 3. Muestreo Automático en segundo plano (cada 3.5 metros recorridos o caídos)
+// 3. Muestreo Automático en segundo plano (cada 10.0 metros recorridos o caídos)
 // -----------------------------------------------------------------------------
 :SAMPLE_TRAJECTORY
 if

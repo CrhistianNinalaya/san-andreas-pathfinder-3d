@@ -190,7 +190,10 @@ y = -1412.9
 z = 106.4
 ```
 
-Muestreo automático cada **3.5 metros** de movimiento o caída libre, capturando la forma 3D completa de la trayectoria.
+Muestreo automático cada **10.0 metros** de movimiento o caída libre, capturando la forma 3D completa de la trayectoria.
+El umbral vive en el `.cs` como `dist_sq >= 100.0`. La separación medida en los atajos importados es de
+10,33 m de media / 10,30 m de mediana — el sobrepaso es el terreno cubierto dentro de un tick de 10 ms.
+Eso coincide con la red oficial, cuya arista mediana es de 11,26 m (10,56 m en corredores de grado 2).
 
 ---
 
@@ -201,7 +204,7 @@ Grabación en Juego          Herramienta de Importación      Router
 ──────────────────          ──────────────────────────      ──────────────
 samp_shortcut_recorder  →   tools/import-shortcuts.ts   →  public/data/custom/
   (CLEO .cs)                  - snap a nodos oficiales      shortcuts/<n>_nombre.json
-  → cleo/shortcuts.ini         - remuestreo a ~10.5m
+  → cleo/shortcuts.ini         - copia puntos 1:1 (sin remuestreo)
                                - genera aristas forward
                                - oneWay si aplica
 ```
