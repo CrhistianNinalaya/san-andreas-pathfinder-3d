@@ -29,3 +29,6 @@ Thumbs.db
 .vscode/
 *.log
 
+
+# Import staging output (never committed; promote by hand)
+.import-staging/

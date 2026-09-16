@@ -200,13 +200,45 @@ Eso coincide con la red oficial, cuya arista mediana es de 11,26 m (10,56 m en c
 ### Pipeline Completo
 
 ```
-Grabación en Juego          Herramienta de Importación      Router
-──────────────────          ──────────────────────────      ──────────────
-samp_shortcut_recorder  →   tools/import-shortcuts.ts   →  public/data/custom/
-  (CLEO .cs)                  - snap a nodos oficiales      shortcuts/<n>_nombre.json
-  → cleo/shortcuts.ini         - copia puntos 1:1 (sin remuestreo)
-                               - genera aristas forward
-                               - oneWay si aplica
+Grabación en Juego          Herramienta de Importación   Curación manual        Router
+──────────────────          ──────────────────────────   ───────────────        ──────────────
+samp_shortcut_recorder  →   tools/import-shortcuts.ts →  quedarse con las    →  public/data/custom/
+  (CLEO .cs)                  - snap a nodos oficiales    tomas buenas           shortcuts/<n>_nombre.json
+  → cleo/shortcuts.ini        - copia puntos 1:1          corregir conectores
+                              - genera aristas forward    marcar oneWay
+                              - oneWay si aplica          recortar extremos
 ```
+
+> **La última flecha es manual, y a propósito.** Una sesión de grabación produce tomas, no
+> resultados: chocás, no te sale el salto del acantilado, volvés a grabar. Nada en la geometría
+> distingue una corrida limpia de una fallida — solo lo sabe quien la manejó. Por eso la salida
+> del importador es un *candidato*, y promover un candidato a
+> `public/data/custom/shortcuts/` es una decisión humana.
+
+> [!WARNING]
+> **No vuelvas a correr el importador esperando que regenere los atajos publicados.** Los
+> archivos en `public/data/custom/shortcuts/` fueron curados a mano (commits `df061fd`,
+> `f356216`): extremos recortados, conectores reapuntados a mejores nodos oficiales, `oneWay`
+> definido, aristas de cadena anotadas. El importador no sabe nada de eso y escribe sin
+> condiciones, y reconstruye `manifest.json` desde cero solo con los IDs presentes en el INI
+> actual.
+>
+> `.gitignore` excluye `*.ini`, así que las grabaciones crudas nunca se commitean — **el JSON
+> curado es la única copia.**
+
+El importador escribe por defecto en un directorio de staging descartable y se niega a publicar
+por su cuenta:
+
+```bash
+pnpm import-shortcuts                                   # -> .import-staging/shortcuts (se limpia en cada corrida)
+pnpm import-shortcuts ruta/a/shortcuts.ini              # INI explícito
+pnpm import-shortcuts --out-dir public/data/custom/shortcuts --force   # publicar, a propósito
+```
+
+Sin `--force` aborta si el destino ya tiene archivos de atajos, listándolos. También rechaza
+emitir un atajo configurado `oneWay: false` cuya geometría tenga un tramo intrepable, porque las
+aristas inversas saldrían lo bastante baratas como para que A\* mande al jugador a subir un
+acantilado. `GTA_SA_CLEO_DIR` apunta a la carpeta `cleo/` del juego cuando el INI no está copiado
+en el repo.
 
 > **Nota:** Los archivos fuente `.txt` deben compilarse a `.cs` con Sanny Builder antes de instalarlos en la carpeta `CLEO/` del juego. Ver [`.agent/skills/cleo-sanny-builder/SKILL.md`](.agent/skills/cleo-sanny-builder/SKILL.md) para instrucciones de compilación.

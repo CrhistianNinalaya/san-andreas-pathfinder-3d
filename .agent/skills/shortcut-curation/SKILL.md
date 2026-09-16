@@ -9,6 +9,35 @@ This skill codifies the rules, geometry, and algorithms required to transform ra
 
 ---
 
+## 0. Take Selection — manual, and not automatable
+
+A recording session produces **takes**, not results. The player crashes into a wall, misses the
+cliff jump, clips a lamppost mid-ramp, or simply takes a worse line than they did two attempts
+ago. All of these produce a perfectly well-formed trajectory: monotone point indices, ~10 m
+spacing, valid coordinates. **Nothing in the geometry distinguishes a clean run from a botched
+one.** A failed jump and a successful one differ only in where the player wanted to land.
+
+Therefore:
+
+* `tools/import-shortcuts.ts` produces **candidates**, never publishable data.
+* Promotion into `public/data/custom/shortcuts/` + `manifest.json` is a **human decision**, made
+  by whoever drove the run. Never automate this step, and never run the importer directly
+  against the published directory — it writes unconditionally and rebuilds the manifest from
+  scratch, and `.gitignore` excludes `*.ini`, so the curated JSON is the only surviving copy.
+* When several takes of the same shortcut exist in one INI, they occupy consecutive IDs. Keep
+  the best one and discard the rest *before* applying any of the geometry below; curating a take
+  you are going to throw away is wasted work.
+
+Reject a take outright when:
+
+- [ ] The trajectory doubles back on itself mid-run (crash + reverse + retry).
+- [ ] A jump or drop lands somewhere the player did not intend, even if it lands cleanly.
+- [ ] There is a long stationary cluster (< 1 m between consecutive points, repeated) — the
+      vehicle was stuck or respawning.
+- [ ] The run ends far from any official node (no merge candidate within $60\,\text{m}$).
+
+---
+
 ## 1. The 3 Systemic Distortions in Raw GPS Recordings
 
 When a player records trajectories in GTA San Andreas (e.g. via `samp_shortcut_recorder.cs`), three predictable geometric distortions occur:
@@ -84,9 +113,12 @@ Given raw recording points $P_1, P_2, \dots, P_m$:
 
 ## 4. Checklist for Curating Any Shortcut
 
+- [ ] Is this the take you actually meant to keep (see §0)?
 - [ ] Does $P_1$ start directly on, or snap forward into, the official junction node?
 - [ ] Are redundant points cruising along existing streets trimmed?
 - [ ] Is every intermediate segment spaced at approximately $10.5\,\text{m}$?
 - [ ] Does the exit edge point forward along the destination road ($\vec{v} \cdot \vec{d} > 0$)?
 - [ ] Does A* pathfinding generate a smooth route across the shortcut in both directions?
 - [ ] Do Vitest test suites and `pnpm run verify-graph` pass without warnings?
+- [ ] Were the files copied into `public/data/custom/shortcuts/` deliberately, and was
+      `manifest.json` updated by hand rather than regenerated?

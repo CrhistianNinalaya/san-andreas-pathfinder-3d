@@ -199,13 +199,42 @@ That matches the official network, whose median edge is 11.26 m (10.56 m over de
 ### Full Pipeline
 
 ```
-In-Game Recording          Import Tool                  Router
-──────────────────         ─────────────────────        ──────────────
-samp_shortcut_recorder  →  tools/import-shortcuts.ts →  public/data/custom/
-  (CLEO .cs)                 - snap to official nodes    shortcuts/<n>_name.json
-  → cleo/shortcuts.ini       - copy points 1:1 (no resample)
-                             - generate forward edges
+In-Game Recording          Import Tool                 Manual curation         Router
+──────────────────         ─────────────────────       ────────────────        ──────────────
+samp_shortcut_recorder  →  tools/import-shortcuts.ts →  keep the good takes  →  public/data/custom/
+  (CLEO .cs)                 - snap to official nodes    fix connectors          shortcuts/<n>_name.json
+  → cleo/shortcuts.ini       - copy points 1:1           set oneWay
+                             - generate forward edges    trim bad endpoints
                              - set oneWay flag if needed
 ```
+
+> **The last arrow is manual, and deliberately so.** A recording session produces takes, not
+> results: you crash, you miss the cliff jump, you re-record. Nothing in the geometry
+> distinguishes a clean run from a botched one — only the person who drove it knows. So the
+> importer's output is a *candidate*, and promoting a candidate into
+> `public/data/custom/shortcuts/` is a human decision.
+
+> [!WARNING]
+> **Do not re-run the importer expecting it to regenerate the shipped shortcuts.** The files
+> under `public/data/custom/shortcuts/` have been hand-curated (commits `df061fd`, `f356216`):
+> endpoints trimmed, connectors re-pointed at better official nodes, `oneWay` set, chain edges
+> annotated. The importer knows none of that and writes unconditionally, and it rebuilds
+> `manifest.json` from scratch containing only the IDs present in the current INI.
+>
+> `.gitignore` excludes `*.ini`, so the raw recordings are never committed — **the curated JSON
+> is the only copy.**
+
+The importer defaults to a disposable staging directory and refuses to publish on its own:
+
+```bash
+pnpm import-shortcuts                                   # -> .import-staging/shortcuts (wiped each run)
+pnpm import-shortcuts path/to/shortcuts.ini             # explicit INI
+pnpm import-shortcuts --out-dir public/data/custom/shortcuts --force   # publish, deliberately
+```
+
+Without `--force` it aborts if the target already holds shortcut files, listing them. It also
+refuses to emit a shortcut configured `oneWay: false` whose geometry contains an unclimbable
+segment, since the reverse edges would be cheap enough for A\* to route a player up a cliff.
+`GTA_SA_CLEO_DIR` points at the game's `cleo/` folder when the INI is not copied into the repo.
 
 > **Note:** `.txt` source files must be compiled to `.cs` using Sanny Builder before installation in the `CLEO/` game folder. See [`.agent/skills/cleo-sanny-builder/SKILL.md`](.agent/skills/cleo-sanny-builder/SKILL.md) for compilation instructions.
