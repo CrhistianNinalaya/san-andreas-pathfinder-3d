@@ -79,7 +79,8 @@ san-andreas-pathfinder-3d/
 │   └── pois.json
 │
 ├── tools/
-│   ├── verify-graph.ts      # Verificador de invariantes y componente gigante
+│   ├── loadNetworkFs.ts     # Lector en disco de las 3 capas (compartido por las CLI)
+│   ├── verify-graph.ts      # Invariantes por archivo + del grafo fusionado
 │   ├── bench-route.ts       # Benchmark A* contra línea base registrada
 │   └── import-shortcuts.ts  # Pipeline: trayectoria CLEO → JSON de atajo
 │
@@ -105,7 +106,7 @@ pnpm dev
 # Ejecutar tests unitarios con Vitest
 pnpm test
 
-# Verificar invariantes del grafo
+# Verificar invariantes del dataset (cada archivo oficial y el grafo fusionado)
 pnpm run verify-graph
 
 # Benchmark del motor A*
@@ -181,14 +182,21 @@ Script CLEO que graba una trayectoria 3D continua (saltos, curvas, caminos off-r
 
 Formato de salida (`shortcuts.ini`):
 ```ini
-[1_pt]        ; total de puntos para el atajo #1
-total = 40
+[meta]                ; cuántas trayectorias lleva escritas el grabador
+total_shortcuts = 6
 
-[1_1]         ; índice de punto dentro del atajo
+[1]                   ; atajo #1 — cantidad de puntos, se reescribe en cada muestra
+points = 23
+
+[1_1]                 ; atajo #1, punto #1
 x = -1389.0
 y = -1412.9
 z = 106.4
 ```
+
+Las secciones se llaman `<atajo>` para el conteo y `<atajo>_<punto>` para las coordenadas;
+`import-shortcuts.ts` matchea exactamente esas dos formas e ignora en silencio cualquier otra,
+así que un INI reparado a mano tiene que respetarlas.
 
 Muestreo automático cada **10.0 metros** de movimiento o caída libre, capturando la forma 3D completa de la trayectoria.
 El umbral vive en el `.cs` como `dist_sq >= 100.0`. La separación medida en los atajos importados es de
@@ -206,7 +214,8 @@ samp_shortcut_recorder  →   tools/import-shortcuts.ts →  quedarse con las   
   (CLEO .cs)                  - snap a nodos oficiales    tomas buenas           shortcuts/<n>_nombre.json
   → cleo/shortcuts.ini        - copia puntos 1:1          corregir conectores
                               - genera aristas forward    marcar oneWay
-                              - oneWay si aplica          recortar extremos
+                              - busca color/oneWay        recortar extremos
+                                por ID de grabación
 ```
 
 > **La última flecha es manual, y a propósito.** Una sesión de grabación produce tomas, no

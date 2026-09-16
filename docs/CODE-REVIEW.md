@@ -5,8 +5,13 @@
 Every number below is measured, not estimated. Reproduce with:
 
 ```bash
-node tools/verify-graph.mjs && node tools/bench-route.mjs
+pnpm verify-graph && pnpm bench
 ```
+
+> **Note:** both tools were `.mjs` when this review was written and are TypeScript now.
+> The baseline below is the official layer alone, before the CLEO shortcut pipeline existed.
+> The graph the app builds today is the three-layer merge — **29,308 nodes, 60,070 directed
+> edges, 198 one-way** — and `pnpm verify-graph` reports it as a second pass.
 
 ---
 
@@ -37,7 +42,7 @@ Both are fixable in a day. See [SPEC.md](../SPEC.md) Phase 0.
 | Graph build (main thread) | 147 ms | — |
 | Connected components | 31 | 19 |
 | Nodes outside giant component | **1,908 (6.6%)** | **1,261 (19.7%)** |
-| One-way edges | 0 | 0 |
+| One-way edges *(official layer only)* | 0 | 0 |
 | Packed binary would be | 602 KB (**9.4×** smaller) | 133 KB (8.4× smaller) |
 
 Route timings (median of 5, full network):

@@ -44,7 +44,7 @@ src/
   ui/           Handcrafted UI styles
   app/          Main App container
 public/data/    san_andreas_official_nodes.json, pois.json
-tools/          verify-graph.mjs, bench-route.ts
+tools/          verify-graph.ts, bench-route.ts, import-shortcuts.ts, loadNetworkFs.ts
 .agent/         skills/ and workflows/
 ```
 

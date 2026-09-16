@@ -79,7 +79,8 @@ san-andreas-pathfinder-3d/
 │   └── pois.json
 │
 ├── tools/
-│   ├── verify-graph.ts      # Dataset invariants & giant component verifier
+│   ├── loadNetworkFs.ts     # Disk loader for the 3 layers (shared by the CLI tools)
+│   ├── verify-graph.ts      # Per-file + merged-graph invariants
 │   ├── bench-route.ts       # A* benchmark against recorded baseline
 │   └── import-shortcuts.ts  # CLEO trajectory → shortcut JSON pipeline
 │
@@ -105,7 +106,7 @@ pnpm dev
 # Run Vitest unit tests
 pnpm test
 
-# Verify graph dataset invariants
+# Verify graph dataset invariants (each official file, then the merged 3-layer graph)
 pnpm run verify-graph
 
 # A* routing benchmark
@@ -180,14 +181,21 @@ A CLEO script that records a continuous 3D trajectory (jumps, curves, off-road p
 
 Output format (`shortcuts.ini`):
 ```ini
-[1_pt]        ; total point count for shortcut #1
-total = 40
+[meta]                ; how many trajectories the recorder has written
+total_shortcuts = 6
 
-[1_1]         ; point index within the shortcut
+[1]                   ; shortcut #1 — point count, rewritten on every sample
+points = 23
+
+[1_1]                 ; shortcut #1, point #1
 x = -1389.0
 y = -1412.9
 z = 106.4
 ```
+
+Section names are `<shortcut>` for the count and `<shortcut>_<point>` for the coordinates;
+`import-shortcuts.ts` matches exactly those two shapes and silently ignores anything else,
+so a hand-repaired INI has to follow them.
 
 Auto-samples every **10.0 meters** of movement or freefall, capturing the complete 3D shape of the trajectory.
 The threshold lives in the `.cs` as `dist_sq >= 100.0`. Measured spacing across the imported shortcuts is
@@ -205,7 +213,8 @@ samp_shortcut_recorder  →  tools/import-shortcuts.ts →  keep the good takes 
   (CLEO .cs)                 - snap to official nodes    fix connectors          shortcuts/<n>_name.json
   → cleo/shortcuts.ini       - copy points 1:1           set oneWay
                              - generate forward edges    trim bad endpoints
-                             - set oneWay flag if needed
+                             - look up colour/oneWay
+                               by recording-order ID
 ```
 
 > **The last arrow is manual, and deliberately so.** A recording session produces takes, not
