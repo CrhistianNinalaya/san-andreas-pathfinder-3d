@@ -4,11 +4,9 @@
  * Imports directly from src/engine/RoadGraph.ts.
  */
 
-import { readFileSync, existsSync } from 'node:fs';
-import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { RoadGraph } from '../src/engine/RoadGraph';
-import type { RawDataset } from '../src/engine/types';
+import { loadNetworkFromDisk } from './loadNetworkFs';
 
 interface OdPair {
   label: string;
@@ -40,80 +38,11 @@ const shortcutsPath =
   args.find((a) => a.startsWith('--shortcuts='))?.slice(12) ?? 'public/data/custom/shortcuts';
 
 const parseStart = performance.now();
-const data: RawDataset = JSON.parse(readFileSync(dataPath, 'utf8'));
-let customData: import('../src/engine/types').CustomNetworkDataset | undefined;
-try {
-  const mergedNodes: import('../src/engine/types').CustomNode[] = [];
-  const mergedEdges: import('../src/engine/types').CustomEdge[] = [];
-
-  // Layer 2: Official patches
-  if (existsSync(patchesPath)) {
-    const patches = JSON.parse(readFileSync(patchesPath, 'utf8')) as {
-      nodes?: import('../src/engine/types').CustomNode[];
-      edges?: import('../src/engine/types').CustomEdge[];
-    };
-    if (patches.nodes) mergedNodes.push(...patches.nodes);
-    if (patches.edges) mergedEdges.push(...patches.edges);
-  }
-
-  // Layer 3: Curated shortcuts
-  if (existsSync(shortcutsPath)) {
-    const manifestFile = path.join(shortcutsPath, 'manifest.json');
-    if (existsSync(manifestFile)) {
-      const manifest = JSON.parse(readFileSync(manifestFile, 'utf8')) as {
-        files?: string[];
-      };
-      for (const rel of manifest.files ?? []) {
-        const itemPath = path.join(shortcutsPath, rel);
-        if (existsSync(itemPath)) {
-          const item = JSON.parse(readFileSync(itemPath, 'utf8')) as {
-            id?: number | string;
-            color?: string;
-            description?: string;
-            oneWay?: boolean;
-            nodes?: import('../src/engine/types').CustomNode[];
-            edges?: import('../src/engine/types').CustomEdge[];
-          };
-          const parentColor = item.color;
-          const parentDesc = item.description;
-          if (item.nodes) {
-            for (const n of item.nodes) {
-              mergedNodes.push({
-                ...n,
-                isCustom: n.isCustom ?? true,
-                customType: 'shortcut',
-                color: n.color ?? parentColor
-              });
-            }
-          }
-          if (item.edges) {
-            for (const e of item.edges) {
-              mergedEdges.push({
-                ...e,
-                speed: e.speed ?? 70,
-                type: 'shortcut',
-                color: e.color ?? parentColor,
-                description: e.description ?? parentDesc,
-                oneWay: e.oneWay ?? item.oneWay
-              });
-            }
-          }
-        }
-      }
-    }
-  }
-
-  if (mergedNodes.length > 0 || mergedEdges.length > 0) {
-    customData = {
-      version: '1.0.0',
-      description: 'Combined official patches and curated shortcuts',
-      nodes: mergedNodes,
-      edges: mergedEdges
-    };
-  }
-} catch {
-  // custom network is optional
-}
+const { official: data, custom: customData } = loadNetworkFromDisk({
+  officialPath: dataPath,
+  patchesPath: patchesPath,
+  shortcutsDir: shortcutsPath
+});
 const parseMs = performance.now() - parseStart;
 
 const buildStart = performance.now();
