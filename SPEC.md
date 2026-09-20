@@ -83,7 +83,7 @@ build time  ──►  tools/pipeline (Python)  ──►  static artifacts  ─
 **This is the backend.** It is a pipeline, not a service. Its output is committed (or published to
 a CDN) and the frontend is a pure static site.
 
-### 3.3 One feature does need a runtime service — later
+### 3.3 Two features need a runtime service — later
 
 **Short links for shared routes.** A route with 8 waypoints encodes to ~120 characters in a URL,
 which is fine for a Discord paste but ugly. If we want `sapf.app/r/x7k2m`, we need persistence.
@@ -91,6 +91,16 @@ which is fine for a Discord paste but ugly. If we want `sapf.app/r/x7k2m`, we ne
 That is **one serverless function plus a KV store** (Vercel Functions + Vercel KV, or Cloudflare
 Workers + KV). Not a service, not a database, no auth. Deferred to Phase 5 and explicitly optional —
 Phase 3 ships full URL state without it.
+
+**Community route listing and voting (§7.9.5).** Browsing routes other players uploaded, and ranking
+them by votes or usage, is shared state by definition — `localStorage` cannot express it. This is the
+feature that actually forces the question this section deferred, and unlike short links it is not
+cosmetic: it is the difference between a contribution loop and a private import tool.
+
+It lands on the same infrastructure (one edge function + KV) but carries problems short links do not:
+abuse, a moderation queue, rate limiting, and a privacy surface. §7.9.5 therefore stages it —
+export-and-send first (no infrastructure at all), then a submit-only webhook, and the public listing
+last, as its own scoped phase. **Promotion into the curated set stays manual at every stage.**
 
 ### 3.4 Verdict
 
@@ -245,7 +255,7 @@ Not a UI library, so C1 permits it. Start without it.
 tools/pipeline/  (Python)
   extract_nodes.py    NODES.DAT ──────────► sanandreas.sapg      ~602 KB   (§6.2)
   build_tiles.py      144 × .txd ─────────► tiles/{z}/{x}/{y}.webp         (§6.4)
-  build_pois.py       curated + IPL/IDE ──► pois.json            ~40 KB    (§6.5)
+  build_pois.py       curated + IPL/IDE ──► pois.json            ~40 KB    (§6.5, §7.11.1)
   verify.py           all of the above ───► invariant report               (§6.6)
 ```
 
@@ -522,6 +532,303 @@ Since off-road shortcuts and stunt jumps are emergent player knowledge not prese
 4. **Community Datasets & Crowdsourcing:**
    - Shipped as a curated `data/shortcuts.json` in the repository, open to community PRs for roleplay servers.
 
+### 7.9 Community Route Contributions
+
+§7.8.3 lists four ways to acquire shortcut geometry. This section specifies the one that scales:
+players record their own trajectories with the CLEO recorder and load them into the app themselves.
+
+The governing constraint, established while curating the six shipped shortcuts: **a recording
+session produces takes, not results.** The player crashes, misses the cliff jump, or simply drives a
+worse line, and all of those produce a perfectly well-formed trajectory — monotone point indices,
+~10 m spacing, valid coordinates. Nothing in the geometry separates a clean run from a botched one.
+So a contributed route is always a *candidate*, never publishable data, and promotion into
+`public/data/custom/shortcuts/` stays a human decision.
+
+#### 7.9.1 In-browser INI import
+
+`tools/import-shortcuts.ts` parses `shortcuts.ini` today, but is coupled to `node:fs`. Extract the
+pure parser to `src/engine/parseShortcutsIni.ts`, mirroring what `src/engine/loadNetwork.ts` did for
+the three-layer merge — one implementation, two callers (CLI and browser).
+
+- **Entry point:** drag a `shortcuts.ini` onto the map, or a file picker. No upload; the file is read
+  with `FileReader` and never leaves the browser at this stage.
+- **Output:** one `UserRoute` per `[<id>]` section that survives validation (§7.9.3).
+- **Graph integration:** a **fourth layer**. `mergeCustomLayers` already composes patches + curated
+  shortcuts; it takes a third source. `RoadGraph` rebuilds in ~60 ms measured, so recomputing on
+  every import is viable without a loading state.
+
+#### 7.9.2 Node adjustment by drag — and the Z problem
+
+A raw recording sits where the *vehicle* was, not where the road *centreline* is. The curation skill
+quantifies the systematic offset at **5–7 m** perpendicular to the road axis, because players drive
+inside their lane. So contributors need to nudge nodes, and dragging on a 2D map is the natural
+gesture.
+
+**Dragging moves X and Y. It cannot produce Z.** That is the whole design problem here, and the
+model below exists to keep the error visible rather than to pretend it away.
+
+```typescript
+interface UserRouteNode {
+  id: string;
+  /** Exactly as the CLEO recorder wrote it. Never mutated, ever. */
+  recorded: GtaCoords;
+  /** Current position after manual adjustment. */
+  current: GtaCoords;
+  zSource: 'recorded' | 'inferred';
+}
+```
+
+`recorded` is immutable so drift is always measurable against ground truth and any adjustment can be
+reverted to the original reading.
+
+**Drift is reported as an estimated Z error, not as a distance.** A 12 m drag along a flat highway is
+harmless; the same drag across a hillside invalidates the altitude. The app already has the means to
+tell the difference — `ElevationPhysics.calculateSlope` over the node's neighbours:
+
+```typescript
+interface NodeDrift {
+  /** Metres between recorded and current X/Y. */
+  horizontal: number;
+  /** horizontal x |local slope|, from the segments either side of the node. */
+  estimatedZError: number;
+  severity: 'none' | 'caution' | 'high';
+}
+```
+
+| Severity | Trigger | UI |
+|---|---|---|
+| `none` | `horizontal <= 6 m` | no marker; this is lane-offset correction, the expected use |
+| `caution` | `horizontal <= 15 m` **or** `estimatedZError <= 1.5 m` | amber dot on the node, tooltip on hover |
+| `high` | beyond either | amber outline on the whole route, tooltip shown while dragging |
+
+Tooltip copy comes from the i18n dictionary (§7.5) and interpolates the real figure rather than
+showing a generic warning — e.g. *"moved 18 m from where CLEO recorded it · estimated altitude error
+≈ 3.2 m"*.
+
+**Hard cap: 40 m.** Past that the node is not being adjusted, it is being invented; the app refuses
+the drag and suggests re-recording the segment. 40 m is chosen against the measured network: the
+median official edge is **11.26 m**, so 40 m is roughly three nodes' worth of road — far enough that
+the point no longer describes the same place.
+
+**Marking directly on the map**, with no recording behind it, is permitted for standalone points but
+yields `zSource: 'inferred'`: Z is copied from the nearest official node. This is acceptable exactly
+where the surface is flat and well covered by the road network — the gas-station case in §7.11 — and
+is **not** acceptable for cliff jumps, bridges or overpasses, where a recorded Z must be required.
+
+#### 7.9.3 Validation before a user route touches the graph
+
+The guards `tools/import-shortcuts.ts` grew are not CLI conveniences; they are what keeps an
+uncurated recording from corrupting routing. All of them run in the browser, on import and again
+after any drag:
+
+| Check | Rejects |
+|---|---|
+| Finite coordinates | `1.#QNAN` / `-1.#IND` written during a load screen |
+| At least 2 usable points | a burnt recording ID |
+| Snap radius <= 60 m **and** abs(dz) <= 6 m | connectors that attach to the road *underneath* an overpass |
+| `MAX_CLIMBABLE_SLOPE = 0.5` on non-`oneWay` routes | reverse edges up a cliff face, which A\* prices cheaply and therefore prefers |
+| No dangling endpoints | an edge left pointing at a trimmed node |
+| No id collision with the official or curated layers | a custom node silently replacing an official one |
+| Weak giant == strongly-connected core | a route connected at one end only |
+
+The last one is the subtle case and the reason this list is not optional. A user route with only an
+exit connector still joins the weak giant, so `findNearestNode({ onlyGiant: true })` returns its
+nodes while `findShortestPath` returns `null` — the app tells the user a point is on the network and
+then cannot route to it.
+
+**A failed check never silently drops the route.** The importer's lesson applies: name the node and
+the rule, and let the contributor fix it by dragging.
+
+#### 7.9.4 Local persistence and export
+
+- **Storage:** `localStorage` under `sap_user_routes` for the MVP. A 116-node route is ~30 KB of
+  pretty JSON against a ~5 MB per-origin quota, so dozens of routes fit. **Migrate to IndexedDB**
+  past ~50 routes, or when binary geometry lands (§6.2).
+- **Limits stated in the UI:** per browser, per device, lost when site data is cleared. This is why
+  export exists.
+- **Export:** emits the same document shape `import-shortcuts.ts` produces, so a contributed file
+  drops straight into the curation workflow.
+
+#### 7.9.5 Submission, moderation and promotion
+
+**⚠ This is the feature that settles §3.3.** Route computation stays client-side and that verdict
+does not change. But "see what the community uploaded" and "recommend popular routes" are shared
+state: they cannot live in `localStorage` by definition.
+
+Three options, in increasing cost:
+
+| | Infrastructure | Gets you |
+|---|---|---|
+| **A · Export and send** | none | contributors download JSON and post it to Discord or open a PR. Promotion is already manual, so this works on day one. |
+| **B · Submit-only endpoint** | 1 edge function + webhook | a "Submit" button that posts the route to a Discord channel or opens a GitHub issue. No public listing, no votes. |
+| **C · Listing and votes** | edge function + KV | the full feature: browse others' routes, upvote, usage counters. |
+
+**Recommendation: ship A alongside §7.9.1–7.9.4, then B, and treat C as its own scoped phase.** A and
+B deliver the contribution loop with zero moving parts. C introduces the problems A and B do not
+have — abuse, a moderation queue, rate limiting, and a privacy surface (§7.9.6).
+
+For C, the minimum shape:
+
+```typescript
+interface RouteSubmission {
+  remoteId: string;
+  title: string;
+  author?: string;          // optional handle; never an account
+  route: UserRoute;
+  votes: number;
+  usageCount: number;       // times loaded into a route by any user
+  status: 'pending' | 'published' | 'rejected' | 'promoted';
+  submittedAt: number;
+}
+```
+
+- **Rate limit** submissions and votes per IP hash. No accounts, no auth — consistent with §3.
+- **Nothing is public until reviewed.** `pending` is the default; an unreviewed route is never served
+  to other users.
+- **Promotion is manual and stays manual.** Votes and usage produce a *ranked queue for review*,
+  never an automatic merge. A popular route is still a take somebody recorded, and §7.9's governing
+  constraint does not stop applying because ten people liked it. Promotion means running the curation
+  pass — trim endpoints, fix connectors, decide `oneWay` — and then committing into
+  `public/data/custom/shortcuts/` with `--out-dir ... --force`.
+
+#### 7.9.6 What a contributed route reveals
+
+A trajectory is a record of where a specific player drove, with timing implied by the 10 m sampling.
+Before option B or C ships:
+
+- Submission is **explicit and per route**, never automatic and never a background sync.
+- The optional author handle is free text. No account, no email, no identifier the app did not ask
+  for.
+- The UI says plainly that a submitted route becomes public if published.
+
+---
+
+### 7.10 Map Legend
+
+There is no legend anywhere in `src/` today, and the map now renders at least nine distinct visual
+states across three layers. Nothing tells a user what any of them mean.
+
+**Blocked on the label fix (§7.10.2).** A legend in English beside nodes reading
+`"Atajo #1 (Dorado) - Punto 1/23"` is worse than no legend.
+
+#### 7.10.1 Contents
+
+| Symbol | Meaning |
+|---|---|
+| Official node | Rockstar `NODES.DAT` traffic path |
+| Curated shortcut node | one of the six shipped routes, in that route's colour |
+| User route node | imported locally, not published (§7.9) |
+| Node with drift | adjusted beyond `caution` (§7.9.2) |
+| One-way edge | cliff drop or jump, forward only — the badge exists in the tooltip and nowhere else |
+| Patch edge | manual repair of the official network (`custom_network.json`) |
+| POI by `kind` | `landmark`, `safehouse`, `transport`, `hospital`, `military`, plus `gas` / `store` from §7.11 |
+| Origin / destination / waypoint | route endpoints |
+| Coincident node | the 7 measured positions holding two nodes; diagnostic toggle, off by default |
+
+- Collapsible panel, collapsed by default on mobile (§7.4).
+- Every entry is a **filter toggle**, not just a caption — clicking hides that class of geometry.
+  This is the cheapest possible version of an "avoid shortcuts" control, reusing `type` and `oneWay`,
+  which are already on every edge.
+
+#### 7.10.2 Prerequisite — labels must come from the dictionary
+
+`tools/import-shortcuts.ts` writes formatted display sentences into the shortcut JSON
+(`name: "Shortcut #1 (Gold) - Point 1/23"`) and `src/map-bridge/useNodesLayer.ts` renders
+`node.name` verbatim, so those strings bypass `src/i18n/translations.ts` entirely and show one
+language whatever the user picked. `public/data/pois.json` already does this correctly with
+`name: { en, es }`.
+
+**Fix:** the importer emits structured fields — shortcut id, colour token, point index and total —
+and the label is composed at render time from a translation key. Touches the importer, the curated
+JSON, and the popup renderers.
+
+---
+
+### 7.11 Fuel and Autonomy (SA-MP mode)
+
+**⚠ Scope caveat, stated up front:** vanilla GTA:SA has **no fuel system** — vehicles never run dry.
+Fuel is a SA-MP server script. So this is explicitly a *server mode*, its consumption constants are a
+convention we choose rather than a fact extracted from the game, and it ships behind a toggle that is
+off by default.
+
+#### 7.11.1 The station dataset is the work
+
+`public/data/pois.json` holds **14 entries** today: 6 `landmark`, 3 `safehouse`, 3 `transport`,
+1 `hospital`, 1 `military`. **Zero fuel stations, zero stores.** No amount of routing logic
+substitutes for this dataset, and it is also what §7.7's job circuits need.
+
+New `kind` values: `gas`, `store` (24/7, Cluckin' Bell, pizzeria), `ammunation`.
+
+**Z is not worth measuring per station.** Snap each station to its nearest official road node and
+take that node's Z. The graph can only reach a station through a road node anyway, so a station's own
+altitude never enters a cost calculation — only its position does, to pick the snap. Marking stations
+by clicking the map (§7.9.2, `zSource: 'inferred'`) is therefore sufficient here, and this is the
+case that justifies allowing inferred Z at all.
+
+```typescript
+interface FuelPoi {
+  id: string;
+  name: { en: string; es: string };   // matching the existing pois.json shape
+  kind: 'gas' | 'store' | 'ammunation';
+  x: number; y: number; z: number;
+  /** Official node the router actually uses to reach it. */
+  snapNodeId: string;
+  city: string;
+}
+```
+
+#### 7.11.2 Consumption model
+
+Reuse `ElevationPhysics` rather than inventing a second physics module. Uphill already reduces the
+speed response; the same response drives consumption, so climbing costs fuel per kilometre in the
+same proportion it costs time.
+
+```
+litresPerKm(segment) = baseRate(vehicleProfile) / getSlopeResponse(slope, slopeSensitivity)
+```
+
+`baseRate` is one constant per `VehicleProfileType`. The five profiles already differ in
+`nominalMultiplier` and `slopeSensitivity`, so the fuel model inherits vehicle differentiation for
+free.
+
+#### 7.11.3 Two tiers, ship the first
+
+**Tier 1 — advisory post-pass. No change to A\*.** Route as normal, then walk the resulting polyline
+accumulating consumption, and mark the point where the tank would run dry plus the last reachable
+station before it. Renders as a marker on the route and a band on the existing elevation chart
+(§7.6). This is a loop over an array the app already has.
+
+**Tier 2 — refuel stops as waypoints.** When Tier 1 finds the route unreachable, insert the chosen
+station into the waypoint list and re-route. `computeRoutes` already handles multi-stop trips and
+already fails the whole trip on an unroutable leg, so this is largely UI. Ordering is then handled by
+the TSP optimizer already specified in §7.7.3 — a refuel stop is an intermediate stop like any other.
+
+**Not specified: range-constrained A\*.** Treating fuel as a resource dimension inside the search
+multiplies the state space by the tank granularity. Tiers 1 and 2 answer the actual question ("where
+do I refuel on this run?") at a fraction of the cost. Revisit only if a concrete route is found that
+tiers 1 and 2 get wrong.
+
+#### 7.11.4 Job circuits
+
+The motivating case — gun-part runs and burglary routes touching pizzerias, 24/7s and gas stations —
+is §7.7.2 (route presets) plus §7.7.3 (TSP) plus this section's dataset. No new routing machinery:
+select a set of POI categories, the optimizer orders them, and the fuel pass says whether that order
+is drivable on one tank.
+
+---
+
+### 7.12 Stunt Jump Catalogue
+
+The 70 unique stunt jumps are a natural companion to the shortcut layer and share its data model
+(§7.8.1, `type: 'cliff_jump'`, `isUnidirectional: true`).
+
+**Priority: low, and honestly so.** Stunt jumps are a completionist feature; they do not help anyone
+find a better route for a server job, which is what every other section here exists for. Specified so
+the data model does not have to change later, scheduled last.
+
+**Explicitly out of scope: collectibles.** Tags, snapshots, horseshoes and oysters are single-player
+completion content. This tool targets SA-MP server play, where they do not exist.
+
 ---
 
 ## 8. Implementation plan
@@ -622,9 +929,50 @@ Zero inline styles (P2-4). Lighthouse ≥ 95 on performance and accessibility.
 
 ---
 
-### Phase 5 — Optional · unscoped
+### Phase 5 — Community contributions and logistics · ~14 days
 
-Custom Markers & SA-MP Job Presets (§7.7) · Shortcut & Offroad Network (§7.8) · TSP multi-stop route optimizer · Short links / shareable circuits (§3.3) · live frontier visualisation for the algorithm-curious · turn-by-turn navigation manoeuvres · PWA / offline · public train and flight network layers.
+Scoped out of what was previously "optional · unscoped". Ordered by dependency, not by appeal: the
+first two items unblock everything visual, and the POI dataset unblocks everything about fuel and
+job circuits. Three of the four headline features here are **blocked on data, not on code.**
+
+| # | Item | § | Days | Blocks |
+|---|---|---|---|---|
+| 1 | Labels from the dictionary, not the data | 7.10.2 | 1 | the legend, and every user-facing string in 7.9 |
+| 2 | Map legend with per-class filter toggles | 7.10 | 1 | — |
+| 3 | Expanded POI dataset (`gas`, `store`, `ammunation`) | 7.11.1 | 2 | fuel, job circuits |
+| 4 | Browser INI parser + fourth graph layer | 7.9.1 | 1.5 | all of 7.9 |
+| 5 | Browser-side validation of contributed routes | 7.9.3 | 1 | must land with 4, not after |
+| 6 | Drag adjustment, drift model, warning tooltip | 7.9.2 | 2 | — |
+| 7 | Local persistence and export (option A) | 7.9.4 | 1 | the contribution loop, with zero infrastructure |
+| 8 | TSP multi-stop optimizer | 7.7.3 | 1.5 | job circuits, refuel ordering |
+| 9 | Fuel tiers 1 and 2 | 7.11.3 | 2 | — |
+| 10 | PWA / offline | — | 1 | — |
+
+**Items 4 and 5 ship together or not at all.** A browser import without the validation guards is a
+way for any contributor to corrupt their own routing — an unclimbable reverse edge is cheap enough
+for A\* to prefer, and a one-ended route is offered as a snap target that then fails to route.
+
+**Exit:** a player records a trajectory in game, loads it in the browser, nudges it onto the road,
+and routes through it — without a server, and without being able to break the shipped network.
+
+---
+
+### Phase 6 — Public route listing · unscoped, gated on D8
+
+Option C of §7.9.5: the edge function, the KV store, votes, usage counters and the moderation queue.
+Held separately because it is the only thing in this document that turns a static site into something
+with an abuse surface and an operational cost. Options A and B in Phase 5 deliver the contribution
+loop without any of it.
+
+---
+
+### Not scheduled
+
+Short links (§3.3) · live frontier visualisation for the algorithm-curious · turn-by-turn navigation
+manoeuvres (§7.6) · public train and flight network layers · stunt jump catalogue (§7.12, specified
+but last).
+
+**Explicitly rejected:** single-player collectible routing (§7.12). Wrong audience.
 
 ---
 
@@ -638,8 +986,8 @@ Test the parts that are pure and the flows that would embarrass us. Nothing in b
 | `libs/ui` | Vitest + Testing Library | smoke | Renders, keyboard nav, ARIA. |
 | Features | Vitest + Testing Library | key flows | Reducer transitions, URL round-trip. |
 | App | Playwright | **3 tests** | Add A + B → route appears · shared URL restores identically · mobile sheet opens and routes. |
-| Datasets | `verify-graph.mjs` | invariants | Runs in CI on every push (§6.6). |
-| Performance | `bench-route.mjs --json` | regression | Fails CI if any median regresses > 20%. |
+| Datasets | `pnpm verify-graph` | invariants | Per-file **and** merged three-layer graph. Runs in CI on every push (§6.6). |
+| Performance | `pnpm bench --json` | regression | Fails CI if any median regresses > 20%. |
 
 Two non-obvious tests that matter more than their size suggests:
 
@@ -676,6 +1024,11 @@ Enforced in CI. A PR that breaks one of these fails.
 | D5 | Are GTA units labelled as metres, or as "units"? (P2-5) | Keep "km" and "min" — the audience thinks in game distances — but state the assumption in an info tooltip. |
 | D6 | Repo language: docs and code in English, UI in ES + EN? | Yes. Matches commit `2d7cbd4` and keeps the codebase contributable. |
 | D7 | Do we commit `.sapg` to git, or build it in CI? | Commit it. 818 KB, changes maybe twice a year, and it keeps `git clone && nx serve` working without Python. |
+| D8 | Does the public route listing (§7.9.5 option C, Phase 6) ship at all? | **Not until options A and B have real contributors.** It is the only feature here that adds an abuse surface and a running cost. Build the loop first, then find out whether anyone uses it. |
+| D9 | `localStorage` or IndexedDB for user routes? (§7.9.4) | `localStorage` for the MVP — ~30 KB per route against a ~5 MB quota. Migrate past ~50 routes, or when `.sapg` geometry lands. |
+| D10 | Is a map-marked point with inferred Z ever acceptable? (§7.9.2) | Only where the road network is flat and dense — fuel stations (§7.11.1). Never for cliff jumps, bridges or overpasses. Enforce with `zSource`, do not leave it to judgement. |
+| D11 | Drag cap of 40 m — right number? (§7.9.2) | Provisional. It is ~3.5 median official edges (11.26 m). Revisit once real contributors hit it; the severity thresholds matter more than the cap. |
+| D12 | Who harvests the expanded POI dataset? (§7.11.1) | Open. It is the single largest unblocked dependency in Phase 5 and it is not a coding task. The CLEO HUD would be the tool for it, once it prints sub-metre coordinates (review-1 P2-3). |
 
 ---
 
@@ -688,6 +1041,15 @@ Enforced in CI. A PR that breaks one of these fails.
 | 2 · Binary + worker | 4 | 8 |
 | 3 · React UI | 5 | 13 |
 | 4 · Product features | 5 | 18 |
+| 5 · Community + logistics | 14 | 32 |
 
 **~18 focused days to the target in §1.** Phases 0–2 are the ones with hard numbers attached, and
 they are the ones that make everything after them cheap.
+
+Phase 5 nearly doubles that, and the split is worth seeing plainly: of its 14 days, **2 are pure data
+harvesting** (§7.11.1) and **1 is paying off a defect** (§7.10.2, labels baked into the data). The
+remaining 11 are feature work, and about half of it is guard rails — validating contributed geometry
+so a stranger's recording cannot corrupt someone else's routing. That ratio is not overhead; it is
+what makes accepting outside data possible at all.
+
+Phase 6 is deliberately unestimated. See D8.
