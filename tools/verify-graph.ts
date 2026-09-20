@@ -40,6 +40,8 @@ interface DatasetReport {
   oneWay: number;
   components: number;
   giant: number;
+  strongGiant: number;
+  strongComponents: number;
   orphaned: number;
   orphanShare: number;
   binaryBytes: number;
@@ -127,6 +129,152 @@ function componentSizes(nodeCount: number, edges: RawDataset['edges'], indexOf: 
   return [...counts.values()].sort((a, b) => b - a);
 }
 
+interface GraphAdjacency {
+  readonly adj: number[][];
+  readonly transpose: number[][];
+}
+
+interface BuildGraphOptions {
+  readonly nodeCount: number;
+  readonly edges: RawDataset['edges'];
+  readonly indexOf: Map<string, number>;
+}
+
+function buildGraphAndTranspose(options: BuildGraphOptions): GraphAdjacency {
+  const { nodeCount, edges, indexOf } = options;
+  const adj: number[][] = Array.from({ length: nodeCount }, () => []);
+  const transpose: number[][] = Array.from({ length: nodeCount }, () => []);
+
+  for (const edge of edges) {
+    const u = indexOf.get(String(edge.from));
+    const v = indexOf.get(String(edge.to));
+    if (u !== undefined && v !== undefined) {
+      adj[u]?.push(v);
+      transpose[v]?.push(u);
+    }
+  }
+
+  return { adj, transpose };
+}
+
+function advanceDfs(
+  top: { u: number; edgeIdx: number },
+  options: { readonly adj: number[][]; readonly visited: Uint8Array }
+): number | null {
+  const neighbors = options.adj[top.u] ?? [];
+  if (top.edgeIdx >= neighbors.length) return null;
+
+  const v = neighbors[top.edgeIdx];
+  top.edgeIdx++;
+  if (v === undefined || options.visited[v]) return null;
+
+  options.visited[v] = 1;
+  return v;
+}
+
+function runDfsFromNode(
+  startNode: number,
+  options: {
+    readonly adj: number[][];
+    readonly visited: Uint8Array;
+    readonly order: number[];
+    orderIdx: number;
+  }
+): number {
+  const { adj, visited, order } = options;
+  let idx = options.orderIdx;
+  const dfsStack: { u: number; edgeIdx: number }[] = [{ u: startNode, edgeIdx: 0 }];
+  visited[startNode] = 1;
+
+  while (dfsStack.length > 0) {
+    const top = dfsStack.at(-1);
+    if (!top) break;
+
+    const nextNode = advanceDfs(top, { adj, visited });
+    if (nextNode !== null) {
+      dfsStack.push({ u: nextNode, edgeIdx: 0 });
+    } else {
+      dfsStack.pop();
+      order[idx++] = top.u;
+    }
+  }
+
+  return idx;
+}
+
+function computeDfsOrder(nodeCount: number, adj: number[][]): number[] {
+  const visited = new Uint8Array(nodeCount);
+  const order: number[] = new Array(nodeCount);
+  let orderIdx = 0;
+
+  for (let i = 0; i < nodeCount; i++) {
+    if (visited[i]) continue;
+    orderIdx = runDfsFromNode(i, { adj, visited, order, orderIdx });
+  }
+
+  return order;
+}
+
+function traverseTransposeComponent(
+  root: number,
+  options: {
+    readonly currentScc: number;
+    readonly transpose: number[][];
+    readonly sccComponent: Int32Array;
+  }
+): number {
+  const { currentScc, transpose, sccComponent } = options;
+  const stack: number[] = [root];
+  sccComponent[root] = currentScc;
+  let currentSize = 0;
+
+  while (stack.length > 0) {
+    const u = stack.pop();
+    if (u === undefined) break;
+    currentSize++;
+
+    const revNeighbors = transpose[u] ?? [];
+    for (const v of revNeighbors) {
+      if (sccComponent[v] === -1) {
+        sccComponent[v] = currentScc;
+        stack.push(v);
+      }
+    }
+  }
+
+  return currentSize;
+}
+
+function collectSccSizes(order: number[], transpose: number[][]): number[] {
+  const nodeCount = order.length;
+  const sccComponent = new Int32Array(nodeCount).fill(-1);
+  const sccSizes: number[] = [];
+
+  for (let i = nodeCount - 1; i >= 0; i--) {
+    const root = order[i];
+    if (root === undefined || sccComponent[root] !== -1) continue;
+
+    const currentScc = sccSizes.length;
+    const size = traverseTransposeComponent(root, { currentScc, transpose, sccComponent });
+    sccSizes.push(size);
+  }
+
+  return sccSizes.sort((a, b) => b - a);
+}
+
+/** Strongly connected components (SCC) via Kosaraju's algorithm for directed graph integrity. */
+function stronglyConnectedComponentSizes(
+  nodeCount: number,
+  edges: RawDataset['edges'],
+  indexOf: Map<string, number>
+): number[] {
+  if (nodeCount === 0) return [];
+
+  const { adj, transpose } = buildGraphAndTranspose({ nodeCount, edges, indexOf });
+  const order = computeDfsOrder(nodeCount, adj);
+  return collectSccSizes(order, transpose);
+}
+
 function validateNodes(nodes: RawDataset['nodes']): NodeValidationResult {
   const indexOf = new Map<string, number>();
   const duplicateIds: string[] = [];
@@ -134,8 +282,7 @@ function validateNodes(nodes: RawDataset['nodes']): NodeValidationResult {
   let namedNodes = 0;
   let nonFiniteZ = 0;
 
-  for (let i = 0; i < nodes.length; i++) {
-    const node = nodes[i];
+  for (const [i, node] of nodes.entries()) {
     if (!node) continue;
 
     const id = String(node.id);
@@ -424,6 +571,9 @@ function analyzeDataset(path: string, bytes: number, data: RawDataset): DatasetR
   const giant = components[0] ?? 0;
   const orphaned = nodes.length - giant;
 
+  const strongComponents = stronglyConnectedComponentSizes(nodes.length, edges, nodeStats.indexOf);
+  const strongGiant = strongComponents[0] ?? 0;
+
   const undirectedEdges = oneWay + reciprocal / 2;
   const binaryBytes = nodes.length * 12 + Math.round(undirectedEdges) * 9;
 
@@ -445,6 +595,8 @@ function analyzeDataset(path: string, bytes: number, data: RawDataset): DatasetR
     oneWay,
     components: components.length,
     giant,
+    strongGiant,
+    strongComponents: strongComponents.length,
     orphaned,
     orphanShare: nodes.length ? orphaned / nodes.length : 0,
     binaryBytes
@@ -495,36 +647,69 @@ function kb(n: number): string {
   return `${(n / 1024).toFixed(0)} KB`;
 }
 
+interface InvariantCheck {
+  readonly label: string;
+  readonly ok: boolean;
+  readonly detail: string;
+}
+
+function getInvariantChecks(r: DatasetReport): InvariantCheck[] {
+  return [
+    {
+      label: 'unique node ids',
+      ok: r.duplicateIds.length === 0,
+      detail: `${r.duplicateIds.length} duplicates`
+    },
+    {
+      label: 'no dangling edge endpoints',
+      ok: r.dangling.length === 0,
+      detail: `${r.dangling.length} edges reference missing nodes`
+    },
+    {
+      label: 'no duplicate edges',
+      ok: r.duplicateEdges.length === 0,
+      detail: `${r.duplicateEdges.length} repeated pairs`
+    },
+    {
+      label: 'no self loops',
+      ok: r.selfLoops.length === 0,
+      detail: `${r.selfLoops.length} found`
+    },
+    {
+      label: `all nodes inside [${WORLD_MIN}, ${WORLD_MAX}]`,
+      ok: r.outOfBounds.length === 0,
+      detail: `${r.outOfBounds.length} outside`
+    },
+    {
+      label: 'every node has a finite z',
+      ok: r.nonFiniteZ === 0,
+      detail: `${r.nonFiniteZ} missing or NaN`
+    },
+    {
+      label: `giant component holds ≥${MIN_GIANT_COMPONENT_SHARE * 100}% of nodes`,
+      ok: r.orphanShare <= 1 - MIN_GIANT_COMPONENT_SHARE,
+      detail: `${r.orphaned.toLocaleString()} nodes (${(r.orphanShare * 100).toFixed(1)}%) are unreachable from it`
+    },
+    {
+      label: 'weak giant component matches strongly-connected core',
+      ok: r.giant === r.strongGiant,
+      detail: `weak giant has ${r.giant.toLocaleString()} nodes but strong core has only ${r.strongGiant.toLocaleString()}`
+    }
+  ];
+}
+
 function reportInvariants(
   r: DatasetReport,
   logSuccess: (label: string) => void,
   logProblem: (label: string, detail: string) => void
 ): void {
-  if (r.duplicateIds.length === 0) logSuccess('unique node ids');
-  else logProblem('unique node ids', `${r.duplicateIds.length} duplicates`);
-
-  if (r.dangling.length === 0) logSuccess('no dangling edge endpoints');
-  else logProblem('no dangling edge endpoints', `${r.dangling.length} edges reference missing nodes`);
-
-  if (r.duplicateEdges.length === 0) logSuccess('no duplicate edges');
-  else logProblem('no duplicate edges', `${r.duplicateEdges.length} repeated pairs`);
-
-  if (r.selfLoops.length === 0) logSuccess('no self loops');
-  else logProblem('no self loops', `${r.selfLoops.length} found`);
-
-  if (r.outOfBounds.length === 0) logSuccess(`all nodes inside [${WORLD_MIN}, ${WORLD_MAX}]`);
-  else logProblem(`all nodes inside [${WORLD_MIN}, ${WORLD_MAX}]`, `${r.outOfBounds.length} outside`);
-
-  if (r.nonFiniteZ === 0) logSuccess('every node has a finite z');
-  else logProblem('every node has a finite z', `${r.nonFiniteZ} missing or NaN`);
-
-  if (r.orphanShare <= 1 - MIN_GIANT_COMPONENT_SHARE) {
-    logSuccess(`giant component holds ≥${MIN_GIANT_COMPONENT_SHARE * 100}% of nodes`);
-  } else {
-    logProblem(
-      `giant component holds ≥${MIN_GIANT_COMPONENT_SHARE * 100}% of nodes`,
-      `${r.orphaned.toLocaleString()} nodes (${(r.orphanShare * 100).toFixed(1)}%) are unreachable from it`
-    );
+  const checks = getInvariantChecks(r);
+  for (const check of checks) {
+    if (check.ok) {
+      logSuccess(check.label);
+    } else {
+      logProblem(check.label, check.detail);
+    }
   }
 
   if (r.oneWayViolations) {
@@ -569,7 +754,7 @@ function report(r: DatasetReport): { problems: string[]; warnings: string[] } {
   reportInvariants(r, logSuccess, logProblem);
 
   console.log(`  · speeds present: ${r.speeds.join(', ')} km/h (heuristic must assume ≥ ${Math.ceil(r.maxNominalSpeed * 1.1)})`);
-  console.log(`  · components: ${r.components} — giant ${r.giant.toLocaleString()}, orphaned ${r.orphaned.toLocaleString()}`);
+  console.log(`  · components: ${r.components} weak, ${r.strongComponents} strong — giant ${r.giant.toLocaleString()}, orphaned ${r.orphaned.toLocaleString()}`);
   console.log(`  · one-way edges: ${r.oneWay.toLocaleString()} of ${r.edgeCount.toLocaleString()}`);
   if (r.strongCore !== undefined) {
     console.log(`  · strongly-connected core: ${r.strongCore.toLocaleString()} of ${r.giant.toLocaleString()} in the weak giant`);

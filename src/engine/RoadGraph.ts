@@ -40,6 +40,34 @@ interface RelaxNeighborsOptions {
   frontier: MinHeap<string>;
 }
 
+interface DfsState {
+  u: number;
+  idList: string[];
+  nodeIndexMap: Map<string, number>;
+  visited: Uint8Array;
+  order: number[];
+  orderIdx: number;
+}
+
+interface DfsNeighborOptions {
+  top: { u: number; edgeIdx: number };
+  neighbors: AdjacencyEdge[];
+  nodeIndexMap: Map<string, number>;
+  visited: Uint8Array;
+}
+
+interface ScanGridOptions {
+  x: number;
+  y: number;
+  onlyGiant: boolean;
+  best: { nearest: GraphNode | null; minDist: number };
+}
+
+interface RingScanOptions extends ScanGridOptions {
+  cx: number;
+  cy: number;
+}
+
 export class RoadGraph {
   public nodes = new Map<string, GraphNode>();
   public adjacencyList = new Map<string, AdjacencyEdge[]>();
@@ -77,27 +105,35 @@ export class RoadGraph {
       ? [...data.edges, ...customData.edges]
       : data.edges;
 
-    const nodeIndexMap = this._populateNodesAndGrid(mergedNodes);
-    const parent = this._initUnionFind(mergedNodes.length);
-    const maxEdgeSpeed = this._populateAdjacencyAndUnionFind(mergedEdges, nodeIndexMap, parent);
-    const giantRoot = this._calculateGiantComponent(mergedNodes.length, parent);
-    this._classifyNodesByComponent(mergedNodes, parent, giantRoot);
+    const { nodeIndexMap, idList } = this._populateNodesAndGrid(mergedNodes);
+    const maxEdgeSpeed = this._populateAdjacency(mergedEdges);
+    this._calculateStronglyConnectedComponents(idList, nodeIndexMap);
 
     this.maxSpeedKmh = Math.max(110, maxEdgeSpeed);
   }
 
   /**
-   * Builds nodes Map and spatial hash grid
+   * Builds nodes Map and spatial hash grid, guarding against cross-layer duplicate IDs
    */
-  private _populateNodesAndGrid(rawNodes: RawDataset['nodes']): Map<string, number> {
+  private _populateNodesAndGrid(rawNodes: RawDataset['nodes']): {
+    nodeIndexMap: Map<string, number>;
+    idList: string[];
+  } {
     const nodeIndexMap = new Map<string, number>();
+    const idList: string[] = [];
 
-    for (let i = 0; i < rawNodes.length; i++) {
-      const node = rawNodes[i];
+    for (const node of rawNodes) {
       if (!node) continue;
 
       const idStr = String(node.id);
-      nodeIndexMap.set(idStr, i);
+      if (this.nodes.has(idStr)) {
+        console.warn(`Duplicate node ID '${idStr}' detected across layers. Skipping duplicate entry.`);
+        continue;
+      }
+
+      const assignedIndex = idList.length;
+      nodeIndexMap.set(idStr, assignedIndex);
+      idList.push(idStr);
 
       const nodeObj: GraphNode = {
         id: idStr,
@@ -124,48 +160,29 @@ export class RoadGraph {
       cell.push(nodeObj);
     }
 
-    return nodeIndexMap;
+    return { nodeIndexMap, idList };
   }
 
   /**
-   * Initializes Union-Find parent array
+   * Prunes any existing reverse edge from toId going to fromId (P1-1)
    */
-  private _initUnionFind(nodeCount: number): Int32Array {
-    const parent = new Int32Array(nodeCount);
-    for (let i = 0; i < nodeCount; i++) {
-      parent[i] = i;
+  private _pruneReverseEdge(fromId: string, toId: string): void {
+    const toList = this.adjacencyList.get(toId);
+    if (!toList) return;
+
+    const filtered = toList.filter((e) => e.to !== fromId);
+    if (filtered.length !== toList.length) {
+      console.warn(`Removed prior reverse edge ${toId}->${fromId} due to oneWay assertion on ${fromId}->${toId}`);
+      this.adjacencyList.set(toId, filtered);
     }
-    return parent;
   }
 
   /**
-   * Finds the root of a set in Union-Find with path compression
+   * Builds adjacency lists and enforces oneWay edge constraints
    */
-  private _findRoot(parent: Int32Array, nodeIdx: number): number {
-    let curr = nodeIdx;
-    while (true) {
-      const parentCurr = parent[curr];
-      if (parentCurr === undefined || parentCurr === curr) {
-        break;
-      }
-      const grandParent = parent[parentCurr];
-      if (grandParent !== undefined) {
-        parent[curr] = grandParent;
-      }
-      curr = parentCurr;
-    }
-    return curr;
-  }
-
-  /**
-   * Builds adjacency lists and links connected components
-   */
-  private _populateAdjacencyAndUnionFind(
-    edges: RawDataset['edges'],
-    nodeIndexMap: Map<string, number>,
-    parent: Int32Array
-  ): number {
+  private _populateAdjacency(edges: RawDataset['edges']): number {
     let maxEdgeSpeed = 0;
+    const oneWayEdgeKeys = new Set<string>();
 
     for (const edge of edges) {
       const fromId = String(edge.from);
@@ -173,16 +190,22 @@ export class RoadGraph {
 
       const n1 = this.nodes.get(fromId);
       const n2 = this.nodes.get(toId);
-      if (!n1 || !n2) continue;
+      if (!n1) continue;
+      if (!n2) continue;
 
-      const idx1 = nodeIndexMap.get(fromId);
-      const idx2 = nodeIndexMap.get(toId);
-      if (idx1 !== undefined && idx2 !== undefined) {
-        const root1 = this._findRoot(parent, idx1);
-        const root2 = this._findRoot(parent, idx2);
-        if (root1 !== root2) {
-          parent[root1] = root2;
-        }
+      const customEdge = edge as import('./types').CustomEdge;
+      const isOneWay = customEdge.oneWay === true;
+
+      // If this edge is the reverse of an existing oneWay edge, reject it (P1-1)
+      const reverseKey = `${toId}->${fromId}`;
+      if (oneWayEdgeKeys.has(reverseKey)) {
+        console.warn(`Suppressed reverse edge ${fromId}->${toId} conflicting with oneWay edge ${reverseKey}`);
+        continue;
+      }
+
+      if (isOneWay) {
+        oneWayEdgeKeys.add(`${fromId}->${toId}`);
+        this._pruneReverseEdge(fromId, toId);
       }
 
       const nominalSpeed = edge.speed ?? 80;
@@ -194,69 +217,226 @@ export class RoadGraph {
       const slope = ElevationPhysics.calculateSlope(n1, n2);
 
       const fromList = this.adjacencyList.get(fromId);
-      if (fromList) {
-        const customEdge = edge as import('./types').CustomEdge;
-        const isCustom = customEdge.type !== undefined;
-        fromList.push({
-          to: toId,
-          distance: dist3D,
-          slope,
-          slopePercent: Math.round(slope * 100),
-          nominalSpeed,
-          isCustom,
-          type: customEdge.type,
-          color: customEdge.color,
-          description: customEdge.description,
-          oneWay: customEdge.oneWay
-        });
-      }
+      if (!fromList) continue;
+
+      fromList.push({
+        to: toId,
+        distance: dist3D,
+        slope,
+        slopePercent: Math.round(slope * 100),
+        nominalSpeed,
+        isCustom: customEdge.type !== undefined,
+        type: customEdge.type,
+        color: customEdge.color,
+        description: customEdge.description,
+        oneWay: isOneWay
+      });
     }
 
     return maxEdgeSpeed;
   }
 
   /**
-   * Calculates the giant connected component root and size
+   * Explores the next unvisited neighbor during iterative DFS traversal
    */
-  private _calculateGiantComponent(nodeCount: number, parent: Int32Array): number {
-    const componentCounts = new Map<number, number>();
-    for (let i = 0; i < nodeCount; i++) {
-      const root = this._findRoot(parent, i);
-      componentCounts.set(root, (componentCounts.get(root) ?? 0) + 1);
-    }
+  private _dfsExploreNextNeighbor(options: DfsNeighborOptions): number | null {
+    const { top, neighbors, nodeIndexMap, visited } = options;
+    const edge = neighbors[top.edgeIdx];
+    top.edgeIdx++;
+    if (!edge) return null;
 
-    let maxComponentSize = 0;
-    let giantRoot = 0;
-    for (const [root, count] of componentCounts.entries()) {
-      if (count > maxComponentSize) {
-        maxComponentSize = count;
-        giantRoot = root;
-      }
-    }
+    const v = nodeIndexMap.get(edge.to);
+    if (v === undefined) return null;
+    if (visited[v]) return null;
 
-    this.giantComponentRoot = giantRoot;
-    this.totalGiantNodes = maxComponentSize;
-    return giantRoot;
+    visited[v] = 1;
+    return v;
   }
 
   /**
-   * Labels each graph node with its component id and giant flag
+   * Performs an iterative DFS from start node to record finishing order
    */
-  private _classifyNodesByComponent(
-    rawNodes: RawDataset['nodes'],
-    parent: Int32Array,
-    giantRoot: number
-  ): void {
-    for (let i = 0; i < rawNodes.length; i++) {
-      const node = rawNodes[i];
-      if (!node) continue;
-      const nodeObj = this.nodes.get(String(node.id));
-      if (nodeObj) {
-        const root = this._findRoot(parent, i);
-        nodeObj.componentId = root;
-        nodeObj.isGiantComponent = root === giantRoot;
+  private _dfsIterative(state: DfsState): number {
+    const { u, idList, nodeIndexMap, visited, order } = state;
+    let orderIdx = state.orderIdx;
+    const dfsStack: { u: number; edgeIdx: number }[] = [{ u, edgeIdx: 0 }];
+    visited[u] = 1;
+
+    while (dfsStack.length > 0) {
+      const top = dfsStack.at(-1);
+      if (!top) break;
+
+      const uId = idList[top.u];
+      const neighbors = uId ? this.adjacencyList.get(uId) : undefined;
+
+      if (neighbors && top.edgeIdx < neighbors.length) {
+        const nextNode = this._dfsExploreNextNeighbor({ top, neighbors, nodeIndexMap, visited });
+        if (nextNode !== null) {
+          dfsStack.push({ u: nextNode, edgeIdx: 0 });
+        }
+      } else {
+        dfsStack.pop();
+        order[orderIdx++] = top.u;
       }
     }
+
+    return orderIdx;
+  }
+
+  /**
+   * Computes DFS finish order on the original graph
+   */
+  private _computeDfsFinishOrder(idList: string[], nodeIndexMap: Map<string, number>): number[] {
+    const nodeCount = idList.length;
+    const visited = new Uint8Array(nodeCount);
+    const order: number[] = new Array(nodeCount);
+    let orderIdx = 0;
+
+    for (let i = 0; i < nodeCount; i++) {
+      if (visited[i]) continue;
+      orderIdx = this._dfsIterative({ u: i, idList, nodeIndexMap, visited, order, orderIdx });
+    }
+
+    return order;
+  }
+
+  /**
+   * Builds the transposed (reversed edges) graph
+   */
+  private _buildTransposedGraph(idList: string[], nodeIndexMap: Map<string, number>): number[][] {
+    const nodeCount = idList.length;
+    const transpose: number[][] = Array.from({ length: nodeCount }, () => []);
+
+    for (const [u, uId] of idList.entries()) {
+      const neighbors = this.adjacencyList.get(uId);
+      if (!neighbors) continue;
+      for (const edge of neighbors) {
+        const v = nodeIndexMap.get(edge.to);
+        if (v !== undefined) {
+          transpose[v]?.push(u);
+        }
+      }
+    }
+
+    return transpose;
+  }
+
+  /**
+   * Traverses an SCC in the transposed graph
+   */
+  private _dfsTransposeVisit(
+    root: number,
+    options: { currentScc: number; transpose: number[][]; sccComponent: Int32Array }
+  ): number {
+    const { currentScc, transpose, sccComponent } = options;
+    const stack: number[] = [root];
+    sccComponent[root] = currentScc;
+    let currentSize = 0;
+
+    while (stack.length > 0) {
+      const u = stack.pop();
+      if (u === undefined) break;
+      currentSize++;
+
+      const revNeighbors = transpose[u];
+      if (!revNeighbors) continue;
+
+      for (const v of revNeighbors) {
+        if (sccComponent[v] === -1) {
+          sccComponent[v] = currentScc;
+          stack.push(v);
+        }
+      }
+    }
+
+    return currentSize;
+  }
+
+  /**
+   * Assigns SCC IDs by running DFS on the transposed graph in reverse finish order
+   */
+  private _assignSccComponents(order: number[], transpose: number[][]): {
+    sccComponent: Int32Array;
+    sccSizes: Map<number, number>;
+  } {
+    const nodeCount = order.length;
+    const sccComponent = new Int32Array(nodeCount).fill(-1);
+    const sccSizes = new Map<number, number>();
+    let sccCount = 0;
+
+    for (let i = nodeCount - 1; i >= 0; i--) {
+      const root = order[i];
+      if (root === undefined) continue;
+      if (sccComponent[root] !== -1) continue;
+
+      const currentScc = sccCount++;
+      const size = this._dfsTransposeVisit(root, { currentScc, transpose, sccComponent });
+      sccSizes.set(currentScc, size);
+    }
+
+    return { sccComponent, sccSizes };
+  }
+
+  /**
+   * Finds the giant strongly connected component
+   */
+  private _findGiantScc(sccSizes: Map<number, number>): { giantSccId: number; maxSccSize: number } {
+    let maxSccSize = 0;
+    let giantSccId = 0;
+
+    for (const [sccId, size] of sccSizes.entries()) {
+      if (size > maxSccSize) {
+        maxSccSize = size;
+        giantSccId = sccId;
+      }
+    }
+
+    return { giantSccId, maxSccSize };
+  }
+
+  /**
+   * Classifies nodes with componentId and isGiantComponent
+   */
+  private _classifySccNodes(options: {
+    idList: string[];
+    sccComponent: Int32Array;
+    giantSccId: number;
+  }): void {
+    const { idList, sccComponent, giantSccId } = options;
+
+    for (const [i, idStr] of idList.entries()) {
+      const nodeObj = this.nodes.get(idStr);
+      if (nodeObj) {
+        const comp = sccComponent[i] ?? -1;
+        nodeObj.componentId = comp;
+        nodeObj.isGiantComponent = comp === giantSccId;
+      }
+    }
+  }
+
+  /**
+   * Calculates Strongly Connected Components (SCC) using Kosaraju's algorithm
+   * to accurately classify the giant routable component on directed graphs (P1-2).
+   */
+  private _calculateStronglyConnectedComponents(
+    idList: string[],
+    nodeIndexMap: Map<string, number>
+  ): void {
+    if (idList.length === 0) {
+      this.giantComponentRoot = 0;
+      this.totalGiantNodes = 0;
+      return;
+    }
+
+    const order = this._computeDfsFinishOrder(idList, nodeIndexMap);
+    const transpose = this._buildTransposedGraph(idList, nodeIndexMap);
+    const { sccComponent, sccSizes } = this._assignSccComponents(order, transpose);
+    const { giantSccId, maxSccSize } = this._findGiantScc(sccSizes);
+
+    this.giantComponentRoot = giantSccId;
+    this.totalGiantNodes = maxSccSize;
+
+    this._classifySccNodes({ idList, sccComponent, giantSccId });
   }
 
   public getEdgeTravelTime(edge: AdjacencyEdge, vehicleType: VehicleProfileType = 'car'): number {
@@ -267,10 +447,10 @@ export class RoadGraph {
   }
 
   /**
-   * Scans a specific cell for the closest node
+   * Scans an iterable of nodes for the closest node with official-priority tie-breaking (P2-1)
    */
   private _scanCellForNearest(
-    cellNodes: GraphNode[],
+    cellNodes: Iterable<GraphNode>,
     x: number,
     y: number,
     onlyGiant: boolean,
@@ -282,12 +462,48 @@ export class RoadGraph {
       if (d < best.minDist) {
         best.minDist = d;
         best.nearest = node;
+      } else if (d === best.minDist && best.nearest?.isCustom && !node.isCustom) {
+        // Break exact ties in favor of official network nodes (P2-1)
+        best.nearest = node;
       }
     }
   }
 
   /**
-   * Finds the nearest road node to given world coordinates
+   * Scans a single grid cell if it contains nodes
+   */
+  private _scanGridCell(cellKey: string, options: ScanGridOptions): void {
+    const cellNodes = this.grid.get(cellKey);
+    if (cellNodes) {
+      this._scanCellForNearest(cellNodes, options.x, options.y, options.onlyGiant, options.best);
+    }
+  }
+
+  /**
+   * Scans the perimeter cells of ring r around center (cx, cy)
+   */
+  private _scanRingPerimeter(r: number, options: RingScanOptions): void {
+    const { cx, cy, x, y, onlyGiant, best } = options;
+    const scanOpts: ScanGridOptions = { x, y, onlyGiant, best };
+
+    if (r === 0) {
+      this._scanGridCell(`${cx},${cy}`, scanOpts);
+      return;
+    }
+
+    for (let dx = -r; dx <= r; dx++) {
+      this._scanGridCell(`${cx + dx},${cy - r}`, scanOpts);
+      this._scanGridCell(`${cx + dx},${cy + r}`, scanOpts);
+    }
+
+    for (let dy = -r + 1; dy <= r - 1; dy++) {
+      this._scanGridCell(`${cx - r},${cy + dy}`, scanOpts);
+      this._scanGridCell(`${cx + r},${cy + dy}`, scanOpts);
+    }
+  }
+
+  /**
+   * Finds the nearest road node to given world coordinates (P2-3)
    */
   public findNearestNode(options: FindNearestOptions): NearestNodeResult {
     const { x, y, onlyGiant = true } = options;
@@ -295,32 +511,24 @@ export class RoadGraph {
     const cy = Math.floor(y / this.cellSize);
 
     const best = { nearest: null as GraphNode | null, minDist: Infinity };
+    const ringOpts: RingScanOptions = { cx, cy, x, y, onlyGiant, best };
     let isProven = false;
 
-    // 1. Check concentric radial rings in the spatial hash grid
+    // 1. Check concentric radial rings in the spatial hash grid (perimeter only, 49 cells total)
     for (let r = 0; r <= 3; r++) {
-      for (let dx = -r; dx <= r; dx++) {
-        for (let dy = -r; dy <= r; dy++) {
-          const key = `${cx + dx},${cy + dy}`;
-          const cellNodes = this.grid.get(key);
-          if (cellNodes) {
-            this._scanCellForNearest(cellNodes, x, y, onlyGiant, best);
-          }
-        }
-      }
+      this._scanRingPerimeter(r, ringOpts);
+
       // The query point sits anywhere inside its own cell, so scanning the
-      // (2r+1)² block only guarantees coverage out to r * cellSize. Using
-      // (r + 1) * cellSize here accepts hits that a neighbouring cell could beat.
+      // perimeter out to r only guarantees coverage out to r * cellSize.
       if (best.nearest && best.minDist <= r * this.cellSize) {
         isProven = true;
         break;
       }
     }
 
-    // 2. Fallback exhaustive scan when the grid search found nothing, or ran out
-    //    of rings before it could prove the candidate is the closest node.
+    // 2. Fallback exhaustive scan without heap allocation (iterating values directly)
     if (!isProven) {
-      this._scanCellForNearest(Array.from(this.nodes.values()), x, y, onlyGiant, best);
+      this._scanCellForNearest(this.nodes.values(), x, y, onlyGiant, best);
     }
 
     return { node: best.nearest, distance: best.minDist };
