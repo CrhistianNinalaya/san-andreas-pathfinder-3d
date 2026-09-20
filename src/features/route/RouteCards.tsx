@@ -1,8 +1,9 @@
 import { useTranslation } from '../../i18n/useTranslation';
 import { formatDistance, formatDuration } from '../../geo/coordinates';
-import { VEHICLE_PROFILES, type VehicleProfileType } from '../../terrain/ElevationPhysics';
+import type { VehicleProfileType } from '../../terrain/ElevationPhysics';
 import { ElevationChart } from '../../components/ElevationChart';
 import type { RouteResult } from '../../engine/types';
+import type { TranslationKey } from '../../i18n/translations';
 import styles from './RouteCards.module.css';
 
 export interface RouteCardsProps {
@@ -21,6 +22,14 @@ const VEHICLE_ICONS: Record<VehicleProfileType, string> = {
   offroad: '🚙'
 };
 
+const VEHICLE_SHORT_KEYS: Record<VehicleProfileType, TranslationKey> = {
+  car: 'vehShort_car',
+  sports: 'vehShort_sports',
+  bike: 'vehShort_bike',
+  truck: 'vehShort_truck',
+  offroad: 'vehShort_offroad'
+};
+
 export function RouteCards({
   routes,
   activeRouteIndex,
@@ -29,7 +38,7 @@ export function RouteCards({
   vehicleType
 }: Readonly<RouteCardsProps>) {
   const { t } = useTranslation();
-  const vehicle = VEHICLE_PROFILES[vehicleType] ?? VEHICLE_PROFILES.car;
+  const vehicleName = t(VEHICLE_SHORT_KEYS[vehicleType] ?? 'vehShort_car');
   const vehicleIcon = VEHICLE_ICONS[vehicleType] ?? '🚗';
 
   if (routes.length === 0) {
@@ -57,13 +66,11 @@ export function RouteCards({
         const gain = Math.round(route.elevationProfile?.elevationGain ?? 0);
         const loss = Math.round(route.elevationProfile?.elevationLoss ?? 0);
 
-        // Calculate average speed
         const distKm = route.totalDistance / 1000;
         const timeHours = route.totalTimeSeconds / 3600;
         const avgSpeed = timeHours > 0 ? Math.round(distKm / timeHours) : 0;
 
-        let title = route.label || t('alternativeRoute', { index: idx });
-        if (route.isOptimal) title = t('fastestRoute');
+        const title = route.isOptimal ? t('fastestRoute') : t('alternativeRoute', { index: idx });
 
         return (
           <button
@@ -79,7 +86,7 @@ export function RouteCards({
               </span>
               <div className={styles.badgesRow}>
                 <span className={styles.vehicleBadge}>
-                  {vehicleIcon} {vehicle.name.split('/')[0]}
+                  {vehicleIcon} {vehicleName}
                 </span>
                 {route.isOptimal && (
                   <span className={styles.optimalBadge}>
@@ -96,10 +103,9 @@ export function RouteCards({
 
             <div className={styles.statsRow}>
               <span>⛰️ {t('elevation', { gain, loss })}</span>
-              <span className={styles.speedText}>⚡ <strong>{avgSpeed} km/h</strong> avg</span>
+              <span className={styles.speedText}>⚡ <strong>{avgSpeed} km/h</strong> {t('avgSpeed')}</span>
             </div>
 
-            {/* 3D Elevation Profile Chart rendered for active route */}
             {isActive && route.path.length > 1 && (
               <ElevationChart
                 path={route.path}
