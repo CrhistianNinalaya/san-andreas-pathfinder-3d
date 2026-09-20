@@ -5,7 +5,8 @@
 import type { RoadGraph } from '../../engine/RoadGraph';
 import type { GtaCoords, RouteResult, RouteLeg } from '../../engine/types';
 import { ElevationPhysics, type VehicleProfileType } from '../../terrain/ElevationPhysics';
-import type { Waypoint } from '../../map-bridge/useWaypointMarkers';
+import type { Waypoint } from '../../map-bridge/hooks/useWaypointMarkers';
+import { getWaypointLabel } from './utils/waypointUtils';
 
 /**
  * Visibility filter toggles for road network geometry classes.
@@ -73,11 +74,6 @@ export const initialRouteState: RouteState = {
   showNodes: false,
   layerFilters: initialLayerFilters
 };
-
-function getWaypointLabel(index: number): string {
-  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  return letters[index] ?? `P${index + 1}`;
-}
 
 export interface ComputeRoutesOptions {
   waypoints: Waypoint[];
@@ -204,7 +200,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
 
       const newIndex = state.waypoints.length;
       const newWp: Waypoint = {
-        id: `wp_${Date.now()}_${Math.random()}`,
+        id: crypto.randomUUID(),
         label: getWaypointLabel(newIndex),
         coords: action.coords,
         snapNode: nearest.node
@@ -351,7 +347,7 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
         const snap = graph.findNearestNode({ x: c.x, y: c.y, onlyGiant: true }).node;
         if (snap) {
           waypoints.push({
-            id: `wp_${i}`,
+            id: crypto.randomUUID(),
             label: getWaypointLabel(i),
             coords: c,
             snapNode: snap

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { ElevationPhysics } from '../ElevationPhysics';
+import { ElevationPhysics } from './ElevationPhysics';
 
 describe('ElevationPhysics', () => {
   it('should compute accurate 3D Euclidean distances', () => {

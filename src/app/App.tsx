@@ -1,7 +1,7 @@
 import { useReducer, useState, useCallback } from 'react';
 import type L from 'leaflet';
 import { routeReducer, initialRouteState, type RouteState, type LayerFilters } from '../features/route/routeReducer';
-import { useUrlState } from '../features/route/useUrlState';
+import { useUrlState } from '../features/route/hooks/useUrlState';
 import { useRoadGraph } from './hooks/useRoadGraph';
 import { MapCanvas } from '../components/MapCanvas';
 import { NavigationPanel } from '../components/NavigationPanel';

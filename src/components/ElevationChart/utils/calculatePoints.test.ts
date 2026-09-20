@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { calculateChartPoints } from '../calculatePoints';
-import type { GraphNode } from '../../../../engine/types';
+import { calculateChartPoints } from './calculatePoints';
+import type { GraphNode } from '../../../engine/types';
 
 describe('calculateChartPoints', () => {
   it('returns null if path has fewer than 2 nodes', () => {

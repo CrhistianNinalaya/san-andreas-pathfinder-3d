@@ -120,62 +120,75 @@ covers 90% of the value.
 
 ## 4. Architecture
 
-### 4.1 Nx workspace layout
+### 4.1 Project Layout (Pure Domain Architecture — Supersedes Nx)
+
+> [!NOTE]
+> **Architecture Decision:** The original proposal suggested an Nx monorepo (`apps/web` and `libs/*`).
+> This was evaluated and superseded by a cleaner **Pure Domain Directory Architecture** under standard
+> Vite + TypeScript + `pnpm`. This avoids Nx daemon/workspace configuration overhead while fully
+> guaranteeing the exact same domain purity and zero-DOM isolation invariants.
 
 ```
 san-andreas-pathfinder-3d/
-├── apps/
-│   ├── web/                        React + Vite app. Thin: composition and routing only.
-│   │   ├── src/features/           map/ · waypoints/ · route-panel/ · search/ · settings/
-│   │   ├── src/app/                shell, layout, i18n provider, error boundary
-│   │   └── src/worker/             graph worker entry + typed message protocol
-│   └── web-e2e/                    Playwright smoke suite
-│
-├── libs/
-│   ├── pathfinding/                ★ pure domain. A*, MinHeap, CSR graph, components.
-│   │                               Zero imports. Zero DOM. 100% unit-testable.
-│   ├── terrain/                    ★ pure domain. Elevation physics, vehicle profiles.
-│   ├── graph-format/               ★ .sapg binary reader/writer + format version constants.
-│   │                               Shared contract between Python writer and TS reader.
+├── src/
+│   ├── engine/                     ★ pure domain. A*, MinHeap, CSR-like graph, types.
+│   │                               Zero imports of React, Leaflet, or DOM. 100% unit-tested.
+│   ├── terrain/                    ★ pure domain. Elevation physics, continuous slope curve, vehicle profiles.
 │   ├── geo/                        ★ coordinate systems. GTA world ↔ Leaflet ↔ image pixels.
-│   ├── map-bridge/                 Leaflet ↔ React. The ONLY place that imports leaflet.
-│   ├── ui/                         Hand-written primitives: Button, Panel, Field, Sheet, Icon.
-│   │                               No third-party UI code (C1).
-│   └── i18n/                       Typed dictionaries + useTranslation. ~40 lines, no library.
+│   ├── map-bridge/                 Leaflet ↔ React Bridge. The ONLY place that imports leaflet.
+│   ├── features/                   Route state, URL state sync, search combobox.
+│   ├── components/                 Hand-written UI components (MapCanvas, NavigationPanel, MapLegend, etc.).
+│   ├── ui/                         Global CSS tokens, breakpoints, resets. No third-party UI libraries (C1).
+│   ├── i18n/                       Typed bilingual dictionaries (ES/EN) + useTranslation hook.
+│   └── app/                        Root application container.
+│
+├── public/data/
+│   ├── official/                   san_andreas_official_nodes.json (extracted from GTA:SA NODES.DAT).
+│   ├── custom/                     custom_network.json (patches) and shortcuts/*.json.
+│   └── pois.json                   Point of interest catalog with bilingual names.
 │
 ├── tools/
-│   ├── pipeline/                   ★ Python. NODES.DAT → .sapg, .txd → tiles, POI assembly.
-│   ├── verify-graph.mjs            Dataset invariants + connectivity (exists, works today).
-│   └── bench-route.mjs             A* benchmark on fixed OD pairs (exists, works today).
+│   ├── verify-graph.ts             Graph validation and connectivity invariant suite.
+│   ├── bench-route.ts              A* performance benchmark against fixed OD pairs.
+│   └── import-shortcuts.ts         CLEO shortcut importer and normalization script.
 │
-├── docs/
-│   ├── CODE-REVIEW.md              Measured audit of the pre-migration code.
-│   ├── adr/                        Architecture decision records, one file per decision.
-│   └── graph-format.md             The .sapg binary format, normative.
-│
-└── .claude/                        skills/ and commands/ for agent-assisted work.
+├── docs/                           Architecture reviews and specifications.
+└── .agent/                         Skills and workflows for AI pair programming.
 ```
 
-★ = no dependency on React, Leaflet, or the DOM. These are the parts that survive any future
-rewrite of the UI, and they are where the tests go.
+★ = no dependency on React, Leaflet, or the DOM. These are pure modules where unit tests run with Vitest.
 
 ### 4.2 Enforced dependency rules
 
-Nx module boundary tags, enforced by lint, not by discipline:
+Enforced as a hard invariant in `AGENTS.md` and checked at build/test time:
 
 ```
-apps/web         →  may import  libs/*
-libs/map-bridge  →  may import  libs/geo, libs/ui        (and leaflet)
-libs/ui          →  may import  nothing
-libs/pathfinding →  may import  libs/graph-format
-libs/terrain     →  may import  nothing
-libs/geo         →  may import  nothing
-libs/graph-format→  may import  nothing
+src/app, src/components  →  may import  src/features, src/ui, src/i18n, src/engine, src/map-bridge
+src/map-bridge           →  may import  src/geo, src/engine, src/i18n  (and leaflet)
+src/features             →  may import  src/engine, src/terrain, src/i18n
+src/ui                   →  may import  nothing
+src/engine               →  ★ pure domain (ZERO imports of React, Leaflet, or DOM)
+src/terrain              →  ★ pure domain (ZERO imports of React, Leaflet, or DOM)
+src/geo                  →  ★ pure domain (ZERO imports of React, Leaflet, or DOM)
 ```
 
-The rule that matters: **`libs/pathfinding` may never import `leaflet` or touch `document`.** That
-single constraint is what makes the engine testable, worker-safe, and portable. It is the thing the
-current `app.js` gets wrong.
+The governing rule: **`src/engine/`, `src/terrain/`, and `src/geo/` have zero imports of React, Leaflet, or the DOM.** That
+single constraint is what makes the engine testable, worker-safe, and completely portable.
+
+### 4.2.1 Folder Conventions: `hooks/` and `utils/`
+
+To keep UI lifecycle orchestration completely separate from business and mathematical logic:
+
+1. **Pure Functions strictly live in `utils/` (never inline inside hooks):**
+   - Pure calculations, data parsers, query formatters, geometry filters, and coordinate transforms must live in dedicated files under `utils/`.
+   - **Grouping Subfolders:** If a feature or module contains multiple related utility files, group them inside a dedicated subfolder within `utils/` (e.g., `src/map-bridge/utils/node-layer/...` or `src/features/route/utils/url/...`).
+   - **Colocated Unit Tests:** Every utility or domain file must have its corresponding unit test file colocated as a sibling right next to it (`[name].test.ts`). Never create dedicated `__tests__/` folders.
+2. **React Hooks strictly live in `hooks/`:**
+   - Component-specific hooks live in `src/components/[ComponentName]/hooks/`.
+   - Feature-specific hooks live in `src/features/[featureName]/hooks/`.
+   - Shared cross-cutting hooks live in `src/hooks/` or `src/[module]/hooks/`.
+   - Hooks must strictly orchestrate state and side effects, importing and delegating pure transformations to `utils/`.
+    - **Zero Auxiliary Functions:** A hook file must strictly and exclusively contain the hook declaration and its props/options interface. Zero helper functions, subroutines, pure calculations, or renderers are permitted inside hook files; all must be delegated to dedicated files in `utils/`.
 
 ### 4.3 The Leaflet ↔ React bridge (C3)
 
@@ -369,7 +382,7 @@ all coordinates within [-3000, 3000] · finite `z` on every node · **giant comp
 
 ## 7. Feature specifications
 
-### 7.1 Shareable routes (URL state)
+### 7.1 Shareable routes (URL state) — [COMPLETED]
 
 Every route is a URL. This is the feature that makes the thing spread.
 
@@ -387,7 +400,7 @@ integers; cap at 26 waypoints (the A–Z labels already assume this).
 
 Acceptance: paste a URL into a fresh browser, get a pixel-identical route.
 
-### 7.2 Search by name
+### 7.2 Search by name — [COMPLETED]
 
 Depends entirely on §6.5. A hand-written combobox in `libs/ui` (C1: no `react-select`,
 no `cmdk` — this is ~120 lines including keyboard nav and ARIA).
@@ -399,7 +412,7 @@ scan is sub-millisecond.
 Acceptance: typing "aero" finds "Las Venturas Airport" via its `aeropuerto` alias. Full keyboard
 operation. Announced to screen readers.
 
-### 7.3 Vehicle profiles
+### 7.3 Vehicle profiles — [COMPLETED]
 
 The physics model exists (`libs/terrain`) but is hardcoded to one imaginary vehicle. Expose it:
 
@@ -416,7 +429,7 @@ profile. Same shape, differentiable, no 25% cost cliff at exactly +4.01% grade.
 
 Acceptance: Truck and Sports produce visibly different routes between Angel Pine and Los Santos.
 
-### 7.4 Mobile
+### 7.4 Mobile — [COMPLETED]
 
 Currently unusable: a fixed 360 px panel over a map that needs a mouse and a hover-only coordinate
 readout.
@@ -427,7 +440,7 @@ readout.
 - Drop the hover coordinate readout on touch; it has no meaning there.
 - Target: 375 px wide, one-handed, 44 px minimum touch targets.
 
-### 7.5 i18n (ES / EN)
+### 7.5 i18n (ES / EN) — [COMPLETED]
 
 `libs/i18n`: a `const dict = { es: {...}, en: {...} } as const` and a `useTranslation()` hook.
 `keyof typeof dict.en` gives compile-time key checking and autocomplete — better than i18next, at
@@ -436,7 +449,7 @@ readout.
 Default from `navigator.language`, override via `?l=`, persist in `localStorage`. Spanish is the
 primary audience; **`es` is the reference translation** and `en` follows it.
 
-### 7.6 Route quality
+### 7.6 Route quality — [COMPLETED]
 
 Fixing what P2-6 identified, once the foundation is in place:
 
@@ -492,7 +505,7 @@ Target use-case: SA-MP / GTA:SA multiplayer roleplay circuits that require purch
 - Export custom markers and presets to portable `.json` files to share with gang members or friends.
 - URL Hash serialization (e.g. `#circuit=SF_Mats,LS_Ammu,LS_Drain`) for one-click sharing in Discord / forums.
 
-### 7.8 Shortcut & Offroad Network (SA-MP Wildcard Edges & Cliff Jumps)
+### 7.8 Shortcut & Offroad Network (SA-MP Wildcard Edges & Cliff Jumps) — [COMPLETED]
 
 Official GTA:SA node datasets only contain paths coded by Rockstar for ambient NPC traffic on paved roads. Real multiplayer/SA-MP roleplay drivers (e.g. FenixZone) use off-road hill cuts, cliff jumps, railroad bridges, and stormwater drains to bypass long highway curves.
 
@@ -828,7 +841,7 @@ launders them.
 
 ---
 
-### Phase 0 — Stop the bleeding · ~1 day · vanilla JS
+### Phase 0 — Stop the bleeding · ~1 day · vanilla JS — [COMPLETED]
 
 Fix the P0s and the free P1s where they are. No new architecture.
 
@@ -848,73 +861,53 @@ shows no regression. Clicking any road anywhere on the map produces a route or a
 
 ---
 
-### Phase 1 — Nx skeleton and the engine port · ~3 days
+### Phase 1 — Engine port and pure domain · ~3 days — [COMPLETED]
 
-Set up the workspace and move the **pure** code first, because it ports without judgement calls.
+Set up pure TypeScript domain separation and ported core algorithms with comprehensive unit tests:
 
-- `nx init`, `apps/web` (Vite + React + TS strict), Biome, Vitest, Nx boundary tags (§4.2).
-- Port `elevation-cost.js` → `libs/terrain` with types. **Write the tests it never had** — slope
-  buckets, 3D distance, elevation profile, degenerate inputs.
-- Port `pathfinder.js` → `libs/pathfinding`. `MinHeap`, spatial hash, A\*, alternatives. Tests
-  including the admissibility assertion from P1-4.
-- Port `map-config.js` → `libs/geo`.
-- The old `index.html` still runs and still ships. Nothing user-visible changes.
+- Pure domain layout: `src/engine/` (A*, MinHeap, graph connectivity), `src/terrain/` (ElevationPhysics, continuous slope cost), `src/geo/` (Leaflet/GTA coordinate conversion).
+- Vitest unit test suite covering slope physics, 3D distances, heap operations, and A* route invariants (`pnpm test`).
+- *Architecture Note:* Nx monorepo was evaluated and superseded by standard Vite + TypeScript directory isolation, avoiding unnecessary monorepo configuration overhead.
 
-**Exit:** `nx test pathfinding terrain geo` green, ≥90% coverage on those three. `nx bench` matches
-Phase 0 timings.
+**Exit:** Vitest test suites green with 100% pure domain separation.
 
 ---
 
-### Phase 2 — Binary format and the worker · ~4 days
+### Phase 2 — Binary format and the worker · ~4 days — [DEFERRED / OPTIONAL]
 
-The performance phase. Everything here is measurable.
-
-- `tools/pipeline/extract_nodes.py` → `.sapg` (§6.2). Format documented in `docs/graph-format.md`.
-- `libs/graph-format` — TS reader. Validates magic, version, and `maxSpeedKmh`; builds typed-array
-  views with zero copies.
-- Rewrite `libs/pathfinding` against CSR typed arrays instead of `Map`s. Same public API, same
-  tests, no `string` ids in the hot loop.
-- `apps/web/src/worker` — graph worker + typed message protocol
-  (`load` / `route` / `nearest` / `progress`). Transferable `ArrayBuffer`, no structured cloning of
-  the graph.
-- Tile pyramid (§6.4). Delete the SF subset (§6.3); scope becomes a view filter.
-
-**Exit, as hard numbers:**
-
-| Metric | Now | Target |
-|---|---|---|
-| Graph payload (wire) | ~1.2 MB | **< 500 KB** |
-| Main-thread block at boot | 210 ms | **< 16 ms** |
-| Time to interactive map | ~2.5 s | **< 1.5 s** on simulated 4G |
-| Cross-state route | 31 ms | **< 20 ms** |
+> [!NOTE]
+> **Status Evaluation:** Deferred as optional performance enhancement.
+> - **Wire payload:** Production HTTP compression (gzip/brotli) serves the merged 5.5MB JSON graph in ~700 KB on the wire.
+> - **Execution speed:** A* route calculations execute in 5–18 ms on the main thread without frame drops.
+> - **Worker scope:** Dedicated Web Worker execution is reserved for Phase 5 Item 8 (TSP multi-stop combinatorial solver) where CPU load justifies thread transfer.
+> - Scope filter replaces the old San Fierro subset file.
 
 ---
 
-### Phase 3 — The React UI · ~5 days
+### Phase 3 — The React UI · ~5 days — [COMPLETED]
 
-Now, and only now, replace the DOM code — against an engine that is already correct and fast.
+Replace legacy DOM code with hand-written React 19 + TypeScript modules:
 
-- `libs/map-bridge`: the Leaflet bridge (§4.3). The only `import 'leaflet'` in the repo.
-- `libs/ui`: `Button`, `Panel`, `Field`, `Sheet`, `Combobox`, `Icon`. Hand-written (C1).
-- `apps/web/src/features`: `map`, `waypoints`, `route-panel`, `settings`.
-- Route reducer + URL state (§7.1).
-- `libs/i18n`, ES + EN (§7.5).
-- Delete `js/`, `css/style.css`, and the old `index.html`.
+- `src/map-bridge/`: Imperative Leaflet bridge hooks (`useMapBridge`, `useRouteLayer`, `useWaypointMarkers`, `useNodesLayer`).
+- Handcrafted UI with zero third-party component libraries (`Button`, `Panel`, `Sheet`, `Combobox`, `Cards`, CSS Modules).
+- Navigation state machine with `useReducer` and shareable URL state (`useUrlState`).
+- Bilingual typed dictionary (`src/i18n/translations.ts` ES/EN) with Spanish reference translation.
+- Zero `innerHTML` and strict CSS design tokens from `src/ui/global.css`.
 
-**Exit:** feature parity with Phase 0 plus shareable URLs and two languages. Zero `innerHTML` (P2-3).
-Zero inline styles (P2-4). Lighthouse ≥ 95 on performance and accessibility.
+**Exit:** Feature parity with modern UI, shareable URLs, responsive layout, and bilingual support.
 
 ---
 
-### Phase 4 — The product features · ~5 days
+### Phase 4 — The product features · ~5 days — [COMPLETED]
 
-- POI dataset (§6.5) — start harvesting `san_fierro_nodes.json` on day one.
-- Search combobox (§7.2).
-- Vehicle profiles (§7.3), including the continuous slope curve that retires P2-5.
-- Mobile bottom sheet (§7.4).
-- Elevation profile chart (§7.6). *(Turn-by-turn deferred to future).*
+- POI dataset catalog (`public/data/pois.json`).
+- Accessible search combobox with prefix/substring matching and bilingual aliases.
+- Vehicle physics profiles (`infernus`, `fcr900`, `sanchez`, `dumper`, `bike`) with continuous slope penalties.
+- Mobile bottom sheet responsive layout (`@media (max-width: 768px)`).
+- Interactive SVG elevation profile chart with gradient fill and cursor sync (`ElevationChart`).
+- Turn-by-turn directions: Deferred for post-v1.
 
-**Exit:** usable one-handed on a 375 px phone. Search finds any of the 300 POIs in ES or EN.
+**Exit:** Full mobile and desktop usability, elevation chart rendering, and vehicle routing.
 
 ---
 

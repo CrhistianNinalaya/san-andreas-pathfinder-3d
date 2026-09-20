@@ -90,6 +90,15 @@ san-andreas-pathfinder-3d/
 └── package.json
 ```
 
+### 📐 Convenciones de Código y Arquitectura
+
+- **Funciones Puras (`utils/`):** Toda función auxiliar pura (cálculos, matemáticas, parsers, filtros, transformaciones) vive en archivos dedicados dentro de un directorio `utils/`.
+  - **Subcarpetas temáticas:** Si un módulo o feature tiene múltiples archivos de utilidad relacionados, se agrupan en una subcarpeta dedicada (ej. `utils/[tema]/`).
+  - **Tests Unitarios Colocados:** Todo archivo dentro de `utils/` o módulos de dominio debe tener su archivo de pruebas unitarias como hermano adyacente (`[nombre].test.ts` junto a `[nombre].ts`). Sin carpetas `__tests__/` dedicadas.
+- **Hooks de React (`hooks/` - Exclusividad de Hook):** Los hooks residen estrictamente en una carpeta `hooks/` (ej. `src/components/[Componente]/hooks/`, `src/features/[Feature]/hooks/`, o `src/hooks/`). Un archivo de hook debe contener estricta y exclusivamente la declaración del hook; cero funciones auxiliares, puras o de renderizado están permitidas dentro de archivos de hooks. Los hooks sólo deben gestionar estado y ciclo de vida de React/Leaflet, delegando todo cálculo y renderizado a `utils/`.
+- **Separación de Dominio Puro:** `src/engine/`, `src/terrain/` y `src/geo/` tienen cero dependencias de React, Leaflet o el DOM.
+- **Cero Librerías de UI:** Estilos artesanales con CSS Modules y tokens de diseño en `src/ui/global.css`.
+
 ---
 
 ## 💻 Desarrollo

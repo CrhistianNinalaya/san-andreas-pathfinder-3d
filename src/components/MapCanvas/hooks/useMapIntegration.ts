@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useMapBridge } from '../../../map-bridge/useMapBridge';
-import { useRouteLayer } from '../../../map-bridge/useRouteLayer';
-import { useWaypointMarkers } from '../../../map-bridge/useWaypointMarkers';
-import { useNodesLayer } from '../../../map-bridge/useNodesLayer';
+import { useMapBridge } from '../../../map-bridge/hooks/useMapBridge';
+import { useRouteLayer } from '../../../map-bridge/hooks/useRouteLayer';
+import { useWaypointMarkers } from '../../../map-bridge/hooks/useWaypointMarkers';
+import { useNodesLayer } from '../../../map-bridge/hooks/useNodesLayer';
 import type { UseMapIntegrationOptions } from '../types';
 
 /**

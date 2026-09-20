@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { MinHeap } from '../MinHeap';
+import { MinHeap } from './MinHeap';
 
 describe('MinHeap', () => {
   it('should extract elements in ascending priority order', () => {

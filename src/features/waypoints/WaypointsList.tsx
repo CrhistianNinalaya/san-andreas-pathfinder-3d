@@ -1,5 +1,5 @@
 import { useTranslation } from '../../i18n/useTranslation';
-import type { Waypoint } from '../../map-bridge/useWaypointMarkers';
+import type { Waypoint } from '../../map-bridge/hooks/useWaypointMarkers';
 import styles from './WaypointsList.module.css';
 
 interface WaypointsListProps {

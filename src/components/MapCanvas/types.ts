@@ -1,7 +1,7 @@
 import type L from 'leaflet';
 import type { GtaCoords, RouteResult } from '../../engine/types';
 import type { RoadGraph } from '../../engine/RoadGraph';
-import type { Waypoint } from '../../map-bridge/useWaypointMarkers';
+import type { Waypoint } from '../../map-bridge/hooks/useWaypointMarkers';
 
 import type { LayerFilters } from '../../features/route/routeReducer';
 

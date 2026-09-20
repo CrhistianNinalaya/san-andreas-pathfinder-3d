@@ -90,6 +90,15 @@ san-andreas-pathfinder-3d/
 └── package.json
 ```
 
+### 📐 Code & Architecture Conventions
+
+- **Pure Functions (`utils/`):** All pure helper functions (calculations, math, parsers, filters, geometry conversions) live in dedicated files within a `utils/` directory.
+  - **Subfolder Grouping:** If a module or feature contains multiple related utility files, group them inside a dedicated topic subfolder (e.g. `utils/[topic]/`).
+  - **Colocated Unit Tests:** Every file inside `utils/` or domain modules must have its unit test file colocated as a sibling (`[name].test.ts` right next to `[name].ts`). No dedicated `__tests__/` folders.
+- **React Hooks (`hooks/` - Hook Exclusivity):** Custom hooks reside strictly in a `hooks/` directory (e.g. `src/components/[Component]/hooks/`, `src/features/[Feature]/hooks/`, or `src/hooks/`). A hook file must strictly and exclusively contain the hook declaration itself; zero helper, pure, or rendering functions are allowed in hook files. Hooks must only orchestrate React/Leaflet lifecycle, dispatch actions, and delegate all computations/rendering to `utils/`.
+- **Pure Domain Separation:** `src/engine/`, `src/terrain/`, and `src/geo/` have zero dependencies on React, Leaflet, or the DOM.
+- **Zero UI Libraries:** Handcrafted CSS Modules styling using design tokens from `src/ui/global.css`.
+
 ---
 
 ## 💻 Development
