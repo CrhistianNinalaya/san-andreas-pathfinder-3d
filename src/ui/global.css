@@ -32,6 +32,10 @@
   --color-danger-bg: rgba(239, 68, 68, 0.1);
   --color-danger-border: rgba(239, 68, 68, 0.3);
   --color-danger-text: #fca5a5;
+  --color-warning: #f59e0b;
+  --color-gold: #fbbf24;
+  --color-purple: #a855f7;
+  --color-pink: #ec4899;
   --color-waypoint: #0284c7;
 
   /* Borders & Dividers */

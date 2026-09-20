@@ -145,7 +145,11 @@ export class RoadGraph {
         isGiantComponent: false,
         isCustom: (node as GraphNode).isCustom,
         customType: (node as GraphNode).customType,
-        color: (node as GraphNode).color
+        color: (node as GraphNode).color,
+        shortcutId: node.shortcutId,
+        pointIndex: node.pointIndex,
+        totalPoints: node.totalPoints,
+        colorToken: node.colorToken
       };
 
       this.nodes.set(nodeObj.id, nodeObj);

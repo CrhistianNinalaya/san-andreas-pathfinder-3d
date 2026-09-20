@@ -75,7 +75,11 @@ export function mergeCustomLayers(options: MergeCustomLayersOptions): CustomNetw
         z: n.z,
         isCustom: n.isCustom ?? true,
         customType: n.customType ?? 'shortcut',
-        color: n.color ?? parentColor
+        color: n.color ?? parentColor,
+        shortcutId: n.shortcutId ?? (typeof doc.id === 'number' ? doc.id : undefined),
+        pointIndex: n.pointIndex,
+        totalPoints: n.totalPoints ?? doc.nodes?.length,
+        colorToken: n.colorToken
       });
     }
 

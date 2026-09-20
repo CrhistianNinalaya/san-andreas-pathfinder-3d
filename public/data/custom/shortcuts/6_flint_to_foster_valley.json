@@ -1,820 +1,1284 @@
 {
   "id": 6,
-  "name": "Atajo #6 (P\u00farpura El\u00e9ctrico)",
-  "description": "Flint County -> Foster Valley (Caida de acantilado - Unidireccional)",
+  "name": "Shortcut #6 (Electric Purple)",
+  "description": "Flint County -> Foster Valley (Cliff drop - one-way)",
   "color": "#a855f7",
   "nodes": [
     {
       "id": "sc_6_1",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 1/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 1/116",
       "x": -1168.6,
       "y": -644.2,
-      "z": 41.5
+      "z": 41.5,
+      "shortcutId": 6,
+      "pointIndex": 1,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_2",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 2/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 2/116",
       "x": -1172.67,
       "y": -653,
-      "z": 43.5285
+      "z": 43.5285,
+      "shortcutId": 6,
+      "pointIndex": 2,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_3",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 3/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 3/116",
       "x": -1175.51,
       "y": -662.658,
-      "z": 45.6282
+      "z": 45.6282,
+      "shortcutId": 6,
+      "pointIndex": 3,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_4",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 4/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 4/116",
       "x": -1180.67,
       "y": -671.09,
-      "z": 47.6011
+      "z": 47.6011,
+      "shortcutId": 6,
+      "pointIndex": 4,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_5",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 5/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 5/116",
       "x": -1188.98,
       "y": -676.689,
-      "z": 49.4478
+      "z": 49.4478,
+      "shortcutId": 6,
+      "pointIndex": 5,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_6",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 6/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 6/116",
       "x": -1199.2,
       "y": -676.793,
-      "z": 49.2532
+      "z": 49.2532,
+      "shortcutId": 6,
+      "pointIndex": 6,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_7",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 7/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 7/116",
       "x": -1208.78,
       "y": -674.122,
-      "z": 46.9948
+      "z": 46.9948,
+      "shortcutId": 6,
+      "pointIndex": 7,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_8",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 8/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 8/116",
       "x": -1216.92,
       "y": -671.758,
-      "z": 41.0389
+      "z": 41.0389,
+      "shortcutId": 6,
+      "pointIndex": 8,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_9",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 9/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 9/116",
       "x": -1223.57,
       "y": -669.83,
-      "z": 33.3106
+      "z": 33.3106,
+      "shortcutId": 6,
+      "pointIndex": 9,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_10",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 10/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 10/116",
       "x": -1229.31,
       "y": -668.164,
-      "z": 24.4712
+      "z": 24.4712,
+      "shortcutId": 6,
+      "pointIndex": 10,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_11",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 11/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 11/116",
       "x": -1234,
       "y": -666.804,
-      "z": 15.6989
+      "z": 15.6989,
+      "shortcutId": 6,
+      "pointIndex": 11,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_12",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 12/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 12/116",
       "x": -1241.92,
       "y": -660.939,
-      "z": 13.67
+      "z": 13.67,
+      "shortcutId": 6,
+      "pointIndex": 12,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_13",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 13/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 13/116",
       "x": -1238.98,
       "y": -651.272,
-      "z": 13.7182
+      "z": 13.7182,
+      "shortcutId": 6,
+      "pointIndex": 13,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_14",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 14/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 14/116",
       "x": -1239.59,
       "y": -641.012,
-      "z": 13.7247
+      "z": 13.7247,
+      "shortcutId": 6,
+      "pointIndex": 14,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_15",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 15/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 15/116",
       "x": -1240.5,
       "y": -631.049,
-      "z": 13.7181
+      "z": 13.7181,
+      "shortcutId": 6,
+      "pointIndex": 15,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_16",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 16/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 16/116",
       "x": -1241.67,
       "y": -620.566,
-      "z": 13.7204
+      "z": 13.7204,
+      "shortcutId": 6,
+      "pointIndex": 16,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_17",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 17/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 17/116",
       "x": -1242.81,
       "y": -610.297,
-      "z": 13.7167
+      "z": 13.7167,
+      "shortcutId": 6,
+      "pointIndex": 17,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_18",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 18/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 18/116",
       "x": -1243.99,
       "y": -600.023,
-      "z": 13.7176
+      "z": 13.7176,
+      "shortcutId": 6,
+      "pointIndex": 18,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_19",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 19/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 19/116",
       "x": -1245.27,
       "y": -589.719,
-      "z": 13.7172
+      "z": 13.7172,
+      "shortcutId": 6,
+      "pointIndex": 19,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_20",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 20/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 20/116",
       "x": -1246.52,
       "y": -579.676,
-      "z": 13.7184
+      "z": 13.7184,
+      "shortcutId": 6,
+      "pointIndex": 20,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_21",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 21/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 21/116",
       "x": -1247.82,
       "y": -569.257,
-      "z": 13.7121
+      "z": 13.7121,
+      "shortcutId": 6,
+      "pointIndex": 21,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_22",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 22/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 22/116",
       "x": -1249.07,
       "y": -559.19,
-      "z": 13.713
+      "z": 13.713,
+      "shortcutId": 6,
+      "pointIndex": 22,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_23",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 23/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 23/116",
       "x": -1250.36,
       "y": -548.801,
-      "z": 13.7147
+      "z": 13.7147,
+      "shortcutId": 6,
+      "pointIndex": 23,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_24",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 24/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 24/116",
       "x": -1251.69,
       "y": -538.205,
-      "z": 13.7176
+      "z": 13.7176,
+      "shortcutId": 6,
+      "pointIndex": 24,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_25",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 25/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 25/116",
       "x": -1252.93,
       "y": -528.225,
-      "z": 13.7172
+      "z": 13.7172,
+      "shortcutId": 6,
+      "pointIndex": 25,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_26",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 26/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 26/116",
       "x": -1254.2,
       "y": -517.995,
-      "z": 13.7169
+      "z": 13.7169,
+      "shortcutId": 6,
+      "pointIndex": 26,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_27",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 27/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 27/116",
       "x": -1255.52,
       "y": -507.393,
-      "z": 13.7123
+      "z": 13.7123,
+      "shortcutId": 6,
+      "pointIndex": 27,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_28",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 28/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 28/116",
       "x": -1256.86,
       "y": -496.696,
-      "z": 13.7141
+      "z": 13.7141,
+      "shortcutId": 6,
+      "pointIndex": 28,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_29",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 29/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 29/116",
       "x": -1258.1,
       "y": -486.68,
-      "z": 13.7177
+      "z": 13.7177,
+      "shortcutId": 6,
+      "pointIndex": 29,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_30",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 30/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 30/116",
       "x": -1259.36,
       "y": -476.632,
-      "z": 13.714
+      "z": 13.714,
+      "shortcutId": 6,
+      "pointIndex": 30,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_31",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 31/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 31/116",
       "x": -1260.61,
       "y": -466.566,
-      "z": 13.7135
+      "z": 13.7135,
+      "shortcutId": 6,
+      "pointIndex": 31,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_32",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 32/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 32/116",
       "x": -1261.87,
       "y": -456.479,
-      "z": 13.7128
+      "z": 13.7128,
+      "shortcutId": 6,
+      "pointIndex": 32,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_33",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 33/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 33/116",
       "x": -1263.14,
       "y": -446.277,
-      "z": 13.7099
+      "z": 13.7099,
+      "shortcutId": 6,
+      "pointIndex": 33,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_34",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 34/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 34/116",
       "x": -1264.4,
       "y": -436.171,
-      "z": 13.7149
+      "z": 13.7149,
+      "shortcutId": 6,
+      "pointIndex": 34,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_35",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 35/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 35/116",
       "x": -1265.67,
       "y": -425.972,
-      "z": 13.7144
+      "z": 13.7144,
+      "shortcutId": 6,
+      "pointIndex": 35,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_36",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 36/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 36/116",
       "x": -1266.95,
       "y": -415.701,
-      "z": 13.7142
+      "z": 13.7142,
+      "shortcutId": 6,
+      "pointIndex": 36,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_37",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 37/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 37/116",
       "x": -1268.22,
       "y": -405.532,
-      "z": 13.7141
+      "z": 13.7141,
+      "shortcutId": 6,
+      "pointIndex": 37,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_38",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 38/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 38/116",
       "x": -1269.59,
       "y": -395.476,
-      "z": 13.7154
+      "z": 13.7154,
+      "shortcutId": 6,
+      "pointIndex": 38,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_39",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 39/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 39/116",
       "x": -1271,
       "y": -385.533,
-      "z": 13.7163
+      "z": 13.7163,
+      "shortcutId": 6,
+      "pointIndex": 39,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_40",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 40/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 40/116",
       "x": -1272.42,
       "y": -375.525,
-      "z": 13.7188
+      "z": 13.7188,
+      "shortcutId": 6,
+      "pointIndex": 40,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_41",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 41/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 41/116",
       "x": -1273.97,
       "y": -364.701,
-      "z": 13.7183
+      "z": 13.7183,
+      "shortcutId": 6,
+      "pointIndex": 41,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_42",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 42/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 42/116",
       "x": -1275.84,
       "y": -353.854,
-      "z": 13.7181
+      "z": 13.7181,
+      "shortcutId": 6,
+      "pointIndex": 42,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_43",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 43/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 43/116",
       "x": -1277.68,
       "y": -343.994,
-      "z": 13.718
+      "z": 13.718,
+      "shortcutId": 6,
+      "pointIndex": 43,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_44",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 44/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 44/116",
       "x": -1280.07,
       "y": -333.378,
-      "z": 13.7178
+      "z": 13.7178,
+      "shortcutId": 6,
+      "pointIndex": 44,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_45",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 45/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 45/116",
       "x": -1282.8,
       "y": -322.759,
-      "z": 13.7184
+      "z": 13.7184,
+      "shortcutId": 6,
+      "pointIndex": 45,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_46",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 46/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 46/116",
       "x": -1286.36,
       "y": -312.367,
-      "z": 13.7175
+      "z": 13.7175,
+      "shortcutId": 6,
+      "pointIndex": 46,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_47",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 47/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 47/116",
       "x": -1290.44,
       "y": -302.365,
-      "z": 13.7171
+      "z": 13.7171,
+      "shortcutId": 6,
+      "pointIndex": 47,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_48",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 48/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 48/116",
       "x": -1294.76,
       "y": -293.295,
-      "z": 13.7143
+      "z": 13.7143,
+      "shortcutId": 6,
+      "pointIndex": 48,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_49",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 49/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 49/116",
       "x": -1300.26,
       "y": -283.961,
-      "z": 13.7168
+      "z": 13.7168,
+      "shortcutId": 6,
+      "pointIndex": 49,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_50",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 50/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 50/116",
       "x": -1306.39,
       "y": -275.515,
-      "z": 13.7175
+      "z": 13.7175,
+      "shortcutId": 6,
+      "pointIndex": 50,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_51",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 51/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 51/116",
       "x": -1313.47,
       "y": -267.225,
-      "z": 13.7169
+      "z": 13.7169,
+      "shortcutId": 6,
+      "pointIndex": 51,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_52",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 52/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 52/116",
       "x": -1320.55,
       "y": -259.105,
-      "z": 13.7181
+      "z": 13.7181,
+      "shortcutId": 6,
+      "pointIndex": 52,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_53",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 53/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 53/116",
       "x": -1327.56,
       "y": -251.08,
-      "z": 13.7184
+      "z": 13.7184,
+      "shortcutId": 6,
+      "pointIndex": 53,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_54",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 54/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 54/116",
       "x": -1334.75,
       "y": -243.191,
-      "z": 13.7186
+      "z": 13.7186,
+      "shortcutId": 6,
+      "pointIndex": 54,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_55",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 55/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 55/116",
       "x": -1341.99,
       "y": -235.526,
-      "z": 13.7175
+      "z": 13.7175,
+      "shortcutId": 6,
+      "pointIndex": 55,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_56",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 56/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 56/116",
       "x": -1349.34,
       "y": -227.751,
-      "z": 13.7165
+      "z": 13.7165,
+      "shortcutId": 6,
+      "pointIndex": 56,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_57",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 57/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 57/116",
       "x": -1356.75,
       "y": -219.913,
-      "z": 13.714
+      "z": 13.714,
+      "shortcutId": 6,
+      "pointIndex": 57,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_58",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 58/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 58/116",
       "x": -1364.08,
       "y": -212.161,
-      "z": 13.7188
+      "z": 13.7188,
+      "shortcutId": 6,
+      "pointIndex": 58,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_59",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 59/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 59/116",
       "x": -1371.41,
       "y": -204.522,
-      "z": 13.7185
+      "z": 13.7185,
+      "shortcutId": 6,
+      "pointIndex": 59,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_60",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 60/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 60/116",
       "x": -1379.06,
       "y": -197.459,
-      "z": 13.717
+      "z": 13.717,
+      "shortcutId": 6,
+      "pointIndex": 60,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_61",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 61/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 61/116",
       "x": -1387.18,
       "y": -190.691,
-      "z": 13.7143
+      "z": 13.7143,
+      "shortcutId": 6,
+      "pointIndex": 61,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_62",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 62/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 62/116",
       "x": -1395.49,
       "y": -184.35,
-      "z": 13.7175
+      "z": 13.7175,
+      "shortcutId": 6,
+      "pointIndex": 62,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_63",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 63/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 63/116",
       "x": -1404.12,
       "y": -178.957,
-      "z": 13.7153
+      "z": 13.7153,
+      "shortcutId": 6,
+      "pointIndex": 63,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_64",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 64/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 64/116",
       "x": -1413.73,
       "y": -174.395,
-      "z": 13.7147
+      "z": 13.7147,
+      "shortcutId": 6,
+      "pointIndex": 64,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_65",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 65/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 65/116",
       "x": -1423.48,
       "y": -171.155,
-      "z": 13.7176
+      "z": 13.7176,
+      "shortcutId": 6,
+      "pointIndex": 65,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_66",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 66/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 66/116",
       "x": -1434.08,
       "y": -169.144,
-      "z": 13.7112
+      "z": 13.7112,
+      "shortcutId": 6,
+      "pointIndex": 66,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_67",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 67/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 67/116",
       "x": -1444.37,
       "y": -168.73,
-      "z": 13.7107
+      "z": 13.7107,
+      "shortcutId": 6,
+      "pointIndex": 67,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_68",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 68/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 68/116",
       "x": -1454.75,
       "y": -169.983,
-      "z": 13.7155
+      "z": 13.7155,
+      "shortcutId": 6,
+      "pointIndex": 68,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_69",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 69/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 69/116",
       "x": -1464.33,
       "y": -172.887,
-      "z": 13.7144
+      "z": 13.7144,
+      "shortcutId": 6,
+      "pointIndex": 69,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_70",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 70/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 70/116",
       "x": -1473.4,
       "y": -177.413,
-      "z": 13.7181
+      "z": 13.7181,
+      "shortcutId": 6,
+      "pointIndex": 70,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_71",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 71/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 71/116",
       "x": -1482.26,
       "y": -182.935,
-      "z": 13.7174
+      "z": 13.7174,
+      "shortcutId": 6,
+      "pointIndex": 71,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_72",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 72/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 72/116",
       "x": -1491.14,
       "y": -188.732,
-      "z": 13.7192
+      "z": 13.7192,
+      "shortcutId": 6,
+      "pointIndex": 72,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_73",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 73/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 73/116",
       "x": -1499.23,
       "y": -194.716,
-      "z": 13.7177
+      "z": 13.7177,
+      "shortcutId": 6,
+      "pointIndex": 73,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_74",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 74/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 74/116",
       "x": -1507.35,
       "y": -200.77,
-      "z": 13.7184
+      "z": 13.7184,
+      "shortcutId": 6,
+      "pointIndex": 74,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_75",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 75/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 75/116",
       "x": -1515.51,
       "y": -206.917,
-      "z": 13.7183
+      "z": 13.7183,
+      "shortcutId": 6,
+      "pointIndex": 75,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_76",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 76/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 76/116",
       "x": -1523.35,
       "y": -213.468,
-      "z": 13.7149
+      "z": 13.7149,
+      "shortcutId": 6,
+      "pointIndex": 76,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_77",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 77/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 77/116",
       "x": -1530.72,
       "y": -220.702,
-      "z": 13.7182
+      "z": 13.7182,
+      "shortcutId": 6,
+      "pointIndex": 77,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_78",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 78/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 78/116",
       "x": -1537.31,
       "y": -228.916,
-      "z": 13.7168
+      "z": 13.7168,
+      "shortcutId": 6,
+      "pointIndex": 78,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_79",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 79/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 79/116",
       "x": -1543.6,
       "y": -237.185,
-      "z": 13.7182
+      "z": 13.7182,
+      "shortcutId": 6,
+      "pointIndex": 79,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_80",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 80/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 80/116",
       "x": -1550.07,
       "y": -245.684,
-      "z": 13.7183
+      "z": 13.7183,
+      "shortcutId": 6,
+      "pointIndex": 80,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_81",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 81/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 81/116",
       "x": -1556.51,
       "y": -254.168,
-      "z": 13.7181
+      "z": 13.7181,
+      "shortcutId": 6,
+      "pointIndex": 81,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_82",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 82/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 82/116",
       "x": -1562.67,
       "y": -262.9,
-      "z": 13.7177
+      "z": 13.7177,
+      "shortcutId": 6,
+      "pointIndex": 82,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_83",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 83/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 83/116",
       "x": -1568.76,
       "y": -271.595,
-      "z": 13.7184
+      "z": 13.7184,
+      "shortcutId": 6,
+      "pointIndex": 83,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_84",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 84/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 84/116",
       "x": -1575.18,
       "y": -279.509,
-      "z": 13.7175
+      "z": 13.7175,
+      "shortcutId": 6,
+      "pointIndex": 84,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_85",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 85/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 85/116",
       "x": -1581.67,
       "y": -287.148,
-      "z": 13.7178
+      "z": 13.7178,
+      "shortcutId": 6,
+      "pointIndex": 85,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_86",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 86/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 86/116",
       "x": -1588.34,
       "y": -294.693,
-      "z": 13.7187
+      "z": 13.7187,
+      "shortcutId": 6,
+      "pointIndex": 86,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_87",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 87/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 87/116",
       "x": -1595.15,
       "y": -302.108,
-      "z": 13.7177
+      "z": 13.7177,
+      "shortcutId": 6,
+      "pointIndex": 87,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_88",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 88/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 88/116",
       "x": -1601.97,
       "y": -309.813,
-      "z": 13.7189
+      "z": 13.7189,
+      "shortcutId": 6,
+      "pointIndex": 88,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_89",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 89/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 89/116",
       "x": -1608.24,
       "y": -317.675,
-      "z": 13.717
+      "z": 13.717,
+      "shortcutId": 6,
+      "pointIndex": 89,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_90",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 90/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 90/116",
       "x": -1615.3,
       "y": -325.246,
-      "z": 13.7137
+      "z": 13.7137,
+      "shortcutId": 6,
+      "pointIndex": 90,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_91",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 91/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 91/116",
       "x": -1622.6,
       "y": -332.447,
-      "z": 13.7181
+      "z": 13.7181,
+      "shortcutId": 6,
+      "pointIndex": 91,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_92",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 92/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 92/116",
       "x": -1630.26,
       "y": -339.879,
-      "z": 13.7186
+      "z": 13.7186,
+      "shortcutId": 6,
+      "pointIndex": 92,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_93",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 93/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 93/116",
       "x": -1638.39,
       "y": -346.565,
-      "z": 13.7177
+      "z": 13.7177,
+      "shortcutId": 6,
+      "pointIndex": 93,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_94",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 94/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 94/116",
       "x": -1647.1,
       "y": -351.934,
-      "z": 13.7161
+      "z": 13.7161,
+      "shortcutId": 6,
+      "pointIndex": 94,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_95",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 95/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 95/116",
       "x": -1656.72,
       "y": -355.972,
-      "z": 13.7153
+      "z": 13.7153,
+      "shortcutId": 6,
+      "pointIndex": 95,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_96",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 96/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 96/116",
       "x": -1666.44,
       "y": -359.275,
-      "z": 13.7148
+      "z": 13.7148,
+      "shortcutId": 6,
+      "pointIndex": 96,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_97",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 97/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 97/116",
       "x": -1676.48,
       "y": -361.856,
-      "z": 13.7181
+      "z": 13.7181,
+      "shortcutId": 6,
+      "pointIndex": 97,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_98",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 98/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 98/116",
       "x": -1686.93,
       "y": -363.953,
-      "z": 13.7191
+      "z": 13.7191,
+      "shortcutId": 6,
+      "pointIndex": 98,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_99",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 99/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 99/116",
       "x": -1697.58,
       "y": -364.735,
-      "z": 13.7175
+      "z": 13.7175,
+      "shortcutId": 6,
+      "pointIndex": 99,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_100",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 100/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 100/116",
       "x": -1707.66,
       "y": -364.859,
-      "z": 13.7183
+      "z": 13.7183,
+      "shortcutId": 6,
+      "pointIndex": 100,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_101",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 101/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 101/116",
       "x": -1717.81,
       "y": -364.817,
-      "z": 13.7396
+      "z": 13.7396,
+      "shortcutId": 6,
+      "pointIndex": 101,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_102",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 102/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 102/116",
       "x": -1727.72,
       "y": -364.838,
-      "z": 17.1046
+      "z": 17.1046,
+      "shortcutId": 6,
+      "pointIndex": 102,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_103",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 103/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 103/116",
       "x": -1736.9,
       "y": -364.913,
-      "z": 21.6523
+      "z": 21.6523,
+      "shortcutId": 6,
+      "pointIndex": 103,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_104",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 104/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 104/116",
       "x": -1746.62,
       "y": -364.98,
-      "z": 24.6048
+      "z": 24.6048,
+      "shortcutId": 6,
+      "pointIndex": 104,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_105",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 105/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 105/116",
       "x": -1756.75,
       "y": -365.073,
-      "z": 25.5881
+      "z": 25.5881,
+      "shortcutId": 6,
+      "pointIndex": 105,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_106",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 106/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 106/116",
       "x": -1767.1,
       "y": -365.173,
-      "z": 24.2536
+      "z": 24.2536,
+      "shortcutId": 6,
+      "pointIndex": 106,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_107",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 107/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 107/116",
       "x": -1776.52,
       "y": -365.266,
-      "z": 20.8848
+      "z": 20.8848,
+      "shortcutId": 6,
+      "pointIndex": 107,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_108",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 108/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 108/116",
       "x": -1785.2,
       "y": -365.352,
-      "z": 15.8844
+      "z": 15.8844,
+      "shortcutId": 6,
+      "pointIndex": 108,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_109",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 109/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 109/116",
       "x": -1794.94,
       "y": -365.991,
-      "z": 18.1626
+      "z": 18.1626,
+      "shortcutId": 6,
+      "pointIndex": 109,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_110",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 110/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 110/116",
       "x": -1800.06,
       "y": -357.528,
-      "z": 19.7168
+      "z": 19.7168,
+      "shortcutId": 6,
+      "pointIndex": 110,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_111",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 111/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 111/116",
       "x": -1800.45,
       "y": -347.322,
-      "z": 20.8486
+      "z": 20.8486,
+      "shortcutId": 6,
+      "pointIndex": 111,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_112",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 112/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 112/116",
       "x": -1800.15,
       "y": -337.184,
-      "z": 22.2909
+      "z": 22.2909,
+      "shortcutId": 6,
+      "pointIndex": 112,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_113",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 113/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 113/116",
       "x": -1799.73,
       "y": -327.063,
-      "z": 23.7347
+      "z": 23.7347,
+      "shortcutId": 6,
+      "pointIndex": 113,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_114",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 114/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 114/116",
       "x": -1798.98,
       "y": -316.982,
-      "z": 24.2331
+      "z": 24.2331,
+      "shortcutId": 6,
+      "pointIndex": 114,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_115",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 115/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 115/116",
       "x": -1798.21,
       "y": -306.761,
-      "z": 24.7348
+      "z": 24.7348,
+      "shortcutId": 6,
+      "pointIndex": 115,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     },
     {
       "id": "sc_6_116",
-      "name": "Atajo #6 (P\u00farpura El\u00e9ctrico) - Punto 116/116",
+      "name": "Shortcut #6 (Electric Purple) - Point 116/116",
       "x": -1797.62,
       "y": -296.599,
-      "z": 24.2114
+      "z": 24.2114,
+      "shortcutId": 6,
+      "pointIndex": 116,
+      "totalPoints": 116,
+      "colorToken": "electricPurple"
     }
   ],
   "edges": [
@@ -1397,13 +1861,13 @@
       "from": "26_172",
       "to": "sc_6_1",
       "speed": 60,
-      "description": "Entrada a Atajo #6 (Purpura Electrico) desde Node 26_172"
+      "description": "Entry to Shortcut #6 (Purpura Electrico) desde Node 26_172"
     },
     {
       "from": "sc_6_116",
       "to": "25_492",
       "speed": 60,
-      "description": "Salida de Atajo #6 (Purpura Electrico) hacia Node 25_492"
+      "description": "Exit from Shortcut #6 (Purpura Electrico) hacia Node 25_492"
     }
   ],
   "oneWay": true

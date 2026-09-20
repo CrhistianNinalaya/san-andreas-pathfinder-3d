@@ -6,7 +6,7 @@ import { useNodesLayer } from '../../../map-bridge/useNodesLayer';
 import type { UseMapIntegrationOptions } from '../types';
 
 /**
- * Hook responsible for orchestrating the Leaflet bridge, route layers, waypoint markers, and debug node layer
+ * Hook responsible for orchestrating the Leaflet bridge, route layers, waypoint markers, and road network nodes
  */
 export function useMapIntegration(options: Readonly<UseMapIntegrationOptions>) {
   const {
@@ -16,6 +16,7 @@ export function useMapIntegration(options: Readonly<UseMapIntegrationOptions>) {
     waypoints,
     graph,
     showNodes = false,
+    layerFilters,
     onMapClick,
     onCursorMove,
     onWaypointDrag,
@@ -23,21 +24,18 @@ export function useMapIntegration(options: Readonly<UseMapIntegrationOptions>) {
     onMapReady
   } = options;
 
-  // Mount Leaflet instance
   const { map, isMapReady } = useMapBridge({
     containerRef,
     onMapClick,
     onCursorMove
   });
 
-  // Notify parent when map instance is ready
   useEffect(() => {
     if (isMapReady && map && onMapReady) {
       onMapReady(map);
     }
   }, [isMapReady, map, onMapReady]);
 
-  // Sync polyline routes layer
   useRouteLayer({
     map,
     routes,
@@ -45,18 +43,17 @@ export function useMapIntegration(options: Readonly<UseMapIntegrationOptions>) {
     onSelectAlternative
   });
 
-  // Sync waypoint pins layer
   useWaypointMarkers({
     map,
     waypoints,
     onWaypointDrag
   });
 
-  // Sync road network nodes layer
   useNodesLayer({
     map,
     graph: graph ?? null,
-    showNodes
+    showNodes,
+    filters: layerFilters
   });
 
   return { map, isMapReady };

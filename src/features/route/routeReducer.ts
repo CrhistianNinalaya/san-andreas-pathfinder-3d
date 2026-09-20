@@ -7,6 +7,28 @@ import type { GtaCoords, RouteResult, RouteLeg } from '../../engine/types';
 import { ElevationPhysics, type VehicleProfileType } from '../../terrain/ElevationPhysics';
 import type { Waypoint } from '../../map-bridge/useWaypointMarkers';
 
+/**
+ * Visibility filter toggles for road network geometry classes.
+ */
+export interface LayerFilters {
+  officialGiant: boolean;
+  officialIsolated: boolean;
+  shortcuts: boolean;
+  patches: boolean;
+  coincidentNodes: boolean;
+}
+
+/**
+ * Default visibility filter states.
+ */
+export const initialLayerFilters: LayerFilters = {
+  officialGiant: true,
+  officialIsolated: false,
+  shortcuts: true,
+  patches: true,
+  coincidentNodes: false
+};
+
 export interface RouteState {
   waypoints: Waypoint[];
   routes: RouteResult[];
@@ -17,6 +39,7 @@ export interface RouteState {
   isLoadingGraph: boolean;
   graphNodeCount: number;
   showNodes: boolean;
+  layerFilters: LayerFilters;
 }
 
 export type RouteAction =
@@ -31,8 +54,13 @@ export type RouteAction =
   | { type: 'SET_SCOPE'; scope: RouteState['scope'] }
   | { type: 'SET_ACTIVE_ROUTE'; index: number }
   | { type: 'TOGGLE_NODES' }
+  | { type: 'TOGGLE_LAYER_FILTER'; key: keyof LayerFilters }
+  | { type: 'SET_LAYER_FILTERS'; filters: Partial<LayerFilters> }
   | { type: 'RESTORE_URL_WAYPOINTS'; waypointsCoords: GtaCoords[]; vehicle?: VehicleProfileType; altIndex?: number };
 
+/**
+ * Initial state for the route navigation reducer.
+ */
 export const initialRouteState: RouteState = {
   waypoints: [],
   routes: [],
@@ -42,7 +70,8 @@ export const initialRouteState: RouteState = {
   graph: null,
   isLoadingGraph: true,
   graphNodeCount: 0,
-  showNodes: false
+  showNodes: false,
+  layerFilters: initialLayerFilters
 };
 
 function getWaypointLabel(index: number): string {
@@ -292,6 +321,24 @@ export function routeReducer(state: RouteState, action: RouteAction): RouteState
 
     case 'TOGGLE_NODES':
       return { ...state, showNodes: !state.showNodes };
+
+    case 'TOGGLE_LAYER_FILTER':
+      return {
+        ...state,
+        layerFilters: {
+          ...state.layerFilters,
+          [action.key]: !state.layerFilters[action.key]
+        }
+      };
+
+    case 'SET_LAYER_FILTERS':
+      return {
+        ...state,
+        layerFilters: {
+          ...state.layerFilters,
+          ...action.filters
+        }
+      };
 
     case 'RESTORE_URL_WAYPOINTS': {
       if (!state.graph || action.waypointsCoords.length === 0) return state;

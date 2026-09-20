@@ -1,750 +1,1174 @@
 {
   "id": 5,
-  "name": "Atajo #5 (Naranja Fuego)",
+  "name": "Shortcut #5 (Fire Orange)",
   "description": "Flint County -> Red County",
   "color": "#f97316",
   "nodes": [
     {
       "id": "sc_5_1",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 1/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 1/106",
       "x": -1160.6,
       "y": -614.4,
-      "z": 37.5
+      "z": 37.5,
+      "shortcutId": 5,
+      "pointIndex": 1,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_2",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 2/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 2/106",
       "x": -1153.97,
       "y": -607.464,
-      "z": 36.5737
+      "z": 36.5737,
+      "shortcutId": 5,
+      "pointIndex": 2,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_3",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 3/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 3/106",
       "x": -1148.14,
       "y": -599.397,
-      "z": 35.1693
+      "z": 35.1693,
+      "shortcutId": 5,
+      "pointIndex": 3,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_4",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 4/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 4/106",
       "x": -1141.49,
       "y": -591.828,
-      "z": 33.4981
+      "z": 33.4981,
+      "shortcutId": 5,
+      "pointIndex": 4,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_5",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 5/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 5/106",
       "x": -1134.47,
       "y": -584.011,
-      "z": 31.8261
+      "z": 31.8261,
+      "shortcutId": 5,
+      "pointIndex": 5,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_6",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 6/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 6/106",
       "x": -1127.72,
       "y": -576.317,
-      "z": 30.7537
+      "z": 30.7537,
+      "shortcutId": 5,
+      "pointIndex": 6,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_7",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 7/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 7/106",
       "x": -1120.72,
       "y": -568.679,
-      "z": 31.1983
+      "z": 31.1983,
+      "shortcutId": 5,
+      "pointIndex": 7,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_8",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 8/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 8/106",
       "x": -1113.2,
       "y": -561.975,
-      "z": 31.462
+      "z": 31.462,
+      "shortcutId": 5,
+      "pointIndex": 8,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_9",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 9/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 9/106",
       "x": -1103.99,
       "y": -556.868,
-      "z": 31.586
+      "z": 31.586,
+      "shortcutId": 5,
+      "pointIndex": 9,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_10",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 10/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 10/106",
       "x": -1094.35,
       "y": -553.355,
-      "z": 31.5776
+      "z": 31.5776,
+      "shortcutId": 5,
+      "pointIndex": 10,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_11",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 11/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 11/106",
       "x": -1084.06,
       "y": -550.714,
-      "z": 31.5773
+      "z": 31.5773,
+      "shortcutId": 5,
+      "pointIndex": 11,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_12",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 12/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 12/106",
       "x": -1074.01,
       "y": -549.074,
-      "z": 31.5775
+      "z": 31.5775,
+      "shortcutId": 5,
+      "pointIndex": 12,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_13",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 13/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 13/106",
       "x": -1063.47,
       "y": -548.263,
-      "z": 31.5775
+      "z": 31.5775,
+      "shortcutId": 5,
+      "pointIndex": 13,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_14",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 14/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 14/106",
       "x": -1053.45,
       "y": -548.294,
-      "z": 31.5774
+      "z": 31.5774,
+      "shortcutId": 5,
+      "pointIndex": 14,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_15",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 15/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 15/106",
       "x": -1043.37,
       "y": -549.063,
-      "z": 31.5775
+      "z": 31.5775,
+      "shortcutId": 5,
+      "pointIndex": 15,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_16",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 16/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 16/106",
       "x": -1033.12,
       "y": -550.141,
-      "z": 31.579
+      "z": 31.579,
+      "shortcutId": 5,
+      "pointIndex": 16,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_17",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 17/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 17/106",
       "x": -1022.71,
       "y": -551.243,
-      "z": 31.5773
+      "z": 31.5773,
+      "shortcutId": 5,
+      "pointIndex": 17,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_18",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 18/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 18/106",
       "x": -1012.59,
       "y": -552.315,
-      "z": 31.5752
+      "z": 31.5752,
+      "shortcutId": 5,
+      "pointIndex": 18,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_19",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 19/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 19/106",
       "x": -1001.98,
       "y": -553.32,
-      "z": 31.5714
+      "z": 31.5714,
+      "shortcutId": 5,
+      "pointIndex": 19,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_20",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 20/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 20/106",
       "x": -991.5,
       "y": -554.235,
-      "z": 30.8652
+      "z": 30.8652,
+      "shortcutId": 5,
+      "pointIndex": 20,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_21",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 21/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 21/106",
       "x": -981.303,
       "y": -555.123,
-      "z": 28.9709
+      "z": 28.9709,
+      "shortcutId": 5,
+      "pointIndex": 21,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_22",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 22/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 22/106",
       "x": -971.149,
       "y": -556.007,
-      "z": 25.8719
+      "z": 25.8719,
+      "shortcutId": 5,
+      "pointIndex": 22,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_23",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 23/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 23/106",
       "x": -961.103,
       "y": -556.822,
-      "z": 25.0706
+      "z": 25.0706,
+      "shortcutId": 5,
+      "pointIndex": 23,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_24",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 24/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 24/106",
       "x": -950.834,
       "y": -557.603,
-      "z": 25.1283
+      "z": 25.1283,
+      "shortcutId": 5,
+      "pointIndex": 24,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_25",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 25/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 25/106",
       "x": -940.664,
       "y": -558.396,
-      "z": 25.0463
+      "z": 25.0463,
+      "shortcutId": 5,
+      "pointIndex": 25,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_26",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 26/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 26/106",
       "x": -930.258,
       "y": -559.209,
-      "z": 24.9572
+      "z": 24.9572,
+      "shortcutId": 5,
+      "pointIndex": 26,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_27",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 27/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 27/106",
       "x": -919.453,
       "y": -560.077,
-      "z": 24.9406
+      "z": 24.9406,
+      "shortcutId": 5,
+      "pointIndex": 27,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_28",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 28/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 28/106",
       "x": -909.134,
       "y": -560.968,
-      "z": 24.8949
+      "z": 24.8949,
+      "shortcutId": 5,
+      "pointIndex": 28,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_29",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 29/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 29/106",
       "x": -898.716,
       "y": -562.077,
-      "z": 25.3228
+      "z": 25.3228,
+      "shortcutId": 5,
+      "pointIndex": 29,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_30",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 30/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 30/106",
       "x": -888.978,
       "y": -563.341,
-      "z": 29.1572
+      "z": 29.1572,
+      "shortcutId": 5,
+      "pointIndex": 30,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_31",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 31/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 31/106",
       "x": -879.199,
       "y": -564.641,
-      "z": 32.7323
+      "z": 32.7323,
+      "shortcutId": 5,
+      "pointIndex": 31,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_32",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 32/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 32/106",
       "x": -869.469,
       "y": -565.815,
-      "z": 37.0166
+      "z": 37.0166,
+      "shortcutId": 5,
+      "pointIndex": 32,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_33",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 33/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 33/106",
       "x": -859.756,
       "y": -567.037,
-      "z": 39.9823
+      "z": 39.9823,
+      "shortcutId": 5,
+      "pointIndex": 33,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_34",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 34/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 34/106",
       "x": -849.672,
       "y": -568.287,
-      "z": 41.4874
+      "z": 41.4874,
+      "shortcutId": 5,
+      "pointIndex": 34,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_35",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 35/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 35/106",
       "x": -839.244,
       "y": -569.573,
-      "z": 41.7718
+      "z": 41.7718,
+      "shortcutId": 5,
+      "pointIndex": 35,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_36",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 36/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 36/106",
       "x": -829.367,
       "y": -571.197,
-      "z": 43.7803
+      "z": 43.7803,
+      "shortcutId": 5,
+      "pointIndex": 36,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_37",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 37/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 37/106",
       "x": -819.755,
       "y": -573.558,
-      "z": 45.2838
+      "z": 45.2838,
+      "shortcutId": 5,
+      "pointIndex": 37,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_38",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 38/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 38/106",
       "x": -810.165,
       "y": -576.148,
-      "z": 46.9602
+      "z": 46.9602,
+      "shortcutId": 5,
+      "pointIndex": 38,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_39",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 39/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 39/106",
       "x": -800.391,
       "y": -578.86,
-      "z": 47.642
+      "z": 47.642,
+      "shortcutId": 5,
+      "pointIndex": 39,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_40",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 40/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 40/106",
       "x": -790.388,
       "y": -581.361,
-      "z": 48.5548
+      "z": 48.5548,
+      "shortcutId": 5,
+      "pointIndex": 40,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_41",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 41/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 41/106",
       "x": -780.201,
       "y": -583.786,
-      "z": 49.5729
+      "z": 49.5729,
+      "shortcutId": 5,
+      "pointIndex": 41,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_42",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 42/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 42/106",
       "x": -770.056,
       "y": -586.472,
-      "z": 49.8063
+      "z": 49.8063,
+      "shortcutId": 5,
+      "pointIndex": 42,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_43",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 43/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 43/106",
       "x": -760.441,
       "y": -589.103,
-      "z": 48.3467
+      "z": 48.3467,
+      "shortcutId": 5,
+      "pointIndex": 43,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_44",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 44/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 44/106",
       "x": -750.319,
       "y": -591.983,
-      "z": 47.1127
+      "z": 47.1127,
+      "shortcutId": 5,
+      "pointIndex": 44,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_45",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 45/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 45/106",
       "x": -741.079,
       "y": -595.911,
-      "z": 46.9064
+      "z": 46.9064,
+      "shortcutId": 5,
+      "pointIndex": 45,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_46",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 46/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 46/106",
       "x": -731.649,
       "y": -600.175,
-      "z": 46.6754
+      "z": 46.6754,
+      "shortcutId": 5,
+      "pointIndex": 46,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_47",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 47/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 47/106",
       "x": -721.873,
       "y": -604.511,
-      "z": 46.4173
+      "z": 46.4173,
+      "shortcutId": 5,
+      "pointIndex": 47,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_48",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 48/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 48/106",
       "x": -712.494,
       "y": -608.654,
-      "z": 45.9108
+      "z": 45.9108,
+      "shortcutId": 5,
+      "pointIndex": 48,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_49",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 49/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 49/106",
       "x": -703.149,
       "y": -612.775,
-      "z": 44.554
+      "z": 44.554,
+      "shortcutId": 5,
+      "pointIndex": 49,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_50",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 50/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 50/106",
       "x": -693.292,
       "y": -616.843,
-      "z": 43.8765
+      "z": 43.8765,
+      "shortcutId": 5,
+      "pointIndex": 50,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_51",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 51/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 51/106",
       "x": -684.006,
       "y": -620.7,
-      "z": 43.0837
+      "z": 43.0837,
+      "shortcutId": 5,
+      "pointIndex": 51,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_52",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 52/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 52/106",
       "x": -674.72,
       "y": -624.625,
-      "z": 41.3912
+      "z": 41.3912,
+      "shortcutId": 5,
+      "pointIndex": 52,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_53",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 53/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 53/106",
       "x": -665.542,
       "y": -628.476,
-      "z": 38.9318
+      "z": 38.9318,
+      "shortcutId": 5,
+      "pointIndex": 53,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_54",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 54/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 54/106",
       "x": -655.924,
       "y": -632.24,
-      "z": 37.4613
+      "z": 37.4613,
+      "shortcutId": 5,
+      "pointIndex": 54,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_55",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 55/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 55/106",
       "x": -646.071,
       "y": -636.157,
-      "z": 35.8487
+      "z": 35.8487,
+      "shortcutId": 5,
+      "pointIndex": 55,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_56",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 56/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 56/106",
       "x": -636.681,
       "y": -639.847,
-      "z": 34.2919
+      "z": 34.2919,
+      "shortcutId": 5,
+      "pointIndex": 56,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_57",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 57/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 57/106",
       "x": -627.24,
       "y": -643.833,
-      "z": 32.4654
+      "z": 32.4654,
+      "shortcutId": 5,
+      "pointIndex": 57,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_58",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 58/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 58/106",
       "x": -617.759,
       "y": -647.843,
-      "z": 30.7239
+      "z": 30.7239,
+      "shortcutId": 5,
+      "pointIndex": 58,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_59",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 59/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 59/106",
       "x": -607.96,
       "y": -651.87,
-      "z": 29.0598
+      "z": 29.0598,
+      "shortcutId": 5,
+      "pointIndex": 59,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_60",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 60/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 60/106",
       "x": -597.997,
       "y": -656.158,
-      "z": 27.8358
+      "z": 27.8358,
+      "shortcutId": 5,
+      "pointIndex": 60,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_61",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 61/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 61/106",
       "x": -588.688,
       "y": -660.118,
-      "z": 26.8322
+      "z": 26.8322,
+      "shortcutId": 5,
+      "pointIndex": 61,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_62",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 62/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 62/106",
       "x": -579.312,
       "y": -664.125,
-      "z": 25.8146
+      "z": 25.8146,
+      "shortcutId": 5,
+      "pointIndex": 62,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_63",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 63/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 63/106",
       "x": -569.865,
       "y": -668.06,
-      "z": 24.9686
+      "z": 24.9686,
+      "shortcutId": 5,
+      "pointIndex": 63,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_64",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 64/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 64/106",
       "x": -560.541,
       "y": -671.924,
-      "z": 24.9004
+      "z": 24.9004,
+      "shortcutId": 5,
+      "pointIndex": 64,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_65",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 65/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 65/106",
       "x": -551.057,
       "y": -675.92,
-      "z": 25.0053
+      "z": 25.0053,
+      "shortcutId": 5,
+      "pointIndex": 65,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_66",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 66/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 66/106",
       "x": -541.859,
       "y": -679.805,
-      "z": 24.2421
+      "z": 24.2421,
+      "shortcutId": 5,
+      "pointIndex": 66,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_67",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 67/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 67/106",
       "x": -532.665,
       "y": -683.671,
-      "z": 22.5953
+      "z": 22.5953,
+      "shortcutId": 5,
+      "pointIndex": 67,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_68",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 68/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 68/106",
       "x": -522.93,
       "y": -687.874,
-      "z": 21.2187
+      "z": 21.2187,
+      "shortcutId": 5,
+      "pointIndex": 68,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_69",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 69/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 69/106",
       "x": -513.135,
       "y": -692.298,
-      "z": 20.6137
+      "z": 20.6137,
+      "shortcutId": 5,
+      "pointIndex": 69,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_70",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 70/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 70/106",
       "x": -503.327,
       "y": -696.811,
-      "z": 20.4967
+      "z": 20.4967,
+      "shortcutId": 5,
+      "pointIndex": 70,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_71",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 71/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 71/106",
       "x": -493.539,
       "y": -701.255,
-      "z": 21.5361
+      "z": 21.5361,
+      "shortcutId": 5,
+      "pointIndex": 71,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_72",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 72/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 72/106",
       "x": -484.072,
       "y": -705.656,
-      "z": 23.2009
+      "z": 23.2009,
+      "shortcutId": 5,
+      "pointIndex": 72,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_73",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 73/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 73/106",
       "x": -474.483,
       "y": -710.141,
-      "z": 24.8013
+      "z": 24.8013,
+      "shortcutId": 5,
+      "pointIndex": 73,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_74",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 74/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 74/106",
       "x": -465.374,
       "y": -715.21,
-      "z": 27.1288
+      "z": 27.1288,
+      "shortcutId": 5,
+      "pointIndex": 74,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_75",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 75/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 75/106",
       "x": -456.381,
       "y": -720.677,
-      "z": 28.5602
+      "z": 28.5602,
+      "shortcutId": 5,
+      "pointIndex": 75,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_76",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 76/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 76/106",
       "x": -447.554,
       "y": -726.04,
-      "z": 28.342
+      "z": 28.342,
+      "shortcutId": 5,
+      "pointIndex": 76,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_77",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 77/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 77/106",
       "x": -438.949,
       "y": -731.326,
-      "z": 26.9798
+      "z": 26.9798,
+      "shortcutId": 5,
+      "pointIndex": 77,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_78",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 78/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 78/106",
       "x": -430.347,
       "y": -736.712,
-      "z": 27.4888
+      "z": 27.4888,
+      "shortcutId": 5,
+      "pointIndex": 78,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_79",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 79/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 79/106",
       "x": -421.491,
       "y": -741.925,
-      "z": 28.6125
+      "z": 28.6125,
+      "shortcutId": 5,
+      "pointIndex": 79,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_80",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 80/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 80/106",
       "x": -412.455,
       "y": -746.872,
-      "z": 29.6048
+      "z": 29.6048,
+      "shortcutId": 5,
+      "pointIndex": 80,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_81",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 81/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 81/106",
       "x": -403.238,
       "y": -751.645,
-      "z": 30.6031
+      "z": 30.6031,
+      "shortcutId": 5,
+      "pointIndex": 81,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_82",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 82/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 82/106",
       "x": -393.828,
       "y": -756.397,
-      "z": 30.7968
+      "z": 30.7968,
+      "shortcutId": 5,
+      "pointIndex": 82,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_83",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 83/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 83/106",
       "x": -384.162,
       "y": -761.029,
-      "z": 30.5268
+      "z": 30.5268,
+      "shortcutId": 5,
+      "pointIndex": 83,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_84",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 84/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 84/106",
       "x": -374.95,
       "y": -765.431,
-      "z": 30.5218
+      "z": 30.5218,
+      "shortcutId": 5,
+      "pointIndex": 84,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_85",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 85/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 85/106",
       "x": -365.522,
       "y": -769.902,
-      "z": 30.478
+      "z": 30.478,
+      "shortcutId": 5,
+      "pointIndex": 85,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_86",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 86/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 86/106",
       "x": -356.009,
       "y": -774.444,
-      "z": 30.7355
+      "z": 30.7355,
+      "shortcutId": 5,
+      "pointIndex": 86,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_87",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 87/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 87/106",
       "x": -346.543,
       "y": -778.948,
-      "z": 29.8191
+      "z": 29.8191,
+      "shortcutId": 5,
+      "pointIndex": 87,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_88",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 88/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 88/106",
       "x": -337.506,
       "y": -783.432,
-      "z": 31.6348
+      "z": 31.6348,
+      "shortcutId": 5,
+      "pointIndex": 88,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_89",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 89/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 89/106",
       "x": -328.232,
       "y": -787.297,
-      "z": 32.538
+      "z": 32.538,
+      "shortcutId": 5,
+      "pointIndex": 89,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_90",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 90/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 90/106",
       "x": -318.106,
       "y": -790.135,
-      "z": 33.3174
+      "z": 33.3174,
+      "shortcutId": 5,
+      "pointIndex": 90,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_91",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 91/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 91/106",
       "x": -308.895,
       "y": -795.105,
-      "z": 33.8173
+      "z": 33.8173,
+      "shortcutId": 5,
+      "pointIndex": 91,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_92",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 92/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 92/106",
       "x": -300.399,
       "y": -801.065,
-      "z": 34.9432
+      "z": 34.9432,
+      "shortcutId": 5,
+      "pointIndex": 92,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_93",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 93/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 93/106",
       "x": -293.26,
       "y": -807.681,
-      "z": 37.4258
+      "z": 37.4258,
+      "shortcutId": 5,
+      "pointIndex": 93,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_94",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 94/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 94/106",
       "x": -287.179,
       "y": -815.429,
-      "z": 40.659
+      "z": 40.659,
+      "shortcutId": 5,
+      "pointIndex": 94,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_95",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 95/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 95/106",
       "x": -282.164,
       "y": -824.021,
-      "z": 42.5706
+      "z": 42.5706,
+      "shortcutId": 5,
+      "pointIndex": 95,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_96",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 96/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 96/106",
       "x": -277.358,
       "y": -833.021,
-      "z": 43.7183
+      "z": 43.7183,
+      "shortcutId": 5,
+      "pointIndex": 96,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_97",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 97/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 97/106",
       "x": -273.612,
       "y": -842.508,
-      "z": 46.1836
+      "z": 46.1836,
+      "shortcutId": 5,
+      "pointIndex": 97,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_98",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 98/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 98/106",
       "x": -269.863,
       "y": -851.867,
-      "z": 46.291
+      "z": 46.291,
+      "shortcutId": 5,
+      "pointIndex": 98,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_99",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 99/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 99/106",
       "x": -266.151,
       "y": -861.116,
-      "z": 43.9076
+      "z": 43.9076,
+      "shortcutId": 5,
+      "pointIndex": 99,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_100",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 100/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 100/106",
       "x": -262.779,
       "y": -870.939,
-      "z": 44.6541
+      "z": 44.6541,
+      "shortcutId": 5,
+      "pointIndex": 100,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_101",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 101/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 101/106",
       "x": -258.463,
       "y": -880.285,
-      "z": 44.9484
+      "z": 44.9484,
+      "shortcutId": 5,
+      "pointIndex": 101,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_102",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 102/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 102/106",
       "x": -252.806,
       "y": -889.016,
-      "z": 43.8603
+      "z": 43.8603,
+      "shortcutId": 5,
+      "pointIndex": 102,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_103",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 103/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 103/106",
       "x": -246.005,
       "y": -896.608,
-      "z": 43.1933
+      "z": 43.1933,
+      "shortcutId": 5,
+      "pointIndex": 103,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_104",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 104/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 104/106",
       "x": -237.703,
       "y": -902.738,
-      "z": 42.464
+      "z": 42.464,
+      "shortcutId": 5,
+      "pointIndex": 104,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_105",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 105/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 105/106",
       "x": -229.604,
       "y": -908.896,
-      "z": 41.583
+      "z": 41.583,
+      "shortcutId": 5,
+      "pointIndex": 105,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     },
     {
       "id": "sc_5_106",
-      "name": "Atajo #5 (Naranja Fuego) - Punto 106/106",
+      "name": "Shortcut #5 (Fire Orange) - Point 106/106",
       "x": -232.9,
       "y": -905.9,
-      "z": 41.4
+      "z": 41.4,
+      "shortcutId": 5,
+      "pointIndex": 106,
+      "totalPoints": 106,
+      "colorToken": "fireOrange"
     }
   ],
   "edges": [
@@ -752,1285 +1176,1285 @@
       "from": "sc_5_1",
       "to": "sc_5_2",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_2",
       "to": "sc_5_1",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_2",
       "to": "sc_5_3",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_3",
       "to": "sc_5_2",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_3",
       "to": "sc_5_4",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_4",
       "to": "sc_5_3",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_4",
       "to": "sc_5_5",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_5",
       "to": "sc_5_4",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_5",
       "to": "sc_5_6",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_6",
       "to": "sc_5_5",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_6",
       "to": "sc_5_7",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_7",
       "to": "sc_5_6",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_7",
       "to": "sc_5_8",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_8",
       "to": "sc_5_7",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_8",
       "to": "sc_5_9",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_9",
       "to": "sc_5_8",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_9",
       "to": "sc_5_10",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_10",
       "to": "sc_5_9",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_10",
       "to": "sc_5_11",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_11",
       "to": "sc_5_10",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_11",
       "to": "sc_5_12",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_12",
       "to": "sc_5_11",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_12",
       "to": "sc_5_13",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_13",
       "to": "sc_5_12",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_13",
       "to": "sc_5_14",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_14",
       "to": "sc_5_13",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_14",
       "to": "sc_5_15",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_15",
       "to": "sc_5_14",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_15",
       "to": "sc_5_16",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_16",
       "to": "sc_5_15",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_16",
       "to": "sc_5_17",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_17",
       "to": "sc_5_16",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_17",
       "to": "sc_5_18",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_18",
       "to": "sc_5_17",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_18",
       "to": "sc_5_19",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_19",
       "to": "sc_5_18",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_19",
       "to": "sc_5_20",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_20",
       "to": "sc_5_19",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_20",
       "to": "sc_5_21",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_21",
       "to": "sc_5_20",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_21",
       "to": "sc_5_22",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_22",
       "to": "sc_5_21",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_22",
       "to": "sc_5_23",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_23",
       "to": "sc_5_22",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_23",
       "to": "sc_5_24",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_24",
       "to": "sc_5_23",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_24",
       "to": "sc_5_25",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_25",
       "to": "sc_5_24",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_25",
       "to": "sc_5_26",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_26",
       "to": "sc_5_25",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_26",
       "to": "sc_5_27",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_27",
       "to": "sc_5_26",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_27",
       "to": "sc_5_28",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_28",
       "to": "sc_5_27",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_28",
       "to": "sc_5_29",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_29",
       "to": "sc_5_28",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_29",
       "to": "sc_5_30",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_30",
       "to": "sc_5_29",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_30",
       "to": "sc_5_31",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_31",
       "to": "sc_5_30",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_31",
       "to": "sc_5_32",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_32",
       "to": "sc_5_31",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_32",
       "to": "sc_5_33",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_33",
       "to": "sc_5_32",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_33",
       "to": "sc_5_34",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_34",
       "to": "sc_5_33",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_34",
       "to": "sc_5_35",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_35",
       "to": "sc_5_34",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_35",
       "to": "sc_5_36",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_36",
       "to": "sc_5_35",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_36",
       "to": "sc_5_37",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_37",
       "to": "sc_5_36",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_37",
       "to": "sc_5_38",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_38",
       "to": "sc_5_37",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_38",
       "to": "sc_5_39",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_39",
       "to": "sc_5_38",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_39",
       "to": "sc_5_40",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_40",
       "to": "sc_5_39",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_40",
       "to": "sc_5_41",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_41",
       "to": "sc_5_40",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_41",
       "to": "sc_5_42",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_42",
       "to": "sc_5_41",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_42",
       "to": "sc_5_43",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_43",
       "to": "sc_5_42",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_43",
       "to": "sc_5_44",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_44",
       "to": "sc_5_43",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_44",
       "to": "sc_5_45",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_45",
       "to": "sc_5_44",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_45",
       "to": "sc_5_46",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_46",
       "to": "sc_5_45",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_46",
       "to": "sc_5_47",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_47",
       "to": "sc_5_46",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_47",
       "to": "sc_5_48",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_48",
       "to": "sc_5_47",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_48",
       "to": "sc_5_49",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_49",
       "to": "sc_5_48",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_49",
       "to": "sc_5_50",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_50",
       "to": "sc_5_49",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_50",
       "to": "sc_5_51",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_51",
       "to": "sc_5_50",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_51",
       "to": "sc_5_52",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_52",
       "to": "sc_5_51",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_52",
       "to": "sc_5_53",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_53",
       "to": "sc_5_52",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_53",
       "to": "sc_5_54",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_54",
       "to": "sc_5_53",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_54",
       "to": "sc_5_55",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_55",
       "to": "sc_5_54",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_55",
       "to": "sc_5_56",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_56",
       "to": "sc_5_55",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_56",
       "to": "sc_5_57",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_57",
       "to": "sc_5_56",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_57",
       "to": "sc_5_58",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_58",
       "to": "sc_5_57",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_58",
       "to": "sc_5_59",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_59",
       "to": "sc_5_58",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_59",
       "to": "sc_5_60",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_60",
       "to": "sc_5_59",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_60",
       "to": "sc_5_61",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_61",
       "to": "sc_5_60",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_61",
       "to": "sc_5_62",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_62",
       "to": "sc_5_61",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_62",
       "to": "sc_5_63",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_63",
       "to": "sc_5_62",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_63",
       "to": "sc_5_64",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_64",
       "to": "sc_5_63",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_64",
       "to": "sc_5_65",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_65",
       "to": "sc_5_64",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_65",
       "to": "sc_5_66",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_66",
       "to": "sc_5_65",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_66",
       "to": "sc_5_67",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_67",
       "to": "sc_5_66",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_67",
       "to": "sc_5_68",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_68",
       "to": "sc_5_67",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_68",
       "to": "sc_5_69",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_69",
       "to": "sc_5_68",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_69",
       "to": "sc_5_70",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_70",
       "to": "sc_5_69",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_70",
       "to": "sc_5_71",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_71",
       "to": "sc_5_70",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_71",
       "to": "sc_5_72",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_72",
       "to": "sc_5_71",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_72",
       "to": "sc_5_73",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_73",
       "to": "sc_5_72",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_73",
       "to": "sc_5_74",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_74",
       "to": "sc_5_73",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_74",
       "to": "sc_5_75",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_75",
       "to": "sc_5_74",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_75",
       "to": "sc_5_76",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_76",
       "to": "sc_5_75",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_76",
       "to": "sc_5_77",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_77",
       "to": "sc_5_76",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_77",
       "to": "sc_5_78",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_78",
       "to": "sc_5_77",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_78",
       "to": "sc_5_79",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_79",
       "to": "sc_5_78",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_79",
       "to": "sc_5_80",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_80",
       "to": "sc_5_79",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_80",
       "to": "sc_5_81",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_81",
       "to": "sc_5_80",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_81",
       "to": "sc_5_82",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_82",
       "to": "sc_5_81",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_82",
       "to": "sc_5_83",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_83",
       "to": "sc_5_82",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_83",
       "to": "sc_5_84",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_84",
       "to": "sc_5_83",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_84",
       "to": "sc_5_85",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_85",
       "to": "sc_5_84",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_85",
       "to": "sc_5_86",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_86",
       "to": "sc_5_85",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_86",
       "to": "sc_5_87",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_87",
       "to": "sc_5_86",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_87",
       "to": "sc_5_88",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_88",
       "to": "sc_5_87",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_88",
       "to": "sc_5_89",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_89",
       "to": "sc_5_88",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_89",
       "to": "sc_5_90",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_90",
       "to": "sc_5_89",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_90",
       "to": "sc_5_91",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_91",
       "to": "sc_5_90",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_91",
       "to": "sc_5_92",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_92",
       "to": "sc_5_91",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_92",
       "to": "sc_5_93",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_93",
       "to": "sc_5_92",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_93",
       "to": "sc_5_94",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_94",
       "to": "sc_5_93",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_94",
       "to": "sc_5_95",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_95",
       "to": "sc_5_94",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_95",
       "to": "sc_5_96",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_96",
       "to": "sc_5_95",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_96",
       "to": "sc_5_97",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_97",
       "to": "sc_5_96",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_97",
       "to": "sc_5_98",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_98",
       "to": "sc_5_97",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_98",
       "to": "sc_5_99",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_99",
       "to": "sc_5_98",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_99",
       "to": "sc_5_100",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_100",
       "to": "sc_5_99",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_100",
       "to": "sc_5_101",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_101",
       "to": "sc_5_100",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_101",
       "to": "sc_5_102",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_102",
       "to": "sc_5_101",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_102",
       "to": "sc_5_103",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_103",
       "to": "sc_5_102",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_103",
       "to": "sc_5_104",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_104",
       "to": "sc_5_103",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_104",
       "to": "sc_5_105",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_105",
       "to": "sc_5_104",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_105",
       "to": "sc_5_106",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "sc_5_106",
       "to": "sc_5_105",
       "speed": 70,
-      "description": "Atajo #5: Flint County -> Red County"
+      "description": "Shortcut #5: Flint County -> Red County"
     },
     {
       "from": "26_174",
       "to": "sc_5_1",
       "speed": 60,
-      "description": "Entrada a Atajo #5 (Naranja Fuego) desde Node 26_174"
+      "description": "Entry to Shortcut #5 (Fire Orange) desde Node 26_174"
     },
     {
       "from": "sc_5_1",
       "to": "26_174",
       "speed": 60,
-      "description": "Entrada a Atajo #5 (Naranja Fuego) desde Node 26_174"
+      "description": "Entry to Shortcut #5 (Fire Orange) desde Node 26_174"
     },
     {
       "from": "sc_5_106",
       "to": "19_184",
       "speed": 60,
-      "description": "Salida de Atajo #5 (Naranja Fuego) hacia Node 19_184"
+      "description": "Exit from Shortcut #5 (Fire Orange) hacia Node 19_184"
     },
     {
       "from": "19_184",
       "to": "sc_5_106",
       "speed": 60,
-      "description": "Salida de Atajo #5 (Naranja Fuego) hacia Node 19_184"
+      "description": "Exit from Shortcut #5 (Fire Orange) hacia Node 19_184"
     }
   ]
 }

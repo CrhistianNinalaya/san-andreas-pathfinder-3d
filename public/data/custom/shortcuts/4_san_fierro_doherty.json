@@ -1,113 +1,173 @@
 {
   "id": 4,
-  "name": "Atajo #4 (Verde Lima)",
-  "description": "San Fierro Doherty -> Battery Pt (Unidireccional)",
+  "name": "Shortcut #4 (Lime Green)",
+  "description": "San Fierro Doherty -> Battery Pt (One-way)",
   "color": "#84cc16",
   "nodes": [
     {
       "id": "sc_4_1",
-      "name": "Atajo #4 (Verde Lima) - Punto 1/15",
+      "name": "Shortcut #4 (Lime Green) - Point 1/15",
       "x": -1830.39,
       "y": 451.547,
-      "z": 18.0007
+      "z": 18.0007,
+      "shortcutId": 4,
+      "pointIndex": 1,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_2",
-      "name": "Atajo #4 (Verde Lima) - Punto 2/15",
+      "name": "Shortcut #4 (Lime Green) - Point 2/15",
       "x": -1822.53,
       "y": 457.734,
-      "z": 18.9643
+      "z": 18.9643,
+      "shortcutId": 4,
+      "pointIndex": 2,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_3",
-      "name": "Atajo #4 (Verde Lima) - Punto 3/15",
+      "name": "Shortcut #4 (Lime Green) - Point 3/15",
       "x": -1814.31,
       "y": 464.103,
-      "z": 20.5769
+      "z": 20.5769,
+      "shortcutId": 4,
+      "pointIndex": 3,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_4",
-      "name": "Atajo #4 (Verde Lima) - Punto 4/15",
+      "name": "Shortcut #4 (Lime Green) - Point 4/15",
       "x": -1805.95,
       "y": 470.358,
-      "z": 22.4689
+      "z": 22.4689,
+      "shortcutId": 4,
+      "pointIndex": 4,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_5",
-      "name": "Atajo #4 (Verde Lima) - Punto 5/15",
+      "name": "Shortcut #4 (Lime Green) - Point 5/15",
       "x": -1797.85,
       "y": 476.35,
-      "z": 24.6364
+      "z": 24.6364,
+      "shortcutId": 4,
+      "pointIndex": 5,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_6",
-      "name": "Atajo #4 (Verde Lima) - Punto 6/15",
+      "name": "Shortcut #4 (Lime Green) - Point 6/15",
       "x": -1789.82,
       "y": 482.268,
-      "z": 25.528
+      "z": 25.528,
+      "shortcutId": 4,
+      "pointIndex": 6,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_7",
-      "name": "Atajo #4 (Verde Lima) - Punto 7/15",
+      "name": "Shortcut #4 (Lime Green) - Point 7/15",
       "x": -1782.2,
       "y": 487.115,
-      "z": 30.8099
+      "z": 30.8099,
+      "shortcutId": 4,
+      "pointIndex": 7,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_8",
-      "name": "Atajo #4 (Verde Lima) - Punto 8/15",
+      "name": "Shortcut #4 (Lime Green) - Point 8/15",
       "x": -1773.79,
       "y": 490.852,
-      "z": 35.7745
+      "z": 35.7745,
+      "shortcutId": 4,
+      "pointIndex": 8,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_9",
-      "name": "Atajo #4 (Verde Lima) - Punto 9/15",
+      "name": "Shortcut #4 (Lime Green) - Point 9/15",
       "x": -1765.72,
       "y": 494.715,
-      "z": 40.6867
+      "z": 40.6867,
+      "shortcutId": 4,
+      "pointIndex": 9,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_10",
-      "name": "Atajo #4 (Verde Lima) - Punto 10/15",
+      "name": "Shortcut #4 (Lime Green) - Point 10/15",
       "x": -1757.16,
       "y": 498.416,
-      "z": 44.4223
+      "z": 44.4223,
+      "shortcutId": 4,
+      "pointIndex": 10,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_11",
-      "name": "Atajo #4 (Verde Lima) - Punto 11/15",
+      "name": "Shortcut #4 (Lime Green) - Point 11/15",
       "x": -1747.92,
       "y": 502.383,
-      "z": 45.7187
+      "z": 45.7187,
+      "shortcutId": 4,
+      "pointIndex": 11,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_12",
-      "name": "Atajo #4 (Verde Lima) - Punto 12/15",
+      "name": "Shortcut #4 (Lime Green) - Point 12/15",
       "x": -1738.59,
       "y": 506.362,
-      "z": 44.1558
+      "z": 44.1558,
+      "shortcutId": 4,
+      "pointIndex": 12,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_13",
-      "name": "Atajo #4 (Verde Lima) - Punto 13/15",
+      "name": "Shortcut #4 (Lime Green) - Point 13/15",
       "x": -1729.93,
       "y": 510.054,
-      "z": 40.0386
+      "z": 40.0386,
+      "shortcutId": 4,
+      "pointIndex": 13,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_14",
-      "name": "Atajo #4 (Verde Lima) - Punto 14/15",
+      "name": "Shortcut #4 (Lime Green) - Point 14/15",
       "x": -1720.66,
       "y": 513.74,
-      "z": 37.9534
+      "z": 37.9534,
+      "shortcutId": 4,
+      "pointIndex": 14,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     },
     {
       "id": "sc_4_15",
-      "name": "Atajo #4 (Verde Lima) - Punto 15/15",
+      "name": "Shortcut #4 (Lime Green) - Point 15/15",
       "x": -1711.24,
       "y": 517.53,
-      "z": 37.8948
+      "z": 37.8948,
+      "shortcutId": 4,
+      "pointIndex": 15,
+      "totalPoints": 15,
+      "colorToken": "limeGreen"
     }
   ],
   "edges": [
@@ -115,97 +175,97 @@
       "from": "sc_4_1",
       "to": "sc_4_2",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_2",
       "to": "sc_4_3",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_3",
       "to": "sc_4_4",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_4",
       "to": "sc_4_5",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_5",
       "to": "sc_4_6",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_6",
       "to": "sc_4_7",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_7",
       "to": "sc_4_8",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_8",
       "to": "sc_4_9",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_9",
       "to": "sc_4_10",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_10",
       "to": "sc_4_11",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_11",
       "to": "sc_4_12",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_12",
       "to": "sc_4_13",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_13",
       "to": "sc_4_14",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "sc_4_14",
       "to": "sc_4_15",
       "speed": 70,
-      "description": "Atajo #4: San Fierro Doherty -> Battery Pt"
+      "description": "Shortcut #4: San Fierro Doherty -> Battery Pt"
     },
     {
       "from": "33_639",
       "to": "sc_4_1",
       "speed": 60,
-      "description": "Entrada a Atajo #4 (Verde Lima) desde Node 33_639"
+      "description": "Entry to Shortcut #4 (Lime Green) desde Node 33_639"
     },
     {
       "from": "sc_4_15",
       "to": "33_23",
       "speed": 60,
-      "description": "Salida de Atajo #4 (Verde Lima) hacia Node 33_23"
+      "description": "Exit from Shortcut #4 (Lime Green) hacia Node 33_23"
     }
   ],
   "oneWay": true

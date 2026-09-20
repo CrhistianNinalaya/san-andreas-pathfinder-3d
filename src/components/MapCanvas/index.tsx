@@ -3,12 +3,16 @@ import type { MapCanvasProps } from './types';
 import { useMapIntegration } from './hooks/useMapIntegration';
 import styles from './MapCanvas.module.css';
 
+/**
+ * Renders the full-screen Leaflet interactive map canvas with custom road network and route layers.
+ */
 export function MapCanvas({
   routes,
   activeRouteIndex,
   waypoints,
   graph,
   showNodes,
+  layerFilters,
   onMapClick,
   onCursorMove,
   onWaypointDrag,
@@ -24,6 +28,7 @@ export function MapCanvas({
     waypoints,
     graph,
     showNodes,
+    layerFilters,
     onMapClick,
     onCursorMove,
     onWaypointDrag,

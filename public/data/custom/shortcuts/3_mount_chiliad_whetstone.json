@@ -1,288 +1,448 @@
 {
   "id": 3,
-  "name": "Atajo #3 (Rosa Fucsia)",
-  "description": "Mount Chiliad / Whetstone (Salto de acantilado - Unidireccional)",
+  "name": "Shortcut #3 (Fuchsia Pink)",
+  "description": "Mount Chiliad / Whetstone (Cliff jump - one-way)",
   "color": "#ec4899",
   "nodes": [
     {
       "id": "sc_3_1",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 1/40",
-      "x": -1389.0,
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 1/40",
+      "x": -1389,
       "y": -1412.9,
-      "z": 106.4
+      "z": 106.4,
+      "shortcutId": 3,
+      "pointIndex": 1,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_2",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 2/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 2/40",
       "x": -1401.03,
       "y": -1410.98,
-      "z": 105.661
+      "z": 105.661,
+      "shortcutId": 3,
+      "pointIndex": 2,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_3",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 3/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 3/40",
       "x": -1411.13,
       "y": -1410.68,
-      "z": 104.302
+      "z": 104.302,
+      "shortcutId": 3,
+      "pointIndex": 3,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_4",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 4/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 4/40",
       "x": -1421.1,
       "y": -1409.76,
-      "z": 102.97
+      "z": 102.97,
+      "shortcutId": 3,
+      "pointIndex": 4,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_5",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 5/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 5/40",
       "x": -1430.74,
       "y": -1406.79,
-      "z": 101.98
+      "z": 101.98,
+      "shortcutId": 3,
+      "pointIndex": 5,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_6",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 6/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 6/40",
       "x": -1440.11,
       "y": -1402.31,
-      "z": 101.53
+      "z": 101.53,
+      "shortcutId": 3,
+      "pointIndex": 6,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_7",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 7/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 7/40",
       "x": -1449.13,
       "y": -1397.72,
-      "z": 101.525
+      "z": 101.525,
+      "shortcutId": 3,
+      "pointIndex": 7,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_8",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 8/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 8/40",
       "x": -1458.28,
       "y": -1392.63,
-      "z": 100.645
+      "z": 100.645,
+      "shortcutId": 3,
+      "pointIndex": 8,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_9",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 9/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 9/40",
       "x": -1466.92,
       "y": -1387.57,
-      "z": 100.078
+      "z": 100.078,
+      "shortcutId": 3,
+      "pointIndex": 9,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_10",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 10/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 10/40",
       "x": -1475.61,
       "y": -1382.61,
-      "z": 99.4295
+      "z": 99.4295,
+      "shortcutId": 3,
+      "pointIndex": 10,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_11",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 11/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 11/40",
       "x": -1484.83,
       "y": -1378.06,
-      "z": 97.2333
+      "z": 97.2333,
+      "shortcutId": 3,
+      "pointIndex": 11,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_12",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 12/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 12/40",
       "x": -1493.22,
       "y": -1373.92,
-      "z": 93.1082
+      "z": 93.1082,
+      "shortcutId": 3,
+      "pointIndex": 12,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_13",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 13/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 13/40",
       "x": -1501.02,
       "y": -1370.07,
-      "z": 87.3754
+      "z": 87.3754,
+      "shortcutId": 3,
+      "pointIndex": 13,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_14",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 14/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 14/40",
       "x": -1508.21,
       "y": -1366.53,
-      "z": 80.4102
+      "z": 80.4102,
+      "shortcutId": 3,
+      "pointIndex": 14,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_15",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 15/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 15/40",
       "x": -1514.7,
       "y": -1363.33,
-      "z": 72.6787
+      "z": 72.6787,
+      "shortcutId": 3,
+      "pointIndex": 15,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_16",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 16/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 16/40",
       "x": -1520.53,
       "y": -1360.45,
-      "z": 64.5053
+      "z": 64.5053,
+      "shortcutId": 3,
+      "pointIndex": 16,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_17",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 17/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 17/40",
       "x": -1526.03,
       "y": -1357.74,
-      "z": 55.6931
+      "z": 55.6931,
+      "shortcutId": 3,
+      "pointIndex": 17,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_18",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 18/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 18/40",
       "x": -1532.43,
       "y": -1355.24,
-      "z": 48.2418
+      "z": 48.2418,
+      "shortcutId": 3,
+      "pointIndex": 18,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_19",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 19/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 19/40",
       "x": -1541.99,
       "y": -1358.07,
-      "z": 49.0497
+      "z": 49.0497,
+      "shortcutId": 3,
+      "pointIndex": 19,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_20",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 20/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 20/40",
       "x": -1547.44,
       "y": -1366.38,
-      "z": 50.5252
+      "z": 50.5252,
+      "shortcutId": 3,
+      "pointIndex": 20,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_21",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 21/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 21/40",
       "x": -1555.24,
       "y": -1372.92,
-      "z": 49.6782
+      "z": 49.6782,
+      "shortcutId": 3,
+      "pointIndex": 21,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_22",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 22/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 22/40",
       "x": -1564.92,
       "y": -1374.96,
-      "z": 48.1336
+      "z": 48.1336,
+      "shortcutId": 3,
+      "pointIndex": 22,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_23",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 23/40",
-      "x": -1575.0,
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 23/40",
+      "x": -1575,
       "y": -1375.61,
-      "z": 46.5077
+      "z": 46.5077,
+      "shortcutId": 3,
+      "pointIndex": 23,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_24",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 24/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 24/40",
       "x": -1585.09,
       "y": -1374.86,
-      "z": 46.9637
+      "z": 46.9637,
+      "shortcutId": 3,
+      "pointIndex": 24,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_25",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 25/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 25/40",
       "x": -1595.12,
       "y": -1372.16,
-      "z": 47.6019
+      "z": 47.6019,
+      "shortcutId": 3,
+      "pointIndex": 25,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_26",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 26/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 26/40",
       "x": -1604.62,
-      "y": -1368.0,
-      "z": 47.9083
+      "y": -1368,
+      "z": 47.9083,
+      "shortcutId": 3,
+      "pointIndex": 26,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_27",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 27/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 27/40",
       "x": -1613.89,
       "y": -1363.46,
-      "z": 46.5341
+      "z": 46.5341,
+      "shortcutId": 3,
+      "pointIndex": 27,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_28",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 28/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 28/40",
       "x": -1622.83,
       "y": -1357.86,
-      "z": 46.1357
+      "z": 46.1357,
+      "shortcutId": 3,
+      "pointIndex": 28,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_29",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 29/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 29/40",
       "x": -1631.11,
       "y": -1351.32,
-      "z": 46.5596
+      "z": 46.5596,
+      "shortcutId": 3,
+      "pointIndex": 29,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_30",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 30/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 30/40",
       "x": -1638.41,
       "y": -1344.24,
-      "z": 47.0512
+      "z": 47.0512,
+      "shortcutId": 3,
+      "pointIndex": 30,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_31",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 31/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 31/40",
       "x": -1645.44,
       "y": -1336.44,
-      "z": 47.1564
+      "z": 47.1564,
+      "shortcutId": 3,
+      "pointIndex": 31,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_32",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 32/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 32/40",
       "x": -1651.13,
       "y": -1328.22,
-      "z": 47.7144
+      "z": 47.7144,
+      "shortcutId": 3,
+      "pointIndex": 32,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_33",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 33/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 33/40",
       "x": -1656.43,
       "y": -1319.44,
-      "z": 48.2028
+      "z": 48.2028,
+      "shortcutId": 3,
+      "pointIndex": 33,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_34",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 34/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 34/40",
       "x": -1661.75,
       "y": -1310.58,
-      "z": 48.6898
+      "z": 48.6898,
+      "shortcutId": 3,
+      "pointIndex": 34,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_35",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 35/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 35/40",
       "x": -1667.24,
       "y": -1301.45,
-      "z": 49.1788
+      "z": 49.1788,
+      "shortcutId": 3,
+      "pointIndex": 35,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_36",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 36/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 36/40",
       "x": -1672.47,
       "y": -1292.75,
-      "z": 49.6315
+      "z": 49.6315,
+      "shortcutId": 3,
+      "pointIndex": 36,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_37",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 37/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 37/40",
       "x": -1677.76,
       "y": -1283.95,
-      "z": 50.0898
+      "z": 50.0898,
+      "shortcutId": 3,
+      "pointIndex": 37,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_38",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 38/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 38/40",
       "x": -1683.09,
       "y": -1274.99,
-      "z": 50.5335
+      "z": 50.5335,
+      "shortcutId": 3,
+      "pointIndex": 38,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_39",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 39/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 39/40",
       "x": -1688.37,
       "y": -1265.89,
-      "z": 50.9817
+      "z": 50.9817,
+      "shortcutId": 3,
+      "pointIndex": 39,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     },
     {
       "id": "sc_3_40",
-      "name": "Atajo #3 (Rosa Fucsia) - Punto 40/40",
+      "name": "Shortcut #3 (Fuchsia Pink) - Point 40/40",
       "x": -1701.9,
       "y": -1248.5,
-      "z": 51.2
+      "z": 51.2,
+      "shortcutId": 3,
+      "pointIndex": 40,
+      "totalPoints": 40,
+      "colorToken": "fuchsiaPink"
     }
   ],
   "edges": [
@@ -485,13 +645,13 @@
       "from": "18_39",
       "to": "sc_3_1",
       "speed": 60,
-      "description": "Entrada a Atajo #3 (Rosa Fucsia) desde Node 18_39"
+      "description": "Entry to Shortcut #3 (Fuchsia Pink) desde Node 18_39"
     },
     {
       "from": "sc_3_40",
       "to": "17_142",
       "speed": 60,
-      "description": "Salida de Atajo #3 (Rosa Fucsia) hacia Node 17_142"
+      "description": "Exit from Shortcut #3 (Fuchsia Pink) hacia Node 17_142"
     }
   ],
   "oneWay": true

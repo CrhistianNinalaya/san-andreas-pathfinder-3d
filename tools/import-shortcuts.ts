@@ -15,6 +15,7 @@ interface ShortcutConfig {
   readonly hex: string;
   readonly desc: string;
   readonly slug: string;
+  readonly colorToken?: string;
   readonly oneWay?: boolean;
 }
 
@@ -34,6 +35,10 @@ interface CustomNetworkNode {
   readonly isCustom?: boolean;
   readonly customType?: string;
   readonly color?: string;
+  readonly shortcutId?: number;
+  readonly pointIndex?: number;
+  readonly totalPoints?: number;
+  readonly colorToken?: string;
 }
 
 interface CustomNetworkEdge {
@@ -182,12 +187,12 @@ if (isPublished && cli.force) {
  * per trajectory, or match a recording to its config by start/end geometry.
  */
 const SHORTCUT_CONFIG: Record<number, ShortcutConfig> = {
-  1: { name: 'Gold', hex: '#f59e0b', desc: 'Glen Park -> Temple (one-way)', slug: '1_glen_park_temple', oneWay: true },
-  2: { name: 'Neon Cyan', hex: '#06b6d4', desc: 'Marina -> Rodeo', slug: '2_marina_rodeo', oneWay: false },
-  3: { name: 'Fuchsia Pink', hex: '#ec4899', desc: 'Mount Chiliad / Whetstone (cliff jump - one-way)', slug: '3_mount_chiliad_whetstone', oneWay: true },
-  4: { name: 'Lime Green', hex: '#84cc16', desc: 'San Fierro Doherty -> Battery Pt (one-way)', slug: '4_san_fierro_doherty', oneWay: true },
-  5: { name: 'Fire Orange', hex: '#f97316', desc: 'Flint County -> Red County', slug: '5_flint_to_red_county', oneWay: false },
-  6: { name: 'Electric Purple', hex: '#a855f7', desc: 'Flint County -> Foster Valley (cliff drop - one-way)', slug: '6_flint_to_foster_valley', oneWay: true }
+  1: { name: 'Gold', hex: '#f59e0b', desc: 'Glen Park -> Temple (one-way)', slug: '1_glen_park_temple', colorToken: 'gold', oneWay: true },
+  2: { name: 'Neon Cyan', hex: '#06b6d4', desc: 'Marina -> Rodeo', slug: '2_marina_rodeo', colorToken: 'neonCyan', oneWay: false },
+  3: { name: 'Fuchsia Pink', hex: '#ec4899', desc: 'Mount Chiliad / Whetstone (cliff jump - one-way)', slug: '3_mount_chiliad_whetstone', colorToken: 'fuchsiaPink', oneWay: true },
+  4: { name: 'Lime Green', hex: '#84cc16', desc: 'San Fierro Doherty -> Battery Pt (one-way)', slug: '4_san_fierro_doherty', colorToken: 'limeGreen', oneWay: true },
+  5: { name: 'Fire Orange', hex: '#f97316', desc: 'Flint County -> Red County', slug: '5_flint_to_red_county', colorToken: 'fireOrange', oneWay: false },
+  6: { name: 'Electric Purple', hex: '#a855f7', desc: 'Flint County -> Foster Valley (cliff drop - one-way)', slug: '6_flint_to_foster_valley', colorToken: 'electricPurple', oneWay: true }
 };
 
 const DEFAULT_COLORS: ReadonlyArray<Readonly<{ name: string; hex: string }>> = [
@@ -459,7 +464,11 @@ for (const sc of shortcuts) {
       name: `Shortcut #${sc.id} (${colorName}) - Point ${p.pt}/${pts.length}`,
       x: p.x,
       y: p.y,
-      z: p.z
+      z: p.z,
+      shortcutId: sc.id,
+      pointIndex: p.pt,
+      totalPoints: pts.length,
+      colorToken: conf.colorToken ?? 'gold'
     });
 
     // Link consecutive points, one-way or both ways

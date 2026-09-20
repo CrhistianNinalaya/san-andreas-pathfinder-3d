@@ -26,8 +26,9 @@ A\* route planner over the official GTA:SA road network, with 3D terrain physics
   - **Standard Global Built-ins:** Prefer `Number.parseInt` over `parseInt` and `Number.parseFloat` over `parseFloat`.
   - **Regex Method:** Use `RegExp.exec()` rather than `String.prototype.match()`.
   - **Optional Chaining:** Prefer optional chaining expressions (`obj?.prop`, `arr?.[i]`) over verbose logical AND chains (`obj && obj.prop`).
-  - **Single Array Push:** Do not call `Array#push()` multiple times consecutively; combine them into a single call: `arr.push(itemA, itemB)`.
   - **Relative Indexing:** Prefer `arr.at(-1)` / `arr.at(0)` over `arr[arr.length - 1]` or index math.
+  - **No Inline Comments & JSDoc Requirement:** Never write inline comments inside function or component code bodies. Only use brief, concise JSDoc (`/** ... */`) immediately above function, component, interface, and type declarations.
+  - **Semantic Interactive HTML (SonarQube S6819):** Always use native interactive elements (`<button type="button">`, `<input>`, etc.) instead of generic elements with ARIA button roles (`<div role="button">`) to ensure full accessibility across devices.
 - **Responsive Breakpoints:**
   - Mobile bottom sheet / touch layout: `@media (max-width: 768px)` (canonical standard defined in `src/ui/breakpoints.ts` and `src/ui/global.css`).
 
@@ -68,6 +69,11 @@ pnpm run build            # Production TypeScript + Vite build
 
 Code, comments, commits, and docs in **English**. User-facing strings are
 translated ES/EN and live in `src/i18n` — Spanish is the reference translation.
+
+- **Feature Completion & Spec Tracking:** Whenever finishing a feature defined in `SPEC.md`, you must always:
+  1. Mark the corresponding feature section header in `SPEC.md` with `— [COMPLETED]`.
+  2. Update the status column in the respective Phase roadmap table to `**Completed**`.
+  3. Execute the full verification suite (`pnpm test`, `pnpm run verify-graph`, `pnpm run build`) to ensure all invariants and types pass cleanly before concluding.
 
 ## Skills
 

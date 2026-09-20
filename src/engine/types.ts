@@ -20,6 +20,9 @@ export interface GtaCoords {
  */
 export type CustomNetworkType = 'shortcut' | 'offroad' | 'jump' | 'patch';
 
+/**
+ * In-memory representation of a node in the road network graph.
+ */
 export interface GraphNode {
   id: string;
   name: string;
@@ -31,6 +34,10 @@ export interface GraphNode {
   isCustom?: boolean;
   customType?: CustomNetworkType;
   color?: string;
+  shortcutId?: number;
+  pointIndex?: number;
+  totalPoints?: number;
+  colorToken?: string;
 }
 
 export interface GraphEdge {
@@ -60,7 +67,18 @@ export interface AdjacencyEdge {
 }
 
 export interface RawDataset {
-  nodes: Array<{ id: number | string; x: number; y: number; z?: number; name?: string; color?: string }>;
+  nodes: Array<{
+    id: number | string;
+    x: number;
+    y: number;
+    z?: number;
+    name?: string;
+    color?: string;
+    shortcutId?: number;
+    pointIndex?: number;
+    totalPoints?: number;
+    colorToken?: string;
+  }>;
   edges: Array<{ from: number | string; to: number | string; speed?: number; flags?: number; color?: string; description?: string; oneWay?: boolean }>;
 }
 
@@ -74,6 +92,9 @@ export interface CustomEdge {
   oneWay?: boolean;
 }
 
+/**
+ * Custom node definition from patches or shortcut layers.
+ */
 export interface CustomNode {
   id: number | string;
   x: number;
@@ -83,6 +104,10 @@ export interface CustomNode {
   isCustom?: boolean;
   customType?: CustomNetworkType;
   color?: string;
+  shortcutId?: number;
+  pointIndex?: number;
+  totalPoints?: number;
+  colorToken?: string;
 }
 
 export interface CustomNetworkDataset {

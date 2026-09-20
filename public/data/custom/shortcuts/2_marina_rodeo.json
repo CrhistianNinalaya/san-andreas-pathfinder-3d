@@ -1,127 +1,195 @@
 {
   "id": 2,
-  "name": "Atajo #2 (Cyan Ne\u00f3n)",
+  "name": "Shortcut #2 (Neon Cyan)",
   "description": "Marina -> Rodeo",
   "color": "#06b6d4",
   "nodes": [
     {
       "id": "sc_2_1",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 1/17",
-      "x": 185.0,
+      "name": "Shortcut #2 (Neon Cyan) - Point 1/17",
+      "x": 185,
       "y": -1498.4,
-      "z": 11.5
+      "z": 11.5,
+      "shortcutId": 2,
+      "pointIndex": 1,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_2",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 2/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 2/17",
       "x": 179.55,
       "y": -1501.01,
-      "z": 11.99
+      "z": 11.99,
+      "shortcutId": 2,
+      "pointIndex": 2,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_3",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 3/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 3/17",
       "x": 171.36,
       "y": -1507.14,
-      "z": 11.99
+      "z": 11.99,
+      "shortcutId": 2,
+      "pointIndex": 3,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_4",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 4/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 4/17",
       "x": 163.14,
       "y": -1512.98,
-      "z": 11.87
+      "z": 11.87,
+      "shortcutId": 2,
+      "pointIndex": 4,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_5",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 5/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 5/17",
       "x": 154.85,
       "y": -1518.83,
-      "z": 11.57
+      "z": 11.57,
+      "shortcutId": 2,
+      "pointIndex": 5,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_6",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 6/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 6/17",
       "x": 145.95,
       "y": -1524.28,
-      "z": 11.23
+      "z": 11.23,
+      "shortcutId": 2,
+      "pointIndex": 6,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_7",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 7/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 7/17",
       "x": 137.14,
       "y": -1529.01,
-      "z": 9.37
+      "z": 9.37,
+      "shortcutId": 2,
+      "pointIndex": 7,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_8",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 8/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 8/17",
       "x": 128.02,
       "y": -1532.92,
-      "z": 7.6
+      "z": 7.6,
+      "shortcutId": 2,
+      "pointIndex": 8,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_9",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 9/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 9/17",
       "x": 118.02,
       "y": -1534.78,
-      "z": 7.16
+      "z": 7.16,
+      "shortcutId": 2,
+      "pointIndex": 9,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_10",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 10/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 10/17",
       "x": 107.62,
       "y": -1534.07,
-      "z": 6.17
+      "z": 6.17,
+      "shortcutId": 2,
+      "pointIndex": 10,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_11",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 11/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 11/17",
       "x": 97.39,
       "y": -1531.66,
-      "z": 5.48
+      "z": 5.48,
+      "shortcutId": 2,
+      "pointIndex": 11,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_12",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 12/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 12/17",
       "x": 87.02,
       "y": -1530.19,
-      "z": 5.13
+      "z": 5.13,
+      "shortcutId": 2,
+      "pointIndex": 12,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_13",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 13/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 13/17",
       "x": 76.79,
       "y": -1529.13,
-      "z": 4.75
+      "z": 4.75,
+      "shortcutId": 2,
+      "pointIndex": 13,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_14",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 14/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 14/17",
       "x": 66.81,
       "y": -1527.99,
-      "z": 4.41
+      "z": 4.41,
+      "shortcutId": 2,
+      "pointIndex": 14,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_15",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 15/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 15/17",
       "x": 56.66,
       "y": -1526.48,
-      "z": 4.58
+      "z": 4.58,
+      "shortcutId": 2,
+      "pointIndex": 15,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_16",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 16/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 16/17",
       "x": 46.15,
       "y": -1525.21,
-      "z": 4.7
+      "z": 4.7,
+      "shortcutId": 2,
+      "pointIndex": 16,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     },
     {
       "id": "sc_2_17",
-      "name": "Atajo #2 (Cyan Ne\u00f3n) - Punto 17/17",
+      "name": "Shortcut #2 (Neon Cyan) - Point 17/17",
       "x": 36.97,
       "y": -1524.02,
-      "z": 4.81
+      "z": 4.81,
+      "shortcutId": 2,
+      "pointIndex": 17,
+      "totalPoints": 17,
+      "colorToken": "neonCyan"
     }
   ],
   "edges": [
@@ -129,217 +197,217 @@
       "from": "sc_2_1",
       "to": "sc_2_2",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_2",
       "to": "sc_2_1",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_2",
       "to": "sc_2_3",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_3",
       "to": "sc_2_2",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_3",
       "to": "sc_2_4",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_4",
       "to": "sc_2_3",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_4",
       "to": "sc_2_5",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_5",
       "to": "sc_2_4",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_5",
       "to": "sc_2_6",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_6",
       "to": "sc_2_5",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_6",
       "to": "sc_2_7",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_7",
       "to": "sc_2_6",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_7",
       "to": "sc_2_8",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_8",
       "to": "sc_2_7",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_8",
       "to": "sc_2_9",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_9",
       "to": "sc_2_8",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_9",
       "to": "sc_2_10",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_10",
       "to": "sc_2_9",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_10",
       "to": "sc_2_11",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_11",
       "to": "sc_2_10",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_11",
       "to": "sc_2_12",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_12",
       "to": "sc_2_11",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_12",
       "to": "sc_2_13",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_13",
       "to": "sc_2_12",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_13",
       "to": "sc_2_14",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_14",
       "to": "sc_2_13",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_14",
       "to": "sc_2_15",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_15",
       "to": "sc_2_14",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_15",
       "to": "sc_2_16",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_16",
       "to": "sc_2_15",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_16",
       "to": "sc_2_17",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "sc_2_17",
       "to": "sc_2_16",
       "speed": 70,
-      "description": "Atajo #2: Marina -> Rodeo"
+      "description": "Shortcut #2: Marina -> Rodeo"
     },
     {
       "from": "20_800",
       "to": "sc_2_1",
       "speed": 60,
-      "description": "Entrada a Atajo #2 (Cyan Ne\u00f3n) desde Node 20_800"
+      "description": "Entry to Shortcut #2 (Cyan Neón) desde Node 20_800"
     },
     {
       "from": "sc_2_1",
       "to": "20_800",
       "speed": 60,
-      "description": "Entrada a Atajo #2 (Cyan Ne\u00f3n) desde Node 20_800"
+      "description": "Entry to Shortcut #2 (Cyan Neón) desde Node 20_800"
     },
     {
       "from": "sc_2_17",
       "to": "12_475",
       "speed": 60,
-      "description": "Salida de Atajo #2 (Cyan Ne\u00f3n) hacia Node 12_475 (Sin retroceso)"
+      "description": "Exit from Shortcut #2 (Cyan Neón) hacia Node 12_475 (Sin retroceso)"
     },
     {
       "from": "12_475",
       "to": "sc_2_17",
       "speed": 60,
-      "description": "Salida de Atajo #2 (Cyan Ne\u00f3n) hacia Node 12_475 (Sin retroceso)"
+      "description": "Exit from Shortcut #2 (Cyan Neón) hacia Node 12_475 (Sin retroceso)"
     }
   ]
 }

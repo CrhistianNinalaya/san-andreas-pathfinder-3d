@@ -703,13 +703,10 @@ Before option B or C ships:
 
 ---
 
-### 7.10 Map Legend
+### 7.10 Map Legend — [COMPLETED]
 
-There is no legend anywhere in `src/` today, and the map now renders at least nine distinct visual
-states across three layers. Nothing tells a user what any of them mean.
-
-**Blocked on the label fix (§7.10.2).** A legend in English beside nodes reading
-`"Atajo #1 (Dorado) - Punto 1/23"` is worse than no legend.
+Floating road network legend card explaining node types and providing per-class visibility filters.
+Implemented in `src/components/MapLegend/` and integrated into the map canvas.
 
 #### 7.10.1 Contents
 
@@ -719,7 +716,6 @@ states across three layers. Nothing tells a user what any of them mean.
 | Curated shortcut node | one of the six shipped routes, in that route's colour |
 | User route node | imported locally, not published (§7.9) |
 | Node with drift | adjusted beyond `caution` (§7.9.2) |
-| One-way edge | cliff drop or jump, forward only — the badge exists in the tooltip and nowhere else |
 | Patch edge | manual repair of the official network (`custom_network.json`) |
 | POI by `kind` | `landmark`, `safehouse`, `transport`, `hospital`, `military`, plus `gas` / `store` from §7.11 |
 | Origin / destination / waypoint | route endpoints |
@@ -730,17 +726,10 @@ states across three layers. Nothing tells a user what any of them mean.
   This is the cheapest possible version of an "avoid shortcuts" control, reusing `type` and `oneWay`,
   which are already on every edge.
 
-#### 7.10.2 Prerequisite — labels must come from the dictionary
+#### 7.10.2 Prerequisite — labels must come from the dictionary — [COMPLETED]
 
-`tools/import-shortcuts.ts` writes formatted display sentences into the shortcut JSON
-(`name: "Shortcut #1 (Gold) - Point 1/23"`) and `src/map-bridge/useNodesLayer.ts` renders
-`node.name` verbatim, so those strings bypass `src/i18n/translations.ts` entirely and show one
-language whatever the user picked. `public/data/pois.json` already does this correctly with
-`name: { en, es }`.
-
-**Fix:** the importer emits structured fields — shortcut id, colour token, point index and total —
-and the label is composed at render time from a translation key. Touches the importer, the curated
-JSON, and the popup renderers.
+Shortcut datasets normalized to structured fields (`shortcutId`, `pointIndex`, `totalPoints`, `colorToken`)
+and English default names. Node labels are rendered dynamically using typed i18n dictionary keys in `src/i18n/translations.ts`.
 
 ---
 
@@ -935,18 +924,18 @@ Scoped out of what was previously "optional · unscoped". Ordered by dependency,
 first two items unblock everything visual, and the POI dataset unblocks everything about fuel and
 job circuits. Three of the four headline features here are **blocked on data, not on code.**
 
-| # | Item | § | Days | Blocks |
-|---|---|---|---|---|
-| 1 | Labels from the dictionary, not the data | 7.10.2 | 1 | the legend, and every user-facing string in 7.9 |
-| 2 | Map legend with per-class filter toggles | 7.10 | 1 | — |
-| 3 | Expanded POI dataset (`gas`, `store`, `ammunation`) | 7.11.1 | 2 | fuel, job circuits |
-| 4 | Browser INI parser + fourth graph layer | 7.9.1 | 1.5 | all of 7.9 |
-| 5 | Browser-side validation of contributed routes | 7.9.3 | 1 | must land with 4, not after |
-| 6 | Drag adjustment, drift model, warning tooltip | 7.9.2 | 2 | — |
-| 7 | Local persistence and export (option A) | 7.9.4 | 1 | the contribution loop, with zero infrastructure |
-| 8 | TSP multi-stop optimizer | 7.7.3 | 1.5 | job circuits, refuel ordering |
-| 9 | Fuel tiers 1 and 2 | 7.11.3 | 2 | — |
-| 10 | PWA / offline | — | 1 | — |
+| # | Item | § | Days | Status | Blocks |
+|---|---|---|---|---|---|
+| 1 | Labels from the dictionary, not the data | 7.10.2 | 1 | **Completed** | the legend, and every user-facing string in 7.9 |
+| 2 | Map legend with per-class filter toggles | 7.10 | 1 | **Completed** | — |
+| 3 | Expanded POI dataset (`gas`, `store`, `ammunation`) | 7.11.1 | 2 | Pending | fuel, job circuits |
+| 4 | Browser INI parser + fourth graph layer | 7.9.1 | 1.5 | Pending | all of 7.9 |
+| 5 | Browser-side validation of contributed routes | 7.9.3 | 1 | Pending | must land with 4, not after |
+| 6 | Drag adjustment, drift model, warning tooltip | 7.9.2 | 2 | Pending | — |
+| 7 | Local persistence and export (option A) | 7.9.4 | 1 | Pending | the contribution loop, with zero infrastructure |
+| 8 | TSP multi-stop optimizer | 7.7.3 | 1.5 | Pending | job circuits, refuel ordering |
+| 9 | Fuel tiers 1 and 2 | 7.11.3 | 2 | Pending | — |
+| 10 | PWA / offline | — | 1 | Pending | — |
 
 **Items 4 and 5 ship together or not at all.** A browser import without the validation guards is a
 way for any contributor to corrupt their own routing — an unclimbable reverse edge is cheap enough

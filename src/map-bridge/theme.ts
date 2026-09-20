@@ -13,6 +13,7 @@ export const MAP_TOKENS = {
   successLight: '#34d399',
   gold: '#fbbf24',
   goldDark: '#b45309',
+  warning: '#f59e0b',
   muted: '#64748b'
 } as const;
 
@@ -44,6 +45,14 @@ export const NODE_LAYER_THEME = {
     color: MAP_TOKENS.goldDark,
     fillColor: MAP_TOKENS.gold,
     fillOpacity: 1.0
+  },
+  coincident: {
+    radius: 8,
+    weight: 2.5,
+    color: '#f43f5e',
+    fillColor: '#fda4af',
+    fillOpacity: 0.45,
+    titleColor: '#e11d48'
   }
 } as const;
 
@@ -51,10 +60,10 @@ export const ROUTE_PALETTE = {
   primary: { main: '#38bdf8', glow: '#0284c7', casing: '#082f49' },
   alternative: { color: MAP_TOKENS.muted },
   legs: [
-    { main: '#38bdf8', casing: '#082f49' }, // Cyan (Leg 1: A -> B)
-    { main: '#34d399', casing: '#022c22' }, // Emerald (Leg 2: B -> C)
-    { main: '#fbbf24', casing: '#451a03' }, // Amber (Leg 3: C -> D)
-    { main: '#c084fc', casing: '#3b0764' }, // Violet (Leg 4: D -> E)
-    { main: '#fb7185', casing: '#4c0519' }  // Rose (Leg 5: E -> F)
+    { main: '#38bdf8', casing: '#082f49' },
+    { main: '#34d399', casing: '#022c22' },
+    { main: '#fbbf24', casing: '#451a03' },
+    { main: '#c084fc', casing: '#3b0764' },
+    { main: '#fb7185', casing: '#4c0519' }
   ]
 } as const;
